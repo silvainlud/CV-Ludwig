@@ -51,8 +51,8 @@ RUN wget https://get.symfony.com/cli/installer -O - | bash && \
 RUN cd /etc/php/7.4/fpm/conf.d/ && wget http://browscap.org/stream?q=PHP_BrowsCapINI -O /etc/php/7.4/fpm/browscap.ini
 RUN apt install -y graphviz
 
-RUN mkdir /var/www/portail-php
-WORKDIR /var/www/portail-php
+RUN mkdir /var/www/web
+WORKDIR /var/www/web
 #
 EXPOSE 9000
 
@@ -72,8 +72,8 @@ RUN mkdir -p $APACHE_RUN_DIR
 RUN mkdir -p $APACHE_LOCK_DIR
 RUN mkdir -p $APACHE_LOG_DIR
 
-COPY ./apache.conf /etc/apache2/sites-available/portail_php.conf
-RUN a2ensite portail_php && a2dissite 000-default
+COPY ./apache.conf /etc/apache2/sites-available/web.conf
+RUN a2ensite web && a2dissite 000-default
 
 RUN echo "exit 0" > /usr/sbin/policy-rc.d
 
