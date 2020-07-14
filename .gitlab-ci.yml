@@ -1,4 +1,4 @@
-image: edbizarro/gitlab-ci-pipeline-php:7.2-alpine
+image: docker/compose:latest
 cache:
   paths:
     - vendor/
@@ -18,8 +18,10 @@ variables:
 build:
   stage: build
   script:
-    - docker-compose up -d redis database pgadmin
-    - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+    - docker-compose up -d redis database web
+#    - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+    - docker run --rm --name composerinstall -v "$PWD":/var/www/app -w /var/www/app composer:1.4 install --no-dev --ignore-platform-reqs --no-suggest --no-progress --no-scripts --prefer-dist
+    - ls vendor/
 
 test:
   stage: test
