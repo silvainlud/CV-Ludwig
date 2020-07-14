@@ -1,0 +1,56 @@
+version: '3.4'
+
+services:
+  web:
+    build:
+      context: ./tools/docker/web
+    ports:
+      - 8003:80
+    volumes:
+      - .:/var/www/portail-php:cached
+      - ./vendor:/var/www/portail-php/vendor:cached
+      - /var/www/portail-php/var/cache
+      - ./tools/docker/web/php.ini:/etc/php/7.4/fpm/php.ini
+    command: bash -c "pwd && php bin/console cache:clear && service php7.4-fpm start && service php7.4-fpm status && /usr/sbin/apache2 -D FOREGROUND"
+    tty: true
+    links:
+      - redis
+      - mailcatcher
+      - database
+  redis:
+    image: redis:5-alpine
+    ports: [6379]
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - 1081:1080
+
+  database:
+    image: "postgres" # use latest official postgres version
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=cv_ludwig
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data/ # persist data even
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@silvain.local
+      PGADMIN_DEFAULT_PASSWORD: 123
+      PGADMIN_LISTEN_PORT: 80
+    ports:
+      - "8801:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    links:
+      - database:pgsql-server
+
+
+volumes:
+  db-data:
+    driver: local
+  pgadmin-data:
