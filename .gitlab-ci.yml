@@ -24,6 +24,7 @@ build:
   tags:
     - docker
   script:
+    - ls -l
     - docker-compose up -d redis database web
 #    - composer install --prefer-dist --no-ansi --no-interaction --no-progress
     - docker run --rm --name composerinstall -v "$PWD":/var/www/app -w /var/www/app composer:1.4 install --no-dev --ignore-platform-reqs --no-suggest --no-progress --no-scripts --prefer-dist
@@ -32,8 +33,8 @@ build:
 test:
   stage: test
   script:
-    - php bin/console doctrine:schema:update --force --env=test
-    - php bin/console doctrine:fixture:load --no-interaction --env=test
-    - php bin/phpunit
+    - docker-compose.exe exec web php bin/console doctrine:schema:update --force --env=test
+    - docker-compose.exe exec web php bin/console doctrine:fixture:load --no-interaction --env=test
+    - docker-compose.exe exec web php bin/phpunit
   dependencies:
     - build
