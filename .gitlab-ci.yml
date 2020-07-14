@@ -1,4 +1,4 @@
-
+image: edbizarro/gitlab-ci-pipeline-php:7.2-alpine
 cache:
   paths:
     - vendor/
@@ -6,7 +6,6 @@ cache:
 stages:
   - build
   - test
-
 variables:
   DB_HOST: mysql
 
@@ -19,7 +18,7 @@ variables:
 build:
   stage: build
   script:
-    - docker-compose up -d redis database
+    - docker-compose up -d redis database pgadmin
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress
 
 test:
