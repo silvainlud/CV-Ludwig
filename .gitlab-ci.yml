@@ -14,6 +14,7 @@ variables:
   POSTGRES_USER: admin
   POSTGRES_PASSWORD: 123
   POSTGRES_DB: cv_ludwig
+  DOCKER_HOST: tcp://localhost:2376
 
 build:
   stage: build
