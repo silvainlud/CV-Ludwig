@@ -1,4 +1,4 @@
-image: php:7.4.0-fpm-buster
+image: php:zts-buster
 cache:
   paths:
     - vendor/
