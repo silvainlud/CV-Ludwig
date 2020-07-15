@@ -34,7 +34,6 @@ build:
     - docker
   script:
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress
-    - apk add --no-cache zip unzip
 
 test:
   stage: test
