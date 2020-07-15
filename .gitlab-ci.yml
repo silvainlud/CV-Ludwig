@@ -1,4 +1,4 @@
-image: docker/compose:latest
+image: php:7.4.0-fpm-buster:latest
 cache:
   paths:
     - vendor/
@@ -23,7 +23,7 @@ build:
     - docker
   script:
     - ls -l
-    - docker-compose up -d redis database web
+    - docker-compose up -d redis database
 #    - composer install --prefer-dist --no-ansi --no-interaction --no-progress
     - docker run --rm --name composerinstall -v "$PWD":/var/www/app -w /var/www/app composer:1.4 install --no-dev --ignore-platform-reqs --no-suggest --no-progress --no-scripts --prefer-dist
     - ls vendor/
