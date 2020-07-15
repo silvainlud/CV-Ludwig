@@ -37,8 +37,7 @@ build:composer:
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress
 
 build:nodejs:
-  before_script:
-    - npm install -g yarn
+  before_script: []
   image: node
   stage: build
   tags:
