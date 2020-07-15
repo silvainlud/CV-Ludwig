@@ -37,8 +37,9 @@ build:composer:
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress
 
 build:nodejs:
-  before_script: []
-  image: yarnpkg/node-yarn
+  before_script:
+    - npm install -g yarn
+  image: node
   stage: build
   tags:
     - docker
