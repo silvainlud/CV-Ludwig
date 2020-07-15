@@ -9,7 +9,9 @@ services:
   - postgres:12.2-alpine
 
 stages:
+  - build
   - test
+
 variables:
   DB_HOST: mysql
 
@@ -25,7 +27,15 @@ before_script:
   - apt-get update && apt-get install -y gnupg2 curl wget unzip git
   - docker-php-ext-install -j$(nproc) xml && docker-php-ext-install -j$(nproc) ctype && docker-php-ext-install -j$(nproc) zip unzip && docker-php-ext-install -j$(nproc) geoip && docker-php-ext-install -j$(nproc) mbstring && docker-php-ext-install -j$(nproc) readline && docker-php-ext-install -j$(nproc) uuid && docker-php-ext-install -j$(nproc) simplexml && docker-php-ext-install -j$(nproc) json && docker-php-ext-install -j$(nproc) phar && docker-php-ext-install -j$(nproc) curl && docker-php-ext-install -j$(nproc) memcached && docker-php-ext-install -j$(nproc) intl && docker-php-ext-install -j$(nproc) odbc && docker-php-ext-install -j$(nproc) opcache && docker-php-ext-install -j$(nproc) yaml && docker-php-ext-install -j$(nproc) cli && docker-php-ext-install -j$(nproc) dom && docker-php-ext-install -j$(nproc) fpm && docker-php-ext-install -j$(nproc) apcu && docker-php-ext-install -j$(nproc) pdo && docker-php-ext-install -j$(nproc) dev && docker-php-ext-install -j$(nproc) xml && docker-php-ext-install -j$(nproc) intl && docker-php-ext-install -j$(nproc) gd && docker-php-ext-install -j$(nproc) redis && docker-php-ext-install -j$(nproc) zip
   - php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
-  - composer install --no-dev --ignore-platform-reqs --no-suggest --no-progress --no-scripts --prefer-dist
+
+build:
+  stage: build
+  tags:
+    - docker
+  script:
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+    - sudo apk add --no-cache zip unzip
+
 test:
   stage: test
   tags:
@@ -34,3 +44,5 @@ test:
     - php bin/console doctrine:schema:update --force --env=test
     - php bin/console doctrine:fixture:load --no-interaction --env=test
     - php bin/phpunit
+  dependencies:
+    - build
