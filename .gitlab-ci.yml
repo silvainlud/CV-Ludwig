@@ -42,6 +42,7 @@ build:nodejs:
   tags:
     - docker
   script:
+    - yarn install
     - yarn encore dev
 
 phpunit:
