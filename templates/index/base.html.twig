@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ 'site_name'|trans }}</title>
+    {% include('index/include/header.html.twig') with {} only %}
+    {% block head %}{% endblock %}
+    {% block  stylesheet %}{% endblock %}
+</head>
+<body>
+{% include('index/include/menu_top.html.twig') with {} only %}
+<main>
+    <div class="header">
+        <img src="{{ asset('img/main_header.svg') }}" class="header_bg" alt="">
+        <div class="header_content">
+            <img src="{{ asset('img/profil.png') }}" alt="">
+            <div class="header_title">
+                <h1>Ludwig SILVAIN</h1>
+                <p>Developpeur FullStack</p>
+            </div>
+        </div>
+    </div>
+</main>
+{% include('index/include/footer.html.twig') with {} only %}
+</body>
+</html>
