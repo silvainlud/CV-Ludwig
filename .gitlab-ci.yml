@@ -9,8 +9,6 @@ stages:
 variables:
   DB_HOST: mysql
 
-  GIT_STRATEGY: fetch
-
   POSTGRES_USER: admin
   POSTGRES_PASSWORD: 123
   POSTGRES_DB: cv_ludwig
