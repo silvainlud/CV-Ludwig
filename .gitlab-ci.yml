@@ -35,7 +35,7 @@ build:composer:
   script:
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress
 
-build:npm:
+build:nodejs:
   before_script: []
   image: yarnpkg/node-yarn
   stage: build
@@ -44,13 +44,14 @@ build:npm:
   script:
     - yarn encore prod
 
-test:
+phpunit:
   stage: test
   tags:
     - docker
   script:
     - php bin/console doctrine:schema:update --force --env=test
-#    - php bin/console doctrine:fixture:load --no-interaction --env=test
+    #    - php bin/console doctrine:fixture:load --no-interaction --env=test
     - php bin/phpunit
   dependencies:
-    - build
+    - build:composer
+    - build:nodejs
