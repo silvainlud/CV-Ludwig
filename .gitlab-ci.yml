@@ -43,7 +43,7 @@ build:nodejs:
   tags:
     - docker
   script:
-    - yarn install
+    - yarn install --ignore-engines
     - yarn encore dev
 
 phpunit:
