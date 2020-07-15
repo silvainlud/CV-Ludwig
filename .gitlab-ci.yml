@@ -6,7 +6,7 @@ cache:
 
 services:
   - redis:latest
-  - postgres:lastest
+  - postgres:12.2-alpine
 
 stages:
   - build
@@ -17,6 +17,7 @@ variables:
   POSTGRES_USER: admin
   POSTGRES_PASSWORD: 123
   POSTGRES_DB: cv_ludwig
+  POSTGRES_HOST_AUTH_METHOD: trust
   DOCKER_DRIVER: overlay2
   # See https://github.com/docker-library/docker/pull/166
   DOCKER_TLS_CERTDIR: ""
