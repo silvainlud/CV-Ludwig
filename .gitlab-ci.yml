@@ -42,7 +42,7 @@ build:nodejs:
   tags:
     - docker
   script:
-    - yarn encore prod
+    - yarn encore dev
 
 phpunit:
   stage: test
