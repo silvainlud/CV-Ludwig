@@ -1,0 +1,121 @@
+header {
+  background: $menu_background;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  padding: 14px 12px;
+  height: $menu_height;
+  align-items: center;
+
+  & > img {
+    object-fit: contain;
+    height: 100%;
+    padding: 4px 15px 4px 12px;
+  }
+
+  & > .header_separate {
+    height: 90%;
+    width: 2px;
+    background: $menu_seperate_color;
+    margin: 0 4px;
+    padding: 12px 0;
+  }
+
+  & > nav {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    align-items: center;
+
+    & > a {
+      padding: 4px 10px;
+      margin: 0 4px;
+      text-decoration: unset;
+      color: $menu_color;
+      font-size: 20px;
+      font-family: Roboto, sans-serif;
+
+      &:hover {
+        transition: color 0.3s;
+        color: lighten($menu_color, 20%);
+      }
+    }
+
+    & > .header_space {
+      flex: 1 0 auto;
+    }
+
+    & > .app-nav-btn {
+      border-radius: 5px;
+      border: 1px solid $menu_color;
+      padding: 10px 15px;
+
+      &:hover {
+        transition: color 0.3s, background-color 0.3s, color 0.3s;
+        border-color: lighten($menu_color, 20%);
+        background: transparentize(white, 0.9);
+      }
+    }
+  }
+}
+
+main > div.header {
+  width: 100%;
+  position: relative;
+
+  .header_bg {
+    width: 100%;
+    top: 0;
+    right: 0;
+  }
+
+  .header_content {
+    position: absolute;
+    top: 35%;
+    left: 50%; /* à 50%/50% du parent référent */
+    transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & > img {
+      box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.25);
+      border-radius: 512px;
+      width: 222px;
+      height: 222px;
+    }
+
+    & > .header_title {
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+
+      h1 {
+
+        padding: 5px 0;
+        margin: 0;
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 36px;
+        line-height: 42px;
+
+        color: $header_color;
+
+        text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+      }
+      p{
+        padding: 5px 0;
+        margin: 0;
+        font-family: Roboto,sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 28px;
+
+        color: $header_color;
+      }
+    }
+  }
+}

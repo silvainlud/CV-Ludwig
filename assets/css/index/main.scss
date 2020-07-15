@@ -1,0 +1,14 @@
+@import "../vars";
+
+html {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  overflow-y: scroll;
+}
+
+@import "../Utils/Bootstrap/bootstrap";
+@import "elements/menu_top";
