@@ -2,6 +2,7 @@ image: php:zts-buster
 cache:
   paths:
     - vendor/
+    - node_modules/
 
 
 services:
