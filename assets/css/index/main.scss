@@ -8,7 +8,17 @@ html {
 body {
   margin: 0;
   overflow-y: scroll;
+  background: #ECF0F1;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  main{
+    flex: 1 0 auto;
+  }
 }
 
 @import "../Utils/Bootstrap/bootstrap";
 @import "elements/menu_top";
+@import "elements/footer";
