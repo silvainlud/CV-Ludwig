@@ -37,7 +37,6 @@ services:
       - db-data:/var/lib/postgresql/data/ # persist data even
   pgadmin:
     image: dpage/pgadmin4
-    restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@silvain.local
       PGADMIN_DEFAULT_PASSWORD: 123
@@ -54,3 +53,5 @@ volumes:
   db-data:
     driver: local
   pgadmin-data:
+    driver: local
+    name: pgadmin-data

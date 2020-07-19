@@ -10,15 +10,16 @@ header {
   & > img {
     object-fit: contain;
     height: 100%;
-    padding: 4px 15px 4px 12px;
+    padding: 0 15px 0 12px;
   }
 
   & > .header_separate {
-    height: 90%;
+    height: 100%;
     width: 2px;
     background: $menu_seperate_color;
     margin: 0 4px;
     padding: 12px 0;
+
   }
 
   & > nav {
@@ -49,7 +50,7 @@ header {
     & > .app-nav-btn {
       border-radius: 5px;
       border: 1px solid $menu_color;
-      padding: 10px 15px;
+      padding: 7px 15px;
 
       &:hover {
         transition: color 0.3s, background-color 0.3s, color 0.3s;
@@ -64,10 +65,38 @@ main > div.header {
   width: 100%;
   position: relative;
 
-  .header_bg {
-    width: 100%;
-    top: 0;
-    right: 0;
+  & > img {
+    &.header_bg {
+      width: 100%;
+      top: 0;
+      right: 0;
+    }
+
+    &:not(.header_bg) {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+
+
+      animation-iteration-count: infinite;
+      &.header_img_cloud {
+        animation-name: cloud_anim;
+        animation-duration: 7s;
+        animation-direction: alternate;
+        width: 14vw;
+      }
+      &.header_img_earth {
+        animation-name: earth_anim;
+        animation-duration: 15s;
+        width: 14vw;
+      }
+      &.header_img_rocket {
+        animation-name: rocket_anim;
+        animation-duration: 15s;
+        width: 12vw;
+      }
+    }
   }
 
   .header_content {
@@ -105,10 +134,11 @@ main > div.header {
 
         text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
       }
-      p{
+
+      p {
         padding: 5px 0;
         margin: 0;
-        font-family: Roboto,sans-serif;
+        font-family: Roboto, sans-serif;
         font-style: normal;
         font-weight: normal;
         font-size: 24px;
@@ -116,6 +146,47 @@ main > div.header {
 
         color: $header_color;
       }
+    }
+  }
+
+
+  @keyframes cloud_anim {
+    0% {
+      transform: translate(0, 0)
+    }
+    50% {
+      transform: translate(10px, 7px)
+    }
+    100% {
+      transform: translate(0, 0)
+    }
+  }
+
+  @keyframes rocket_anim {
+    0% {
+      transform: translate(0, 0)
+    }
+
+    33% {
+      transform: translate(-7px, -7px)
+    }
+    66% {
+      transform: translate(7px, 7px)
+    }
+    100% {
+      transform: translate(0, 0)
+    }
+  }
+
+  @keyframes earth_anim {
+    0% {
+      transform: translate(0, 0)
+    }
+    50% {
+      transform: translate(-14px, -10px)
+    }
+    100% {
+      transform: translate(0, 0)
     }
   }
 }

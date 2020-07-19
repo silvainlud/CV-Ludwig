@@ -1,9 +1,52 @@
 <footer>
-    <p>
-        {{ "copyright"|trans({ "%year%" : "now"|date("Y") }) }}
-        <br>
-        <a href="">{{ "cgu.label"|trans|capitalize }}</a>
-        | <a href="">{{ "credits.title"|trans|capitalize }}</a>
-    </p>
+    <img src="{{ asset('img/main_footer.svg') }}" class="footer_bg" alt="">
+    <div class="footer_content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4 footer_border px-6">
+                    <h2>Curiculum Vitae</h2>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="">Mes compétences</a>
+                                <a href="">Mon parcours</a>
+                                <a href="">Mes passions</a>
+                            </div>
+                            <div class="col-6">
+                                <a href="">Mes réalisations</a>
+                                <a href="">Me contacter</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 footer_border px-6">
+                    <h2>Silvain.eu</h2>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="">Configuration email</a>
+                                <a href="">Webmail</a>
+                                <a href="">Gitlab</a>
+                            </div>
+                            <div class="col-6">
+                                <a href="">Owncloud</a>
+                                <a href="">Mentions légales</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 px-6">
+                    <h2>Ludwig SILVAIN</h2>
+                    <p>
+                        Alii nullo quaerente vultus severitate adsimulata patrimonia sua in inmensum extollunt, cultorum
+                        ut puta feracium multiplicantes annuos fructus.
+                    </p>
+                </div>
+                <div class="col-12">
+                        <p class="footer_copyright">Site réalisé par : Ludwig SILVAIN | Copyright © Ludwig SILVAIN 2020</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </footer>
