@@ -107,12 +107,18 @@ main > div.header {
     display: flex;
     flex-direction: row;
     align-items: center;
+    &.header_index{
+      & > img {
+        width: 222px;
+        height: 222px;
+      }
+    }
 
     & > img {
       box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.25);
       border-radius: 512px;
-      width: 222px;
-      height: 222px;
+      width: 164px;
+      height: 164px;
     }
 
     & > .header_title {
