@@ -14,11 +14,41 @@ body {
   flex-direction: column;
   min-height: 100vh;
 
-  main{
+  main {
     flex: 1 0 auto;
+
+
+    font-size: 22px;
+    font-family: 'Open Sans', sans-serif;
+    color: $default_text_color;
+
+
+
+
+    p {
+      text-indent: 20px;
+      margin: 0;
+      padding: 0;
+      text-align: justify;
+    }
+
+    h2 {
+      margin: 7px 0;
+      padding: 0 25px;
+      font-family: Rubik, sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 45px;
+      color: $default_h2_color;
+    }
+
   }
 }
 
 @import "../Utils/Bootstrap/bootstrap";
 @import "elements/menu_top";
 @import "elements/footer";
+@import "elements/separator";
+
+@import "pages/index";
