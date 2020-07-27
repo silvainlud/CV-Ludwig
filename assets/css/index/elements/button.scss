@@ -1,0 +1,30 @@
+.app-btn {
+  padding: 12px 25px;
+  box-sizing: border-box;
+  display: inline-block;
+
+  font-size: 20px;
+  border-radius: 15px;
+
+  background: lighten($blue_color, 25%);
+  color: $blue_color;
+
+  text-decoration: unset;
+
+  &.app-color-plain {
+    background: $blue_color;
+    color: white;
+  }
+
+  @each $class, $color in $colors {
+    &.app-btn-#{$class} {
+      background: lighten($color, 25%);
+      color: $color;
+
+      &.app-color-plain {
+        background: $color;
+        color: white;
+      }
+    }
+  }
+}
