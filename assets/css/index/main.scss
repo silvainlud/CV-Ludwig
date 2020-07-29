@@ -17,30 +17,50 @@ body {
   main {
     flex: 1 0 auto;
 
+    & > div.main-content {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
 
-    font-size: 22px;
-    font-family: 'Open Sans', sans-serif;
-    color: $default_text_color;
+      padding: 20px 80px;
 
+      h2 {
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 38px;
 
+        color: $menu_background;
+        margin: 20px 0;
 
+      }
 
-    p {
-      text-indent: 20px;
-      margin: 0;
-      padding: 0;
-      text-align: justify;
-    }
+      h3 {
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 34px;
+        line-height: 40px;
+        margin: 20px 0 15px 0;
 
-    h2 {
-      margin: 7px 0;
-      padding: 0 25px;
-      font-family: Rubik, sans-serif;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 30px;
-      line-height: 45px;
-      color: $default_h2_color;
+        color: #2C3E50;
+      }
+
+      p {
+        font-family: "Open Sans", sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 33px;
+        text-align: justify;
+        text-indent: 26px;
+
+        margin: 0;
+        padding: 0;
+
+        color: $default_text_color;
+
+      }
     }
 
   }
@@ -51,5 +71,9 @@ body {
 @import "elements/footer";
 @import "elements/separator";
 @import "elements/button";
+@import "elements/badge";
+
+@import "elements/media/icon_skills";
+@import "elements/card/card";
 
 @import "pages/index";

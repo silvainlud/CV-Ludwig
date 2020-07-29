@@ -22,7 +22,7 @@
             <img src="{{ asset('img/header/icon_Rocket.svg') }}" class="header_img_rocket" alt="fusée"
                  style="top: 12%;left: 78%;width: 11vw;">
             <div class="header_content">
-                <img src="{{ asset('img/profil.png') }}" alt="" >
+                <img src="{{ asset('img/profil.png') }}" alt="">
                 <div class="header_title">
                     <h1>Ludwig SILVAIN</h1>
                     <p>Developpeur FullStack</p>
@@ -31,7 +31,9 @@
         </div>
     {% endblock %}
     {% block body %}
-
+        <div class="main-content">
+            {% block content %}{% endblock %}
+        </div>
     {% endblock %}
 </main>
 {% include('index/include/footer.html.twig') with {} only %}

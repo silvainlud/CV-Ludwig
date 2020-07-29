@@ -6,24 +6,49 @@
   font-size: 20px;
   border-radius: 15px;
 
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+
   background: lighten($blue_color, 25%);
+  border: 2px solid lighten($blue_color, 25%);
   color: $blue_color;
 
   text-decoration: unset;
 
   &.app-color-plain {
+    border: 3px solid $blue_color;
     background: $blue_color;
     color: white;
+    &:not(:disabled):hover {
+      border-color: lighten($blue_color, 25%);
+      background-color: lighten($blue_color, 25%);
+    }
+  }
+
+  &:not(:disabled):hover {
+    border-color: $blue_color;
+    background-color: lighten($blue_color, 25%);
   }
 
   @each $class, $color in $colors {
     &.app-btn-#{$class} {
       background: lighten($color, 25%);
+      border-color: lighten($color, 25%);
       color: $color;
+
+      &:not(:disabled):hover {
+        border-color: $color;
+        background-color: transparent;
+      }
 
       &.app-color-plain {
         background: $color;
+        border-color: $color;
         color: white;
+
+        &:not(:disabled):hover {
+          border-color: lighten($color, 25%);
+          background-color: lighten($color, 25%);
+        }
       }
     }
   }

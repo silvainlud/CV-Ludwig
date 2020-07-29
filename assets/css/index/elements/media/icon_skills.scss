@@ -1,0 +1,17 @@
+.icon_skills {
+  width: 150px;
+  height: 150px;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  background-color: transparentize($red_color, 0.7);
+  border-radius: 100%;
+
+  img {
+    width: 110px;
+    max-height: 110px;
+    object-fit: contain;
+  }
+}

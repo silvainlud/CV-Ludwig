@@ -8,7 +8,7 @@ footer {
 
   & > img.footer_bg {
     width: 100%;
-
+    margin-bottom: -1px;
   }
 
   .footer_content {
@@ -16,6 +16,10 @@ footer {
 
     background: #34495E;
     width: 100%;
+    @media screen and (max-width: 720px) {
+      padding-right: 25px;
+      padding-left: 25px;
+    }
     padding: 10px 100px 20px;
 
     & > .container-fluid {
@@ -38,6 +42,10 @@ footer {
       padding: 0;
       text-indent: 0;
       @extend .mb-4;
+      @media screen and (max-width: 720px) {
+        text-indent: 0;
+        text-align: center;
+      }
     }
 
     p, a {
@@ -55,6 +63,11 @@ footer {
       margin: 10px 5px 10px 0;
       display: flex;
 
+      @media screen and (max-width: 720px) {
+        justify-content: center;
+        text-align: center;
+      }
+
     }
 
     a:hover {
@@ -62,6 +75,18 @@ footer {
     }
 
     .footer_border {
+      &:nth-child(1) {
+        @media screen and (max-width: 960px) {
+          border-right: unset;
+        }
+      }
+
+      &:nth-child(2) {
+        @media screen and (max-width: 1200px) {
+          border-right: unset;
+        }
+      }
+
       border-right: 2px solid #8494A4;
     }
 

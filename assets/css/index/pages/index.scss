@@ -1,5 +1,32 @@
 div.index-page {
   padding: 0 30px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+
+  font-size: 22px;
+  font-family: 'Open Sans', sans-serif;
+  color: $default_text_color;
+
+  p {
+    text-indent: 20px;
+    margin: 0;
+    padding: 0;
+    text-align: justify;
+  }
+
+  h2 {
+    margin: 7px 0;
+    padding: 0 25px;
+    font-family: Rubik, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 45px;
+    color: $default_h2_color;
+  }
+
 
   .who-am-i {
     .who-am-i_img {
@@ -95,10 +122,9 @@ div.index-page {
     }
 
     &.reverse {
-      margin-left: 0;
+      margin-left: auto;
       margin-right: -30px;
       justify-content: flex-end;
-      float: right;
       @media screen and (max-width: 1000px) {
         margin-left: -30px;
       }
@@ -195,8 +221,9 @@ div.index-page {
 
     img.index-contact-me_background {
       width: 100%;
-      object-fit: contain;
+      object-fit: cover;
       filter: drop-shadow(0px 4px 100px #5FAADD);
+      min-height: 500px;
     }
 
     .index-contact-me_content {
@@ -206,6 +233,11 @@ div.index-page {
       transform: translate(-50%, -50%);
       text-align: center;
       text-indent: 0;
+
+      min-width: 500px;
+      @media screen and (max-width: 500px){
+        min-width: 100%;
+      }
 
       h2 {
         font-family: Rubik, sans-serif;
@@ -217,6 +249,15 @@ div.index-page {
         color: #FFFFFF;
 
         text-shadow: 0px 4px 25px rgba(0, 0, 0, 0.25);
+
+        @media screen and (max-width: 1400px){
+          font-size: 45px;
+          line-height: 55px;
+          @media screen and (max-width: 1000px){
+            font-size: 35px;
+            line-height: 45px;
+          }
+        }
       }
 
       p {
@@ -230,12 +271,69 @@ div.index-page {
         color: #FFFFFF;
 
         text-shadow: 0px 4px 25px rgba(0, 0, 0, 0.25);
-      }
-      .app-btn{
-        padding: 15px 30px;
-        font-size: 25px;
+
+        @media screen and (max-width: 1400px){
+          font-size: 20px;
+          line-height: 35px;
+
+          @media screen and (max-width: 1000px){
+            font-size: 18px;
+            line-height: 25px;
+          }
+        }
       }
 
+      .app-btn {
+        padding: 15px 30px;
+        font-size: 25px;
+        @media screen and (max-width: 1400px){
+          font-size: 20px;
+          padding: 10px 20px;
+          @media screen and (max-width: 1000px){
+            font-size: 16px;
+          }
+        }
+      }
+
+    }
+  }
+
+  .index-hub-dir {
+    height: 440px;
+
+    & > .row {
+      @extend .h-100;
+
+      .index-hub-dir_item {
+        overflow: hidden;
+        width: 100%;
+        display: flex;
+
+        //min-height: 150px;
+
+        .index-hub-dir_content {
+          background-size: cover;
+          transition: all 1s;
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+          text-decoration: unset;
+
+          &:hover {
+            transform: scale(1.05);
+          }
+
+          h2 {
+            font-family: Rubik, sans-serif;
+            padding: 40px 30px;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 40px;
+
+            color: #FFFFFF;
+          }
+        }
+      }
     }
   }
 

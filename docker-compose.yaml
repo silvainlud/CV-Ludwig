@@ -7,9 +7,9 @@ services:
     ports:
       - 8003:80
     volumes:
-      - .:/var/www/portail-php:cached
-      - ./vendor:/var/www/portail-php/vendor:cached
-      - /var/www/portail-php/var/cache
+      - .:/var/www/web
+      - ./vendor:/var/www/web/vendor
+      - /var/www/web/var/cache
       - ./tools/docker/web/php.ini:/etc/php/7.4/fpm/php.ini
     command: bash -c "pwd && php bin/console cache:clear && service php7.4-fpm start && service php7.4-fpm status && /usr/sbin/apache2 -D FOREGROUND"
     tty: true
@@ -23,7 +23,7 @@ services:
   mailcatcher:
     image: schickling/mailcatcher
     ports:
-      - 1081:1080
+      - 1083:1080
 
   database:
     image: "postgres" # use latest official postgres version
