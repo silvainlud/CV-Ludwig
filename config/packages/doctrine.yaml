@@ -4,12 +4,7 @@ doctrine:
         default_connection: default
         connections:
             default:
-                driver: "pdo_pgsql"
-                server_version: '12.3'
-                charset: UTF-8
-                default_table_options:
-                    charset: UTF-8
-                    collate: utf8mb4_unicode_ci
+                server_version: '5.2'
                 url: '%env(resolve:DATABASE_URL)%'
 
         # IMPORTANT: You MUST configure your server version,

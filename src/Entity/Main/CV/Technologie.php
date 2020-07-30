@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=TechnologieRepository::class)
- * @ORM\Table(schema="curiculum_vitae")
+ * @ORM\Table(name="CV_Technologie")
  */
 class Technologie
 {
