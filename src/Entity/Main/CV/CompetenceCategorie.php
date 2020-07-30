@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CompetenceCategorieRepository::class)
- * @ORM\Table(schema="curiculum_vitae")
+ * @ORM\Table(name="CV_CompetenceCategorie")
  */
 class CompetenceCategorie
 {
