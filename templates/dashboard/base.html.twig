@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ 'site_name'|trans }}</title>
+    {% include('dashboard/include/header.html.twig') with {} only %}
+    {% block head %}{% endblock %}
+    {% block  stylesheet %}{% endblock %}
+</head>
+<body>
+
+{% include('dashboard/include/menu_left.html.twig') with {} only %}
+<main>
+    {% include('dashboard/include/menu_top.html.twig') with {} only %}
+    <div class="main-content">
+        <h2>Ajouter une compétence</h2>
+        <div class="card">
+            <div class="card-body container-fluid">
+                <form class="row form-zone">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="">Nom</label>
+                            <input type="text">
+                            <p class="form-help">Ce champs doit contenir un mot</p>
+                            <ul class="form-errors">
+                                <li>Aucune valeur n'a été trouvé</li>
+                                <li>Aucune valeur n'a été trouvé</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="">Nom</label>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="">Nom</label>
+                            <input type="file">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% include('dashboard/include/footer.html.twig') with {} only %}
+</body>
+</html>

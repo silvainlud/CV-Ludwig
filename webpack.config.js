@@ -15,6 +15,7 @@ Encore
     //.setManifestKeyPrefix('build/')
 
     .addStyleEntry('css/index/main', './assets/css/index/main.scss')
+    .addStyleEntry('css/dashboard/main', './assets/css/dashboard/main.scss')
 
     /*
      * ENTRY CONFIG
