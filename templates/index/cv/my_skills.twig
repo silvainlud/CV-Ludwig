@@ -1,0 +1,48 @@
+{% extends 'index/base.html.twig' %}
+
+
+{% block content %}
+    <h2>Mes compétences</h2>
+    <p>
+        Alii nullo quaerente vultus severitate adsimulata patrimonia sua in inmensum extollunt, cultorum ut puta
+        feracium multiplicantes annuos fructus, quae a primo ad ultimum solem se abunde iactitant possidere, ignorantes
+        profecto maiores suos, per quos ita magnitudo Romana porrigitur, non divitiis eluxisse sed per bella saevissima,
+        nec opibus nec victu nec indumentorum vilitate gregariis militibus discrepantes opposita cuncta superasse
+        virtute.
+    </p>
+    {% for c in skills %}
+        <h3 class="mt-7">{{ c.name }}</h3>
+        <div class="container-fluid">
+            <div class="row">
+                {% for s in c.competences %}
+                    <div class="col-3 mb-5">
+                        <div class="card">
+                            <div class="card-body card-centered">
+                                <div class="icon_skills" style="background-color: {{ s.technologie.color }}">
+                                    <img src="{{ s.technologie.displayImage }}" alt="">
+                                </div>
+                                <h2>{{ s.technologie.name }}</h2>
+                                <p>
+                                    {{ s.technologie.description }}
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="app-badge app-badge-red">
+                                    <span>{{ s.niveau }}</span>
+                                </div>
+                                <div class="card-footer_spacer"></div>
+                                {% if s.autoditacte %}
+                                    <i class="fas fa-home"></i>
+                                {% endif %}
+                                {% if s.scolaire %}
+                                    <i class="fas fa-graduation-cap"></i>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

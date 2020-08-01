@@ -1,0 +1,79 @@
+@import "../vars";
+
+html {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  overflow-y: scroll;
+  background: #ECF0F1;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  main {
+    flex: 1 0 auto;
+
+    & > div.main-content {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+
+      padding: 20px 80px;
+
+      h2 {
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 38px;
+
+        color: $menu_background;
+        margin: 20px 0;
+
+      }
+
+      h3 {
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 34px;
+        line-height: 40px;
+        margin: 20px 0 15px 0;
+
+        color: #2C3E50;
+      }
+
+      p {
+        font-family: "Open Sans", sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 33px;
+        text-align: justify;
+        text-indent: 26px;
+
+        margin: 0;
+        padding: 0;
+
+        color: $default_text_color;
+
+      }
+    }
+
+  }
+}
+
+@import "../Utils/Bootstrap/bootstrap";
+@import "elements/menu_top";
+@import "elements/footer";
+@import "elements/separator";
+@import "elements/button";
+@import "elements/badge";
+
+@import "elements/media/icon_skills";
+@import "elements/card/card";
+
+@import "pages/index";

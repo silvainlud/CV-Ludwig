@@ -1,0 +1,61 @@
+$border_width: 1.25px;
+$border_radius: 10px;
+$border_head_background: #6c7ae0;
+$border_color: #e0e5e8;
+
+table.db_data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0;
+  overflow-x: scroll;
+
+  text-align: left;
+
+  font-family: 'Roboto', sans-serif;
+  background: transparent;
+
+  &.db_data-table_hoverable tbody tr:hover > td {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+
+  thead {
+    tr {
+      td {
+
+        &:first-child {
+          @extend .text-center;
+        }
+
+        color: #C2C8D8;
+        padding: 10px 5px 5px 5px;
+        text-transform: uppercase;
+        font-weight: 400;
+        font-size: 0.8em;
+      }
+    }
+  }
+
+  tbody {
+
+    tr {
+      background: white;
+
+      & > td {
+
+        &:first-child {
+          @extend .text-center;
+        }
+
+        background: white;
+        color: darken($border_color, 40%);
+        padding: 7px 5px;
+
+        margin: 10px 0;
+
+      }
+
+
+    }
+  }
+}

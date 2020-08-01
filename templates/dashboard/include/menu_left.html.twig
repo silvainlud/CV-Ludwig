@@ -1,0 +1,36 @@
+<nav id="nav-left" class="nav-left">
+    <div class="nav-header">
+        <div class="nav-header_img">
+            <img src="{{ asset('favicon.png') }}" alt="">
+        </div>
+        <div class="nav-header_content">
+            <h1>Silvain.eu</h1>
+            <p>Espace Administration</p>
+        </div>
+    </div>
+    <div class="nav_left-content">
+        <div class="menu-section">
+            <a class="menu-item" href="{{ path('index') }}">
+                <div class="menu-item-link">
+                    <div class="menu-item-link_icon"><i class="fas fa-home"></i></div>
+                    <div class="menu-item-link_content">{{ "home"|trans|capitalize }}</div>
+                </div>
+            </a>
+        </div>
+        {% if is_granted("ROLE_ADMIN_CV") %}
+            <div class="menu-section">
+                <div class="menu-title">
+                    <div class="menu-title__icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h2>Curiculum</h2>
+                </div>
+                <a class="menu-item" href="{{ path('index') }}">
+                    <div class="menu-item-link">
+                        <div class="menu-item-link_icon"><i class="fas fa-home"></i></div>
+                        <div class="menu-item-link_content">{{ "home"|trans|capitalize }}</div>
+                    </div>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+</nav>
