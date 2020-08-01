@@ -16,7 +16,7 @@ class CompetenceCategorie
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="guid", name="NumCompetenceCategorie")
+     * @ORM\Column(type="integer", name="NumCompetenceCategorie")
      */
     private $id;
 

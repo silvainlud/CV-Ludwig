@@ -1,4 +1,4 @@
-<nav>
+<nav id="nav-left" class="nav-left">
     <div class="nav-header">
         <div class="nav-header_img">
             <img src="{{ asset('favicon.png') }}" alt="">
@@ -9,6 +9,13 @@
         </div>
     </div>
     <div class="nav_left-content">
-        <div class="nav_left-content_separator"></div>
+        <div class="menu-section">
+            <a class="menu-item" href="{{ path('index') }}">
+                <div class="menu-item-link">
+                    <div class="menu-item-link_icon"><i class="fas fa-home"></i></div>
+                    <div class="menu-item-link_content">{{ "home"|trans|capitalize }}</div>
+                </div>
+            </a>
+        </div>
     </div>
 </nav>
