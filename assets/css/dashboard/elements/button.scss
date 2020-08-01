@@ -1,0 +1,85 @@
+.app-btn {
+  padding: .375rem .75rem;
+  box-sizing: border-box;
+  display: inline-block;
+
+  font-size: 1em;
+  font-weight: 400;
+  border-radius: 3px;
+  cursor: pointer;
+
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+  background: darken($blue_color, 10%);
+  border: 2px solid darken($blue_color, 10%);
+  color: white;
+  outline: none;
+
+  text-decoration: unset;
+
+  &.app-color-plain {
+    border: 3px solid $blue_color;
+    background: $blue_color;
+    color: white;
+
+    &:not(:disabled):hover {
+      border-color: lighten($blue_color, 25%);
+      background-color: lighten($blue_color, 25%);
+    }
+  }
+
+  &.app-btn-text {
+    background: transparent;
+    color: $blue_color;
+    border-radius: 100%;
+    border: unset;
+    font-size: 0.9em;
+
+    padding: 6px 9px;
+
+    &:not(:disabled):hover {
+      background: lighten($blue_color, 25%);
+      color: darken($blue_color, 25%);
+    }
+  }
+
+  &:not(:disabled):hover {
+    border-color: $blue_color;
+    background-color: lighten($blue_color, 25%);
+  }
+
+  @each $class, $color in $colors {
+    &.app-btn-#{$class} {
+      background: darken($color, 10%);
+      border-color: darken($color, 10%);
+      color: white;
+
+      &:not(:disabled):hover {
+        background: darken($color, 20%);
+        border-color: darken($color, 20%);
+      }
+
+      &.app-color-plain {
+        background: $color;
+        border-color: $color;
+        color: white;
+
+        &:not(:disabled):hover {
+          border-color: lighten($color, 25%);
+          background-color: lighten($color, 25%);
+        }
+      }
+
+      &.app-btn-text {
+        color: $color;
+        background: transparent;
+        border: unset;
+
+        &:not(:disabled):hover {
+          background: lighten($color, 25%);
+          color: darken($color, 25%);
+        }
+      }
+    }
+  }
+}
