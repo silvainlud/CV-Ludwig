@@ -6,7 +6,7 @@ $border_color: #e0e5e8;
 table.db_data-table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0;
+  border-spacing: 0 0;
   overflow-x: scroll;
 
   text-align: left;
@@ -14,24 +14,24 @@ table.db_data-table {
   font-family: 'Roboto', sans-serif;
   background: transparent;
 
+  &.db_data-table_hoverable tbody tr:hover > td {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
 
   thead {
     tr {
-      &:first-child {
-        & > td:first-child {
-          border-top-left-radius: $border_radius;
-        }
-
-        & > td:last-child {
-          border-top-right-radius: $border_radius;
-        }
-      }
-
       td {
-        color: white;
-        border-left: $border_width solid $border_head_background;
-        background: $border_head_background;
-        padding: 15px 15px 15px 20px;
+
+        &:first-child {
+          @extend .text-center;
+        }
+
+        color: #C2C8D8;
+        padding: 10px 5px 5px 5px;
+        text-transform: uppercase;
+        font-weight: 400;
+        font-size: 0.8em;
       }
     }
   }
@@ -39,31 +39,23 @@ table.db_data-table {
   tbody {
 
     tr {
-      &:last-child > td {
-        &:first-child {
-          border-bottom-left-radius: $border_radius/2;
-        }
-
-        &:last-child {
-          border-bottom-right-radius: $border_radius/2;
-        }
-
-      }
+      background: white;
 
       & > td {
-        background: white;
-        color: darken($border_color, 40%);
-        padding: 10px 15px 10px 20px;
-        border-bottom: $border_width solid $border_color;
 
         &:first-child {
-          border-left: $border_width solid $border_color;
+          @extend .text-center;
         }
 
-        &:last-child {
-          border-right: $border_width solid $border_color;
-        }
+        background: white;
+        color: darken($border_color, 40%);
+        padding: 7px 5px;
+
+        margin: 10px 0;
+
       }
+
+
     }
   }
 }

@@ -14,7 +14,7 @@ class Competence
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="guid", name="CodeCompetence")
+     * @ORM\Column(type="integer", name="CodeCompetence")
      */
     private $id;
 

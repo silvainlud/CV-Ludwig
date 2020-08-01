@@ -79,10 +79,10 @@
                     </div>
                 </div>
 
-                <div class="card card_no-shadow">
+                <div class="card">
                     <div class="card-body">
                         <h3>Liste des catégories</h3>
-                        <table class="db_data-table">
+                        <table class="db_data-table db_data-table_hoverable">
                             <thead>
                             <tr>
                                 <td>#</td>
@@ -169,5 +169,7 @@
     </div>
 </main>
 {% include('dashboard/include/footer.html.twig') with {} only %}
+<script src="{{ asset('js/dashboard/main.js') }}"></script>
 </body>
+
 </html>

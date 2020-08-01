@@ -1,1 +1,57 @@
-<div class="nav_top"></div>
+<div class="nav_top">
+    <div class="nav-top_item">
+        <button id="nav-responsive_open">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+    <div class="nav-top_spacer"></div>
+    <div class="nav-top_item nav-top_dropdown nav-dropdown_primary">
+        <a>
+            <i class="fas fa-cogs"></i>
+        </a>
+        <div class="nav-dropdown_settings">
+            <div class="nav-dropdown_settings__header">
+                <div class="nav-dropdown_settings__header-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <h2>
+                    Ludwig SILVAIN
+                </h2>
+                <div class="nav-dropdown_settings__spacer"></div>
+                <a href=""><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+            <ul class="dropdown_settings__list">
+                <li>
+                    <a href="">
+                        <i class="fas fa-cogs"></i>
+                        {{ "my_account"|trans|capitalize }}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fas fa-external-link-alt"></i>
+                        {{ "lauch_portail_app"|trans }}
+                    </a>
+                </li>
+
+                <li>
+                    <a href="">
+                        <i class="fas fa-user-shield"></i>
+                        {{ "administration"|trans|capitalize }}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fas fa-sign-out-alt"></i>
+                        {{ "disconnect"|trans|capitalize }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="nav-top_item">
+        <a href="">
+            <i class="fas fa-sign-out-alt"></i>
+        </a>
+    </div>
+</div>
