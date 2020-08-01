@@ -1,0 +1,59 @@
+@import "../vars";
+@import "vars";
+
+html {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  overflow-y: scroll;
+  background: #FAFAFC;
+
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+
+  main {
+
+    @media screen and (max-width: $dashboard_nav-left_responsive) {
+      width: 100%;
+    }
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    width: calc(100% - #{$dashboard_nav_left_width});
+
+    .main-content {
+      padding: 50px 45px;
+
+      font-family: Roboto, sans-serif;
+
+      font-weight: normal;
+      font-size: 16px;
+
+      h2 {
+        margin: 0 0 20px 20px;
+        padding: 0;
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 25px;
+
+        color: #555A5E;
+      }
+    }
+  }
+}
+
+@import "elements/menu/menu_left";
+@import "elements/menu/menu_top";
+
+@import "elements/card";
+@import "elements/form";
+@import "elements/button";
+@import "elements/table";
+
+@import "../Utils/Bootstrap/bootstrap";

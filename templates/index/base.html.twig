@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ 'site_name'|trans }}</title>
+    {% include('index/include/header.html.twig') with {} only %}
+    {% block head %}{% endblock %}
+    {% block  stylesheet %}{% endblock %}
+</head>
+<body>
+{% include('index/include/menu_top.html.twig') with {} only %}
+<main>
+    {% block header %}
+        <div class="header">
+            <img src="{{ asset('img/main_header.svg') }}" class="header_bg" alt="">
+            <img src="{{ asset('img/header/icon_cloud.svg') }}" class="header_img_cloud" alt="nuage"
+                 style="left: 19%;top: 1%;">
+            <img src="{{ asset('img/header/icon_cloud.svg') }}" class="header_img_cloud" alt="nuage"
+                 style="left: 5%;top: 37%;">
+            <img src="{{ asset('img/header/icon_earth.svg') }}" class="header_img_earth" alt="terre"
+                 style="top: 37%;left: 68%;width: 10vw;">
+            <img src="{{ asset('img/header/icon_Rocket.svg') }}" class="header_img_rocket" alt="fusée"
+                 style="top: 12%;left: 78%;width: 11vw;">
+            <div class="header_content">
+                <img src="{{ asset('img/profil.png') }}" alt="">
+                <div class="header_title">
+                    <h1>Ludwig SILVAIN</h1>
+                    <p>Developpeur FullStack</p>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    {% block body %}
+        <div class="main-content">
+            {% block content %}{% endblock %}
+        </div>
+    {% endblock %}
+</main>
+{% include('index/include/footer.html.twig') with {} only %}
+</body>
+</html>

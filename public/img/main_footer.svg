@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="1440px" height="126px" viewBox="0 0 1440 126" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <desc>Created with Lunacy</desc>
+  <defs>
+    <rect width="1440" height="126" id="slice_1" />
+    <clipPath id="clip_1">
+      <use xlink:href="#slice_1" clip-rule="evenodd" />
+    </clipPath>
+  </defs>
+  <g id="Slice" clip-path="url(#clip_1)">
+    <use xlink:href="#slice_1" stroke="none" fill="none" />
+    <g id="Footer">
+      <path d="M0 126.5L1440 126.5L1440 47.7625C1440 47.7625 1350.51 -3.77298 1251.85 0.220675C1153.19 4.21432 972.201 105.553 766.914 101.559C561.626 97.5658 406.209 13.2001 263.704 23.1842C121.198 33.1683 0 85.0857 0 85.0857L0 126.5L0 126.5Z" id="Footer" fill="#34495E" stroke="none" />
+    </g>
+  </g>
+</svg>

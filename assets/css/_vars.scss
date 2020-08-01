@@ -1,0 +1,35 @@
+$menu_background: #2C3E50;
+$menu_color: #8494A4;
+$menu_seperate_color: #8494A4;
+$menu_height: 60px;
+
+$header_color: #ECF0F1;
+
+
+$footer_h2_color: #ECF0F1;
+$footer_color: #C4C4C4;
+
+
+$default_text_color: #666666;
+$default_h2_color: #333333;
+
+
+$hr_background: rgba(0, 0, 0, 0.06);
+
+
+//Colors
+$purple_color: #7A69E6;
+$green_color: #76CE44;
+$yellow_color: #F9C043;
+$blue_color: #6A9AE8;
+$red_color: #FA5E5D;
+$light_black_color: #263547;
+
+$colors: (
+        'purple' : $purple_color,
+        'green' : $green_color,
+        'yellow' : $yellow_color,
+        'blue' : $blue_color,
+        'red' : $red_color,
+        'light-black' : $light_black_color,
+)

@@ -7,9 +7,9 @@ services:
     ports:
       - 8003:80
     volumes:
-      - .:/var/www/portail-php:cached
-      - ./vendor:/var/www/portail-php/vendor:cached
-      - /var/www/portail-php/var/cache
+      - .:/var/www/web
+      - ./vendor:/var/www/web/vendor
+      - /var/www/web/var/cache
       - ./tools/docker/web/php.ini:/etc/php/7.4/fpm/php.ini
     command: bash -c "pwd && php bin/console cache:clear && service php7.4-fpm start && service php7.4-fpm status && /usr/sbin/apache2 -D FOREGROUND"
     tty: true
@@ -23,34 +23,21 @@ services:
   mailcatcher:
     image: schickling/mailcatcher
     ports:
-      - 1081:1080
+      - 1083:1080
 
   database:
-    image: "postgres" # use latest official postgres version
+    image: "mariadb" # use latest official postgres version
     environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=123
-      - POSTGRES_DB=cv_ludwig
+      - MYSQL_ROOT_PASSWORD=123
     ports:
-      - 5432:5432
+      - 3306:3306
     volumes:
-      - db-data:/var/lib/postgresql/data/ # persist data even
-  pgadmin:
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@silvain.local
-      PGADMIN_DEFAULT_PASSWORD: 123
-      PGADMIN_LISTEN_PORT: 80
-    ports:
-      - "8801:80"
-    volumes:
-      - pgadmin-data:/var/lib/pgadmin
-    links:
-      - database:pgsql-server
+      - db-data:/var/lib/mysql # persist data even
 
 
 volumes:
   db-data:
     driver: local
   pgadmin-data:
+    driver: local
+    name: pgadmin-data
