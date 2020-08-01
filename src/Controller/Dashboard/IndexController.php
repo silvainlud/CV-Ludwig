@@ -9,9 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class IndexController extends AbstractController
 {
     /**
-     * @Route("/d/", name="dashboard_index")
-     *
-     * @return Response
+     * @Route("/dashboard", name="dashboard_index")
      */
     public function Index(): Response
     {

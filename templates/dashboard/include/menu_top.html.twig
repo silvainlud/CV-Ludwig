@@ -15,10 +15,10 @@
                     <i class="fas fa-user-circle"></i>
                 </div>
                 <h2>
-                    Ludwig SILVAIN
+                    {{ app.user.username }}
                 </h2>
                 <div class="nav-dropdown_settings__spacer"></div>
-                <a href=""><i class="fas fa-sign-out-alt"></i></a>
+                <a href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i></a>
             </div>
             <ul class="dropdown_settings__list">
                 <li>
@@ -28,20 +28,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <i class="fas fa-external-link-alt"></i>
-                        {{ "lauch_portail_app"|trans }}
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                        <i class="fas fa-user-shield"></i>
-                        {{ "administration"|trans|capitalize }}
-                    </a>
-                </li>
-                <li>
-                    <a href="">
+                    <a href="{{ path('app_logout') }}">
                         <i class="fas fa-sign-out-alt"></i>
                         {{ "disconnect"|trans|capitalize }}
                     </a>
@@ -50,7 +37,7 @@
         </div>
     </div>
     <div class="nav-top_item">
-        <a href="">
+        <a href="{{ path('app_logout') }}">
             <i class="fas fa-sign-out-alt"></i>
         </a>
     </div>
