@@ -1,0 +1,109 @@
+{% extends 'dashboard/base.html.twig' %}
+
+{% block content_class %}container-fuild{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-8">
+
+            <div class="card mb-5">
+                <div class="card-body">
+                    <h3>Catégories : Technologie du web</h3>
+                    <table class="db_data-table">
+                        <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Nom</td>
+                            <td class="text-right">Action</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Technologie du web</td>
+                            <td class="text-right">
+                                <a href="" class="app-btn app-btn-blue app-btn-text">
+                                    <i class="fas fa-pen-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Programmation Applicative</td>
+                            <td class="text-right">
+                                <a href="" class="app-btn app-btn-blue app-btn-text">
+                                    <i class="fas fa-pen-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Base de données</td>
+                            <td class="text-right">
+                                <a href="" class="app-btn app-btn-blue app-btn-text">
+                                    <i class="fas fa-pen-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Utilitaire</td>
+                            <td class="text-right">
+                                <a href="" class="app-btn app-btn-blue app-btn-text">
+                                    <i class="fas fa-pen-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Logiciel Serveur</td>
+                            <td class="text-right">
+                                <a href="" class="app-btn app-btn-blue app-btn-text">
+                                    <i class="fas fa-pen-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h3>Liste des catégories</h3>
+                    <table class="db_data-table db_data-table_hoverable">
+                        <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Nom</td>
+                            <td class="text-right">Action</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for c in categories %}
+                            <tr>
+                                <td>{{ c.id }}</td>
+                                <td>{{ c.name }}</td>
+                                <td class="text-right">
+                                    <a href="" class="app-btn app-btn-blue app-btn-text">
+                                        <i class="fas fa-pen-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body container-fluid">
+                    <h3>Ajouter une catégorie</h3>
+                    {% form_theme formCat 'dashboard/include/form.html.twig' %}
+                    {{ form(formCat) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

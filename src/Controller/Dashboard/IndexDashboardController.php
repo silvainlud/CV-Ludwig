@@ -2,16 +2,16 @@
 
 namespace App\Controller\Dashboard;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class IndexController extends AbstractController
+class IndexDashboardController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController
 {
     /**
-     * @Route("/dashboard", name="dashboard_index")
+     * @Route("/dashboard/")
      */
-    public function Index(): Response
+    public function Index(Request $request): Response
     {
         return $this->render('dashboard/base.html.twig');
     }
