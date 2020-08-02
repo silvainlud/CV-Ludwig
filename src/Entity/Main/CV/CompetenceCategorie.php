@@ -6,6 +6,7 @@ use App\Repository\Main\CV\CompetenceCategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CompetenceCategorieRepository::class)
@@ -22,11 +23,15 @@ class CompetenceCategorie
 
     /**
      * @ORM\Column(type="string", length=64, name="NomCompetenceCategorie", unique=true)
+     * @Assert\Length(max="64")
+     * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer", nullable=true, name="OrdreCompetenceCategorie")
+     * @Assert\GreaterThanOrEqual(0)
+     * @Assert\NotNull
      */
     private $ordre;
 

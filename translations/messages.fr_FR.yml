@@ -1,0 +1,21 @@
+cv:
+  skills:
+    skill-categories:
+      attr:
+        name: Nom
+        order: Position
+      title:
+        _: 'Catégorie : %name%'
+        add: Ajouter une catégorie
+        edit: Éditer une catégorie
+        list: Liste des catégories
+    title:
+      add: Ajouter une compétences
+      edit: Éditer une compétence
+      list: Liste des compétences
+general:
+  action:
+    btn:
+      cancel: Annuler
+      submit: Envoyer
+

@@ -80,3 +80,21 @@
         {% endfor %}
     {{ form_end(form) }}
 {%- endblock form -%}
+
+{%- block submit_widget -%}
+    {% if attr['cancel_btn'] is defined and attr['cancel_btn'] == true %}
+        {% if attr['cancel_url'] is defined %}
+            {% set url = attr['cancel_url'] %}
+        {% else %}
+            {% set url =  GetPreviousUrl() %}
+        {% endif %}
+        {% if url != null %}
+            <a href="{{ url }}" class="app-btn app-btn-red">
+                <i class="fas fa-times"></i>
+                {{ "general.action.btn.cancel"|trans }}
+            </a>
+        {% endif %}
+    {% endif %}
+    {%- set type = type|default('submit') -%}
+    {{ block('button_widget') }}
+{%- endblock -%}

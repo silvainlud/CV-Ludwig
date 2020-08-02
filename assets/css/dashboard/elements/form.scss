@@ -1,6 +1,10 @@
+.col-4 .form-zone {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
 .form-zone {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   grid-gap: 10px 15px;
 
   .form-group {
@@ -59,5 +63,9 @@
     display: flex;
     justify-content: flex-end;
     align-content: center;
+
+    & > * {
+      margin: 5px;
+    }
   }
 }

@@ -7,7 +7,6 @@ cache:
 
 services:
   - redis:latest
-  - postgres:12.2-alpine
 
 stages:
   - build

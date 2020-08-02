@@ -1,0 +1,13 @@
+App\Entity\Main\Utilisateur:
+  user:
+    username: 'user'
+    email: 'user@silvain.local'
+    password: '\$argon2id\$v=19\$m=1024,t=1,p=1\$c29tZXNhbHQ\$Wg1s/1X6O1f1ZQCQtAvkGaCMwteH+F2h6p6AGDM8om4' # 123
+    date_creation: '<date_create()>'
+    roles: ['ROLE_USER']
+  admin:
+    username: 'admin'
+    email: 'admin@silvain.local'
+    password: '\$argon2id\$v=19\$m=1024,t=1,p=1\$c29tZXNhbHQ\$Wg1s/1X6O1f1ZQCQtAvkGaCMwteH+F2h6p6AGDM8om4' # 123
+    date_creation: '<date_create()>'
+    roles: ['ROLE_ADMIN', 'ROLE_ADMIN_CV']

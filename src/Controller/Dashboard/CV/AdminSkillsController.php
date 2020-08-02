@@ -23,16 +23,51 @@ class AdminSkillsController extends AbstractController
     }
 
     /**
-     * @Route("/dashboard/cv/skills", name="db_vc_skills")
+     * @Route("/dashboard/cv/skills", name="db_cv_skills")
+     * @Route("/dashboard/cv/skills/categories/{cat}", name="db_cv_skills_categories_view")
      */
-    public function View(Request $request): Response
+    public function View(Request $request, CompetenceCategorie $cat = null): Response
     {
-        $formCat = $this->createForm(CompetenceCategorieType::class);
+        $newCat = new CompetenceCategorie();
+        $formCat = $this->createForm(CompetenceCategorieType::class, $newCat);
+        $formSkill = $this->createFormBuilder()->getForm();
+        $skills = [];
+
+        $formCat->handleRequest($request);
+        if ($formCat->isSubmitted() && $formCat->isValid()) {
+            $this->em->persist($newCat);
+            $this->em->flush();
+
+            return $this->redirectToRoute('db_cv_skills');
+        }
+
         $categories = $this->em->getRepository(CompetenceCategorie::class)->findBy([], ['ordre' => 'asc']);
 
         return $this->render('dashboard/cv/skills/index.html.twig', [
             'categories' => $categories,
             'formCat' => $formCat->createView(),
+            'skills' => $skills,
+            'formSkill' => $formSkill->createView(),
+            'selectCategory' => $cat,
+        ]);
+    }
+
+    /**
+     * @Route("/dashboard/cv/skills/categories/{cat}/edit", name="db_cv_skills_categories_edit")
+     */
+    public function EditCategories(Request $request, CompetenceCategorie $cat): Response
+    {
+        $form = $this->createForm(CompetenceCategorieType::class, $cat, ['cancel_btn' => true]);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->flush();
+
+            return $this->redirectToRoute('db_cv_skills');
+        }
+
+        return $this->render('dashboard/cv/skills/edit_categories.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }
