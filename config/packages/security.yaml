@@ -39,9 +39,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/dashboard/admin/cv/skills, roles: ROLE_ADMIN_CV_SKILLS }
-        - { path: ^/dashboard/admin/cv, roles: ROLE_ADMIN_CV }
+        - { path: ^/dashboard/cv, roles: ROLE_ADMIN_CV }
 
-        - { path: ^/dashboard/admin, roles: ROLE_ADMIN_VIEW }
         - { path: ^/dashboard, roles: ROLE_USER }
         # - { path: ^/profile, roles: ROLE_USER }

@@ -15,15 +15,28 @@ class CompetenceCategorieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('ordre', NumberType::class)
-            ->add('submit', SubmitType::class);
+            ->add('name', TextType::class, [
+                'label' => 'cv.skills.skill-categories.attr.name',
+            ])
+            ->add('ordre', NumberType::class, [
+                'label' => 'cv.skills.skill-categories.attr.order',
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'general.action.btn.submit',
+                'attr' => ['cancel_btn' => $options['cancel_btn']],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => CompetenceCategorie::class,
+            'cancel_btn' => false,
         ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return 'form_competencecategorie';
     }
 }

@@ -5,77 +5,33 @@
 {% block content %}
     <div class="row">
         <div class="col-8">
-
-            <div class="card mb-5">
-                <div class="card-body">
-                    <h3>Catégories : Technologie du web</h3>
-                    <table class="db_data-table">
-                        <thead>
-                        <tr>
-                            <td>#</td>
-                            <td>Nom</td>
-                            <td class="text-right">Action</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Technologie du web</td>
-                            <td class="text-right">
-                                <a href="" class="app-btn app-btn-blue app-btn-text">
-                                    <i class="fas fa-pen-alt"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Programmation Applicative</td>
-                            <td class="text-right">
-                                <a href="" class="app-btn app-btn-blue app-btn-text">
-                                    <i class="fas fa-pen-alt"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Base de données</td>
-                            <td class="text-right">
-                                <a href="" class="app-btn app-btn-blue app-btn-text">
-                                    <i class="fas fa-pen-alt"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Utilitaire</td>
-                            <td class="text-right">
-                                <a href="" class="app-btn app-btn-blue app-btn-text">
-                                    <i class="fas fa-pen-alt"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Logiciel Serveur</td>
-                            <td class="text-right">
-                                <a href="" class="app-btn app-btn-blue app-btn-text">
-                                    <i class="fas fa-pen-alt"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+            {% if selectCategory is not null %}
+                <div class="card mb-5" id="skills_list">
+                    <div class="card-body">
+                        <h3>{{ 'cv.skills.skill-categories.title._'|trans({"%name%" : selectCategory.name}) }}</h3>
+                        <table class="db_data-table">
+                            <thead>
+                            <tr>
+                                <td>#</td>
+                                <td>Nom</td>
+                                <td class="text-right">Action</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-
-            <div class="card">
+            {% endif %}
+            <div class="card" id="categories_list">
                 <div class="card-body">
-                    <h3>Liste des catégories</h3>
+                    <h3>{{ 'cv.skills.skill-categories.title.list'|trans }}</h3>
                     <table class="db_data-table db_data-table_hoverable">
                         <thead>
                         <tr>
                             <td>#</td>
-                            <td>Nom</td>
+                            <td>{{ 'cv.skills.skill-categories.attr.name'|trans }}</td>
+                            <td>{{ 'cv.skills.skill-categories.attr.order'|trans }}</td>
                             <td class="text-right">Action</td>
                         </tr>
                         </thead>
@@ -84,8 +40,14 @@
                             <tr>
                                 <td>{{ c.id }}</td>
                                 <td>{{ c.name }}</td>
+                                <td>{{ c.ordre }}</td>
                                 <td class="text-right">
-                                    <a href="" class="app-btn app-btn-blue app-btn-text">
+                                    <a href="{{ path('db_cv_skills_categories_view', {'cat': c.id}) }}"
+                                       class="app-btn app-btn-blue app-btn-text">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="{{ path('db_cv_skills_categories_edit', {'cat': c.id}) }}"
+                                       class="app-btn app-btn-blue app-btn-text">
                                         <i class="fas fa-pen-alt"></i>
                                     </a>
                                 </td>
@@ -97,9 +59,18 @@
             </div>
         </div>
         <div class="col-4">
-            <div class="card">
+            {% if selectCategory is not null %}
+                <div class="card mb-5" id="skills_add">
+                    <div class="card-body container-fluid">
+                        <h3>{{ 'cv.skills.title.add'|trans }}</h3>
+                        {% form_theme formSkill 'dashboard/include/form.html.twig' %}
+                        {{ form(formSkill) }}
+                    </div>
+                </div>
+            {% endif %}
+            <div class="card" id="categories_add">
                 <div class="card-body container-fluid">
-                    <h3>Ajouter une catégorie</h3>
+                    <h3>{{ 'cv.skills.skill-categories.title.add'|trans }}</h3>
                     {% form_theme formCat 'dashboard/include/form.html.twig' %}
                     {{ form(formCat) }}
                 </div>
