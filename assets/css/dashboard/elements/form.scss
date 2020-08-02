@@ -1,8 +1,11 @@
 .form-zone {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-gap: 10px 15px;
+
   .form-group {
     display: flex;
     flex-direction: column;
-    margin: 10px 5px;
 
     label {
       margin: 5px 0 1px 5px;
@@ -48,5 +51,13 @@
       color: #7f8c8d;
       font-size: 0.9em;
     }
+  }
+
+  .form-submit {
+    grid-column: 1 / -1;
+
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
   }
 }
