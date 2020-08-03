@@ -18,6 +18,13 @@
                             </tr>
                             </thead>
                             <tbody>
+                            {% for s in skills %}
+                                <tr>
+                                    <td>{{ s.id }}</td>
+                                    <td>{{ s.technologie.name }}</td>
+                                    <td></td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>

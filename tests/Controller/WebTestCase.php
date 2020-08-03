@@ -27,7 +27,23 @@ class WebTestCase extends \Symfony\Bundle\FrameworkBundle\Test\WebTestCase
         /** @var EntityManagerInterface $em */
         $em = self::$container->get(EntityManagerInterface::class);
 
-        $this->data = $this->loadFixtureFiles($this->fixtures);
+        $temp = $this->loadFixtureFiles($this->fixtures);
+        foreach ($temp as $k => $t) {
+            $pk = '';
+            $chars = array_reverse(str_split($k));
+            foreach ($chars as $c) {
+                if (is_numeric($c)) {
+                    $pk = $c . $pk;
+                } else {
+                    break;
+                }
+            }
+            $k = str_replace($pk, '', $k);
+            if (!\array_key_exists($k, $this->data)) {
+                $this->data[$k] = [];
+            }
+            $this->data[$k][] = $t;
+        }
 
         $this->em = $em;
         $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
@@ -43,7 +59,7 @@ class WebTestCase extends \Symfony\Bundle\FrameworkBundle\Test\WebTestCase
         /** @var EntityManagerInterface $em */
         $em = self::$container->get(EntityManagerInterface::class);
         /** @var Utilisateur $managedUser */
-        $managedUser = $em->getRepository(Utilisateur::class)->find($this->data[$user]->getId());
+        $managedUser = $em->getRepository(Utilisateur::class)->find($this->data[$user][0]->getId());
         if (null === $managedUser) {
             throw new Exception("Impossible de retrouver l'utilisateur {$user}");
         }

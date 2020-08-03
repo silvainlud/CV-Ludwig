@@ -36,7 +36,7 @@ class CompetenceCategorie
     private $ordre;
 
     /**
-     * @ORM\OneToMany(targetEntity=Competence::class, mappedBy="Categorie")
+     * @ORM\OneToMany(targetEntity=Competence::class, mappedBy="categorie")
      */
     private $competences;
 

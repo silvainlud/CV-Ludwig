@@ -4,10 +4,16 @@ namespace App\Entity\Main\CV;
 
 use App\Repository\Main\CV\CompetenceRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CompetenceRepository::class)
  * @ORM\Table(name="CV_Competence")
+ * @UniqueEntity(
+ *     fields={"technologie"},
+ *     errorPath="technologie",
+ * )
  */
 class Competence
 {
@@ -21,19 +27,16 @@ class Competence
     /**
      * @ORM\ManyToOne(targetEntity=CompetenceCategorie::class, inversedBy="competences")
      * @ORM\JoinColumn(name="NumCompetenceCategorie", nullable=false, referencedColumnName="NumCompetenceCategorie")
+     * @Assert\NotNull
      */
-    private $Categorie;
+    private $categorie;
 
     /**
      * @ORM\OneToOne(targetEntity=Technologie::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false, name="NumTechnologie", referencedColumnName="NumTechnologie")
+     * @Assert\NotNull
      */
-    private $Technologie;
-
-    /**
-     * @ORM\Column(type="string", length=16, name="NiveauCompetence")
-     */
-    private $niveau;
+    private $technologie;
 
     /**
      * @ORM\Column(type="boolean", name="EstScolaire")
@@ -45,6 +48,13 @@ class Competence
      */
     private $autoditacte;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=CompetenceNiveau::class)
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull
+     */
+    private $niveau;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,36 +62,24 @@ class Competence
 
     public function getCategorie(): ?CompetenceCategorie
     {
-        return $this->Categorie;
+        return $this->categorie;
     }
 
-    public function setCategorie(?CompetenceCategorie $Categorie): self
+    public function setCategorie(?CompetenceCategorie $categorie): self
     {
-        $this->Categorie = $Categorie;
+        $this->categorie = $categorie;
 
         return $this;
     }
 
     public function getTechnologie(): ?Technologie
     {
-        return $this->Technologie;
+        return $this->technologie;
     }
 
-    public function setTechnologie(Technologie $Technologie): self
+    public function setTechnologie(Technologie $technologie): self
     {
-        $this->Technologie = $Technologie;
-
-        return $this;
-    }
-
-    public function getNiveau(): ?string
-    {
-        return $this->niveau;
-    }
-
-    public function setNiveau(string $niveau): self
-    {
-        $this->niveau = $niveau;
+        $this->technologie = $technologie;
 
         return $this;
     }
@@ -106,6 +104,18 @@ class Competence
     public function setAutoditacte(bool $autoditacte): self
     {
         $this->autoditacte = $autoditacte;
+
+        return $this;
+    }
+
+    public function getNiveau(): ?CompetenceNiveau
+    {
+        return $this->niveau;
+    }
+
+    public function setNiveau(?CompetenceNiveau $niveau): self
+    {
+        $this->niveau = $niveau;
 
         return $this;
     }

@@ -1,5 +1,11 @@
 cv:
   skills:
+    skill:
+      attr:
+        autoditacte: En autodidacte
+        level: Niveau
+        scolaire: Dans le cadre scolaire
+        technologie: Technologie
     skill-categories:
       attr:
         name: Nom

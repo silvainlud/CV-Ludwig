@@ -1,0 +1,4 @@
+App\Entity\Main\CV\CompetenceNiveau:
+  skill_level{1..10}:
+    name: '<username()>'
+    class: '<current()>'
