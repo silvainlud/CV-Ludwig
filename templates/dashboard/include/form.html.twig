@@ -98,3 +98,23 @@
     {%- set type = type|default('submit') -%}
     {{ block('button_widget') }}
 {%- endblock -%}
+
+{%- block checkbox_row -%}
+    {%- set widget_attr = {} -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+    {%- endif -%}
+     <div{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ ' form-group form-checkbox')|trim })} %}{{ block('attributes') }}{% endwith %}>
+        <div class="form-checkbox_content">
+            {{- form_widget(form, widget_attr) -}}
+            {{- form_label(form) -}}
+        </div>
+        {{- form_help(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock checkbox_row -%}
+
+{%- block choice_widget_collapsed -%}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' select2')|trim}) -%}
+    {{- parent() -}}
+{%- endblock choice_widget_collapsed -%}

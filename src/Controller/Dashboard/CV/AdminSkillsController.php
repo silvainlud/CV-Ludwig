@@ -2,8 +2,10 @@
 
 namespace App\Controller\Dashboard\CV;
 
+use App\Entity\Main\CV\Competence;
 use App\Entity\Main\CV\CompetenceCategorie;
 use App\Form\CV\CompetenceCategorieType;
+use App\Form\CV\CompetenceType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,6 +41,20 @@ class AdminSkillsController extends AbstractController
             $this->em->flush();
 
             return $this->redirectToRoute('db_cv_skills');
+        }
+
+        if (null != $cat) {
+            $skills = $this->em->getRepository(Competence::class)->findBy(['categorie' => $cat->getId()]);
+            $nSkill = new Competence();
+            $nSkill->setCategorie($cat);
+            $formSkill = $this->createForm(CompetenceType::class, $nSkill);
+            $formSkill->handleRequest($request);
+            if ($formSkill->isSubmitted() && $formSkill->isValid()) {
+                $this->em->persist($nSkill);
+                $this->em->flush();
+
+                return $this->redirectToRoute('db_cv_skills_categories_view', ['cat' => $cat->getId()]);
+            }
         }
 
         $categories = $this->em->getRepository(CompetenceCategorie::class)->findBy([], ['ordre' => 'asc']);
