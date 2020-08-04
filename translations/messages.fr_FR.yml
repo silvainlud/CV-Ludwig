@@ -19,6 +19,16 @@ cv:
         add: Ajouter une catégorie
         edit: Éditer une catégorie
         list: Liste des catégories
+    technology:
+      attr:
+        color: Couleur
+        description: Description
+        image: Logo
+        name: Nom
+      title:
+        add: Ajouter une technologie
+        edit: Éditer une technologie
+        list: Liste des technologies
     title:
       add: Ajouter une compétences
       edit: Éditer une compétence

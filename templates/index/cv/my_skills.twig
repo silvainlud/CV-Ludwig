@@ -10,10 +10,12 @@
         nec opibus nec victu nec indumentorum vilitate gregariis militibus discrepantes opposita cuncta superasse
         virtute.
     </p>
-    {% for c in skills %}
-        <h3 class="mt-7">{{ c.name }}</h3>
-        <div class="container-fluid">
-            <div class="row">
+    <div class="container">
+        <div class="row">
+            {% for c in skills %}
+                <div class="col-12">
+                    <h3 class="mt-7">{{ c.name }}</h3>
+                </div>
                 {% for s in c.competences %}
                     <div class="col-3 mb-5">
                         <div class="card">
@@ -41,8 +43,8 @@
                         </div>
                     </div>
                 {% endfor %}
-            </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+    </div>
 
 {% endblock %}
