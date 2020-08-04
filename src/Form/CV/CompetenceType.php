@@ -35,14 +35,16 @@ class CompetenceType extends AbstractType
                 'choice_label' => 'name',
             ]);
         }
-        $builder->add('scolaire', CheckboxType::class, [
-            'label' => 'cv.skills.skill.attr.scolaire',
-            'required' => false,
-        ])
-            ->add('autoditacte', CheckboxType::class, [
+        $builder
+            ->add('scolaire', CheckboxType::class, [
                 'label' => 'cv.skills.skill.attr.scolaire',
                 'required' => false,
-            ])->add('submit', SubmitType::class, [
+            ])
+            ->add('autoditacte', CheckboxType::class, [
+                'label' => 'cv.skills.skill.attr.autoditacte',
+                'required' => false,
+            ])
+            ->add('submit', SubmitType::class, [
                 'label' => 'general.action.btn.submit',
                 'attr' => ['cancel_btn' => $options['cancel_btn']],
             ]);

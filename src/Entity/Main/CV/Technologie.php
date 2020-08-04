@@ -4,6 +4,7 @@ namespace App\Entity\Main\CV;
 
 use App\Repository\Main\CV\TechnologieRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -33,7 +34,7 @@ class Technologie
     private $description;
 
     /**
-     * @ORM\Column(type="binary", name="ImageTechnologie")
+     * @ORM\Column(type="blob", name="ImageTechnologie")
      * @Assert\NotNull
      */
     private $image;
@@ -46,7 +47,7 @@ class Technologie
     private $imageExtension;
 
     /**
-     * @ORM\Column(type="string", length=15, name="ColorTechnologie", nullable=true)
+     * @ORM\Column(type="string", length=25, name="ColorTechnologie", nullable=true)
      * @Assert\NotBlank
      * @Assert\Length(max="25")
      */
@@ -131,6 +132,21 @@ class Technologie
     public function setColor(string $color): self
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    public function getUpload()
+    {
+        return null;
+    }
+
+    public function setUpload(UploadedFile $file): self
+    {
+        if (!empty($file->getPath())) {
+            $this->imageExtension = $file->guessExtension();
+            $this->image = file_get_contents($file);
+        }
 
         return $this;
     }

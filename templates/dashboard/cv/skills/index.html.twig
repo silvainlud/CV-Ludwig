@@ -13,6 +13,7 @@
                             <thead>
                             <tr>
                                 <td>#</td>
+                                <td  style="width: 64px;" class="text-center">{{ 'cv.skills.technology.attr.image'|trans }}</td>
                                 <td>Nom</td>
                                 <td class="text-right">Action</td>
                             </tr>
@@ -21,6 +22,11 @@
                             {% for s in skills %}
                                 <tr>
                                     <td>{{ s.id }}</td>
+                                    <td class="text-center icon_skills-cell justify-content-center" style="width: 64px;">
+                                        <div class="icon_skills" style="background-color: {{ s.technologie.color }}">
+                                            <img src="{{ s.technologie.displayImage }}" alt="">
+                                        </div>
+                                    </td>
                                     <td>{{ s.technologie.name }}</td>
                                     <td class="text-right">
                                         <a href="{{ path('db_cv_skills_edit', {'skill': s.id}) }}"
