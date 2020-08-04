@@ -47,7 +47,7 @@ class AdminSkillsController extends AbstractController
             $skills = $this->em->getRepository(Competence::class)->findBy(['categorie' => $cat->getId()]);
             $nSkill = new Competence();
             $nSkill->setCategorie($cat);
-            $formSkill = $this->createForm(CompetenceType::class, $nSkill);
+            $formSkill = $this->createForm(CompetenceType::class, $nSkill, ['choose_categories' => false]);
             $formSkill->handleRequest($request);
             if ($formSkill->isSubmitted() && $formSkill->isValid()) {
                 $this->em->persist($nSkill);
@@ -83,6 +83,25 @@ class AdminSkillsController extends AbstractController
         }
 
         return $this->render('dashboard/cv/skills/edit_categories.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/dashboard/cv/skills/{skill}/edit", name="db_cv_skills_edit")
+     */
+    public function EditCompetences(Request $request, Competence $skill): Response
+    {
+        $form = $this->createForm(CompetenceType::class, $skill, ['cancel_btn' => true]);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->flush();
+
+            return $this->redirectToRoute('db_cv_skills_categories_view', ['cat' => $skill->getCategorie()->getId()]);
+        }
+
+        return $this->render('dashboard/cv/skills/edit_skill.html.twig', [
             'form' => $form->createView(),
         ]);
     }

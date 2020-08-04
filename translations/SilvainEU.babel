@@ -1,4 +1,4 @@
-<babeledit_project version="1.2" be_version="2.7.1">
+<babeledit_project be_version="2.7.1" version="1.2">
     <!--
 
     BabelEdit project file
@@ -41,6 +41,19 @@
                                                 </translations>
                                             </concept_node>
                                             <concept_node>
+                                                <name>category</name>
+                                                <definition_loaded>false</definition_loaded>
+                                                <description></description>
+                                                <comment></comment>
+                                                <default_text></default_text>
+                                                <translations>
+                                                    <translation>
+                                                        <language>fr-FR</language>
+                                                        <approved>false</approved>
+                                                    </translation>
+                                                </translations>
+                                            </concept_node>
+                                            <concept_node>
                                                 <name>level</name>
                                                 <definition_loaded>false</definition_loaded>
                                                 <description></description>
@@ -68,6 +81,37 @@
                                             </concept_node>
                                             <concept_node>
                                                 <name>technologie</name>
+                                                <definition_loaded>false</definition_loaded>
+                                                <description></description>
+                                                <comment></comment>
+                                                <default_text></default_text>
+                                                <translations>
+                                                    <translation>
+                                                        <language>fr-FR</language>
+                                                        <approved>false</approved>
+                                                    </translation>
+                                                </translations>
+                                            </concept_node>
+                                        </children>
+                                    </folder_node>
+                                    <folder_node>
+                                        <name>title</name>
+                                        <children>
+                                            <concept_node>
+                                                <name>add</name>
+                                                <definition_loaded>false</definition_loaded>
+                                                <description></description>
+                                                <comment></comment>
+                                                <default_text></default_text>
+                                                <translations>
+                                                    <translation>
+                                                        <language>fr-FR</language>
+                                                        <approved>false</approved>
+                                                    </translation>
+                                                </translations>
+                                            </concept_node>
+                                            <concept_node>
+                                                <name>edit</name>
                                                 <definition_loaded>false</definition_loaded>
                                                 <description></description>
                                                 <comment></comment>

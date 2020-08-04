@@ -3,9 +3,13 @@ cv:
     skill:
       attr:
         autoditacte: En autodidacte
+        category: Catégorie
         level: Niveau
         scolaire: Dans le cadre scolaire
         technologie: Technologie
+      title:
+        add: Ajouter une compétence
+        edit: Éditer une compétence
     skill-categories:
       attr:
         name: Nom

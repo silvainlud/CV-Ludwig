@@ -3,6 +3,7 @@
 namespace App\Form\CV;
 
 use App\Entity\Main\CV\Competence;
+use App\Entity\Main\CV\CompetenceCategorie;
 use App\Entity\Main\CV\CompetenceNiveau;
 use App\Entity\Main\CV\Technologie;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -26,11 +27,18 @@ class CompetenceType extends AbstractType
                 'class' => Technologie::class,
                 'label' => 'cv.skills.skill.attr.technologie',
                 'choice_label' => 'name',
-            ])
-            ->add('scolaire', CheckboxType::class, [
-                'label' => 'cv.skills.skill.attr.scolaire',
-                'required' => false,
-            ])
+            ]);
+        if ($options['choose_categories']) {
+            $builder->add('categorie', EntityType::class, [
+                'class' => CompetenceCategorie::class,
+                'label' => 'cv.skills.skill.attr.category',
+                'choice_label' => 'name',
+            ]);
+        }
+        $builder->add('scolaire', CheckboxType::class, [
+            'label' => 'cv.skills.skill.attr.scolaire',
+            'required' => false,
+        ])
             ->add('autoditacte', CheckboxType::class, [
                 'label' => 'cv.skills.skill.attr.scolaire',
                 'required' => false,
@@ -45,6 +53,7 @@ class CompetenceType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Competence::class,
             'cancel_btn' => false,
+            'choose_categories' => true,
         ]);
     }
 }
