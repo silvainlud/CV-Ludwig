@@ -22,7 +22,12 @@
                                 <tr>
                                     <td>{{ s.id }}</td>
                                     <td>{{ s.technologie.name }}</td>
-                                    <td></td>
+                                    <td class="text-right">
+                                        <a href="{{ path('db_cv_skills_edit', {'skill': s.id}) }}"
+                                           class="app-btn app-btn-blue app-btn-text">
+                                            <i class="fas fa-pen-alt"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
