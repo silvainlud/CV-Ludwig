@@ -5,6 +5,7 @@ namespace App\Entity\Main\CV;
 use App\Repository\Main\CV\TechnologieRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -52,6 +53,11 @@ class Technologie
      * @Assert\Length(max="25")
      */
     private $color;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     */
+    private $slug;
 
     public function getId(): ?int
     {
@@ -149,5 +155,20 @@ class Technologie
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function CompleteSlug(SluggerInterface $slugger)
+    {
+        if (!$this->slug || '-' == $this->slug) {
+            $this->slug = (string) $slugger->slug($this->id . ' ' . $this->name)->lower();
+        }
     }
 }

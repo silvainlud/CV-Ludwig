@@ -38,4 +38,7 @@ general:
     btn:
       cancel: Annuler
       submit: Envoyer
+  menu:
+    administration: Administration
+    sign-in: Se connecter
 

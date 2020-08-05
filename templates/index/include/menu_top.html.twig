@@ -6,9 +6,21 @@
         <a href="">Parcours</a>
         <a href="{{ path('cv-my_skills') }}">Compétences</a>
         <div class="header_space"></div>
-        <a href="" class="app-nav-btn">
-            <i class="far fa-envelope-open"></i>
-            Me Contacter
-        </a>
+
+        {% if app.user %}
+            <a href="{{ path('db_index') }}" class="app-nav-btn">
+                <i class="fas fa-shield-alt"></i>
+                {{ 'general.menu.administration'|trans }}
+            </a>
+        {% else %}
+            <a href="" class="app-nav-btn">
+                <i class="far fa-envelope-open"></i>
+                Me Contacter
+            </a>
+            <a href="{{ path('app_login') }}" class="app-nav-btn">
+                {{ 'general.menu.sign-in'|trans }}
+                <i class="fas fa-sign-in-alt"></i>
+            </a>
+        {% endif %}
     </nav>
 </header>
