@@ -17,34 +17,60 @@
                     <h3 class="mt-7">{{ c.name }}</h3>
                 </div>
                 {% for s in c.competences %}
-                    <div class="col-3 mb-5">
-                        <div class="card">
-                            <div class="card-body card-centered">
+                    <div class="col-3 mb-5 {% if  loop.index > 8 %}d-none{% endif %}"
+                         id="tech-{{- c.id -}}-{{- s.technologie.id -}}">
+                        <div class="card h-100">
+                            <div class="card-body card-centered card-body_maximize">
                                 <div class="icon_skills" style="background-color: {{ s.technologie.color }}">
-                                    <img src="{{ s.technologie.displayImage }}" alt="">
+                                    <img src="{{ path('cv-technology_icon',{'slug': s.technologie.slug }) }}" alt="">
                                 </div>
                                 <h2>{{ s.technologie.name }}</h2>
                                 <p>
                                     {{ s.technologie.description }}
                                 </p>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer flex-column justify-content-center">
                                 <div class="app-badge app-badge-{{ s.niveau.class }}">
                                     <span>{{ s.niveau.name }}</span>
                                 </div>
                                 <div class="card-footer_spacer"></div>
-                                {% if s.autoditacte %}
-                                    <i class="fas fa-home"></i>
-                                {% endif %}
-                                {% if s.scolaire %}
-                                    <i class="fas fa-graduation-cap"></i>
-                                {% endif %}
+                                <div class="card-footer_icon mt-3">
+                                    {% if s.autoditacte %}
+                                        <i class="fas fa-home"></i>
+                                    {% endif %}
+                                    {% if s.scolaire %}
+                                        <i class="fas fa-graduation-cap"></i>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {% if loop.index == 8 and loop.last == false %}
+                        <div class="col-12 text-center">
+                            <button class="app-btn app-btn-inverse app-btn-grey" id="btn-categ-{{ c.id }}">
+                                Voir plus
+                            </button>
+                        </div>
+                    {% endif %}
                 {% endfor %}
             {% endfor %}
         </div>
     </div>
 
+{% endblock %}
+
+{% block script %}
+    <script>
+        const categId = {{ skills|map(x=>x.id)|json_encode }};
+        categId.forEach(function (x) {
+            let btn = document.getElementById('btn-categ-' + x);
+            if (btn != null)
+                btn.addEventListener('click', function (e) {
+                    document.querySelectorAll('*[id^="tech-' + x + '-"].d-none').forEach(function (i) {
+                        i.classList.remove("d-none");
+                    });
+                    btn.parentElement.remove();
+                });
+        });
+    </script>
 {% endblock %}

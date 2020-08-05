@@ -13,14 +13,28 @@
   color: $blue_color;
 
   text-decoration: unset;
+  cursor: pointer;
+  outline: none;
 
   &.app-color-plain {
     border: 3px solid $blue_color;
     background: $blue_color;
     color: white;
+
     &:not(:disabled):hover {
       border-color: lighten($blue_color, 25%);
       background-color: lighten($blue_color, 25%);
+    }
+  }
+
+  &.app-btn-inverse {
+    border: 2px solid $blue_color;
+    background: transparent;
+    color: $blue_color;
+
+    &:not(:disabled):hover {
+      background: $blue_color;
+      color: white;
     }
   }
 
@@ -38,6 +52,17 @@
       &:not(:disabled):hover {
         border-color: $color;
         background-color: transparent;
+      }
+
+      &.app-btn-inverse {
+        border: 2px solid $color;
+        background: transparent;
+        color: $color;
+
+        &:not(:disabled):hover {
+          background: $color;
+          color: white;
+        }
       }
 
       &.app-color-plain {

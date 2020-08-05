@@ -23,6 +23,7 @@ class TechnologieType extends AbstractType
                 'label' => 'cv.skills.technology.attr.name',
             ])
             ->add('upload', FileType::class, [
+                'required' => false,
                 'data_class' => UploadedFile::class,
                 'label' => 'cv.skills.technology.attr.image',
                 'constraints' => [
