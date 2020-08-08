@@ -14,13 +14,16 @@
     display: flex;
     flex-direction: column;
 
+    &.card-body_maximize {
+      flex: 1 0 auto;
+    }
 
     &.card-centered {
-      @extend .justify-content-center;
       @extend .align-items-center;
 
       p {
         text-align: center;
+        text-indent: 0;
       }
     }
 
@@ -28,10 +31,8 @@
       color: black;
       font-family: Rubik, sans-serif;
       font-weight: 500;
-      font-size: 30px;
-
-      line-height: 36px;
-
+      font-size: 22px;
+      margin: 15px 0 5px 0;
       display: flex;
       align-items: center;
       text-align: center;
@@ -40,8 +41,8 @@
     p {
       font-family: Open Sans;
       font-weight: normal;
-      font-size: 25px;
-      line-height: 34px;
+      font-size: 18px;
+      line-height: 25px;
 
       color: $default_text_color;
     }
@@ -59,9 +60,9 @@
       flex: 1 0 auto;
     }
 
-    & > i {
+    & > i, .card-footer_icon > i, i.card-footer_icon {
       color: rgba(0, 0, 0, 0.5);
-      font-size: 30px;
+      font-size: 25px;
       padding: 0 4px;
     }
   }

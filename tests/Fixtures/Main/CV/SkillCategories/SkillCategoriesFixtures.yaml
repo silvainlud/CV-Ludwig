@@ -1,0 +1,4 @@
+App\Entity\Main\CV\CompetenceCategorie:
+  skill_categ{1..10}:
+    name: '<username()>'
+    ordre: '<current()>'

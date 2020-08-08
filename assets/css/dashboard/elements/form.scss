@@ -1,15 +1,22 @@
+.col-4 .form-zone {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
 .form-zone {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-gap: 10px 15px;
+
   .form-group {
     display: flex;
     flex-direction: column;
-    margin: 10px 5px;
 
-    label {
+    & > label {
       margin: 5px 0 1px 5px;
       color: #525858;
     }
 
-    input {
+    & > input {
       margin: 3px 0 5px 0;
       padding: 7px 10px;
       font-family: Roboto, sans-serif;
@@ -47,6 +54,33 @@
 
       color: #7f8c8d;
       font-size: 0.9em;
+    }
+  }
+
+  .form-checkbox {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+
+    .form-checkbox_content {
+      display: flex;
+      flex-direction: row;
+    }
+
+    & > * {
+      margin: 5px;
+    }
+  }
+
+  .form-submit {
+    grid-column: 1 / -1;
+
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+
+    & > * {
+      margin: 5px;
     }
   }
 }

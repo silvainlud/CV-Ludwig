@@ -1,0 +1,17 @@
+{% extends 'dashboard/base.html.twig' %}
+
+{% block content_class %}container-fuild{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card" id="categories_add">
+                <div class="card-body container-fluid">
+                    <h3>{{ 'cv.skills.technology.title.edit'|trans }}</h3>
+                    {% form_theme form 'dashboard/include/form.html.twig' %}
+                    {{ form(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

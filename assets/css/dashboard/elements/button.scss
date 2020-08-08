@@ -44,8 +44,8 @@
   }
 
   &:not(:disabled):hover {
-    border-color: $blue_color;
-    background-color: lighten($blue_color, 25%);
+    background: darken($blue_color, 20%);
+    border-color: darken($blue_color, 20%);
   }
 
   @each $class, $color in $colors {

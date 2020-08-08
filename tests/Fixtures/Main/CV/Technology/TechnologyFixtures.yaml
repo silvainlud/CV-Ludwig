@@ -1,0 +1,7 @@
+App\Entity\Main\CV\Technologie:
+  skill_tech{1..10}:
+    name: '<username()>'
+    description: '<current()>'
+    image: '<current()>'
+    imageExtension: 'png'
+    color: '#00000'

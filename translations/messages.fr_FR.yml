@@ -1,0 +1,44 @@
+cv:
+  skills:
+    skill:
+      attr:
+        autoditacte: En autodidacte
+        category: Catégorie
+        level: Niveau
+        scolaire: Dans le cadre scolaire
+        technologie: Technologie
+      title:
+        add: Ajouter une compétence
+        edit: Éditer une compétence
+    skill-categories:
+      attr:
+        name: Nom
+        order: Position
+      title:
+        _: 'Catégorie : %name%'
+        add: Ajouter une catégorie
+        edit: Éditer une catégorie
+        list: Liste des catégories
+    technology:
+      attr:
+        color: Couleur
+        description: Description
+        image: Logo
+        name: Nom
+      title:
+        add: Ajouter une technologie
+        edit: Éditer une technologie
+        list: Liste des technologies
+    title:
+      add: Ajouter une compétences
+      edit: Éditer une compétence
+      list: Liste des compétences
+general:
+  action:
+    btn:
+      cancel: Annuler
+      submit: Envoyer
+  menu:
+    administration: Administration
+    sign-in: Se connecter
+
