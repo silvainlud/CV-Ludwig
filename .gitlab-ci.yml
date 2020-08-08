@@ -50,6 +50,8 @@ phpunit:
 
 docker-build-master:
   before_script: []
+  tags:
+    - docker
   # Official docker image.
   image: docker:19.03.12
   stage: build
