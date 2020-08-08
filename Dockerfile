@@ -5,4 +5,4 @@ COPY ./tools/docker/web/php.ini /etc/php/7.4/fpm/php.ini
 
 CMD ["service", "php7.4-fpm",  "restart"]
 CMD ["php", "bin/console",  "cache:clear"]
-CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
+CMD bash -c "pwd && php bin/console cache:clear && service php7.4-fpm start && service php7.4-fpm status && /usr/sbin/apache2 -D FOREGROUND"
