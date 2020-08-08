@@ -49,9 +49,12 @@ phpunit:
     - compile:nodejs
 
 docker-build-master:
-  # Official docker image.
   image: docker:19.03.12
   stage: build
+
+  before_script: []
+  tags:
+    - docker
   services:
     - docker:19.03.12-dind
   script:
