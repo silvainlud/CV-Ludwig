@@ -57,8 +57,9 @@ RUN mkdir -p $APACHE_LOCK_DIR
 RUN mkdir -p $APACHE_LOG_DIR
 
 COPY ./apache.conf /etc/apache2/sites-available/web.conf
+COPY ./php.ini /etc/php/7.4/fpm/php.ini
 RUN a2ensite web && a2dissite 000-default
 
 RUN echo "exit 0" > /usr/sbin/policy-rc.d
 
-#CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
+CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
