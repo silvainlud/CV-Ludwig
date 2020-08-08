@@ -9,7 +9,6 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @method CompetenceCategorie|null find($id, $lockMode = null, $lockVersion = null)
  * @method CompetenceCategorie|null findOneBy(array $criteria, array $orderBy = null)
- * @method CompetenceCategorie[]    findAll()
  * @method CompetenceCategorie[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class CompetenceCategorieRepository extends ServiceEntityRepository
@@ -19,22 +18,18 @@ class CompetenceCategorieRepository extends ServiceEntityRepository
         parent::__construct($registry, CompetenceCategorie::class);
     }
 
-    // /**
-    //  * @return CompetenceCategorie[] Returns an array of CompetenceCategorie objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return CompetenceCategorie[] Returns an array of CompetenceCategorie objects
+     */
+    public function findAll()
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            ->leftJoin('c.competences', 'competences')->addSelect('competences')
+            ->leftJoin('competences.technologie', 'technologie')->addSelect('technologie')
+            ->leftJoin('competences.niveau', 'niveau')->addSelect('niveau')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?CompetenceCategorie

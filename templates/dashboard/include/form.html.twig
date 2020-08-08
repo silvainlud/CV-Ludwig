@@ -1,0 +1,120 @@
+{% use 'form_div_layout.html.twig' %}
+
+
+{%- block form_row -%}
+    {%- set widget_attr = {} -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+    {%- endif -%}
+    <div{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ ' form-group')|trim })} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_label(form) -}}
+        {{- form_widget(form, widget_attr) -}}
+        {{- form_help(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock form_row -%}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <ul class="form-errors">
+            {%- for error in errors -%}
+                <li>{{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+{% block form_help -%}
+    {%- if help is not empty -%}
+        {%- set help_attr = help_attr|merge({class: (help_attr.class|default('') ~ ' form-help')|trim}) -%}
+        <p id="{{ id }}_help"{% with { attr: help_attr } %}{{ block('attributes') }}{% endwith %}>
+            {%- if translation_domain is same as(false) -%}
+                {%- if help_html is same as(false) -%}
+                    {{- help -}}
+                {%- else -%}
+                    {{- help|raw -}}
+                {%- endif -%}
+            {%- else -%}
+                {%- if help_html is same as(false) -%}
+                    {{- help|trans(help_translation_parameters, translation_domain) -}}
+                {%- else -%}
+                    {{- help|trans(help_translation_parameters, translation_domain)|raw -}}
+                {%- endif -%}
+            {%- endif -%}
+        </p>
+    {%- endif -%}
+{%- endblock form_help %}
+
+{%- block form_start -%}
+    {%- do form.setMethodRendered() -%}
+    {% set method = method|upper %}
+    {%- if method in ["GET", "POST"] -%}
+        {% set form_method = method %}
+    {%- else -%}
+        {% set form_method = "POST" %}
+    {%- endif -%}
+    <form{% if name != '' %} name="{{ name }}"{% endif %} method="{{ form_method|lower }}"
+                                                          class="form-zone" {% if action != '' %} action="{{ action }}"{% endif %}{{ block('attributes') }}{% if multipart %} enctype="multipart/form-data"{% endif %}>
+        {%- if form_method != method -%}
+            <input type="hidden" name="_method" value="{{ method }}"/>
+        {%- endif -%}
+    {#</form>#}
+{%- endblock form_start -%}
+
+{%- block button_row -%}
+    <div{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ ' form-submit')|trim })} %}{{ block('attributes') }}{% endwith %} >
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock button_row -%}
+
+{%- block button_widget -%}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' app-btn')|trim}) -%}
+
+    {{- parent() -}}
+{%- endblock button_widget -%}
+
+{%- block form -%}
+    {{ form_start(form) }}
+        {% for child in form|filter(child => not child.rendered) %}
+            {{- form_row(child) -}}
+        {% endfor %}
+    {{ form_end(form) }}
+{%- endblock form -%}
+
+{%- block submit_widget -%}
+    {% if attr['cancel_btn'] is defined and attr['cancel_btn'] == true %}
+        {% if attr['cancel_url'] is defined %}
+            {% set url = attr['cancel_url'] %}
+        {% else %}
+            {% set url =  GetPreviousUrl() %}
+        {% endif %}
+        {% if url != null %}
+            <a href="{{ url }}" class="app-btn app-btn-red">
+                <i class="fas fa-times"></i>
+                {{ "general.action.btn.cancel"|trans }}
+            </a>
+        {% endif %}
+    {% endif %}
+    {%- set type = type|default('submit') -%}
+    {{ block('button_widget') }}
+{%- endblock -%}
+
+{%- block checkbox_row -%}
+    {%- set widget_attr = {} -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+    {%- endif -%}
+     <div{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ ' form-group form-checkbox')|trim })} %}{{ block('attributes') }}{% endwith %}>
+        <div class="form-checkbox_content">
+            {{- form_widget(form, widget_attr) -}}
+            {{- form_label(form) -}}
+        </div>
+        {{- form_help(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock checkbox_row -%}
+
+{%- block choice_widget_collapsed -%}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' select2')|trim}) -%}
+    {{- parent() -}}
+{%- endblock choice_widget_collapsed -%}

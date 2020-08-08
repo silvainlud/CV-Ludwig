@@ -10,7 +10,7 @@ RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list \
     && apt update -y && apt upgrade -y
 
-RUN apt install php7.4 php7.4-xml php7.4-ctype php7.4-zip unzip php7.4-geoip php7.4-mbstring php7.4-readline php7.4-uuid php7.4-simplexml php7.4-json php7.4-phar php7.4-curl php7.4-memcached php7.4-intl php7.4-odbc php7.4-opcache php7.4-yaml php7.4-cli php7.4-dom php7.4-fpm php7.4-apcu php7.4-pdo php7.4-dev php7.4-xml php7.4-intl php7.4-gd php7.4-redis php7.4-pgsql php7.4-mysql php7.4-pdo-mysql -y
+RUN apt install php7.4 php7.4-xml php7.4-ctype php7.4-zip unzip php7.4-geoip php7.4-mbstring php7.4-readline php7.4-uuid php7.4-simplexml php7.4-json php7.4-phar php7.4-curl php7.4-memcached php7.4-intl php7.4-odbc php7.4-opcache php7.4-yaml php7.4-cli php7.4-dom php7.4-fpm php7.4-apcu php7.4-pdo php7.4-dev php7.4-xml php7.4-intl php7.4-gd php7.4-redis php7.4-pgsql php7.4-mysql php7.4-pdo-mysql php7.4-pdo-sqlite -y
 #RUN apt install -y yarn unixodbc-dev  wkhtmltopdf \
 #    && cp /usr/bin/wkhtmlto* /usr/local/bin
 
@@ -57,8 +57,9 @@ RUN mkdir -p $APACHE_LOCK_DIR
 RUN mkdir -p $APACHE_LOG_DIR
 
 COPY ./apache.conf /etc/apache2/sites-available/web.conf
+COPY ./php.ini /etc/php/7.4/fpm/php.ini
 RUN a2ensite web && a2dissite 000-default
 
 RUN echo "exit 0" > /usr/sbin/policy-rc.d
 
-#CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
+CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]

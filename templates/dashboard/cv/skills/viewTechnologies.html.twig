@@ -1,0 +1,54 @@
+{% extends 'dashboard/base.html.twig' %}
+
+{% block content_class %}container-fuild{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-8">
+            <div class="card" id="technologies_list">
+                <div class="card-body">
+                    <h3>{{ 'cv.skills.technology.title.list'|trans }}</h3>
+                    <table class="db_data-table db_data-table_hoverable">
+                        <thead>
+                        <tr>
+                            <td>#</td>
+                            <td  style="width: 64px;" class="text-center">{{ 'cv.skills.technology.attr.image'|trans }}</td>
+                            <td>{{ 'cv.skills.technology.attr.name'|trans }}</td>
+                            <td class="text-right">Action</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for c in technologies %}
+                            <tr>
+                                <td>{{ c.id }}</td>
+                                <td class="text-center icon_skills-cell justify-content-center" style="width: 64px;">
+                                    <div class="icon_skills" style="background-color: {{ c.color }}">
+                                        <img src="{{ c.displayImage }}" alt="">
+                                    </div>
+                                </td>
+                                <td>{{ c.name }}</td>
+                                <td class="text-right">
+                                    <a href="{{ path('db_cv_skills_technologies_edit', {'tech': c.id}) }}"
+                                       class="app-btn app-btn-blue app-btn-text">
+                                        <i class="fas fa-pen-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+
+            <div class="card" id="categories_add">
+                <div class="card-body container-fluid">
+                    <h3>{{ 'cv.skills.technology.title.add'|trans }}</h3>
+                     {% form_theme form 'dashboard/include/form.html.twig' %}
+                     {{ form(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
