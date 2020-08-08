@@ -41,7 +41,7 @@ phpunit:
   tags:
     - docker
   script:
-#    - php bin/console doctrine:schema:update --force --env=test
+    #    - php bin/console doctrine:schema:update --force --env=test
     #    - php bin/console doctrine:fixture:load --no-interaction --env=test
     - php bin/phpunit
   dependencies:
@@ -50,14 +50,13 @@ phpunit:
 
 docker-build-master:
   # Official docker image.
-  image: docker:latest
+  image: docker:19.03.12
   stage: build
   services:
-    - docker:dind
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker:19.03.12-dind
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
-    - docker push "$CI_REGISTRY_IMAGE"
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/silvain.eu/cv-ludwig_php:latest .
+    - docker push $CI_REGISTRY/silvain.eu/cv-ludwig_php:latest
   only:
     - master
