@@ -2,15 +2,13 @@ version: '3.4'
 
 services:
   web:
-    build:
-      context: ./tools/docker/web
+    image: registery.gitlab.silvain.eu/silvain.eu/cv-ludwig_php:base
     ports:
       - 8003:80
     volumes:
       - .:/var/www/web
       - ./vendor:/var/www/web/vendor
       - /var/www/web/var/cache
-      - ./tools/docker/web/php.ini:/etc/php/7.4/fpm/php.ini
     command: bash -c "pwd && php bin/console cache:clear && service php7.4-fpm start && service php7.4-fpm status && /usr/sbin/apache2 -D FOREGROUND"
     tty: true
     links:
