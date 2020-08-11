@@ -1,0 +1,33 @@
+{% extends 'index/base.html.twig' %}
+
+
+{% block content %}
+    <h2>Services de Silvain.eu</h2>
+    <p>
+        Alii nullo quaerente vultus severitate adsimulata patrimonia sua in inmensum extollunt, cultorum ut puta
+        feracium multiplicantes annuos fructus, quae a primo ad ultimum solem se abunde iactitant possidere, ignorantes
+        profecto maiores suos, per quos ita magnitudo Romana porrigitur, non divitiis eluxisse sed per bella saevissima,
+        nec opibus nec victu nec indumentorum vilitate gregariis militibus discrepantes opposita cuncta superasse
+        virtute.
+    </p>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            {% for s in services %}
+                <div class="col-4 mb-5 mt-4 px-5">
+                    <div class="card card-media-circle">
+                        <div class="card-body card-centered card-body_maximize">
+                            <img src="{{ path('silvaineu_service_icon', {"slug" : s.slug}) }}" alt="" class="card-media-circle">
+                            <h2>{{ s.name }}</h2>
+                            <p>
+                                {{ s.description }}
+                            </p>
+                            <a href="{{ s.link }}" class="app-btn app-btn-grey app-color-plain mt-4">
+                                Voir plus
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

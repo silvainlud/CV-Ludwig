@@ -37,6 +37,20 @@
                 </a>
             </div>
         {% endif %}
+        {% if is_granted("ROLE_ADMIN_SILVAINEU") %}
+            <div class="menu-section">
+                <div class="menu-title">
+                    <div class="menu-title__icon"><i class="fas fa-dove"></i></div>
+                    <h2>Silavin.eu</h2>
+                </div>
+                <a class="menu-item" href="{{ path('db_silvaineu_services') }}">
+                    <div class="menu-item-link">
+                        <div class="menu-item-link_icon"><i class="fas fa-cogs"></i></div>
+                        <div class="menu-item-link_content">Services</div>
+                    </div>
+                </a>
+            </div>
+        {% endif %}
     </div>
 
 </nav>
