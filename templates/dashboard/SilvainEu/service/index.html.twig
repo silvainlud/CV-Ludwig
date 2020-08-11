@@ -1,0 +1,49 @@
+{% extends 'dashboard/base.html.twig' %}
+
+{% block content_class %}container{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">Services</h2>
+                    <table class="db_data-table db_data-table_hoverable">
+                        <thead>
+                        <tr>
+                            <td>#</td>
+                            <td style="width: 64px;"
+                                class="text-center">{{ 'cv.skills.technology.attr.image'|trans }}</td>
+                            <td>Nom</td>
+                            <td>Lien</td>
+                            <td class="text-right">Action</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for s in services %}
+                            <tr>
+                                <td>{{ s.id }}</td>
+                                <td class="text-center icon-cell justify-content-center" style="width: 64px;">
+                                    <img src="{{ path('silvaineu_service_icon', {"slug" : s.slug}) }}" alt="">
+                                </td>
+                                <td>{{ s.name }}</td>
+                                <td>{{ s.link }}</td>
+                                <td class="text-right">
+                                    <a href="{{ path('db_silvaineu_services-edit', {'service': s.slug}) }}"
+                                       class="app-btn app-btn-blue app-btn-text">
+                                        <i class="fas fa-pen-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-end mt-4">
+                        <a href="{{ path('db_silvaineu_services-add') }}" class="app-btn">{{ 'silvaineu.service.title.add'|trans }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'dashboard/base.html.twig' %}
+
+{% block content_class %}container{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card" id="categories_add">
+                <div class="card-body container-fluid">
+                    {% if isEdit is not defined or isEdit == false %}
+                        <h3>{{ 'silvaineu.service.title.add'|trans }}</h3>
+                    {% else %}
+                        <h3>{{ 'silvaineu.service.title.edit'|trans }}</h3>
+                    {% endif %}
+                    {% form_theme form 'dashboard/include/form.html.twig' %}
+                    {{ form(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

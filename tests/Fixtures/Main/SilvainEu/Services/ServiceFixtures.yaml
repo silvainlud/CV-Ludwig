@@ -1,0 +1,8 @@
+App\Entity\Main\SilvainEu\Service:
+  service{1..10}:
+    name: '<username()>'
+    description: '<paragraph(3)>'
+    image: '<current()>'
+    imageExtension: '<fileExtension()>'
+    link: '<url()>'
+    slug: "<slug()>"
