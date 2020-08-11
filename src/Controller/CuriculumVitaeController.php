@@ -31,10 +31,11 @@ class CuriculumVitaeController extends AbstractController
     public function my_skills(): Response
     {
         $i = $this->cache->getItem(self::CACHE_KEY_TECHNOLOGIE);
-        if (!$i->isHit() || true) {
-            $i->set($this->getDoctrine()->getRepository(CompetenceCategorie::class)->findBy([], ['ordre' => 'asc']));
+        if (!$i->isHit()) {
+            $i->set($this->getDoctrine()->getRepository(CompetenceCategorie::class)->findAll());
             $this->cache->save($i);
         }
+
         /** @var CompetenceCategorie[] $skills */
         $skills = $i->get();
 

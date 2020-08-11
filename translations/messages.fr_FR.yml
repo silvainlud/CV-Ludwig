@@ -41,4 +41,14 @@ general:
   menu:
     administration: Administration
     sign-in: Se connecter
+silvaineu:
+  service:
+    attr:
+      description: Description
+      image: Image
+      link: Lien
+      name: Nom du service
+    title:
+      add: Ajouter un service
+      edit: Éditer un service
 
