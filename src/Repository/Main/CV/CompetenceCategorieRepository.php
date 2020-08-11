@@ -27,6 +27,7 @@ class CompetenceCategorieRepository extends ServiceEntityRepository
             ->leftJoin('c.competences', 'competences')->addSelect('competences')
             ->leftJoin('competences.technologie', 'technologie')->addSelect('technologie')
             ->leftJoin('competences.niveau', 'niveau')->addSelect('niveau')
+            ->orderBy('c.ordre', 'ASC')
             ->getQuery()
             ->getResult();
     }

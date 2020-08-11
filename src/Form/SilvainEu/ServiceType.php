@@ -1,31 +1,37 @@
 <?php
 
-namespace App\Form\CV;
+namespace App\Form\SilvainEu;
 
-use App\Entity\Main\CV\Technologie;
+use App\Entity\Main\SilvainEu\Service;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Image;
 
-class TechnologieType extends AbstractType
+class ServiceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'cv.skills.technology.attr.name',
+                'label' => 'silvaineu.service.attr.name',
+                'required' => true,
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'silvaineu.service.attr.description',
+                'required' => true,
             ])
             ->add('upload', FileType::class, [
+                'label' => 'silvaineu.service.attr.image',
                 'required' => false,
                 'data_class' => UploadedFile::class,
-                'label' => 'cv.skills.technology.attr.image',
                 'constraints' => [
                     new Image(),
                     new File([
@@ -33,11 +39,9 @@ class TechnologieType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('color', TextType::class, [
-                'label' => 'cv.skills.technology.attr.color',
-            ])
-            ->add('description', TextareaType::class, [
-                'label' => 'cv.skills.technology.attr.description',
+            ->add('link', UrlType::class, [
+                'label' => 'silvaineu.service.attr.link',
+                'required' => true,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'general.action.btn.submit',
@@ -48,7 +52,7 @@ class TechnologieType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Technologie::class,
+            'data_class' => Service::class,
             'cancel_btn' => false,
             'error_mapping' => ['image' => 'upload'],
         ]);
