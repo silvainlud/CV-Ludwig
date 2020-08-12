@@ -2,10 +2,15 @@
 
 namespace App\Twig;
 
+use App\Controller\SilvainEu\ServiceController;
+use App\Entity\Main\SilvainEu\Service;
+use Doctrine\ORM\EntityManagerInterface;
+use Psr\Cache\InvalidArgumentException;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
-use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 class NavExtension extends AbstractExtension
@@ -13,11 +18,26 @@ class NavExtension extends AbstractExtension
     private RouterInterface $router;
 
     private RequestStack $request;
+    /**
+     * @var EntityManagerInterface
+     */
+    private EntityManagerInterface $em;
+    /**
+     * @var AdapterInterface
+     */
+    private AdapterInterface $cache;
+    /**
+     * @var TranslatorInterface
+     */
+    private TranslatorInterface $translator;
 
-    public function __construct(RouterInterface $router, RequestStack $request)
+    public function __construct(RouterInterface $router, RequestStack $request, EntityManagerInterface $em, AdapterInterface $cache, TranslatorInterface $translator)
     {
         $this->router = $router;
         $this->request = $request;
+        $this->em = $em;
+        $this->cache = $cache;
+        $this->translator = $translator;
     }
 
     public function getFilters(): array
@@ -34,6 +54,7 @@ class NavExtension extends AbstractExtension
     {
         return [
             new TwigFunction('GetPreviousUrl', [$this, 'GetPreviousUrl']),
+            new TwigFunction('GetServicesFooter', [$this, 'GetServicesFooter']),
         ];
     }
 
@@ -56,5 +77,42 @@ class NavExtension extends AbstractExtension
         } catch (\Exception $e) {
             return null;
         }
+    }
+
+    /**
+     * @throws InvalidArgumentException
+     *
+     * @return array<array<string>>
+     */
+    public function GetServicesFooter()
+    {
+        $i = $this->cache->getItem(ServiceController::CACHE_KEY_SERVICES);
+        if (!$i->isHit()) {
+            $i->set($this->em->getRepository(Service::class)->findAll());
+            $this->cache->save($i);
+        }
+        $col1 = [];
+        $col2 = [];
+        $services = $i->get();
+        $i = 1;
+        /** @var Service[] $services */
+        foreach ($services as $s) {
+            $k = [0 => $s->getName(), $s->getLink()];
+            if ($i < \count($services)) {
+                $col1[] = $k;
+            } else {
+                $col2[] = $k;
+            }
+
+            ++$i;
+        }
+        $k = [$this->translator->trans('general.title.legal-notice'), ''];
+        if ($i < \count($services)) {
+            $col1[] = $k;
+        } else {
+            $col2[] = $k;
+        }
+
+        return [0 => $col1, 1 => $col2];
     }
 }
