@@ -4,6 +4,7 @@ namespace App\Entity\Main\SilvainEu;
 
 use App\Repository\Main\SilvainEu\ServiceRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -11,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=ServiceRepository::class)
  * @ORM\Table(name="SilvainEu_Service")
+ * @UniqueEntity(fields={"name"})
  */
 class Service
 {
