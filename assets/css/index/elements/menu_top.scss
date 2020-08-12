@@ -70,6 +70,8 @@ main > div.header {
       width: 100%;
       top: 0;
       right: 0;
+      min-height: 300px;
+      object-fit: cover;
     }
 
     &:not(.header_bg) {
@@ -78,23 +80,28 @@ main > div.header {
       left: 0;
 
 
-
       animation-iteration-count: infinite;
+
       &.header_img_cloud {
         animation-name: cloud_anim;
         animation-duration: 7s;
         animation-direction: alternate;
         width: 14vw;
+        min-width: 100px;
       }
+
       &.header_img_earth {
         animation-name: earth_anim;
         animation-duration: 15s;
         width: 14vw;
+        min-width: 100px;
       }
+
       &.header_img_rocket {
         animation-name: rocket_anim;
         animation-duration: 15s;
         width: 12vw;
+        min-width: 100px;
       }
     }
   }
@@ -107,10 +114,19 @@ main > div.header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    &.header_index{
+
+    &.header_index {
       & > img {
         width: 222px;
         height: 222px;
+        @media screen and (max-width: 1300px) {
+          width: 164px;
+          height: 164px;
+          @media screen and (max-width: 1000px) {
+            width: 125px;
+            height: 125px;
+          }
+        }
       }
     }
 
@@ -119,12 +135,30 @@ main > div.header {
       border-radius: 512px;
       width: 164px;
       height: 164px;
+      @media screen and (max-width: 1300px) {
+        width: 125px;
+        height: 125px;
+        @media screen and (max-width: 1000px) {
+          width: 100px;
+          height: 100px;
+        }
+      }
     }
 
     & > .header_title {
       padding: 34px;
       display: flex;
       flex-direction: column;
+
+      @media screen and (max-width: 1300px) {
+        padding: 28px;
+        @media screen and (max-width: 1000px) {
+          padding: 20px;
+        }
+        @media screen and (max-width: 700px) {
+          padding: 10px;
+        }
+      }
 
       h1 {
 
@@ -135,10 +169,19 @@ main > div.header {
         font-weight: bold;
         font-size: 36px;
         line-height: 42px;
+        white-space: nowrap;
 
         color: $header_color;
 
         text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+        @media screen and (max-width: 1300px) {
+          font-size: 30px;
+          line-height: 35px;
+          @media screen and (max-width: 1000px) {
+            font-size: 25px;
+            line-height: 30px;
+          }
+        }
       }
 
       p {
@@ -149,8 +192,17 @@ main > div.header {
         font-weight: normal;
         font-size: 24px;
         line-height: 28px;
+        white-space: nowrap;
 
         color: $header_color;
+        @media screen and (max-width: 1300px) {
+          font-size: 20px;
+          line-height: 24px;
+          @media screen and (max-width: 1000px) {
+            font-size: 16px;
+            line-height: 20px;
+          }
+        }
       }
     }
   }
