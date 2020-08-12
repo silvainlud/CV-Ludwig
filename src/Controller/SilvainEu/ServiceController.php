@@ -57,4 +57,15 @@ class ServiceController extends AbstractController
     {
         return AssetsResponse::ReturnImgAdapterCache($this->cache, $s->getImage(), $s->getSlug(), $s->getImageExtension(), self::SERVICE_SIZE_WIDTH);
     }
+
+    /**
+     * @Route("/silvaineu/email/config", name="silvaineu_service_config-email")
+     *
+     * @return Response
+     */
+    public function ConfigEmail()
+    {
+        return $this->render('index/silvain.eu/mail/config.html.twig', [
+        ]);
+    }
 }

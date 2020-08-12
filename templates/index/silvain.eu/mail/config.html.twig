@@ -1,0 +1,57 @@
+{% extends 'index/base.html.twig' %}
+
+
+{% block content %}
+    <h2>Configuration Email</h2>
+    <p>
+        Alii nullo quaerente vultus severitate adsimulata patrimonia sua in inmensum extollunt, cultorum ut puta
+        feracium multiplicantes annuos fructus, quae a primo ad ultimum solem se abunde iactitant possidere, ignorantes
+        profecto maiores suos, per quos ita magnitudo Romana porrigitur, non divitiis eluxisse sed per bella saevissima,
+        nec opibus nec victu nec indumentorum vilitate gregariis militibus discrepantes opposita cuncta superasse
+        virtute.
+    </p>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-6 col-12 mb-5 mt-lg-4 px-xl-5 px-lg-4 p-0">
+                <div class="card card-media-circle_horiz">
+                    <div class="card-body">
+                        <div class="card-media-circle_horiz">
+                            <img src="{{ asset('img/silvain.eu/smtp.png') }}" alt="">
+                            <h2>Serveur SMTP</h2>
+                        </div>
+                        <p><b>Adresse :</b> mail.silvain.eu</p>
+                        <p><b>Port :</b> 587</p>
+                        <p><b>Chiffrement :</b> StartTLS</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12 mb-5 mt-lg-4 px-xl-5 px-lg-4 p-0">
+                <div class="card card-media-circle_horiz">
+                    <div class="card-body">
+                        <div class="card-media-circle_horiz">
+                            <img src="{{ asset('img/silvain.eu/imap.png') }}" alt="">
+                            <h2>Serveur IMAP</h2>
+                        </div>
+                        <p><b>Adresse :</b> mail.silvain.eu</p>
+                        <p><b>Port :</b> 993</p>
+                        <p><b>Chiffrement :</b> SSL/TLS</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12 mb-5 mt-lg-4 px-xl-5 px-lg-4 p-0">
+                <div class="card card-media-circle_horiz">
+                    <div class="card-body">
+                        <div class="card-media-circle_horiz">
+                            <img src="{{ asset('img/silvain.eu/pop.png') }}" alt="">
+                            <h2>Serveur POP3</h2>
+                        </div>
+                        <p><b>Adresse :</b> mail.silvain.eu</p>
+                        <p><b>Port :</b> 995</p>
+                        <p><b>Chiffrement :</b> SLL/TLS</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
