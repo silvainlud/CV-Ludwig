@@ -17,7 +17,7 @@
                     <h3 class="mt-7">{{ c.name }}</h3>
                 </div>
                 {% for s in c.competences %}
-                    <div class="col-3 mb-5 {% if  loop.index > 8 %}d-none{% endif %}"
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-5 {% if  loop.index > 8 %}d-none{% endif %}"
                          id="tech-{{- c.id -}}-{{- s.technologie.id -}}">
                         <div class="card h-100">
                             <div class="card-body card-centered card-body_maximize">
