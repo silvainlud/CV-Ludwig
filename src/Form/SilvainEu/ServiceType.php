@@ -8,7 +8,6 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -39,7 +38,7 @@ class ServiceType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('link', UrlType::class, [
+            ->add('link', TextType::class, [
                 'label' => 'silvaineu.service.attr.link',
                 'required' => true,
             ])

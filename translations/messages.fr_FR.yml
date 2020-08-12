@@ -41,6 +41,8 @@ general:
   menu:
     administration: Administration
     sign-in: Se connecter
+  title:
+    legal-notice: Mentions légales
 silvaineu:
   service:
     attr:
