@@ -37,7 +37,10 @@ class Service
     /**
      * @ORM\Column(type="string", length=128, name="LinkService")
      * @Assert\NotBlank
-     * @Assert\Url
+     * @Assert\AtLeastOneOf(constraints={
+     *     @Assert\Url(relativeProtocol=true),
+     *     @Assert\Regex(pattern="/^\/.*$/")
+     * })
      */
     private $link;
 

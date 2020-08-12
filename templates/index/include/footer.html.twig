@@ -23,15 +23,14 @@
                     <h2>Silvain.eu</h2>
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-6">
-                                <a href="{{ path('silvaineu_service_config-email') }}">Configuration email</a>
-                                <a href="">Webmail</a>
-                                <a href="">Gitlab</a>
-                            </div>
-                            <div class="col-6">
-                                <a href="">Owncloud</a>
-                                <a href="">Mentions légales</a>
-                            </div>
+                            {% set service = GetServicesFooter() %}
+                            {% for arrayService in service %}
+                                <div class="col-6">
+                                    {% for s in arrayService %}
+                                        <a href="{{ s[1] }}">{{ s[0] }}</a>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -43,7 +42,7 @@
                     </p>
                 </div>
                 <div class="col-12">
-                        <p class="footer_copyright">Site réalisé par : Ludwig SILVAIN | Copyright © Ludwig SILVAIN 2020</p>
+                    <p class="footer_copyright">Site réalisé par : Ludwig SILVAIN | Copyright © Ludwig SILVAIN 2020</p>
                 </div>
             </div>
         </div>
