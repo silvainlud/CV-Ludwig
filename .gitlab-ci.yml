@@ -75,4 +75,4 @@ deployment:production:ansible:
   variables:
     ANSIBLE_HOST_KEY_CHECKING: 'false'
   script:
-    - ansible -i inventory $CI_PROJECT_DIR/$CI_PROJECT_NAME/tools/ansible/deploy/deploy.yml all
+    - ansible -i $CI_PROJECT_DIR/$CI_PROJECT_NAME/tools/ansible/deploy/inventory -m ping all
