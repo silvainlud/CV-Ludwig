@@ -13,53 +13,63 @@ stages:
   - compile
   - test
   - build
+  - deploy
 
 variables:
   DB_HOST: mysql
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
 
-compile:composer:
-  stage: compile
-  tags:
-    - docker
-  script:
-    - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+#compile:composer:
+#  stage: compile
+#  tags:
+#    - docker
+#  script:
+#    - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+#
+#compile:nodejs:
+#  before_script: []
+#  image: node
+#  stage: compile
+#  tags:
+#    - docker
+#  script:
+#    - yarn install --ignore-engines
+#    - yarn encore dev
+#
+#phpunit:
+#  stage: test
+#  tags:
+#    - docker
+#  script:
+#    #    - php bin/console doctrine:schema:update --force --env=test
+#    #    - php bin/console doctrine:fixture:load --no-interaction --env=test
+#    - php bin/phpunit
+#  dependencies:
+#    - compile:composer
+#    - compile:nodejs
+#
+#docker-build-master:
+#  before_script: []
+#  tags:
+#    - docker
+#  # Official docker image.
+#  image: docker:19.03.12
+#  stage: build
+#  services:
+#    - docker:19.03.12-dind
+#  script:
+#    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#    - docker build -t $CI_REGISTRY/silvain.eu/cv-ludwig_php:latest .
+#    - docker push $CI_REGISTRY/silvain.eu/cv-ludwig_php:latest
+#  only:
+#    - master
 
-compile:nodejs:
-  before_script: []
-  image: node
-  stage: compile
+deployment:production:ansible:
   tags:
     - docker
+  image: ansible/ansible
+  stage: deploy
+  when: manual
   script:
-    - yarn install --ignore-engines
-    - yarn encore dev
-
-phpunit:
-  stage: test
-  tags:
-    - docker
-  script:
-    #    - php bin/console doctrine:schema:update --force --env=test
-    #    - php bin/console doctrine:fixture:load --no-interaction --env=test
-    - php bin/phpunit
-  dependencies:
-    - compile:composer
-    - compile:nodejs
-
-docker-build-master:
-  before_script: []
-  tags:
-    - docker
-  # Official docker image.
-  image: docker:19.03.12
-  stage: build
-  services:
-    - docker:19.03.12-dind
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build -t $CI_REGISTRY/silvain.eu/cv-ludwig_php:latest .
-    - docker push $CI_REGISTRY/silvain.eu/cv-ludwig_php:latest
-  only:
-    - master
+    - ansible all -i inventory $CI_PROJECT_DIR/$CI_PROJECT_NAME/tools/ansible/deploy/deploy.yml
