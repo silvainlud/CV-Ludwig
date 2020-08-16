@@ -20,50 +20,50 @@ variables:
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
 
-#compile:composer:
-#  stage: compile
-#  tags:
-#    - docker
-#  script:
-#    - composer install --prefer-dist --no-ansi --no-interaction --no-progress
-#
-#compile:nodejs:
-#  before_script: []
-#  image: node
-#  stage: compile
-#  tags:
-#    - docker
-#  script:
-#    - yarn install --ignore-engines
-#    - yarn encore dev
-#
-#phpunit:
-#  stage: test
-#  tags:
-#    - docker
-#  script:
-#    #    - php bin/console doctrine:schema:update --force --env=test
-#    #    - php bin/console doctrine:fixture:load --no-interaction --env=test
-#    - php bin/phpunit
-#  dependencies:
-#    - compile:composer
-#    - compile:nodejs
-#
-#docker-build-master:
-#  before_script: []
-#  tags:
-#    - docker
-#  # Official docker image.
-#  image: docker:19.03.12
-#  stage: build
-#  services:
-#    - docker:19.03.12-dind
-#  script:
-#    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-#    - docker build -t $CI_REGISTRY/silvain.eu/cv-ludwig_php:latest .
-#    - docker push $CI_REGISTRY/silvain.eu/cv-ludwig_php:latest
-#  only:
-#    - master
+compile:composer:
+  stage: compile
+  tags:
+    - docker
+  script:
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+
+compile:nodejs:
+  before_script: []
+  image: node
+  stage: compile
+  tags:
+    - docker
+  script:
+    - yarn install --ignore-engines
+    - yarn encore dev
+
+phpunit:
+  stage: test
+  tags:
+    - docker
+  script:
+    #    - php bin/console doctrine:schema:update --force --env=test
+    #    - php bin/console doctrine:fixture:load --no-interaction --env=test
+    - php bin/phpunit
+  dependencies:
+    - compile:composer
+    - compile:nodejs
+
+docker-build-master:
+  before_script: []
+  tags:
+    - docker
+  # Official docker image.
+  image: docker:19.03.12
+  stage: build
+  services:
+    - docker:19.03.12-dind
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/silvain.eu/cv-ludwig_php:latest .
+    - docker push $CI_REGISTRY/silvain.eu/cv-ludwig_php:latest
+  only:
+    - master
 
 deployment:production:ansible:
   tags:
@@ -71,7 +71,9 @@ deployment:production:ansible:
   services: []
   image: williamyeh/ansible:centos7
   stage: deploy
-#  when: manual
+  when: manual
+  only:
+    - master
   variables:
     ANSIBLE_HOST_KEY_CHECKING: 'false'
     ansible_user: 'false'
