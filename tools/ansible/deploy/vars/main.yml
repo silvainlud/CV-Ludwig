@@ -1,7 +1,7 @@
 ---
 # vars file for ansistrano
 web_user: www-data
-user: ludwig
+user: "{{ ansible_user }}"
 
 
 ansistrano_deploy_to: /var/www/cv/
