@@ -79,4 +79,4 @@ deployment:production:ansible:
     - echo $ansible_become_user
     - echo $ansible_sudo_pass
     - echo $ansible_user
-    - ansible -i $CI_PROJECT_DIR/tools/ansible/deploy/inventory -m ping all
+    - ansible -i $CI_PROJECT_DIR/tools/ansible/deploy/inventory --extra-vars "ANSIBLE_HOST_KEY_CHECKING=false ANSIBLE_PASSWORD=$ansible_password ANSIBLE_USER=$ansible_user" -m ping all
