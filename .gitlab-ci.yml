@@ -74,4 +74,4 @@ deployment:production:ansible:
   variables:
     ANSIBLE_HOST_KEY_CHECKING: 'false'
   script:
-    - ansible all -i inventory $CI_PROJECT_DIR/$CI_PROJECT_NAME/tools/ansible/deploy/deploy.yml
+    - ansible -i inventory $CI_PROJECT_DIR/$CI_PROJECT_NAME/tools/ansible/deploy/deploy.yml all
