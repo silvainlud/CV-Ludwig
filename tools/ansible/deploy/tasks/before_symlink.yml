@@ -25,17 +25,6 @@
     recurse: true
     owner: "{{user}}"
   become: yes
-- name: Symfony | Writable
-  file:
-    path: "{{ item }}"
-    mode: 0777
-    state: directory
-    owner: "{{user}}"
-  become: yes
-  with_items:
-    - "{{ ansistrano_shared_path }}/var/cache"
-    - "{{ ansistrano_shared_path }}/var/log"
-    - "{{ ansistrano_shared_path }}/var/spool"
 - name: Git | Get hash commit
   shell:  git log -1 --pretty=format:'%h' --abbrev-commit
   args:
