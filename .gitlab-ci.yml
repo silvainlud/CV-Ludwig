@@ -76,12 +76,7 @@ deployment:production:ansible:
     ANSIBLE_HOST_KEY_CHECKING: 'false'
     ansible_user: 'false'
   script:
-    - echo $ansible_password
-    - echo $ansible_become_user
-    - echo $ansible_sudo_pass
-    - echo $ansible_user
-    - cat secret.sh
-    - ansible -i $CI_PROJECT_DIR/tools/ansible/deploy/inventory --e "ansible_user=$ansible_user" -e "@$CI_PROJECT_DIR/tools/ansible/deploy/initvars.yaml" -m ping all --vault-password-file secret.sh
+    - ansible -i $CI_PROJECT_DIR/tools/ansible/deploy/inventory --extra-vars "ansible_ssh_pass=$ansible_password ansible_user=$ansible_user" -m ping all  --vault-password-file secret.sh
   before_script:
     - echo -e "#/bin/bash\necho \"${ansible_vault}\";" > secret.sh
   after_script:
