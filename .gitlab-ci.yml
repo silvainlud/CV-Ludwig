@@ -68,7 +68,7 @@ variables:
 deployment:production:ansible:
   tags:
     - docker
-  image: williamyeh/ansible
+  image: williamyeh/ansible:centos7
   stage: deploy
   when: manual
   variables:
