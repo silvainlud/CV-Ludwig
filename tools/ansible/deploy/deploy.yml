@@ -1,0 +1,10 @@
+- hosts: all
+  tasks:
+    - name: run ansible galaxy
+      local_action: command ansible-galaxy install -r requirements.yml --ignore-errors
+    - include_vars:
+        file: vars/main.yml
+    - include_vars:
+        file: "{{ playbook_dir }}/vars/prod.yml"
+    - include_role:
+        name: "ansistrano.deploy"

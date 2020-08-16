@@ -1,0 +1,9 @@
+- name: Apache2 | Stop
+  service:
+    name: apache2
+    state: stopped
+  become: yes
+- name: Symfony | Env Local file
+  template:
+    src: env.j2
+    dest: "{{ ansistrano_shared_path }}/.env.local"
