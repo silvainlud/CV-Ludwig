@@ -17,9 +17,8 @@
   shell: php bin/console cache:warmup
   args:
     chdir: "{{ ansistrano_release_path.stdout }}"
-
 - name: Symfony | Doctrine Migration
-  shell: php bin/console doctrine:schema:udpate --force
+  shell: php bin/console doctrine:schema:update --force
   args:
     chdir: "{{ ansistrano_release_path.stdout }}"
 - name: Symfony | Writable
