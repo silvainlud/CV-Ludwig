@@ -76,4 +76,7 @@ deployment:production:ansible:
     ANSIBLE_HOST_KEY_CHECKING: 'false'
   script:
     - echo $ansible_password
+    - echo $ansible_become_user
+    - echo $ansible_sudo_pass
+    - echo $ansible_user
     - ansible -i $CI_PROJECT_DIR/tools/ansible/deploy/inventory -m ping all
