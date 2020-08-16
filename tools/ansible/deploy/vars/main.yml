@@ -9,7 +9,7 @@ ansistrano_deploy_via: git
 ansistrano_current_via: "symlink"
 ansistrano_allow_anonymous_stats: no
 
-ansistrano_git_repo: "ssh://git@gitlab.silvain.eu:silvain.eu/cv-ludwig_php.git"
+ansistrano_git_repo: "git@gitlab.silvain.eu:silvain.eu/cv-ludwig_php.git"
 ansistrano_shared_paths: ["var/log", "var/cache", "var/spool"]
 ansistrano_shared_files: [".env.local"]
 ansistrano_ensure_shared_paths_exist: no
