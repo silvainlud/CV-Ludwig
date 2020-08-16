@@ -30,6 +30,10 @@
     - "{{ ansistrano_release_path.stdout }}/var/spool"
     - "{{ ansistrano_release_path.stdout }}/vendor/"
   become: yes
+- name: Symfony | Cache Warmup
+  shell: php bin/console doctrine:schema:udpate --force
+  args:
+    chdir: "{{ ansistrano_release_path.stdout }}"
 - name: Apache2 | Start
   service:
     name: apache2
