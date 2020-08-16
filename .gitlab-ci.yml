@@ -73,10 +73,12 @@ deployment:production:ansible:
   stage: deploy
 #  when: manual
   variables:
-    ANSIBLE_HOST_KEY_CHECKING: 'false'
+    ANSIBLE_HOST_KEY_CHECKING: "false"
+    ansible_user: "$ansible_user"
+    ansible_password: "$ansible_password"
   script:
     - echo $ansible_password
     - echo $ansible_become_user
     - echo $ansible_sudo_pass
     - echo $ansible_user
-    - ansible -i $CI_PROJECT_DIR/tools/ansible/deploy/inventory --extra-vars "ANSIBLE_HOST_KEY_CHECKING=false ANSIBLE_PASSWORD=$ansible_password ANSIBLE_USER=$ansible_user" -m ping all
+    - ansible -i $CI_PROJECT_DIR/tools/ansible/deploy/inventory -m ping all
