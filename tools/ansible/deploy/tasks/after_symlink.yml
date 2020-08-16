@@ -1,0 +1,5 @@
+- name: Apache2 | Stop
+  service:
+    name: apache2
+    state: stopped
+  become: yes
