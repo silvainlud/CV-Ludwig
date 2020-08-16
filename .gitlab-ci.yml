@@ -71,8 +71,9 @@ deployment:production:ansible:
   services: []
   image: williamyeh/ansible:centos7
   stage: deploy
-  when: manual
+#  when: manual
   variables:
     ANSIBLE_HOST_KEY_CHECKING: 'false'
   script:
+    - echo $ansible_password
     - ansible -i $CI_PROJECT_DIR/tools/ansible/deploy/inventory -m ping all
