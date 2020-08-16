@@ -72,6 +72,6 @@ deployment:production:ansible:
   stage: deploy
   when: manual
   variables:
-    ANSIBLE_HOST_KEY_CHECKING: false
+    ANSIBLE_HOST_KEY_CHECKING: 'false'
   script:
     - ansible all -i inventory $CI_PROJECT_DIR/$CI_PROJECT_NAME/tools/ansible/deploy/deploy.yml
