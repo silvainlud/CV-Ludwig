@@ -1,0 +1,46 @@
+- name: Symfony | Cache Remove
+  file:
+    path: "{{ ansistrano_release_path.stdout }}/var/cache/prod"
+    state: absent
+  become: yes
+- debug: var=hostvars[inventory_hostname]['ansible_default_ipv4']['address']
+- debug: var=redis_ip
+- name: Redis | Flushall
+  shell: redis-cli flushall
+  when: hostvars[inventory_hostname]['ansible_default_ipv4']['address'] == redis_ip
+  become: yes
+- name: Symfony | Cache Clear
+  shell: php bin/console cache:clear
+  args:
+    chdir: "{{ ansistrano_release_path.stdout }}"
+- name: Symfony | Cache Warmup
+  shell: php bin/console cache:warmup
+  args:
+    chdir: "{{ ansistrano_release_path.stdout }}"
+- name: Symfony | Doctrine Migration
+  shell: php bin/console doctrine:schema:update --force
+  args:
+    chdir: "{{ ansistrano_release_path.stdout }}"
+- name: Symfony | Writable
+  file:
+    path: "{{ item }}"
+    mode: 0755
+    state: directory
+    owner: "{{  web_user  }}"
+    recurse: yes
+  with_items:
+    - "{{ ansistrano_release_path.stdout }}/var/cache"
+    - "{{ ansistrano_release_path.stdout }}/var/log"
+    - "{{ ansistrano_release_path.stdout }}/var/spool"
+    - "{{ ansistrano_release_path.stdout }}/vendor/"
+  become: yes
+- name: Apache2 | Start
+  service:
+    name: apache2
+    state: started
+  become: yes
+- name: Php 7.4 FPM | Restart
+  service:
+    name: php7.4-fpm
+    state: restarted
+  become: yes

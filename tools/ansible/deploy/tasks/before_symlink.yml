@@ -1,0 +1,48 @@
+- name: Symfony | Composer
+  composer:
+    command: install
+    working_dir: "{{ ansistrano_release_path.stdout }}"
+    optimize_autoloader: true
+    no_dev: true
+    prefer_dist: true
+    no_scripts: no
+- name: Symfony | Yarn | Install
+  command: yarn install
+  args:
+    chdir: "{{ ansistrano_release_path.stdout }}"
+- name: Symfony | Yarn | Build
+  command: yarn encore prod
+  args:
+    chdir: "{{ ansistrano_release_path.stdout }}"
+- name: Symfony | Assets install 
+  command: php bin/console assets:install --symlink public
+  args:
+    chdir: "{{ ansistrano_release_path.stdout }}"
+- name: Ansistano | Writable
+  file:
+    path: "{{ansistrano_deploy_to}}/releases"
+    state: directory
+    recurse: true
+    owner: "{{user}}"
+  become: yes
+- name: Git | Get hash commit
+  shell:  git log -1 --pretty=format:'%h' --abbrev-commit
+  args:
+      chdir: "{{ansistrano_deploy_to}}/repo"
+  register: git_commit_hash
+
+- name: Symfony | Writable
+  file:
+    path: "{{ item }}"
+    mode: 0777
+    state: directory
+    owner: "{{user}}"
+  become: yes
+  with_items:
+    - "{{ ansistrano_shared_path }}/var/cache"
+    - "{{ ansistrano_shared_path }}/var/log"
+    - "{{ ansistrano_shared_path }}/var/spool"
+- name: Symfony | Env Local file
+  template:
+    src: env.j2
+    dest: "{{ ansistrano_shared_path }}/.env.local"

@@ -1,0 +1,14 @@
+- hosts: "{{group_serv_dest}}"
+  tasks:
+    - name: run ansible galaxy
+      local_action: command ansible-galaxy install -r requirements.yml --ignore-errors
+    - include_vars:
+        file: vars/main.yml
+    - name: Check {{group_serv_dest}}.yml vars exist
+      local_action: stat path={{ playbook_dir }}/vars/{{group_serv_dest|lower}}.yml
+      register: var_file_result
+    - include_vars:
+        file: "{{ playbook_dir }}/vars/{{group_serv_dest|lower}}.yml"
+      when: var_file_result.stat.exists
+    - include_role:
+        name: "ansistrano.rollback"
