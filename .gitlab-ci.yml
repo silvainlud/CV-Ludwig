@@ -80,8 +80,8 @@ deployment:production:ansible:
     - echo $ansible_become_user
     - echo $ansible_sudo_pass
     - echo $ansible_user
-    - ansible -i $CI_PROJECT_DIR/tools/ansible/deploy/inventory --vault-password-file .vault --e "ansible_user=$ansible_user" -e $CI_PROJECT_DIR/tools/ansible/deploy/initvars.yaml -m ping all
+    - ansible -i $CI_PROJECT_DIR/tools/ansible/deploy/inventory --vault-password-file secret.sh --e "ansible_user=$ansible_user" -e "@$CI_PROJECT_DIR/tools/ansible/deploy/initvars.yaml" -m ping all
   before_script:
-    - echo $ansible_vault > .vault
+    - echo -e "#/bin/bash\necho \"${ansible_vault}\";" > secret.sh
   after_script:
-    - rm .vault
+    - rm secret.sh
