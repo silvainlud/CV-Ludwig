@@ -3,18 +3,3 @@
     name: apache2
     state: stopped
   become: yes
-- name: Symfony | Writable
-  file:
-    path: "{{ item }}"
-    mode: 0777
-    state: directory
-    owner: "{{user}}"
-  become: yes
-  with_items:
-    - "{{ ansistrano_shared_path }}/var/cache"
-    - "{{ ansistrano_shared_path }}/var/log"
-    - "{{ ansistrano_shared_path }}/var/spool"
-- name: Symfony | Env Local file
-  template:
-    src: env.j2
-    dest: "{{ ansistrano_shared_path }}/.env.local"
