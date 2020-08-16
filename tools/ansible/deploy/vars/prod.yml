@@ -4,7 +4,7 @@ ansistrano_git_branch: master
 
 # .env
 db_host: "localhost"
-db_port: "1433"
+db_port: "3306"
 db_db: "CV"
 db_username: !vault |
           $ANSIBLE_VAULT;1.1;AES256
