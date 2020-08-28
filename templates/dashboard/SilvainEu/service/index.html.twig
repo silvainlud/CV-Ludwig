@@ -6,44 +6,47 @@
 
     <div class="row">
         <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="text-center">Services</h2>
-                    <table class="db_data-table db_data-table_hoverable">
-                        <thead>
-                        <tr>
-                            <td>#</td>
-                            <td style="width: 64px;"
-                                class="text-center">{{ 'cv.skills.technology.attr.image'|trans }}</td>
-                            <td>Nom</td>
-                            <td>Lien</td>
-                            <td class="text-right">Action</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for s in services %}
-                            <tr>
-                                <td>{{ s.id }}</td>
-                                <td class="text-center icon-cell justify-content-center" style="width: 64px;">
-                                    <img src="{{ path('silvaineu_service_icon', {"slug" : s.slug}) }}" alt="">
-                                </td>
-                                <td>{{ s.name }}</td>
-                                <td>{{ s.link }}</td>
-                                <td class="text-right">
-                                    <a href="{{ path('db_silvaineu_services-edit', {'service': s.slug}) }}"
-                                       class="app-btn app-btn-blue app-btn-text">
-                                        <i class="fas fa-pen-alt"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                    <div class="d-flex justify-content-end mt-4">
-                        <a href="{{ path('db_silvaineu_services-add') }}" class="app-btn">{{ 'silvaineu.service.title.add'|trans }}</a>
-                    </div>
+            <div class="d-flex align-items-center mb-5">
+                <h2 class="mb-0">Services</h2>
+                <div class="flex-grow-1"></div>
+                <div class="justify-content-end">
+                    <a href="{{ path('db_silvaineu_services-add') }}" class="app-btn app-btn-green">
+                        {{ 'silvaineu.service.title.add'|trans }}
+                    </a>
                 </div>
             </div>
+            <table class="db_data-table db_data-table_hoverable">
+                <tbody>
+                {% for s in services %}
+                    <tr>
+                        <td class="td_icon">
+                            <img src="{{ path('silvaineu_service_icon', {"slug" : s.slug}) }}" alt="">
+                        </td>
+                        <td class="td_key">
+                            <h3>N° :</h3>
+                            <p>{{ s.id }}</p>
+                        </td>
+                        <td>
+                            <h3>{{ "silvaineu.service.attr.name"|trans }} :</h3>
+                            <p>{{ s.name }}</p>
+                        </td>
+                        <td>
+                            <h3>{{ "silvaineu.service.attr.link"|trans }} :</h3>
+                            <p>{{ s.link }}</p>
+                        </td>
+                        <td class="text-right">
+                            <h3></h3>
+                            <div>
+                                <a href="{{ path('db_silvaineu_services-edit', {'service': s.slug}) }}"
+                                   class="app-btn app-btn-blue app-btn-text">
+                                    <i class="fas fa-pen-alt"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock %}
