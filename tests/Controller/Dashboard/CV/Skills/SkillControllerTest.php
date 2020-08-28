@@ -8,6 +8,7 @@ use App\Entity\Main\CV\CompetenceNiveau;
 use App\Entity\Main\CV\Technologie;
 use App\Tests\Controller\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
@@ -34,21 +35,20 @@ class SkillControllerTest extends WebTestCase
     {
         $this->login('admin');
         $this->client->request(Request::METHOD_GET, '/dashboard/cv/skills/categories/0');
-        self::assertResponseIsSuccessful();
+        self::assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);
     }
 
     public function testFound()
     {
         $this->login('admin');
         $this->client->request(Request::METHOD_GET, '/dashboard/cv/skills/categories/' . $this->_categ->getId());
-        self::assertSelectorExists('#competence_submit');
         self::assertResponseIsSuccessful();
     }
 
     public function testAddSkills()
     {
         $this->login('admin');
-        $crawler = $this->client->request(Request::METHOD_GET, '/dashboard/cv/skills/categories/' . $this->_categ->getId());
+        $crawler = $this->client->request(Request::METHOD_GET, '/dashboard/cv/skills/' . $this->_categ->getId() . '/add');
         $form = $crawler->filter('#competence_submit')->form([
             'competence[niveau]' => $this->_level->getId(),
             'competence[technologie]' => $this->_tech->getId(),

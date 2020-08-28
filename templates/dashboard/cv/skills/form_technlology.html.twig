@@ -7,7 +7,13 @@
         <div class="col-12">
             <div class="card" id="categories_add">
                 <div class="card-body container-fluid">
-                    <h3>{{ 'cv.skills.skill.title.edit'|trans }}</h3>
+                    <h3>
+                        {% if add %}
+                            {{ 'cv.skills.technology.title.add'|trans }}
+                        {% else %}
+                            {{ 'cv.skills.technology.title.edit'|trans }}
+                        {% endif %}
+                    </h3>
                     {% form_theme form 'dashboard/include/form.html.twig' %}
                     {{ form(form) }}
                 </div>
