@@ -138,6 +138,17 @@ table.db_data-table {
           align-items: center;
 
           color: #434854;
+
+          .icon_skills {
+            width: 22px;
+            height: 22px;
+
+            i {
+
+              font-size: 14px;
+            }
+          }
+
         }
 
         & > div {
@@ -172,15 +183,26 @@ table.db_data-table {
               width: 75%;
               max-height: 75%;
             }
+
+            i {
+              font-size: $td_icon-size * 0.6;
+            }
           }
         }
 
-        &.td_key{
+        &.td_key {
           width: $td_key-size + $td_padding_x * 2;
 
           &:first-child, &:last-child {
             width: $td_key-size + $td_padding_x + $td_extrem_padding;
           }
+        }
+
+        span.small {
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 300;
+          align-self: flex-end;
         }
 
       }

@@ -148,7 +148,7 @@ class AdminSkillsController extends AbstractController
      */
     public function EditTechnology(Request $request, Technologie $tech = null): Response
     {
-        if ($tech = null) {
+        if (null == $tech) {
             $tech = new Technologie();
         }
         $form = $this->createForm(TechnologieType::class, $tech, ['cancel_btn' => true]);
@@ -169,7 +169,7 @@ class AdminSkillsController extends AbstractController
 
                 return $this->redirectToRoute('db_cv_skills_technologies');
             }
-            if (null == $form->get('upload')->getData() && null == $_t->getImage()) {
+            if (null == $form->get('upload')->getData() && null == $tech->getImage()) {
                 $form->get('upload')->addError(new FormError($this->translator->trans((new NotNull())->message, [], 'validators')));
             }
         }

@@ -43,6 +43,15 @@ body {
         font-size: 25px;
 
         color: #555A5E;
+        &.bold{
+          font-family: Roboto, sans-serif;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 26px;
+          line-height: 35px;
+
+          color: #343434;
+        }
       }
     }
   }

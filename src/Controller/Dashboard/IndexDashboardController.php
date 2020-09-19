@@ -13,6 +13,6 @@ class IndexDashboardController extends \Symfony\Bundle\FrameworkBundle\Controlle
      */
     public function Index(Request $request): Response
     {
-        return $this->render('dashboard/base.html.twig');
+        return $this->render('dashboard/Mail/index.html.twig');
     }
 }
