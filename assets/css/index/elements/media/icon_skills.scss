@@ -14,4 +14,19 @@
     max-height: 60%;
     object-fit: contain;
   }
+
+  i {
+    font-size: 90px;
+    max-height: 60%;
+    color: $red_color;
+  }
+
+  @each $class, $color in $colors {
+    &.icon_skills-#{$class} {
+      background-color: transparentize($color, 0.7);
+      i {
+        color: $color;
+      }
+    }
+  }
 }
