@@ -99,8 +99,8 @@ class AdminSkillsController extends AbstractController
     }
 
     /**
-     * @Route("/dashboard/cv/skills/{skill}/edit", name="db_cv_skills_edit")
-     * @Route("/dashboard/cv/skills/{category}/add", name="db_cv_skills_add_categ")
+     * @Route("/dashboard/cv/skills/edit/{skill}", name="db_cv_skills_edit")
+     * @Route("/dashboard/cv/skills/add/{category}", name="db_cv_skills_add_categ")
      * @Route("/dashboard/cv/skills/add", name="db_cv_skills_add")
      */
     public function ModifyCompetences(Request $request, Competence $skill = null, CompetenceCategorie $category = null): Response
