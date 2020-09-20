@@ -30,7 +30,7 @@
             <div class="card card-stats">
                 <div class="card-content">
                     <h2>Domaines managés</h2>
-                    <p>5</p>
+                    <p>{{ domains|length }}</p>
                 </div>
                 <div class="icon_skills icon_skills-light-black">
                     <i class="fas fa-tags"></i>
@@ -41,16 +41,16 @@
         <div class="col-8 ">
             <h2 class="bold">Liste des domaines</h2>
             <table class="db_data-table" style="table-layout: auto">
-                {% for i in 1..3 %}
+                {% for d in domains %}
                     <tr>
                         <td class="td_icon">
-                            <div class="icon_skills">
+                            <div class="icon_skills icon_skills-{{- cssClassRandom() -}}">
                                 <i class="fas fa-tag"></i>
                             </div>
                         </td>
                         <td>
                             <h3>Nom :</h3>
-                            <p>silvain.eu</p>
+                            <p>{{ d.domain }}</p>
                         </td>
                         <td>
                             <h3>Nombre de comptes :</h3>
@@ -92,20 +92,20 @@
             </table>
             <h2 class="bold mt-4">Liste des boîtes mails</h2>
             <table class="db_data-table" style="table-layout: auto">
-                {% for i in 1..3 %}
+                {% for m in mailboxes %}
                     <tr>
                         <td class="td_icon">
-                            <div class="icon_skills icon_skills-yellow">
+                            <div class="icon_skills  icon_skills-{{- cssClassRandom() -}}">
                                 <i class="fas fa-envelope"></i>
                             </div>
                         </td>
                         <td>
                             <h3>Nom :</h3>
-                            <p>ludwig.silvain</p>
+                            <p>{{ m.username }}</p>
                         </td>
                         <td>
                             <h3>Domaine :</h3>
-                            <p>silvain.eu</p>
+                            <p>{{ m.domain.domain }}</p>
                         </td>
                         <td>
                             <h3>Nombre mails reçûs :</h3>
