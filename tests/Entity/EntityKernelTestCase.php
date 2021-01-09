@@ -3,6 +3,7 @@
 namespace App\Tests\Entity;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @internal
@@ -18,7 +19,7 @@ class EntityKernelTestCase extends KernelTestCase
 
     public function assertsHasErrors($u, int $number = 0)
     {
-        $error = self::$container->get('validator')->validate($u);
+        $error = self::$container->get(ValidatorInterface::class)->validate($u);
         $this->assertCount($number, $error);
     }
 }
