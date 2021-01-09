@@ -48,7 +48,7 @@ class SkillControllerTest extends WebTestCase
     public function testAddSkills()
     {
         $this->login('admin');
-        $crawler = $this->client->request(Request::METHOD_GET, '/dashboard/cv/skills/' . $this->_categ->getId() . '/add');
+        $crawler = $this->client->request(Request::METHOD_GET, '/dashboard/cv/skills/add/' . $this->_categ->getId());
         $form = $crawler->filter('#competence_submit')->form([
             'competence[niveau]' => $this->_level->getId(),
             'competence[technologie]' => $this->_tech->getId(),
@@ -74,7 +74,7 @@ class SkillControllerTest extends WebTestCase
         $this->em->persist($c);
         $this->em->flush();
         $this->login('admin');
-        $crawler = $this->client->request(Request::METHOD_GET, '/dashboard/cv/skills/' . $c->getId() . '/edit');
+        $crawler = $this->client->request(Request::METHOD_GET, '/dashboard/cv/skills/edit/' . $c->getId());
         self::assertResponseIsSuccessful();
         /** @var CompetenceCategorie $_categ */
         $_categ = $this->data['skill_categ'][rand(0, 9)];
