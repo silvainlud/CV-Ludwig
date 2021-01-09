@@ -6,6 +6,7 @@ ansistrano_git_branch: master
 db_host: "localhost"
 db_port: "3306"
 db_db: "CV"
+db_mail_db: "postfixadmin"
 db_username: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           38323639386634326436643838633530373333363134366564386438653365393937346363636638
