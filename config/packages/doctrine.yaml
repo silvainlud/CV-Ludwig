@@ -6,6 +6,9 @@ doctrine:
             default:
                 server_version: '5.2'
                 url: '%env(resolve:DATABASE_URL)%'
+            mail:
+                server_version: '5.2'
+                url: '%env(resolve:DATABASE_URL_MAIL)%'
 
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
@@ -27,3 +30,14 @@ doctrine:
                         dir: '%kernel.project_dir%/src/Entity/Main'
                         prefix: 'App\Entity\Main'
                         alias: App\Main
+
+            mail:
+
+                connection: mail
+                mappings:
+                    App\Mail:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/Entity/Mail'
+                        prefix: 'App\Entity\Mail'
+                        alias: App\Mail
