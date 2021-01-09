@@ -65,7 +65,7 @@ main > div.header {
   width: 100%;
   position: relative;
 
-  & > img {
+  & > img,& > svg {
     &.header_bg {
       width: 100%;
       top: 0;

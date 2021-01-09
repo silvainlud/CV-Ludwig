@@ -1,37 +1,37 @@
 .app-btn {
-  padding: .375rem .75rem;
+  padding: 9px;
   box-sizing: border-box;
   display: inline-block;
 
-  font-size: 1em;
-  font-weight: 400;
-  border-radius: 3px;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: normal;
+  border-radius: 5px;
   cursor: pointer;
+  text-align: center;
 
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
   font-family: Roboto, sans-serif;
 
-  background: darken($blue_color, 10%);
-  border: 2px solid darken($blue_color, 10%);
+  background: $light_blue_color;
+  border: 2px solid $light_blue_color;
   color: white;
   outline: none;
 
   text-decoration: unset;
 
   &.app-color-plain {
-    border: 3px solid $blue_color;
-    background: $blue_color;
-    color: white;
+    border: 3px solid $light_blue_color;
 
     &:not(:disabled):hover {
-      border-color: lighten($blue_color, 25%);
-      background-color: lighten($blue_color, 25%);
+      border-color: lighten($light_blue_color, 25%);
+      background-color: lighten($light_blue_color, 25%);
     }
   }
 
   &.app-btn-text {
     background: transparent;
-    color: $blue_color;
+    color: $light_blue_color;
     border-radius: 100%;
     border: unset;
     font-size: 0.9em;
@@ -39,32 +39,30 @@
     padding: 6px 9px;
 
     &:not(:disabled):hover {
-      background: lighten($blue_color, 25%);
-      color: darken($blue_color, 25%);
+      background: lighten($light_blue_color, 25%);
+      color: darken($light_blue_color, 25%);
     }
   }
 
   &:not(:disabled):hover {
-    background: darken($blue_color, 20%);
-    border-color: darken($blue_color, 20%);
+    background: darken($light_blue_color, 10%);
+    border-color: darken($light_blue_color, 10%);
   }
 
   @each $class, $color in $colors {
     &.app-btn-#{$class} {
-      background: darken($color, 10%);
-      border-color: darken($color, 10%);
+      background: $color;
+      border-color: $color;
       color: white;
 
       &:not(:disabled):hover {
-        background: darken($color, 20%);
-        border-color: darken($color, 20%);
+        background: darken($color, 10%);
+        border-color: darken($color, 10%);
       }
 
       &.app-color-plain {
-        background: $color;
         border-color: $color;
-        color: white;
-
+        
         &:not(:disabled):hover {
           border-color: lighten($color, 25%);
           background-color: lighten($color, 25%);

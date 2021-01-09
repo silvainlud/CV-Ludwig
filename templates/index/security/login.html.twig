@@ -1,0 +1,58 @@
+{% extends 'index/base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body px-6">
+                        <h2 class="big-title justify-content-center">Connexion</h2>
+
+                        <form method="post" class="form-zone mt-6">
+                            {% if error %}
+                                <div class="form-alert form-alert-red c"><i class="fas fa-exclamation-circle"></i>&nbsp;{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
+                            <div class="form-row">
+                                <input placeholder="Nom d'utilisateur" type="email" value="{{ last_username }}"
+                                       name="email"
+                                       id="inputEmail" class="form-control" required autofocus>
+                            </div>
+                            <div class="form-row">
+                                <input placeholder="Mot de passe" type="password" name="password" id="inputPassword"
+                                       class="form-control" required>
+                            </div>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                            {#
+                            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                            See https://symfony.com/doc/current/security/remember_me.html
+
+                            <div class="checkbox mb-3">
+                                <label>
+                                    <input type="checkbox" name="_remember_me"> Remember me
+                                </label>
+                            </div>
+                            #}
+
+                            <div class="d-flex w-100 mt-4 mb-7 align-items-center">
+                                <a href="">Mot de passe oublié ?</a>
+                                <div class="flex-grow-1"></div>
+                                <button class="app-btn app-color-plain app-btn-medium-green app-color-classic"
+                                        type="submit">
+                                    Se connecter
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+
+{% endblock %}
