@@ -6,9 +6,9 @@ footer {
   align-items: center;
 
 
-  & > img.footer_bg {
+  & > img.footer_bg, & > svg.footer_bg {
     width: 100%;
-    margin-bottom: -1px;
+    margin-bottom: -5px;
   }
 
   .footer_content {
