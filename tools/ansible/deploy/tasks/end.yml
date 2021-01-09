@@ -17,8 +17,11 @@
   shell: php bin/console cache:warmup
   args:
     chdir: "{{ ansistrano_release_path.stdout }}"
+- name: Mysql | Backup
+  command: "mysqldump --opt -uroot --databases {{ db_db }} {{ db_mail_db }} --result-file=/tmp/backup-cv-mail-{{ ansible_date_time.iso8601 }}.sql"
+  become: yes
 - name: Symfony | Doctrine Migration
-  shell: php bin/console doctrine:schema:update --force
+  shell: php bin/console doctrine:migration:migrate --allow-no-migration -n
   args:
     chdir: "{{ ansistrano_release_path.stdout }}"
 - name: Symfony | Writable
