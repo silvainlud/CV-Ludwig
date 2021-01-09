@@ -1,27 +1,40 @@
 version: '3.4'
 
 services:
-  web:
-    image: registery.gitlab.silvain.eu/silvain.eu/cv-ludwig_php:base
+  nginx:
+    image: nginx
     ports:
       - 8003:80
+    depends_on:
+      - php
     volumes:
-      - .:/var/www/web
-      - ./vendor:/var/www/web/vendor
-      - /var/www/web/var/cache
-    command: bash -c "pwd && php bin/console cache:clear && service php7.4-fpm start && service php7.4-fpm status && /usr/sbin/apache2 -D FOREGROUND"
+      - ./public:/usr/share/nginx/html/public
+      - ./tools/docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    links:
+      - php
+      - yarn
+  php:
+    image: registery.gitlab.silvain.eu/silvain.eu/cv-ludwig_php:base
+    working_dir: /var/www/
+    volumes:
+      - ./var/www/node_modules
+      - .:/var/www:cached
+      - vendor:/var/www/vendor
+      - var:/var/www/var/cache
     tty: true
     links:
       - redis
       - mailcatcher
       - database
-  redis:
-    image: redis:5-alpine
-    ports: [6379]
-  mailcatcher:
-    image: schickling/mailcatcher
-    ports:
-      - 1083:1080
+  yarn:
+    image: node:10.23.0-alpine3.10
+    working_dir: /var/www
+    volumes:
+      - node_modules:/var/www/node_modules
+      - .:/var/www:delegated
+      - vendor:/var/www/vendor
+      - /var/www/var/cache
+    command: /bin/sh -c "npm install && yarn watch"
 
   database:
     image: "mariadb" # use latest official postgres version
@@ -32,6 +45,15 @@ services:
     volumes:
       - db-data:/var/lib/mysql # persist data even
 
+  redis:
+    image: redis:5-alpine
+    ports: [6379]
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - 1083:1080
+
+
 
 volumes:
   db-data:
@@ -39,3 +61,6 @@ volumes:
   pgadmin-data:
     driver: local
     name: pgadmin-data
+  var:
+  vendor:
+  node_modules:

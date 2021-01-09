@@ -25,16 +25,12 @@ class SkillsCategoriesControllerTest extends WebTestCase
         $this->login('admin');
         $this->client->request(Request::METHOD_GET, '/dashboard/cv/skills');
         self::assertResponseIsSuccessful();
-        self::assertSelectorExists('#categories_list');
-        self::assertSelectorExists('#categories_add');
-        self::assertSelectorNotExists('#skills_list');
-        self::assertSelectorNotExists('#skills_add');
     }
 
-    public function testFormCategorieSubmit()
+    public function testAddCategorieSubmit()
     {
         $this->login('admin');
-        $crawler = $this->client->request(Request::METHOD_GET, '/dashboard/cv/skills');
+        $crawler = $this->client->request(Request::METHOD_GET, '/dashboard/cv/skills/category/add');
         self::assertResponseIsSuccessful();
         $form = $crawler->filter('#form_competencecategorie_submit')->form([
             'form_competencecategorie[name]' => 'Ceci est un nom',
@@ -52,10 +48,10 @@ class SkillsCategoriesControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter('#categories_list tbody tr'));
     }
 
-    public function testFormCategorieError()
+    public function testAddCategorieError()
     {
         $this->login('admin');
-        $crawler = $this->client->request(Request::METHOD_GET, '/dashboard/cv/skills');
+        $crawler = $this->client->request(Request::METHOD_GET, '/dashboard/cv/skills/category/add');
         self::assertResponseIsSuccessful();
         $form = $crawler->filter('#form_competencecategorie_submit')->form([
         ]);

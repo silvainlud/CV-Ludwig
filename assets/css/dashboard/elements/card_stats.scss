@@ -1,0 +1,46 @@
+$card-stats_color: #505050;
+
+.card.card-stats {
+  display: flex;
+  flex-direction: row;
+  padding: 22px 25px;
+
+  & > .card-content {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+
+    h2 {
+      font-family: Roboto, "sans-serif";
+      font-style: normal;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 21px;
+      margin: 0 0 6px 0;
+
+      color: $card-stats_color;
+    }
+
+    p {
+      font-family: Roboto, sans-serif;
+      font-style: normal;
+      font-weight: 900;
+      font-size: 35px;
+      line-height: 41px;
+      margin: 0;
+      padding: 0;
+      color: $card-stats_color;
+    }
+  }
+
+  & > .icon_skills {
+    height: 88px;
+    width: 88px;
+
+    i {
+      font-size: 48px;
+    }
+  }
+}

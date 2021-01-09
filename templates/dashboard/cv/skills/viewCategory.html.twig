@@ -1,0 +1,49 @@
+{% extends 'dashboard/base.html.twig' %}
+
+{% block content_class %}container{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex align-items-center mb-5">
+                <h2>{{ 'cv.skills.skill-categories.title._'|trans({"%name%" : selectCategory.name}) }}</h2>
+                <div class="flex-grow-1"></div>
+                <div class="justify-content-end">
+                    <a href="{{ path('db_cv_skills_add_categ', {"category" : selectCategory.id}) }}" class="app-btn app-btn-green">
+                        {{ 'cv.skills.skill.title.add'|trans }}
+                    </a>
+                </div>
+            </div>
+            <table class="db_data-table db_data-table_hoverable">
+                <tbody>
+                {% for s in skills %}
+                    <tr>
+                        <td class="td_icon">
+                            <div class="icon_skills" style="background-color: {{ s.technologie.color }}">
+                                <img src="{{ s.technologie.displayImage }}" alt="">
+                            </div>
+                        </td>
+                        <td class="td_key">
+                            <h3>N° :</h3>
+                            <p>{{ s.id }}</p>
+                        </td>
+                        <td>
+                            <h3>Nom :</h3>
+                            <p>{{ s.technologie.name }}</p>
+                        </td>
+                        <td>
+                            <h3></h3>
+                            <div class="justify-content-end">
+                                <a href="{{ path('db_cv_skills_edit', {'skill': s.id}) }}"
+                                   class="app-btn app-btn-light-blue app-btn-text">
+                                    <i class="fas fa-pen-alt"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
