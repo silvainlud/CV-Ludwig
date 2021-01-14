@@ -3,6 +3,7 @@
 namespace App\Entity\Mail;
 
 use App\Repository\Mail\DomainRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,64 +17,68 @@ class Domain
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $domain;
+    private string $domain;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $nb_aliases;
+    private int $nb_aliases;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $nb_mailboxes;
+    private int $nb_mailboxes;
 
     /**
      * @ORM\Column(type="bigint")
      */
-    private $maxquota;
+    private int $maxquota;
 
     /**
      * @ORM\Column(type="bigint")
      */
-    private $quota;
+    private int $quota;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $backupMX;
+    private bool $backupMX;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_created;
+    private DateTimeInterface $date_created;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_modified;
+    private DateTimeInterface $date_modified;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $active;
+    private bool $active;
 
     public function getId(): ?int
     {
+        if (!isset($this->id)) {
+            return null;
+        }
+
         return $this->id;
     }
 
-    public function getDomain(): ?string
+    public function getDomain(): string
     {
         return $this->domain;
     }
@@ -97,7 +102,7 @@ class Domain
         return $this;
     }
 
-    public function getNbAliases(): ?int
+    public function getNbAliases(): int
     {
         return $this->nb_aliases;
     }
@@ -109,7 +114,7 @@ class Domain
         return $this;
     }
 
-    public function getNbMailboxes(): ?int
+    public function getNbMailboxes(): int
     {
         return $this->nb_mailboxes;
     }
@@ -121,24 +126,24 @@ class Domain
         return $this;
     }
 
-    public function getMaxquota(): ?string
+    public function getMaxquota(): ?int
     {
         return $this->maxquota;
     }
 
-    public function setMaxquota(string $maxquota): self
+    public function setMaxquota(int $maxquota): self
     {
         $this->maxquota = $maxquota;
 
         return $this;
     }
 
-    public function getQuota(): ?string
+    public function getQuota(): ?int
     {
         return $this->quota;
     }
 
-    public function setQuota(string $quota): self
+    public function setQuota(int $quota): self
     {
         $this->quota = $quota;
 
@@ -157,24 +162,24 @@ class Domain
         return $this;
     }
 
-    public function getDateCreated(): ?\DateTimeInterface
+    public function getDateCreated(): ?DateTimeInterface
     {
         return $this->date_created;
     }
 
-    public function setDateCreated(\DateTimeInterface $date_created): self
+    public function setDateCreated(DateTimeInterface $date_created): self
     {
         $this->date_created = $date_created;
 
         return $this;
     }
 
-    public function getDateModified(): ?\DateTimeInterface
+    public function getDateModified(): ?DateTimeInterface
     {
         return $this->date_modified;
     }
 
-    public function setDateModified(\DateTimeInterface $date_modified): self
+    public function setDateModified(DateTimeInterface $date_modified): self
     {
         $this->date_modified = $date_modified;
 

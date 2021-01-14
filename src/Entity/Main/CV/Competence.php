@@ -22,57 +22,61 @@ class Competence
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer", name="CodeCompetence")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=CompetenceCategorie::class, inversedBy="competences")
      * @ORM\JoinColumn(name="NumCompetenceCategorie", nullable=false, referencedColumnName="NumCompetenceCategorie")
      * @Assert\NotNull
      */
-    private $categorie;
+    private CompetenceCategorie $categorie;
 
     /**
      * @ORM\OneToOne(targetEntity=Technologie::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false, name="NumTechnologie", referencedColumnName="NumTechnologie")
      * @Assert\NotNull
      */
-    private $technologie;
+    private Technologie $technologie;
 
     /**
      * @ORM\Column(type="boolean", name="EstScolaire")
      */
-    private $scolaire;
+    private bool $scolaire;
 
     /**
      * @ORM\Column(type="boolean", name="EstAutoDitacte")
      */
-    private $autoditacte;
+    private bool $autoditacte;
 
     /**
      * @ORM\ManyToOne(targetEntity=CompetenceNiveau::class)
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotNull
      */
-    private $niveau;
+    private CompetenceNiveau $niveau;
 
     public function getId(): ?int
     {
+        if (!isset($this->id)) {
+            return null;
+        }
+
         return $this->id;
     }
 
-    public function getCategorie(): ?CompetenceCategorie
+    public function getCategorie(): CompetenceCategorie
     {
         return $this->categorie;
     }
 
-    public function setCategorie(?CompetenceCategorie $categorie): self
+    public function setCategorie(CompetenceCategorie $categorie): self
     {
         $this->categorie = $categorie;
 
         return $this;
     }
 
-    public function getTechnologie(): ?Technologie
+    public function getTechnologie(): Technologie
     {
         return $this->technologie;
     }
@@ -84,7 +88,7 @@ class Competence
         return $this;
     }
 
-    public function getScolaire(): ?bool
+    public function getScolaire(): bool
     {
         return $this->scolaire;
     }
@@ -96,7 +100,7 @@ class Competence
         return $this;
     }
 
-    public function getAutoditacte(): ?bool
+    public function getAutoditacte(): bool
     {
         return $this->autoditacte;
     }
@@ -113,7 +117,7 @@ class Competence
         return $this->niveau;
     }
 
-    public function setNiveau(?CompetenceNiveau $niveau): self
+    public function setNiveau(CompetenceNiveau $niveau): self
     {
         $this->niveau = $niveau;
 

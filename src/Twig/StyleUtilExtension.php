@@ -24,7 +24,7 @@ class StyleUtilExtension extends AbstractExtension
         ];
     }
 
-    public function cssClassRandom()
+    public function cssClassRandom(): string
     {
         $v = ['purple', 'green', 'yellow', 'blue', 'red', 'light-black'];
 

@@ -4,7 +4,7 @@ namespace App\Utils\Assets;
 
 use App\Utils\StringHelper;
 use Gumlet\ImageResize;
-use Psr\Cache\InvalidArgumentException;
+use Gumlet\ImageResizeException;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\HeaderUtils;
@@ -18,21 +18,20 @@ class AssetsResponse
     public const image_width = 200;
 
     /**
-     * @param $file
-     * @param $filename
-     * @param string $ext
-     *
-     * @throws InvalidArgumentException
-     *
-     * @return Response
+     * @param resource|string $file
      */
-    public static function ReturnImg($file, $filename, $ext = 'png', int $width_resize = self::image_width, int $expireCache = 3600): Response
+    public static function ReturnImg($file, string $filename, string $ext = 'png', int $width_resize = self::image_width, int $expireCache = 3600): Response
     {
         $filename = StringHelper::strRemoveAccent($filename);
         $filename = str_replace(' ', '', $filename);
         $filename = str_replace('/', '_', $filename);
         $filename = str_replace('\\', '_', $filename);
         $filename = iconv('UTF-8', 'ASCII//IGNORE', $filename);
+        if (false === $filename) {
+            $filename = StringHelper::strRemoveAccent(StringHelper::GenreateRandomString(16));
+            $expireCache = 0;
+        }
+
         $ext = str_replace(' ', '', $ext);
         $ext = str_replace('_', '', $ext);
         if ($expireCache < 0) {
@@ -54,23 +53,21 @@ class AssetsResponse
         });
     }
 
-    public static function CacheKey($file, string $filename, string $ext, int $width_resize): string
-    {
-        if (\is_string($file)) {
-            $cacheKey = $file . '_' . $width_resize;
-        } else {
-            $cacheKey = $filename . '_' . $ext . '_' . $width_resize;
-        }
-
-        return StringHelper::strRemoveCacheKey($cacheKey);
-    }
-
-    public static function MakeReponseImg($file, $filename, $ext = 'png', int $width_resize = self::image_width): Response
+    /**
+     * @param resource|string $file
+     *
+     * @throws ImageResizeException
+     */
+    public static function MakeReponseImg($file, string $filename, string $ext = 'png', int $width_resize = self::image_width): Response
     {
         if (\is_string($file)) {
             $image = new ImageResize($file);
         } else {
-            $image = ImageResize::createFromString(stream_get_contents($file));
+            $stream = stream_get_contents($file);
+            if (false === $stream) {
+                throw new \InvalidArgumentException('The var $file is not a valid resource.');
+            }
+            $image = ImageResize::createFromString($stream);
         }
 
         $image->resizeToWidth($width_resize);
@@ -108,21 +105,21 @@ class AssetsResponse
     }
 
     /**
-     * @param $file
-     * @param $filename
-     * @param string $ext
-     *
-     * @throws InvalidArgumentException
-     *
-     * @return Response
+     * @param resource|string $file
      */
-    public static function ReturnImgAdapterCache(AdapterInterface $cache, $file, $filename, $ext = 'png', int $width_resize = self::image_width, int $expireCache = 3600): Response
+    public static function ReturnImgAdapterCache(AdapterInterface $cache, $file, string $filename, string $ext = 'png', int $width_resize = self::image_width, int $expireCache = 3600): Response
     {
         $filename = StringHelper::strRemoveAccent($filename);
         $filename = str_replace(' ', '', $filename);
         $filename = str_replace('/', '_', $filename);
         $filename = str_replace('\\', '_', $filename);
         $filename = iconv('UTF-8', 'ASCII//IGNORE', $filename);
+
+        if (false === $filename) {
+            $filename = StringHelper::strRemoveAccent(StringHelper::GenreateRandomString(16));
+            $expireCache = 0;
+        }
+
         $ext = str_replace(' ', '', $ext);
         $ext = str_replace('_', '', $ext);
         if ($expireCache < 0) {
@@ -138,5 +135,19 @@ class AssetsResponse
         }
 
         return $item->get();
+    }
+
+    /**
+     * @param resource|string $file
+     */
+    public static function CacheKey($file, string $filename, string $ext, int $width_resize): string
+    {
+        if (\is_string($file)) {
+            $cacheKey = $file . '_' . $width_resize;
+        } else {
+            $cacheKey = $filename . '_' . $ext . '_' . $width_resize;
+        }
+
+        return StringHelper::strRemoveCacheKey($cacheKey);
     }
 }

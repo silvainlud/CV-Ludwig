@@ -4,22 +4,16 @@ namespace App\Controller\Dashboard;
 
 use App\Entity\Mail\Domain;
 use App\Entity\Mail\Mailbox;
-use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class IndexDashboardController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController
 {
-    /**
-     * @var EntityManager
-     */
-    private $em;
-    /**
-     * @var EntityManager
-     */
-    private $emMail;
+    private ObjectManager $em;
+    private ObjectManager $emMail;
 
     public function __construct(ManagerRegistry $doctrine)
     {
