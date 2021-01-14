@@ -4,7 +4,6 @@ namespace App\Controller\SilvainEu;
 
 use App\Entity\Main\SilvainEu\Service;
 use App\Utils\Assets\AssetsResponse;
-use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,10 +23,8 @@ class ServiceController extends AbstractController
 
     /**
      * @Route("/silvaineu/", name="silvaineu_service_index")
-     *
-     * @return Response
      */
-    public function Hub()
+    public function Hub(): Response
     {
         $i = $this->cache->getItem(self::CACHE_KEY_SERVICES);
         if (!$i->isHit()) {
@@ -45,8 +42,6 @@ class ServiceController extends AbstractController
 
     /**
      * @Route("/silvaineu/service/{slug}/icon", name="silvaineu_service_icon")
-     *
-     * @throws InvalidArgumentException
      */
     public function service_icon(Service $s): Response
     {
@@ -55,10 +50,8 @@ class ServiceController extends AbstractController
 
     /**
      * @Route("/silvaineu/email/config", name="silvaineu_service_config-email")
-     *
-     * @return Response
      */
-    public function ConfigEmail()
+    public function ConfigEmail(): Response
     {
         return $this->render('index/silvain.eu/mail/config.html.twig', [
         ]);

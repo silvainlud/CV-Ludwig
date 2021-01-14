@@ -17,24 +17,28 @@ class CompetenceNiveau
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=32, name="NomNiveau")
      * @Assert\Length(max="32")
      * @Assert\NotBlank
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=10, name="ClassNiveau")
      * @Assert\Length(max="10")
      * @Assert\NotBlank
      */
-    private $class;
+    private string $class;
 
     public function getId(): ?int
     {
+        if (!isset($this->id)) {
+            return null;
+        }
+
         return $this->id;
     }
 
@@ -50,7 +54,7 @@ class CompetenceNiveau
         return $this;
     }
 
-    public function getClass(): ?string
+    public function getClass(): string
     {
         return $this->class;
     }

@@ -24,7 +24,7 @@ class CompetenceSubscriber implements EventSubscriberInterface
         $this->cache = $cache;
     }
 
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return [
             Events::prePersist => 'prePersist',
@@ -32,7 +32,7 @@ class CompetenceSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function preUpdate(LifecycleEventArgs $args)
+    public function preUpdate(LifecycleEventArgs $args): void
     {
         if ($args->getEntity() instanceof Technologie) {
             $args->getEntity()->CompleteSlug($this->slugger);
@@ -44,7 +44,7 @@ class CompetenceSubscriber implements EventSubscriberInterface
         }
     }
 
-    public function prePersist(LifecycleEventArgs $args)
+    public function prePersist(LifecycleEventArgs $args): void
     {
         if ($args->getEntity() instanceof Technologie) {
             $args->getEntity()->CompleteSlug($this->slugger);

@@ -3,6 +3,7 @@
 namespace App\Entity\Mail;
 
 use App\Repository\Mail\AliasDomainRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,84 +17,88 @@ class AliasDomain
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Domain::class)
      * @ORM\JoinColumn(nullable=false, name="domain_origin_id")
      */
-    private $domainOrigin;
+    private Domain $domainOrigin;
 
     /**
      * @ORM\ManyToOne(targetEntity=Domain::class)
      * @ORM\JoinColumn(nullable=false, name="domain_target_id")
      */
-    private $DomainTarget;
+    private Domain $domainTarget;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_created;
+    private DateTimeInterface $date_created;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $dateÃ_modified;
+    private DateTimeInterface $date_modified;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $active;
+    private bool $active;
 
     public function getId(): ?int
     {
+        if (!isset($this->id)) {
+            return null;
+        }
+
         return $this->id;
     }
 
-    public function getDomainOrigin(): ?Domain
+    public function getDomainOrigin(): Domain
     {
         return $this->domainOrigin;
     }
 
-    public function setDomainOrigin(?Domain $domainOrigin): self
+    public function setDomainOrigin(Domain $domainOrigin): self
     {
         $this->domainOrigin = $domainOrigin;
 
         return $this;
     }
 
-    public function getDomainTarget(): ?Domain
+    public function getDomainTarget(): Domain
     {
-        return $this->DomainTarget;
+        return $this->domainTarget;
     }
 
-    public function setDomainTarget(?Domain $DomainTarget): self
+    public function setDomainTarget(Domain $domainTarget): self
     {
-        $this->DomainTarget = $DomainTarget;
+        $this->domainTarget = $domainTarget;
 
         return $this;
     }
 
-    public function getDateCreated(): ?\DateTimeInterface
+    public function getDateCreated(): DateTimeInterface
     {
         return $this->date_created;
     }
 
-    public function setDateCreated(\DateTimeInterface $date_created): self
+    public function setDateCreated(DateTimeInterface $date_created): self
     {
         $this->date_created = $date_created;
 
         return $this;
     }
 
-    public function getDateÃModified(): ?\DateTimeInterface
+    public function getDateModified(): DateTimeInterface
     {
-        return $this->dateÃ_modified;
+        return $this->date_modified;
     }
 
-    public function setDateÃModified(\DateTimeInterface $dateÃ_modified): self
+    public function setDateModified(DateTimeInterface $date_modified): self
     {
-        $this->dateÃ_modified = $dateÃ_modified;
+        $this->date_modified = $date_modified;
 
         return $this;
     }

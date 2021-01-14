@@ -31,7 +31,7 @@ else
 endif
 
 ifeq ($(OSFLAG),win)
-	dockerRun := docker run -v $(PWD):/app -w /app --rm -it -e "TERM=xterm-256color" 172.31.1.120:5000/intersysteme/helpdesk_php:latest
+	dockerRun := docker run -v $(PWD):/app -w /app --rm -it -e "TERM=xterm-256color" registery.gitlab.silvain.eu/silvain.eu/cv-ludwig_php:base
 else
 	dockerRun :=
 endif
@@ -55,7 +55,7 @@ lintb: vendor/autoload.php ## Analyse le code (sans docker)
 
 .PHONY: format
 format: ## Formate le code
-	$(dockerRun) ./vendor/bin/phpcbf
+	$(dockerRun) ./vendor/bin/phpcbf -q
 	$(dockerRun) ./vendor/bin/php-cs-fixer fix --allow-risky=yes --config ".php_cs.dist"
 
 .PHONY: test

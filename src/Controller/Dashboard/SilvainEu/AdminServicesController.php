@@ -86,7 +86,7 @@ class AdminServicesController extends AbstractController
         ]);
     }
 
-    public static function RemoveServiceCache(EntityManagerInterface $em, AdapterInterface $cache)
+    public static function RemoveServiceCache(EntityManagerInterface $em, AdapterInterface $cache): void
     {
         $keys = [StringHelper::strRemoveCacheKey(ServiceController::CACHE_KEY_SERVICES)];
         $_ts = $em->getRepository(Service::class)->findAll();

@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Main\CV\CompetenceCategorie;
 use App\Entity\Main\CV\Technologie;
 use App\Utils\Assets\AssetsResponse;
-use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,8 +24,6 @@ class CuriculumVitaeController extends AbstractController
 
     /**
      * @Route("/cv/my-skills", name="cv-my_skills")
-     *
-     * @throws InvalidArgumentException
      */
     public function my_skills(): Response
     {
@@ -46,8 +43,6 @@ class CuriculumVitaeController extends AbstractController
 
     /**
      * @Route("/cv/my-skills/icon/{slug}", name="cv-technology_icon")
-     *
-     * @throws InvalidArgumentException
      */
     public function technology_icon(Technologie $tech): Response
     {
