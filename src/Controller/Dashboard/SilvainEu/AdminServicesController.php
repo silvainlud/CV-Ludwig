@@ -23,9 +23,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AdminServicesController extends AbstractController
 {
-    /**
-     * @var EntityManagerInterface
-     */
     private EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $em)
@@ -35,8 +32,6 @@ class AdminServicesController extends AbstractController
 
     /**
      * @Route("/dashboard/silvaineu/services", name="db_silvaineu_services")
-     *
-     * @return Response
      */
     public function ListServices(): Response
     {
@@ -50,8 +45,6 @@ class AdminServicesController extends AbstractController
 
     /**
      * @Route("/dashboard/silvaineu/services/add", name="db_silvaineu_services-add")
-     *
-     * @return Response
      */
     public function AddService(Request $request): Response
     {
@@ -75,8 +68,6 @@ class AdminServicesController extends AbstractController
     /**
      * @Route("/dashboard/silvaineu/services/edit/{service}", name="db_silvaineu_services-edit")
      * @ParamConverter("s", options={"mapping": {"service": "slug"}})
-     *
-     * @return Response
      */
     public function EditService(Request $request, Service $s): Response
     {

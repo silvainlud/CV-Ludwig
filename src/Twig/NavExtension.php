@@ -18,17 +18,11 @@ class NavExtension extends AbstractExtension
     private RouterInterface $router;
 
     private RequestStack $request;
-    /**
-     * @var EntityManagerInterface
-     */
+
     private EntityManagerInterface $em;
-    /**
-     * @var AdapterInterface
-     */
+
     private AdapterInterface $cache;
-    /**
-     * @var TranslatorInterface
-     */
+
     private TranslatorInterface $translator;
 
     public function __construct(RouterInterface $router, RequestStack $request, EntityManagerInterface $em, AdapterInterface $cache, TranslatorInterface $translator)
