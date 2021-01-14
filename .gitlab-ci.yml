@@ -11,6 +11,7 @@ services:
 
 stages:
   - compile
+  - lint
   - test
   - build
   - deploy
@@ -28,7 +29,7 @@ compile:composer:
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress
 
 compile:nodejs:
-  before_script: []
+  before_script: [ ]
   image: node
   stage: compile
   tags:
@@ -36,6 +37,14 @@ compile:nodejs:
   script:
     - yarn install --ignore-engines
     - yarn encore dev
+
+lint:phpstan:
+  before_script: [ ]
+  stage: lint
+  tags:
+    - docker
+  script:
+    - ./vendor/bin/phpstan analyse  --memory-limit=-1
 
 phpunit:
   stage: test
@@ -50,7 +59,7 @@ phpunit:
     - compile:nodejs
 
 docker-build-master:
-  before_script: []
+  before_script: [ ]
   tags:
     - docker
   # Official docker image.
@@ -68,7 +77,7 @@ docker-build-master:
 deployment:production:ansible:
   tags:
     - docker
-  services: []
+  services: [ ]
   image: williamyeh/ansible:centos7
   stage: deploy
   when: manual

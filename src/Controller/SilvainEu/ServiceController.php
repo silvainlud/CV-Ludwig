@@ -15,9 +15,6 @@ class ServiceController extends AbstractController
     public const SERVICE_SIZE_WIDTH = 200;
     public const CACHE_KEY_SERVICES = 'cv_services';
 
-    /**
-     * @var AdapterInterface
-     */
     private AdapterInterface $cache;
 
     public function __construct(AdapterInterface $cache)
@@ -50,8 +47,6 @@ class ServiceController extends AbstractController
      * @Route("/silvaineu/service/{slug}/icon", name="silvaineu_service_icon")
      *
      * @throws InvalidArgumentException
-     *
-     * @return Response
      */
     public function service_icon(Service $s): Response
     {
