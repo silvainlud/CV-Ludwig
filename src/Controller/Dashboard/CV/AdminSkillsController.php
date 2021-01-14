@@ -23,10 +23,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AdminSkillsController extends AbstractController
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private $em;
+    private EntityManagerInterface $em;
 
     private TranslatorInterface $translator;
 
@@ -36,7 +33,7 @@ class AdminSkillsController extends AbstractController
         $this->translator = $translator;
     }
 
-    public static function RemoveSkillCache(EntityManagerInterface $em, AdapterInterface $cache)
+    public static function RemoveSkillCache(EntityManagerInterface $em, AdapterInterface $cache): void
     {
         $keys = [StringHelper::strRemoveCacheKey(CuriculumVitaeController::CACHE_KEY_TECHNOLOGIE)];
         $_ts = $em->getRepository(Technologie::class)->findAll();
@@ -107,7 +104,9 @@ class AdminSkillsController extends AbstractController
     {
         if (null == $skill) {
             $skill = new Competence();
-            $skill->setCategorie($category);
+            if (null !== $category) {
+                $skill->setCategorie($category);
+            }
         }
 
         $form = $this->createForm(CompetenceType::class, $skill, ['cancel_btn' => true, 'choose_categories' => null == $category]);

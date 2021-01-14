@@ -19,26 +19,28 @@ class CompetenceCategorie
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer", name="NumCompetenceCategorie")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=64, name="NomCompetenceCategorie", unique=true)
      * @Assert\Length(max="64")
      * @Assert\NotBlank
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="integer", nullable=true, name="OrdreCompetenceCategorie")
      * @Assert\GreaterThanOrEqual(0)
      * @Assert\NotNull
      */
-    private $ordre;
+    private ?int $ordre;
 
     /**
      * @ORM\OneToMany(targetEntity=Competence::class, mappedBy="categorie")
+     *
+     * @var Collection<Competence>
      */
-    private $competences;
+    private Collection $competences;
 
     public function __construct()
     {
@@ -47,6 +49,10 @@ class CompetenceCategorie
 
     public function getId(): ?int
     {
+        if (!isset($this->id)) {
+            return null;
+        }
+
         return $this->id;
     }
 
@@ -96,10 +102,6 @@ class CompetenceCategorie
     {
         if ($this->competences->contains($competence)) {
             $this->competences->removeElement($competence);
-            // set the owning side to null (unless already changed)
-            if ($competence->getCategorie() === $this) {
-                $competence->setCategorie(null);
-            }
         }
 
         return $this;

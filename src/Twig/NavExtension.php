@@ -5,9 +5,9 @@ namespace App\Twig;
 use App\Controller\SilvainEu\ServiceController;
 use App\Entity\Main\SilvainEu\Service;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
@@ -25,13 +25,16 @@ class NavExtension extends AbstractExtension
 
     private TranslatorInterface $translator;
 
-    public function __construct(RouterInterface $router, RequestStack $request, EntityManagerInterface $em, AdapterInterface $cache, TranslatorInterface $translator)
+    private UrlMatcherInterface $matcher;
+
+    public function __construct(RouterInterface $router, UrlMatcherInterface $matcher, RequestStack $request, EntityManagerInterface $em, AdapterInterface $cache, TranslatorInterface $translator)
     {
         $this->router = $router;
         $this->request = $request;
         $this->em = $em;
         $this->cache = $cache;
         $this->translator = $translator;
+        $this->matcher = $matcher;
     }
 
     public function getFilters(): array
@@ -52,16 +55,22 @@ class NavExtension extends AbstractExtension
         ];
     }
 
-    public function GetPreviousUrl()
+    public function GetPreviousUrl(): ?string
     {
         try {
             $url = $this->router->generate('index');
+            if (null === $this->request->getMasterRequest()) {
+                return null;
+            }
             $referer = $this->request->getMasterRequest()->headers->get('referer');
-            $matcher = $this->router->getMatcher();
-            $lastPath = substr($referer, strpos($referer, $this->request->getMasterRequest()->getSchemeAndHttpHost()));
-            $lastPath = str_replace($this->request->getMasterRequest()->getSchemeAndHttpHost(), '', $lastPath);
 
-            $parametersLastRoute = $matcher->match($lastPath);
+            if (null == $referer) {
+                return null;
+            }
+
+            $lastPath = str_replace($this->request->getMasterRequest()->getSchemeAndHttpHost(), '', $referer);
+
+            $parametersLastRoute = $this->matcher->match($lastPath);
 
             if ($parametersLastRoute['_route'] !== $this->request->getMasterRequest()->attributes->get('_route')) {
                 $url = $referer;
@@ -74,22 +83,21 @@ class NavExtension extends AbstractExtension
     }
 
     /**
-     * @throws InvalidArgumentException
-     *
-     * @return array<array<string>>
+     * @return array<int, array<int, array<int, string|null>>>
      */
-    public function GetServicesFooter()
+    public function GetServicesFooter(): array
     {
         $i = $this->cache->getItem(ServiceController::CACHE_KEY_SERVICES);
         if (!$i->isHit()) {
             $i->set($this->em->getRepository(Service::class)->findAll());
             $this->cache->save($i);
         }
+
         $col1 = [];
         $col2 = [];
         $services = $i->get();
         $i = 1;
-        /** @var Service[] $services */
+        /** @var Service $s */
         foreach ($services as $s) {
             $k = [0 => $s->getName(), $s->getLink()];
             if ($i < \count($services)) {

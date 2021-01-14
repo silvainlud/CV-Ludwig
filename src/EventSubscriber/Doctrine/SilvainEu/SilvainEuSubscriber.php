@@ -22,7 +22,7 @@ class SilvainEuSubscriber implements EventSubscriberInterface
         $this->cache = $cache;
     }
 
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return [
             Events::prePersist => 'prePersist',
@@ -30,7 +30,7 @@ class SilvainEuSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function preUpdate(LifecycleEventArgs $args)
+    public function preUpdate(LifecycleEventArgs $args): void
     {
         if ($args->getEntity() instanceof Service) {
             $args->getEntity()->MakeSlug($this->slugger);
@@ -38,7 +38,7 @@ class SilvainEuSubscriber implements EventSubscriberInterface
         }
     }
 
-    public function prePersist(LifecycleEventArgs $args)
+    public function prePersist(LifecycleEventArgs $args): void
     {
         if ($args->getEntity() instanceof Service) {
             $args->getEntity()->MakeSlug($this->slugger);
