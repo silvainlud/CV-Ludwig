@@ -3,6 +3,8 @@
 namespace App\Entity\Mail;
 
 use App\Repository\Mail\MailboxRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,65 +18,69 @@ class Mailbox
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Domain::class)
      * @ORM\JoinColumn(nullable=false, name="domain_id")
      */
-    private $domain;
+    private Domain $domain;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $username;
+    private string $username;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $password;
+    private string $password;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
      */
-    private $firstname;
+    private ?string $firstname;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $maildir;
+    private ?string $maildir;
 
     /**
      * @ORM\Column(type="bigint")
      */
-    private $quota;
+    private ?int $quota;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_created;
+    private DateTimeInterface $date_created;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_modified;
+    private DateTimeInterface $date_modified;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $active;
+    private bool $active;
 
     public function getId(): ?int
     {
+        if (!isset($this->id)) {
+            return null;
+        }
+
         return $this->id;
     }
 
-    public function getUsername(): ?string
+    public function getUsername(): string
     {
         return $this->username;
     }
@@ -86,7 +92,7 @@ class Mailbox
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -103,7 +109,7 @@ class Mailbox
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -134,36 +140,36 @@ class Mailbox
         return $this;
     }
 
-    public function getQuota(): ?string
+    public function getQuota(): ?int
     {
         return $this->quota;
     }
 
-    public function setQuota(string $quota): self
+    public function setQuota(?int $quota): self
     {
         $this->quota = $quota;
 
         return $this;
     }
 
-    public function getDateCreated(): ?\DateTimeInterface
+    public function getDateCreated(): ?DateTimeInterface
     {
         return $this->date_created;
     }
 
-    public function setDateCreated(\DateTimeInterface $date_created): self
+    public function setDateCreated(DateTimeInterface $date_created): self
     {
         $this->date_created = $date_created;
 
         return $this;
     }
 
-    public function getDateModified(): ?\DateTimeInterface
+    public function getDateModified(): ?DateTimeInterface
     {
         return $this->date_modified;
     }
 
-    public function setDateModified(\DateTimeInterface $date_modified): self
+    public function setDateModified(DateTimeInterface $date_modified): self
     {
         $this->date_modified = $date_modified;
 
@@ -182,17 +188,17 @@ class Mailbox
         return $this;
     }
 
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->username . '@' . $this->getDomain()->getDomain();
     }
 
-    public function getDomain(): ?Domain
+    public function getDomain(): Domain
     {
         return $this->domain;
     }
 
-    public function setDomain(?Domain $domain): self
+    public function setDomain(Domain $domain): self
     {
         $this->domain = $domain;
 

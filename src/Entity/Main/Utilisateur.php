@@ -3,6 +3,8 @@
 namespace App\Entity\Main;
 
 use App\Repository\Main\UtilisateurRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -17,41 +19,44 @@ class Utilisateur implements UserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer", name="CodeUtilisateur")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true, name="Utilisateur")
      */
-    private $username;
+    private string $username;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true, name="EmailUtilisateur")
      */
-    private $email;
+    private string $email;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private $password;
+    private string $password;
 
     /**
-     * @var \DateTime
      * @ORM\Column(type="datetime", name="DateCreationUtilisateur")
      */
-    private $date_creation;
+    private DateTimeInterface $date_creation;
 
     public function getId(): ?int
     {
+        if (!isset($this->id)) {
+            return null;
+        }
+
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -117,26 +122,26 @@ class Utilisateur implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getSalt()
+    public function getSalt(): ?string
     {
-        // not needed when using the "bcrypt" algorithm in security.yaml
+        return null;
     }
 
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
 
-    public function getDateCreation(): ?\DateTimeInterface
+    public function getDateCreation(): DateTimeInterface
     {
         return $this->date_creation;
     }
 
-    public function setDateCreation(\DateTimeInterface $date_creation): self
+    public function setDateCreation(DateTimeInterface $date_creation): self
     {
         $this->date_creation = $date_creation;
 
@@ -146,8 +151,8 @@ class Utilisateur implements UserInterface
     /**
      * @ORM\PrePersist
      */
-    public function setCreatedValue()
+    public function setCreatedValue(): void
     {
-        $this->date_creation = new \DateTime();
+        $this->date_creation = new DateTime();
     }
 }

@@ -21,20 +21,20 @@ class Service
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=32, unique=true, name="NomService")
      * @Assert\Length(max="32")
      * @Assert\NotBlank
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="text", name="DescriptionService")
      * @Assert\NotBlank
      */
-    private $description;
+    private string $description;
 
     /**
      * @ORM\Column(type="string", length=128, name="LinkService")
@@ -44,11 +44,13 @@ class Service
      *     @Assert\Regex(pattern="/^\/.*$/")
      * })
      */
-    private $link;
+    private string $link;
 
     /**
      * @ORM\Column(type="blob", name="ImageService")
      * @Assert\NotNull
+     *
+     * @var resource|string
      */
     private $image;
 
@@ -57,16 +59,20 @@ class Service
      * @Assert\Length(max="10")
      * @Assert\NotBlank
      */
-    private $imageExtension;
+    private string $imageExtension;
 
     /**
      * @ORM\Column(type="string", length=128, name="SlugService")
      * @Assert\Length(max="128")
      */
-    private $slug;
+    private string $slug;
 
     public function getId(): ?int
     {
+        if (!isset($this->id)) {
+            return null;
+        }
+
         return $this->id;
     }
 
@@ -106,11 +112,19 @@ class Service
         return $this;
     }
 
+    /**
+     * @return resource|string
+     */
     public function getImage()
     {
         return $this->image;
     }
 
+    /**
+     * @param resource|string $image
+     *
+     * @return $this
+     */
     public function setImage($image): self
     {
         $this->image = $image;
@@ -118,7 +132,7 @@ class Service
         return $this;
     }
 
-    public function getImageExtension(): ?string
+    public function getImageExtension(): string
     {
         return $this->imageExtension;
     }
@@ -130,7 +144,16 @@ class Service
         return $this;
     }
 
-    public function getSlug(): ?string
+    public function getSlugOrNull(): ?string
+    {
+        if (!isset($this->slug)) {
+            return null;
+        }
+
+        return $this->slug;
+    }
+
+    public function getSlug(): string
     {
         return $this->slug;
     }
@@ -142,12 +165,12 @@ class Service
         return $this;
     }
 
-    public function MakeSlug(SluggerInterface $slugger)
+    public function MakeSlug(SluggerInterface $slugger): void
     {
         $this->slug = (string) $slugger->slug($this->name)->lower();
     }
 
-    public function getUpload()
+    public function getUpload(): ?UploadedFile
     {
         return null;
     }
@@ -155,8 +178,14 @@ class Service
     public function setUpload(UploadedFile $file): self
     {
         if (!empty($file->getPath())) {
-            $this->imageExtension = $file->guessExtension();
-            $this->image = file_get_contents($file);
+            $ext = $file->guessExtension();
+            if (null !== $ext) {
+                $this->imageExtension = $ext;
+            }
+            $_file = file_get_contents($file);
+            if (false !== $_file) {
+                $this->image = $_file;
+            }
         }
 
         return $this;

@@ -3,6 +3,7 @@
 namespace App\Entity\Mail;
 
 use App\Repository\Mail\AliasRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,57 +17,61 @@ class Alias
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Domain::class)
      * @ORM\JoinColumn(nullable=false, name="domain_id")
      */
-    private $domain;
+    private Domain $domain;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private $adress;
+    private string $adress;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $goto;
+    private string $goto;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_created;
+    private DateTimeInterface $date_created;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_modified;
+    private DateTimeInterface $date_modified;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $active;
+    private bool $active;
 
     public function getId(): ?int
     {
+        if (!isset($this->id)) {
+            return null;
+        }
+
         return $this->id;
     }
 
-    public function getDomain(): ?Domain
+    public function getDomain(): Domain
     {
         return $this->domain;
     }
 
-    public function setDomain(?Domain $domain): self
+    public function setDomain(Domain $domain): self
     {
         $this->domain = $domain;
 
         return $this;
     }
 
-    public function getAdress(): ?string
+    public function getAdress(): string
     {
         return $this->adress;
     }
@@ -78,7 +83,7 @@ class Alias
         return $this;
     }
 
-    public function getGoto(): ?string
+    public function getGoto(): string
     {
         return $this->goto;
     }
@@ -90,31 +95,31 @@ class Alias
         return $this;
     }
 
-    public function getDateCreated(): ?\DateTimeInterface
+    public function getDateCreated(): DateTimeInterface
     {
         return $this->date_created;
     }
 
-    public function setDateCreated(\DateTimeInterface $date_created): self
+    public function setDateCreated(DateTimeInterface $date_created): self
     {
         $this->date_created = $date_created;
 
         return $this;
     }
 
-    public function getDateModified(): ?\DateTimeInterface
+    public function getDateModified(): DateTimeInterface
     {
         return $this->date_modified;
     }
 
-    public function setDateModified(\DateTimeInterface $date_modified): self
+    public function setDateModified(DateTimeInterface $date_modified): self
     {
         $this->date_modified = $date_modified;
 
         return $this;
     }
 
-    public function getActive(): ?bool
+    public function getActive(): bool
     {
         return $this->active;
     }

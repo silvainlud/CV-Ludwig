@@ -184,3 +184,8 @@ yarn-error.log
 !/bin/phpunit
 .phpunit.result.cache
 .sync-project
+
+###> squizlabs/php_codesniffer ###
+/.phpcs-cache
+/phpcs.xml
+###< squizlabs/php_codesniffer ###
