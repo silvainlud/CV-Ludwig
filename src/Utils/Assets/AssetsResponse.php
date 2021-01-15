@@ -19,8 +19,9 @@ class AssetsResponse
 
     /**
      * @param resource|string $file
+     * @param ?int            $width_resize
      */
-    public static function ReturnImg($file, string $filename, string $ext = 'png', int $width_resize = self::image_width, int $expireCache = 3600): Response
+    public static function ReturnImg($file, string $filename, string $ext = 'png', ?int $width_resize = self::image_width, int $expireCache = 3600): Response
     {
         $filename = StringHelper::strRemoveAccent($filename);
         $filename = str_replace(' ', '', $filename);
@@ -55,10 +56,11 @@ class AssetsResponse
 
     /**
      * @param resource|string $file
+     * @param ?int            $width_resize
      *
      * @throws ImageResizeException
      */
-    public static function MakeReponseImg($file, string $filename, string $ext = 'png', int $width_resize = self::image_width): Response
+    public static function MakeReponseImg($file, string $filename, string $ext = 'png', ?int $width_resize = self::image_width): Response
     {
         if (\is_string($file)) {
             $image = new ImageResize($file);
@@ -67,11 +69,14 @@ class AssetsResponse
             if (false === $stream) {
                 throw new \InvalidArgumentException('The var $file is not a valid resource.');
             }
+
             $image = ImageResize::createFromString($stream);
         }
-
-        $image->resizeToWidth($width_resize);
+        if (null !== $width_resize) {
+            $image->resizeToWidth($width_resize);
+        }
         $response = new Response((string) $image);
+
         $filename .= '.' . $ext;
 
         $mimeTypes = new MimeTypes();
@@ -106,8 +111,10 @@ class AssetsResponse
 
     /**
      * @param resource|string $file
+     * @param ?string         $ext
+     * @param ?int            $width_resize
      */
-    public static function ReturnImgAdapterCache(AdapterInterface $cache, $file, string $filename, string $ext = 'png', int $width_resize = self::image_width, int $expireCache = 3600): Response
+    public static function ReturnImgAdapterCache(AdapterInterface $cache, $file, string $filename, ?string $ext = 'png', ?int $width_resize = self::image_width, int $expireCache = 3600): Response
     {
         $filename = StringHelper::strRemoveAccent($filename);
         $filename = str_replace(' ', '', $filename);
@@ -118,6 +125,17 @@ class AssetsResponse
         if (false === $filename) {
             $filename = StringHelper::strRemoveAccent(StringHelper::GenreateRandomString(16));
             $expireCache = 0;
+        }
+
+        if (null === $ext && !\is_string($file)) {
+            $ext = mime_content_type($file);
+            if (false !== $ext && str_contains($ext, '/')) {
+                $ext = explode('/', $ext)[1];
+            }
+        }
+
+        if (null === $ext || false === $ext) {
+            throw new \InvalidArgumentException('Bad extension');
         }
 
         $ext = str_replace(' ', '', $ext);
@@ -139,8 +157,9 @@ class AssetsResponse
 
     /**
      * @param resource|string $file
+     * @param ?int            $width_resize
      */
-    public static function CacheKey($file, string $filename, string $ext, int $width_resize): string
+    public static function CacheKey($file, string $filename, string $ext, ?int $width_resize): string
     {
         if (\is_string($file)) {
             $cacheKey = $file . '_' . $width_resize;

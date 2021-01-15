@@ -68,6 +68,7 @@ class Technologie
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Main\CV\Technologie")
      * @ORM\JoinTable(joinColumns={@ORM\JoinColumn(referencedColumnName="NumTechnologie", name="source_technologie_num")}, inverseJoinColumns={@ORM\JoinColumn(referencedColumnName="NumTechnologie", name="target_technologie_num")})
+     * @Assert\Expression("this.getLinkedTechonologies().contains(this) == false", message="cv.skills.technology.attr.link.not-contain-slef")
      *
      * @var Collection<self> $linkedTechonologies
      */
