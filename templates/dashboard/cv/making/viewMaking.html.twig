@@ -6,22 +6,22 @@
     <div class="row">
         <div class="col-12">
             <div class="d-flex align-items-center mb-5">
-                <h2>{{ 'cv.skills.technology.title.list'|trans }}</h2>
+                <h2>{{ 'cv.making.title.list'|trans }}</h2>
                 <div class="flex-grow-1"></div>
                 <div class="justify-content-end">
                     <a href="{{ path('db_cv_skills_technologies_add') }}" class="app-btn app-btn-green">
-                        {{ 'cv.skills.technology.title.add'|trans }}
+                        {{ 'cv.making.title.add'|trans }}
                     </a>
                 </div>
             </div>
             <table class="db_data-table db_data-table_hoverable">
                 <tbody>
-                {% for c in technologies %}
+                {% for c in makings %}
                     <tr>
                         <td class="td_icon">
-                            <div class="icon_skills" style="background-color: {{ c.color }}">
-                                <img src="{{ c.displayImage }}" alt="">
-                            </div>
+                            {% if c.mainImage  != null %}
+                                <img src="{{ path('cv-making-img', {"rea" : c.mainImage.id }) }}" alt="">
+                            {% endif %}
                         </td>
                         <td class="td_key">
                             <h3>N° :</h3>
@@ -30,16 +30,6 @@
                         <td>
                             <h3>{{ 'cv.skills.technology.attr.name'|trans }} :</h3>
                             <p>{{ c.name }}</p>
-                        </td>
-                        <td>
-                            <h3>{{ 'cv.skills.technology.attr.link'|trans }} :</h3>
-                            <p>
-                                {% if c.LinkedTechonologies|length >0 %}
-                                    {{ c.LinkedTechonologies|map(x=>x.name)|join(', ',' et ') }}
-                                {% else %}
-                                    &nbsp;
-                                {% endif %}
-                            </p>
                         </td>
                         <td class="text-right">
                             <h3></h3>

@@ -14,7 +14,7 @@ class RealisationImageMiniature extends RealisationImage
 {
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Main\CV\Realisation", inversedBy="mainImage")
-     * @ORM\JoinColumn()
+     * @ORM\JoinColumn
      */
     protected Realisation $realisation;
 

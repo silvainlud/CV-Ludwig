@@ -14,7 +14,7 @@ class RealisationImageGallerie extends RealisationImage
 {
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Main\CV\Realisation", inversedBy="gallery")
-     * @ORM\JoinColumn()
+     * @ORM\JoinColumn
      */
     protected Realisation $realisations;
 

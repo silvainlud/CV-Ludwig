@@ -23,14 +23,14 @@ class Realisation
 
     /**
      * @ORM\Column(type="string", length=255, unique=true, name="NomRealisation")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank
      * @Assert\Length(max=255)
      */
     protected string $name;
 
     /**
      * @ORM\Column(type="string", name="DescriptionRealisation")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank
      */
     protected string $description;
 
@@ -54,12 +54,12 @@ class Realisation
     /**
      * @ORM\Column(type="string", nullable=true, name="LienRealisation", length=255)
      * @Assert\Length(max=255)
-     * @Assert\Url()
+     * @Assert\Url
      */
     protected ?string $link;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Main\CV\RealisationImageMiniature", orphanRemoval=true,mappedBy="realisation")
+     * @ORM\OneToOne(targetEntity="App\Entity\Main\CV\RealisationImageMiniature", orphanRemoval=true, mappedBy="realisation")
      * @ORM\JoinColumn(nullable=true)
      */
     protected ?RealisationImageMiniature $mainImage;

@@ -3,6 +3,7 @@
 namespace App\Form\CV;
 
 use App\Entity\Main\CV\Technologie;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -38,6 +39,13 @@ class TechnologieType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'cv.skills.technology.attr.description',
+            ])
+            ->add('linkedTechonologies', EntityType::class, [
+                'class' => Technologie::class,
+                'multiple' => true,
+                'choice_label' => 'name',
+                'required' => false,
+                'label' => 'cv.skills.technology.attr.link',
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'general.action.btn.submit',

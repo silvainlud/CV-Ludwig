@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Main\CV\CompetenceCategorie;
+use App\Entity\Main\CV\Realisation;
+use App\Entity\Main\CV\RealisationImage;
 use App\Entity\Main\CV\Technologie;
 use App\Utils\Assets\AssetsResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CuriculumVitaeController extends AbstractController
 {
     public const CACHE_KEY_TECHNOLOGIE = 'cv_technologies';
+    public const CACHE_KEY_REALISATION = 'cv_making';
     public const TECHNOLOGIES_SIZE_WIDTH = 110;
 
     private AdapterInterface $cache;
@@ -55,5 +59,31 @@ class CuriculumVitaeController extends AbstractController
     public function my_career(): Response
     {
         return $this->render('index/cv/my_cv.twig', []);
+    }
+
+    /**
+     * @Route("/cv/making", name="cv-making")
+     */
+    public function making(): Response
+    {
+        $i = $this->cache->getItem(self::CACHE_KEY_REALISATION);
+        if (!$i->isHit()) {
+            $i->set($this->getDoctrine()->getRepository(Realisation::class)->findAll());
+            $this->cache->save($i);
+        }
+
+        /** @var Realisation[] $makings */
+        $makings = $i->get();
+
+        return $this->render('index/cv/making.twig', ['realisations' => $makings]);
+    }
+
+    /**
+     * @Route("/cv/my-career/img/{rea}", name="cv-making-img")
+     * @ParamConverter("_r", options={"mapping": {"rea": "id"}})
+     */
+    public function making_image(RealisationImage $_r): Response
+    {
+        return AssetsResponse::ReturnImgAdapterCache($this->cache, $_r->getImage(), (string) $_r->getId(), null, null);
     }
 }
