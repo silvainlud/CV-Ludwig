@@ -48,4 +48,12 @@ class CuriculumVitaeController extends AbstractController
     {
         return AssetsResponse::ReturnImgAdapterCache($this->cache, $tech->getImage(), $tech->getSlug(), $tech->getImageExtension(), self::TECHNOLOGIES_SIZE_WIDTH);
     }
+
+    /**
+     * @Route("/cv/my-career", name="cv-my_career")
+     */
+    public function my_career(): Response
+    {
+        return $this->render('index/cv/my_cv.twig', []);
+    }
 }
