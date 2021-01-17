@@ -75,7 +75,7 @@ class Technologie
     private Collection $linkedTechonologies;
 
     /**
-     * @ORM\Column(type="string", nullable=false, length=255)
+     * @ORM\Column(type="string", nullable=true, length=255)
      * @Assert\Url
      * @Assert\Length(max=255)
      */
