@@ -39,6 +39,21 @@ class RealisationRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return array<Realisation>
+     */
+    public function findAllWithImage(): ?array
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.public = :true')
+            ->setParameter('true', true)
+            ->orderBy('t.dateRelease', 'DESC')
+            ->orderBy('t.name', 'ASC')
+            ->join('t.mainImage', 'mainImage')->addSelect('mainImage')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Technologie[] Returns an array of Technologie objects
     //  */

@@ -75,11 +75,11 @@ class CuriculumVitaeController extends AbstractController
     /**
      * @Route("/cv/realisation", name="cv-making")
      */
-    public function making(): Response
+    public function making(RealisationRepository $realisationRepository): Response
     {
         $i = $this->cache->getItem(self::CACHE_KEY_REALISATION);
         if (!$i->isHit()) {
-            $i->set($this->getDoctrine()->getRepository(Realisation::class)->findBy(['public' => true], ['dateRelease' => 'desc', 'name' => 'asc']));
+            $i->set($realisationRepository->findAllWithImage());
             $this->cache->save($i);
         }
 
