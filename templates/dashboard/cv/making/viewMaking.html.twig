@@ -9,7 +9,7 @@
                 <h2>{{ 'cv.making.title.list'|trans }}</h2>
                 <div class="flex-grow-1"></div>
                 <div class="justify-content-end">
-                    <a href="{{ path('db_cv_skills_technologies_add') }}" class="app-btn app-btn-green">
+                    <a href="{{ path('db_cv_making_add') }}" class="app-btn app-btn-green">
                         {{ 'cv.making.title.add'|trans }}
                     </a>
                 </div>
@@ -34,7 +34,7 @@
                         <td class="text-right">
                             <h3></h3>
                             <div>
-                                <a href="{{ path('db_cv_skills_technologies_edit', {'tech': c.id}) }}"
+                                <a href="{{ path('db_cv_making_edit', {'slug': c.slug}) }}"
                                    class="app-btn app-btn-light-blue app-btn-text">
                                     <i class="fas fa-pen-alt"></i>
                                 </a>

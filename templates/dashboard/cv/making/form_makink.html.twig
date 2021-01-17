@@ -1,0 +1,79 @@
+{% extends 'dashboard/base.html.twig' %}
+
+{% block content_class %}container-fuild{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card" id="realisation_add">
+                    <div class="card-body container-fluid">
+                        <h3>
+                            {% if add %}
+                                {{ 'cv.making.title.add'|trans }}
+                            {% else %}
+                                {{ 'cv.making.title.edit'|trans }}
+                            {% endif %}
+                        </h3>
+                        {% form_theme form 'dashboard/include/form.html.twig' %}
+                        {{ form(form) }}
+                    </div>
+                </div>
+            </div>
+            {% if add == false %}
+                <div class="col-8">
+                    <div class="card mt-5" id="realisation_gallery">
+                        <div class="card-body container-fluid">
+
+                            <h3>
+                                {{ 'cv.making.title.gallery.list'|trans }}
+                            </h3>
+
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td class="text-right">Action</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for g in gallery %}
+                                    <tr>
+                                        <td>
+                                            <img style="max-width: 200px; max-height: 100px; object-fit: contain"
+                                                 src="{{ path('cv-making-img',{"rea" : g.id}) }}" alt="">
+                                        </td>
+                                        <td class="text-right">
+                                            {{ form(formGalleryRemove[g.id]) }}
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="2">
+                                            Pas d'images
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card mt-5" id="realisation_gallery">
+                        <div class="card-body container-fluid">
+                            {% if formGallery is defined and formGallery != null %}
+                                <h3>
+                                    {{ 'cv.making.title.gallery.add'|trans }}
+                                </h3>
+                                {% form_theme formGallery 'dashboard/include/form.html.twig' %}
+                                {{ form(formGallery) }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

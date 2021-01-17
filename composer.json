@@ -4,12 +4,14 @@
   "require": {
     "php": "^7.4",
     "ext-ctype": "*",
+    "ext-fileinfo": "*",
     "ext-iconv": "*",
     "composer/package-versions-deprecated": "^1.8",
     "doctrine/annotations": "^1.0",
     "doctrine/doctrine-bundle": "^2.1",
     "doctrine/doctrine-migrations-bundle": "^3.0",
     "doctrine/orm": "^2.7",
+    "erusev/parsedown": "^1.7",
     "gumlet/php-image-resize": "^2.0",
     "phpdocumentor/reflection-docblock": "^5.1",
     "sensio/framework-extra-bundle": "^5.1",
@@ -40,8 +42,8 @@
     "symfony/webpack-encore-bundle": "^1.7",
     "symfony/yaml": "5.2.*",
     "twig/extra-bundle": "^2.12|^3.0",
-    "twig/twig": "^2.12|^3.0",
-    "ext-fileinfo": "*"
+    "twig/markdown-extra": "^3.2",
+    "twig/twig": "^2.12|^3.0"
   },
   "require-dev": {
     "doctrine/doctrine-fixtures-bundle": "^3.3",

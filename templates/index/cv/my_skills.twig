@@ -21,9 +21,10 @@
                          id="tech-{{- c.id -}}-{{- s.technologie.id -}}">
                         <div class="card h-100">
                             <div class="card-body card-centered card-body_maximize">
-                                <div class="icon_skills" style="background-color: {{ s.technologie.color }}">
+                                <a class="icon_skills" style="background-color: {{ s.technologie.color }}"
+                                   {% if s.technologie.link != null %}href="{{ s.technologie.link }}"{% endif %}>
                                     <img src="{{ path('cv-technology_icon',{'slug': s.technologie.slug }) }}" alt="">
-                                </div>
+                                </a>
                                 <h2>{{ s.technologie.name }}</h2>
                                 <p>
                                     {{ s.technologie.description }}
