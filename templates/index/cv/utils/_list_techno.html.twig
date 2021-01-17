@@ -1,0 +1,20 @@
+<div class="techno-text-list ml-4">
+    {% for t in techno %}
+        {% if t.link != null %}
+            <a class="techno-text-list_item"
+            href="{{ t.link }}">
+        {% else %}
+            <div class="techno-text-list_item">
+        {% endif %}
+
+        <div class="icon_skills icon_skills_40" style="background-color: {{ t.color }}">
+            <img src="{{ path('cv-technology_icon',{'slug': t.slug }) }}" alt="">
+        </div>
+        <span>{{ t.name }}</span>
+        {% if t.link == null %}
+            </div>
+        {% else %}
+            </a>
+        {% endif %}
+    {% endfor %}
+</div>

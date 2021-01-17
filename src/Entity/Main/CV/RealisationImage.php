@@ -4,6 +4,7 @@ namespace App\Entity\Main\CV;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class RealisationImage.
@@ -58,6 +59,35 @@ abstract class RealisationImage
     public function setImage($image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return resource|string|null
+     */
+    public function getImageOrNull()
+    {
+        if (!isset($this->image)) {
+            return null;
+        }
+
+        return $this->image;
+    }
+
+    public function getUpload(): ?UploadedFile
+    {
+        return null;
+    }
+
+    public function setUpload(UploadedFile $file): self
+    {
+        if (!empty($file->getPath())) {
+            $_file = file_get_contents($file);
+            if (false !== $_file) {
+                $this->image = $_file;
+            }
+        }
 
         return $this;
     }

@@ -158,14 +158,30 @@ class AssetsResponse
     /**
      * @param resource|string $file
      * @param ?int            $width_resize
+     * @param ?string         $ext
      */
-    public static function CacheKey($file, string $filename, string $ext, ?int $width_resize): string
+    public static function CacheKey($file, string $filename, ?string $ext, ?int $width_resize): string
     {
-        if (\is_string($file)) {
-            $cacheKey = $file . '_' . $width_resize;
-        } else {
-            $cacheKey = $filename . '_' . $ext . '_' . $width_resize;
+        if (null === $ext) {
+            if (!\is_string($file)) {
+                $ext = mime_content_type($file);
+            } else {
+                $stream = fopen('php://memory', 'r+');
+                if (false !== $stream) {
+                    fwrite($stream, $file);
+                    rewind($stream);
+                    $ext = mime_content_type($stream);
+                }
+            }
+            if (false !== $ext && null !== $ext && str_contains($ext, '/')) {
+                $ext = explode('/', $ext)[1];
+            }
         }
+        if (null === $ext || false === $ext) {
+            throw new \InvalidArgumentException('Bad extension');
+        }
+
+        $cacheKey = $filename . '_' . $ext . '_' . $width_resize;
 
         return StringHelper::strRemoveCacheKey($cacheKey);
     }

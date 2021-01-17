@@ -2,6 +2,7 @@
 
 namespace App\EventSubscriber\Doctrine\CV;
 
+use App\Controller\Dashboard\CV\AdminMakingController;
 use App\Controller\Dashboard\CV\AdminSkillsController;
 use App\Entity\Main\CV\Competence;
 use App\Entity\Main\CV\CompetenceCategorie;
@@ -32,23 +33,17 @@ class CompetenceSubscriber implements EventSubscriberInterface
         ];
     }
 
+    public function prePersist(LifecycleEventArgs $args): void
+    {
+        $this->preUpdate($args);
+    }
+
     public function preUpdate(LifecycleEventArgs $args): void
     {
         if ($args->getEntity() instanceof Technologie) {
             $args->getEntity()->CompleteSlug($this->slugger);
             AdminSkillsController::RemoveSkillCache($args->getEntityManager(), $this->cache);
-        } elseif ($args->getEntity() instanceof Competence) {
-            AdminSkillsController::RemoveSkillCache($args->getEntityManager(), $this->cache);
-        } elseif ($args->getEntity() instanceof CompetenceCategorie) {
-            AdminSkillsController::RemoveSkillCache($args->getEntityManager(), $this->cache);
-        }
-    }
-
-    public function prePersist(LifecycleEventArgs $args): void
-    {
-        if ($args->getEntity() instanceof Technologie) {
-            $args->getEntity()->CompleteSlug($this->slugger);
-            AdminSkillsController::RemoveSkillCache($args->getEntityManager(), $this->cache);
+            AdminMakingController::RemoveMakingCache($args->getEntityManager(), $this->cache);
         } elseif ($args->getEntity() instanceof Competence) {
             AdminSkillsController::RemoveSkillCache($args->getEntityManager(), $this->cache);
         } elseif ($args->getEntity() instanceof CompetenceCategorie) {

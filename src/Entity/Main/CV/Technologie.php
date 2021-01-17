@@ -74,9 +74,17 @@ class Technologie
      */
     private Collection $linkedTechonologies;
 
+    /**
+     * @ORM\Column(type="string", nullable=false, length=255)
+     * @Assert\Url
+     * @Assert\Length(max=255)
+     */
+    private ?string $link;
+
     public function __construct()
     {
         $this->linkedTechonologies = new ArrayCollection();
+        $this->link = null;
     }
 
     public function getDescription(): ?string
@@ -235,6 +243,18 @@ class Technologie
         if ($this->linkedTechonologies->contains($t)) {
             $this->linkedTechonologies->removeElement($t);
         }
+
+        return $this;
+    }
+
+    public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    public function setLink(?string $link): self
+    {
+        $this->link = $link;
 
         return $this;
     }

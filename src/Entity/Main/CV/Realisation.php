@@ -2,15 +2,22 @@
 
 namespace App\Entity\Main\CV;
 
+use App\Repository\Main\CV\RealisationRepository;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=RealisationRepository::class)
  * @ORM\Table(name="CV_Realisation")
+ * @UniqueEntity(
+ *     fields={"name"},
+ *     errorPath="name",
+ * )
  */
 class Realisation
 {
@@ -29,7 +36,7 @@ class Realisation
     protected string $name;
 
     /**
-     * @ORM\Column(type="string", name="DescriptionRealisation")
+     * @ORM\Column(type="text", name="DescriptionRealisation")
      * @Assert\NotBlank
      */
     protected string $description;
@@ -59,7 +66,7 @@ class Realisation
     protected ?string $link;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Main\CV\RealisationImageMiniature", orphanRemoval=true, mappedBy="realisation")
+     * @ORM\OneToOne(targetEntity="App\Entity\Main\CV\RealisationImageMiniature", orphanRemoval=true, mappedBy="realisation", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     protected ?RealisationImageMiniature $mainImage;
@@ -71,31 +78,35 @@ class Realisation
      */
     protected Collection $gallery;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default": false}, name="EnLigne")
+     */
+    protected bool $public;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     */
+    protected string $slug;
+
+    /**
+     * @ORM\Column(type="string", nullable=true, name="Resume")
+     */
+    protected ?string $preface;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Main\CV\Technologie")
+     * @ORM\JoinTable(joinColumns={@ORM\JoinColumn(referencedColumnName="id")}, inverseJoinColumns={@ORM\JoinColumn(referencedColumnName="NumTechnologie")})
+     *
+     * @var Collection<Technologie>
+     */
+    protected Collection $technologies;
+
     public function __construct()
     {
         $this->gallery = new ArrayCollection();
+        $this->technologies = new ArrayCollection();
         $this->mainImage = null;
-    }
-
-    public function getId(): ?int
-    {
-        if (!isset($this->id)) {
-            return null;
-        }
-
-        return $this->id;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
+        $this->public = false;
     }
 
     public function getDescription(): string
@@ -195,6 +206,98 @@ class Realisation
             if ($gallery->getRealisation() === $this) {
                 unset($gallery);
             }
+        }
+
+        return $this;
+    }
+
+    public function isPublic(): bool
+    {
+        return $this->public;
+    }
+
+    public function setPublic(bool $public): self
+    {
+        $this->public = $public;
+
+        return $this;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function CompleteSlug(SluggerInterface $slugger): void
+    {
+        if (null === $this->getSlugOrNUll() || '-' == $this->getSlugOrNUll()) {
+            $this->slug = (string) $slugger->slug($this->getId() . ' ' . $this->getName())->lower();
+        }
+    }
+
+    public function getSlugOrNUll(): ?string
+    {
+        if (!isset($this->slug)) {
+            return null;
+        }
+
+        return $this->slug;
+    }
+
+    public function getId(): ?int
+    {
+        if (!isset($this->id)) {
+            return null;
+        }
+
+        return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getPreface(): ?string
+    {
+        return $this->preface;
+    }
+
+    public function setPreface(?string $preface): self
+    {
+        $this->preface = $preface;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Technologie[]
+     */
+    public function getTechnologies()
+    {
+        return $this->technologies;
+    }
+
+    public function addTechnologies(Technologie $technologie): self
+    {
+        if (!$this->technologies->contains($technologie)) {
+            $this->technologies[] = $technologie;
+        }
+
+        return $this;
+    }
+
+    public function removeTechnologies(Technologie $technologie): self
+    {
+        if ($this->technologies->contains($technologie)) {
+            $this->technologies->removeElement($technologie);
         }
 
         return $this;

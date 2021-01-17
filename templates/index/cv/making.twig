@@ -14,12 +14,12 @@
                         {% endif %}
                         <div class="card-body card-centered card-body_maximize">
                             <h2>{{ s.name }}</h2>
-                            <p>
-                                {{ s.description }}
+                            <p class="text-justify">
+                                {{ s.preface }}
                             </p>
                         </div>
                         <div class="card-footer justify-content-end">
-                            <a href="{{ s.link }}" class="app-btn app-btn-light-blue">
+                            <a href="{{ path('cv-making-view', {'slug': s.slug}) }}" class="app-btn app-btn-light-blue">
                                 Voir plus
                             </a>
                         </div>
