@@ -23,7 +23,7 @@ final class Version20210117205729 extends AbstractMigration
         $this->addSql('CREATE TABLE realisation_technologie (realisation_id INT NOT NULL, technologie_numtechnologie INT NOT NULL, INDEX IDX_6B3ED48CB685E551 (realisation_id), INDEX IDX_6B3ED48CD93522A1 (technologie_numtechnologie), PRIMARY KEY(realisation_id, technologie_numtechnologie)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE realisation_technologie ADD CONSTRAINT FK_6B3ED48CB685E551 FOREIGN KEY (realisation_id) REFERENCES CV_Realisation (id)');
         $this->addSql('ALTER TABLE realisation_technologie ADD CONSTRAINT FK_6B3ED48CD93522A1 FOREIGN KEY (technologie_numtechnologie) REFERENCES CV_Technologie (NumTechnologie)');
-        $this->addSql('ALTER TABLE CV_Technologie CHANGE link link VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE CV_Technologie ADD link VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
