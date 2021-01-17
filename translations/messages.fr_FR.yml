@@ -1,3 +1,4 @@
+site_name: "Ludwig SILVAIN "
 cv:
   skills:
     skill:
@@ -23,6 +24,8 @@ cv:
       attr:
         color: Couleur
         description: Description
+        link: Technologies liées
+        url: Lien externe
         image: Logo
         name: Nom
       title:
@@ -33,16 +36,40 @@ cv:
       add: Ajouter une compétences
       edit: Éditer une compétence
       list: Liste des compétences
+  making:
+    title:
+      add: Ajouter une réalisation
+      edit: Éditer une réalisation
+      list: Liste des rélisation
+      gallery:
+        add: "Ajouter une image à la gallerie"
+        list: "Element de la gallerie"
+    attr:
+      name: Titre
+      preface: Resumé
+      description: Contenu
+      company: Employeur
+      technologies: Technologies utiliées
+      dateToRelease: Date de mise en production
+      timeToMake: Temps de réalisation
+      link: Lien
+      public: En ligne
+      mainImage: Miniature
+      linkTechnologies: Technologies liées
+      gallery: Illustration
+
 general:
   action:
     btn:
       cancel: Annuler
       submit: Envoyer
+      delete: Supprimer
   menu:
     administration: Administration
     sign-in: Se connecter
   title:
     legal-notice: Mentions légales
+    list-services: List des services
 silvaineu:
   service:
     attr:

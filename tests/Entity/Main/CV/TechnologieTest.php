@@ -49,6 +49,13 @@ class TechnologieTest extends EntityKernelTestCase
         $this->assertsHasErrors($this->GetEntity()->setColor('jesai12345jesai1234512345+'), 1);
     }
 
+    public function testLink()
+    {
+        $this->assertsHasErrors($this->GetEntity()->addLinkedTechonologies($this->GetEntity()), 0);
+        $d = $this->GetEntity();
+        $this->assertsHasErrors($d->addLinkedTechonologies($d), 1);
+    }
+
     private function GetEntity(): Technologie
     {
         return (new Technologie())->setName('Html')

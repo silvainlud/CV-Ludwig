@@ -1,3 +1,5 @@
+$icon_size: (128, 64, 48, 32, 40);
+
 .icon_skills {
   width: 150px;
   height: 150px;
@@ -8,6 +10,13 @@
 
   background-color: transparentize($red_color, 0.7);
   border-radius: 100%;
+
+  @each $size in $icon_size {
+    &.icon_skills_#{$size} {
+      width: #{$size}px;
+      height: #{$size}px;
+    }
+  }
 
   img {
     width: 60%;
@@ -24,9 +33,47 @@
   @each $class, $color in $colors {
     &.icon_skills-#{$class} {
       background-color: transparentize($color, 0.7);
+
       i {
         color: $color;
       }
+    }
+  }
+}
+
+.techno-text-list {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  flex-wrap: wrap;
+
+  font-family: "Open Sans", sans-serif;
+  color: #666666;
+  font-weight: 400;
+  font-size: 17px;
+
+  a {
+    text-decoration: none;
+    color: #666666;
+    transition: color 0.3s;
+
+    &:link:hover {
+      color: lighten(#666666, 30%);
+    }
+  }
+
+  & > .techno-text-list_item {
+
+    display: flex;
+    margin: 4px 14px 2px 4px;
+    align-items: center;
+
+    & > span {
+      margin: 6px 12px;
+    }
+
+    &:not(:last-child) {
+      border-right: 2px solid rgba(0, 0, 0, 0.06);
     }
   }
 }
