@@ -49,7 +49,7 @@ class RealisationRepository extends ServiceEntityRepository
             ->setParameter('true', true)
             ->orderBy('t.dateRelease', 'DESC')
             ->orderBy('t.name', 'ASC')
-            ->join('t.mainImage', 'mainImage')->addSelect('mainImage')
+            ->leftJoin('t.mainImage', 'mainImage')->addSelect('mainImage')
             ->getQuery()
             ->getResult();
     }
