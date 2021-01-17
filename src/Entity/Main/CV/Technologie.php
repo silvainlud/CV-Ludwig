@@ -3,6 +3,8 @@
 namespace App\Entity\Main\CV;
 
 use App\Repository\Main\CV\TechnologieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -62,6 +64,28 @@ class Technologie
      * @ORM\Column(type="string", length=255, unique=true, nullable=false)
      */
     private string $slug;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Main\CV\Technologie")
+     * @ORM\JoinTable(joinColumns={@ORM\JoinColumn(referencedColumnName="NumTechnologie", name="source_technologie_num")}, inverseJoinColumns={@ORM\JoinColumn(referencedColumnName="NumTechnologie", name="target_technologie_num")})
+     * @Assert\Expression("this.getLinkedTechonologies().contains(this) == false", message="cv.skills.technology.attr.link.not-contain-slef")
+     *
+     * @var Collection<self> $linkedTechonologies
+     */
+    private Collection $linkedTechonologies;
+
+    /**
+     * @ORM\Column(type="string", nullable=true, length=255)
+     * @Assert\Url
+     * @Assert\Length(max=255)
+     */
+    private ?string $link;
+
+    public function __construct()
+    {
+        $this->linkedTechonologies = new ArrayCollection();
+        $this->link = null;
+    }
 
     public function getDescription(): ?string
     {
@@ -196,6 +220,41 @@ class Technologie
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getLinkedTechonologies(): Collection
+    {
+        return $this->linkedTechonologies;
+    }
+
+    public function addLinkedTechonologies(self $t): self
+    {
+        if (!$this->linkedTechonologies->contains($t)) {
+            $this->linkedTechonologies->add($t);
+        }
+
+        return $this;
+    }
+
+    public function removeLinkedTechonologies(self $t): self
+    {
+        if ($this->linkedTechonologies->contains($t)) {
+            $this->linkedTechonologies->removeElement($t);
+        }
+
+        return $this;
+    }
+
+    public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    public function setLink(?string $link): self
+    {
+        $this->link = $link;
 
         return $this;
     }

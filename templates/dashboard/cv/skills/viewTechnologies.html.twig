@@ -28,8 +28,18 @@
                             <p>{{ c.id }}</p>
                         </td>
                         <td>
-                            <h3>{{ 'cv.skills.technology.attr.name'|trans }}</h3>
+                            <h3>{{ 'cv.skills.technology.attr.name'|trans }} :</h3>
                             <p>{{ c.name }}</p>
+                        </td>
+                        <td>
+                            <h3>{{ 'cv.skills.technology.attr.link'|trans }} :</h3>
+                            <p>
+                                {% if c.LinkedTechonologies|length >0 %}
+                                    {{ c.LinkedTechonologies|map(x=>x.name)|join(', ',' et ') }}
+                                {% else %}
+                                    &nbsp;
+                                {% endif %}
+                            </p>
                         </td>
                         <td class="text-right">
                             <h3></h3>

@@ -1,0 +1,49 @@
+{% extends 'dashboard/base.html.twig' %}
+
+{% block content_class %}container{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex align-items-center mb-5">
+                <h2>{{ 'cv.making.title.list'|trans }}</h2>
+                <div class="flex-grow-1"></div>
+                <div class="justify-content-end">
+                    <a href="{{ path('db_cv_making_add') }}" class="app-btn app-btn-green">
+                        {{ 'cv.making.title.add'|trans }}
+                    </a>
+                </div>
+            </div>
+            <table class="db_data-table db_data-table_hoverable">
+                <tbody>
+                {% for c in makings %}
+                    <tr>
+                        <td class="td_icon">
+                            {% if c.mainImage  != null %}
+                                <img src="{{ path('cv-making-img', {"rea" : c.mainImage.id }) }}" alt="">
+                            {% endif %}
+                        </td>
+                        <td class="td_key">
+                            <h3>N° :</h3>
+                            <p>{{ c.id }}</p>
+                        </td>
+                        <td>
+                            <h3>{{ 'cv.skills.technology.attr.name'|trans }} :</h3>
+                            <p>{{ c.name }}</p>
+                        </td>
+                        <td class="text-right">
+                            <h3></h3>
+                            <div>
+                                <a href="{{ path('db_cv_making_edit', {'slug': c.slug}) }}"
+                                   class="app-btn app-btn-light-blue app-btn-text">
+                                    <i class="fas fa-pen-alt"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
