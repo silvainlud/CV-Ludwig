@@ -2,7 +2,7 @@
 
 
 {% block content %}
-    <h2 class="text-center">Mes réalisations</h2>
+    <h1 class="text-center">Mes réalisations</h1>
     <div class="container">
         <div class="row justify-content-center mt-5">
             {% for s in realisations %}
@@ -19,7 +19,7 @@
                             </p>
                         </div>
                         <div class="card-footer justify-content-end">
-                            <a href="{{ path('cv-making-view', {'slug': s.slug}) }}" class="app-btn app-btn-light-blue">
+                            <a href="{{ path('cv-making-view', {'slug': s.slug}) }}" class="app-btn app-btn-light-blue app-btn-small">
                                 Voir plus
                             </a>
                         </div>

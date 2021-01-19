@@ -35,6 +35,9 @@ services:
       - vendor:/var/www/vendor
       - /var/www/var/cache
     command: /bin/sh -c "npm install && yarn watch"
+#    ports:
+#      - 9003:8080
+#    command: /bin/sh -c "npm install && ./node_modules/.bin/encore dev-server --hot --port 8080 --host 0.0.0.0 --public localhost:9003"
 
   database:
     image: "mariadb" # use latest official postgres version

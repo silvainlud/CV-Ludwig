@@ -25,11 +25,14 @@ $yellow_color: #F9C043;
 $light_blue_color: #6A9AE8;
 $blue_color: #2980B9;
 $red_color: #FA5E5D;
+$dark_red_color: #ae3131;
 $light_black_color: #263547;
 $light_grey_color: #BFBFBF;
 $grey_color: #7F8C8D;
 
 $colors: (
+        'primary' : $light_blue_color,
+        'secondary' : $grey_color,
         'purple' : $purple_color,
         'green' : $green_color,
         'medium-green' : $medium_green_color,
@@ -37,7 +40,14 @@ $colors: (
         'light-blue' : $light_blue_color,
         'blue' : $blue_color,
         'red' : $red_color,
+        'danger' : $dark_red_color,
         'light-black' : $light_black_color,
         'light-grey' : $light_grey_color,
         'grey' : $grey_color,
-)
+);
+
+:root {
+  @each $class, $color in $colors {
+    --color-#{$class} : #{$color};
+  }
+}

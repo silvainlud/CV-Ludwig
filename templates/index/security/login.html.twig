@@ -7,13 +7,15 @@
         <div class="row">
             <div class="col-3"></div>
             <div class="col-6">
-                <div class="card">
+                <div class="card mb-10">
                     <div class="card-body px-6">
                         <h2 class="big-title justify-content-center">Connexion</h2>
 
                         <form method="post" class="form-zone mt-6">
                             {% if error %}
-                                <div class="form-alert form-alert-red c"><i class="fas fa-exclamation-circle"></i>&nbsp;{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                <div class="form-alert form-alert-red c"><i
+                                            class="fas fa-exclamation-circle"></i>&nbsp;{{ error.messageKey|trans(error.messageData, 'security') }}
+                                </div>
                             {% endif %}
                             <div class="form-row">
                                 <input placeholder="Nom d'utilisateur" type="email" value="{{ last_username }}"
@@ -40,7 +42,7 @@
                             <div class="d-flex w-100 mt-4 mb-7 align-items-center">
                                 <a href="">Mot de passe oublié ?</a>
                                 <div class="flex-grow-1"></div>
-                                <button class="app-btn app-color-plain app-btn-medium-green app-color-classic"
+                                <button class="app-btn app-btn-small app-btn-green"
                                         type="submit">
                                     Se connecter
                                     <i class="fas fa-sign-in-alt"></i>
