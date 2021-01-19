@@ -2,25 +2,7 @@
 
 {% block header %}
     <div class="header">
-        <svg viewBox="0 0 1440 652" preserveAspectRatio="xMinYMin slice" fill="none" xmlns="http://www.w3.org/2000/svg"
-             class="header_bg">
-            <g filter="url(#filter0_d)">
-                <path d="M1440 0H0V559.813C0 559.813 63.2803 647.418 161.938 643.897C260.595 640.375 444.457 500.822 649.744 504.344C855.031 507.865 1024.94 621.005 1167.45 612.2C1309.95 603.395 1440 559.813 1440 559.813V0Z"
-                      fill="#5FAADD"/>
-            </g>
-            <defs>
-                <filter id="filter0_d" x="-4" y="0" width="1448" height="652" filterUnits="userSpaceOnUse"
-                        color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-                    <feOffset dy="4"/>
-                    <feGaussianBlur stdDeviation="2"/>
-                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-                </filter>
-            </defs>
-        </svg>
+        {{ source('@public_path'~asset('img/index_header.svg')) }}
 
         <img src="{{ asset('img/header/icon_cloud.svg') }}" class="header_img_cloud" alt="nuage"
              style="left: 19%;top: 1%;">
@@ -35,8 +17,8 @@
         <div class="header_content header_index">
             <img src="{{ asset('img/profil.png') }}" alt="">
             <div class="header_title">
-                <h1>Ludwig SILVAIN</h1>
-                <p>Developpeur Informatique</p>
+                <p class="header_title_title">Ludwig SILVAIN</p>
+                <p class="header_title_content">Developpeur Informatique</p>
             </div>
         </div>
     </div>
@@ -45,15 +27,15 @@
 {% block body %}
     <div class="index-page">
         <div class="container who-am-i">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col-xl-8 col-lg-6 col-12">
                     <h2>Qui suis-je ?</h2>
-                    <p>
+                    <p class="hero-text">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim
                         imperdiet, et finibus tortor tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Mauris dignissim viverra mauris non laoreet.
                     </p>
-                    <p>
+                    <p class="hero-text">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim
                         imperdiet, et finibus tortor tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Mauris dignissim viverra mauris non laoreet dignissim viverra mauris non laoreet.
@@ -72,7 +54,8 @@
                     </div>
                     <div class="quality_content">
                         <h3>Musicien</h3>
-                        <p>Passionné par la musique depuis tout jeune, cela fait maintenant plus de 10 ans que je fais du
+                        <p>Passionné par la musique depuis tout jeune, cela fait maintenant plus de 10 ans que je fais
+                            du
                             violoncelle.</p>
                     </div>
                 </div>
@@ -134,13 +117,14 @@
                 <div class="index-card-circle_content">
                     <h2>L’informatique, une passion ...</h2>
                     <p>
-                        Baignié depuis mon tous jeune âge dans l'informatique, il me parais clair aujourd'hui que je
+                        Baignié depuis mon tout jeune âge dans l'informatique, il me parait clair aujourd'hui que je
                         veux
                         en faire plus q'une passion.
                         Ce que j'aime avec ce domaine c'est sa constante évolution : on a jamais finit d'être surpris.
                     </p>
                     <div class="justify-content-end mt-5 d-flex flex-row">
-                        <a href="{{ path('cv-making') }}" class="app-btn app-btn-purple">Mes réalisations</a>
+                        <a href="{{ path('cv-making') }}" class="app-btn app-btn-fluent app-btn-small app-btn-purple">Mes
+                            réalisations</a>
                     </div>
                 </div>
 
@@ -185,7 +169,8 @@
                         PS : J'en ai fait des choses depuis la matenelle ... <i class="fas fa-grin-squint-tears"></i>
                     </p>
                     <div class="justify-content-end mt-5 d-flex flex-row">
-                        <a href="{{ path('cv-my_career') }}" class="app-btn app-btn-light-blue">Mon Parcours</a>
+                        <a href="{{ path('cv-my_career') }}"
+                           class="app-btn app-btn-fluent app-btn-small app-btn-light-blue">Mon Parcours</a>
                     </div>
                 </div>
 

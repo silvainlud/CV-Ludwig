@@ -66,6 +66,21 @@ $card-media-horiz_padding_top: 20px;
     }
   }
 
+  &.card-centered {
+    .card-body {
+      @extend .align-items-center;
+
+      p {
+        text-align: center;
+        text-indent: 0;
+      }
+    }
+
+    .card-footer {
+      justify-content: center;
+    }
+  }
+
   .card-header {
   }
 
@@ -90,11 +105,11 @@ $card-media-horiz_padding_top: 20px;
 
 
     h2 {
-      color: black;
+      color: #2C3E50;
       font-family: Roboto, sans-serif;
       font-weight: bold;
       font-size: 22px;
-      margin: 15px 0 5px 0;
+      margin: 5px 0 5px 0;
       display: flex;
       align-items: center;
       text-align: center;
@@ -113,7 +128,7 @@ $card-media-horiz_padding_top: 20px;
     }
 
     p {
-      font-family: Open Sans;
+      font-family: Roboto, sans-serif;
       font-weight: normal;
       font-size: 16px;
       line-height: 23px;
@@ -129,6 +144,8 @@ $card-media-horiz_padding_top: 20px;
     flex-direction: row;
     align-items: center;
     border: 1px solid #EAE8E8;
+    justify-content: flex-end;
+    color: rgba(0, 0, 0, 0.5);
 
     & > .card-footer_spacer {
       flex: 1 0 auto;

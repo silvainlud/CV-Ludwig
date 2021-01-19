@@ -160,4 +160,22 @@ class CuriculumVitaeController extends AbstractController
             'linkTechno' => $linkTechno,
         ]);
     }
+
+    /**
+     * @Route("/ui")
+     */
+    public function ui(): Response
+    {
+        return $this->render('index/ui.html.twig');
+    }
+
+    /**
+     * @Route("/by")
+     *
+     * @return Response
+     */
+    public function by()
+    {
+        return new Response('Fait par Ludwig SILVAIN');
+    }
 }

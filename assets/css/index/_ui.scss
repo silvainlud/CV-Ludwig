@@ -1,0 +1,191 @@
+body {
+  font-size: 16px;
+  font-family: Roboto, sans-serif;
+}
+
+h1, .h1 {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 44px;
+  line-height: 1.5;
+
+  color: $menu_background;
+  margin: 12px 0;
+
+  @media screen and (max-width: 950px) {
+    font-size: 30px;
+    @media screen and (max-width: 700px) {
+      font-size: 25px;
+      text-align: center;
+      text-indent: 0;
+    }
+  }
+
+}
+
+h2, .h2 {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.5;
+
+  color: $menu_background;
+  margin: 12px 0;
+
+  @media screen and (max-width: 950px) {
+    font-size: 25px;
+    @media screen and (max-width: 700px) {
+      text-align: center;
+      text-indent: 0;
+    }
+  }
+
+}
+
+h3, .h3 {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 25px;
+  line-height: 1.5;
+  margin: 12px 0;
+
+  color: #2C3E50;
+  @media screen and (max-width: 950px) {
+    font-size: 22px;
+    @media screen and (max-width: 700px) {
+      text-align: center;
+      text-indent: 0;
+    }
+  }
+}
+
+h4, .h4 {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 1.5;
+  margin: 12px 0;
+
+  color: #2C3E50;
+  @media screen and (max-width: 950px) {
+    font-size: 18px;
+    @media screen and (max-width: 700px) {
+      text-align: center;
+      text-indent: 0;
+    }
+  }
+}
+
+p {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.4;
+
+  margin: 6px 0;
+  padding: 0;
+
+  color: $default_text_color;
+
+  @media screen and (max-width: 950px) {
+    font-size: 20px;
+    line-height: 25px;
+    @media screen and (max-width: 700px) {
+      font-size: 16px;
+      line-height: 20px;
+    }
+  }
+
+}
+
+.hero-title {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 1.5;
+
+  color: $menu_background;
+  margin: 20px 0;
+
+  @media screen and (max-width: 950px) {
+    font-size: 35px;
+    @media screen and (max-width: 700px) {
+      font-size: 30px;
+      text-align: center;
+      text-indent: 0;
+    }
+  }
+}
+
+.hero-text {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 1.5;
+
+
+  margin: 0;
+  padding: 0;
+
+}
+
+hr {
+  height: 2px;
+  margin: 30px 0;
+  background: #DEE2E3;
+  width: 100%;
+  border: none;
+}
+
+
+.text-danger {
+
+}
+
+.text-muted, p.text-muted {
+  font-size: 16px;
+  line-height: 1.1;
+  color: lighten($default_text_color, 15%);
+}
+
+.section-title {
+  @extend h1;
+  font-size: 22px;
+  margin: 10px 0;
+}
+
+pre {
+  padding: 0;
+  border: 1px solid #00000026;
+  box-shadow: 0 1px 0 0 #00000026;
+  border-radius: 3px;
+  overflow-x: hidden;
+  margin: 20px 0;
+  background: #2b303b;
+  color: #eff1f5;
+
+  & > code.hljs {
+    padding: 13px 0 13px 15px;
+    margin-right: 36px;
+    display: block;
+    color: inherit;
+    background: 0 0;
+    overflow: hidden;
+    white-space: break-spaces;
+  }
+}
+
+code {
+  word-break: normal;
+  padding: 2px 4px;
+  color: rgba(0, 0, 0, 0.6);
+  background-color: #cccccc;
+  border-radius: 4px;
+}

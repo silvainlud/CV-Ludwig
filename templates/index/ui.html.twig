@@ -1,0 +1,316 @@
+{% extends 'index/base.html.twig' %}
+
+{% set colors = [
+    'primary',
+    'secondary',
+    'purple',
+    'green',
+    'medium-green',
+    'yellow',
+    'light-blue',
+    'blue',
+    'red',
+    'danger',
+    'light-black',
+    'light-grey',
+    'grey',
+] %}
+
+{% block content %}
+    <div class="container stack-separated py5" style="--gap:6">
+        <div class="row">
+            <div class="col-6">
+                <div class="h1 mb2">Titre de premier niveau</div>
+                <div class="h2 mb1">Titre de second niveau</div>
+                <div class="h3 mb1">Titre de troisième niveau</div>
+                <div class="h4 mb1">Titre de quatrième niveau</div>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam consequatur dolor est ex,
+                    excepturi
+                    explicabo iusto libero minus nostrum obcaecati omnis perferendis provident reprehenderit sapiente,
+                    soluta unde
+                    veniam voluptates?
+                </p>
+            </div>
+            <div class="col-6">
+                <div class="hero-title">Titre .hero-title</div>
+                <p class="hero-text">.hero-text ipsum dolor sit amet, consectetur adipisicing elit. Adipisci atque
+                    dolorem eligendi esse et porro repellendus? Autem consectetur deserunt dolor laborum, tenetur unde!
+                    Facilis hic ipsa, iste itaque quam quidem.</p>
+
+                <div class="section-title mt4">Titre de section .section-title</div>
+                <div>
+                    <span class="text-danger">Texte d'alerte .text-danger</span>
+                    <span class="text-muted">Texte d'alerte .text-muted</span>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div>
+            <div class="h1 mb2">Couleurs</div>
+            <div class="d-flex flex-row flex-wrap">
+                {% for color in colors %}
+                    <div class="m-2">
+                        <span style="font-size: 0.8em;">{{ color }}</span>
+                        <div style="width: 70px;height: 70px;background:var(--color-{{ color }});"></div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div>
+            <h1 class="h1 mb2">Boutons</h1>
+            <div>
+                {% for color in colors %}
+                    <a href="#" class="m-2 app-btn app-btn-{{ color }}">.app-btn app-btn-{{ color }}</a>
+                {% endfor %}
+            </div>
+            <div>
+                <h2>.app-btn-fluent</h2>
+                {% for color in colors %}
+                    <a href="#" class="m-2 app-btn app-btn-fluent app-btn-{{ color }}">.app-btn.app-btn-fluent.app-btn-{{ color }}</a>
+                {% endfor %}
+            </div>
+            <div>
+                <h2>.app-btn-outline</h2>
+                {% for color in colors %}
+                    <a href="#" class="m-2 app-btn app-btn-outline app-btn-{{ color }}">.app-btn.app-btn-outline.app-btn-{{ color }}</a>
+                {% endfor %}
+            </div>
+            <div class="mt-4">
+                <a href="#" class="m-2 app-btn app-btn-danger" disabled>Bouton [disabled]</a>
+                <a href="#" class="m-2 app-btn app-btn-danger" disabled>
+                    <i class="fas fa-envelope-open-text"></i>
+                    Bouton avec icône
+                </a>
+            </div>
+            <div>
+                <a class="m-2 app-btn app-btn-big app-btn-primary" href="#">Bouton .app-btn app-btn-big</a>
+                <a class="m-2 app-btn  app-btn-primary" href="#">Bouton .app-btn</a>
+                <a class="m-2 app-btn app-btn-small app-btn-primary" href="#">Bouton .app-btn app-btn-small</a>
+            </div>
+            <div>
+
+            </div>
+        </div>
+
+        <div>
+            <h1 class="h1 mb2">Icones des compétences</h1>
+            <div class="d-flex flex-row flex-wrap">
+                <div class="m-4">
+                    <small class="text-muted">.icon_skills</small>
+                    <a class="icon_skills" style="background-color: rgba(0, 0, 0, 0.3)">
+                        <img src="{{ asset('img/illustrations/technologies/symfony.png') }}" alt="">
+                    </a>
+                </div>
+                <div class="m-4">
+                    <small class="text-muted">.icon_skills.icon_skills_128</small>
+                    <a class="icon_skills icon_skills_128" style="background-color: rgba(0, 0, 0, 0.3)">
+                        <img src="{{ asset('img/illustrations/technologies/symfony.png') }}" alt="">
+                    </a>
+                </div>
+                <div class="m-4">
+                    <small class="text-muted">.icon_skills.icon_skills_64</small>
+                    <a class="icon_skills icon_skills_64" style="background-color: rgba(0, 0, 0, 0.3)">
+                        <img src="{{ asset('img/illustrations/technologies/symfony.png') }}" alt="">
+                    </a>
+                </div>
+                <div class="m-4">
+                    <small class="text-muted">.icon_skills.icon_skills_48</small>
+                    <a class="icon_skills icon_skills_48" style="background-color: rgba(0, 0, 0, 0.3)">
+                        <img src="{{ asset('img/illustrations/technologies/symfony.png') }}" alt="">
+                    </a>
+                </div>
+                <div class="m-4">
+                    <small class="text-muted">.icon_skills.icon_skills_40</small>
+                    <a class="icon_skills icon_skills_40" style="background-color: rgba(0, 0, 0, 0.3)">
+                        <img src="{{ asset('img/illustrations/technologies/symfony.png') }}" alt="">
+                    </a>
+                </div>
+                <div class="m-4">
+                    <small class="text-muted">.icon_skills.icon_skills_32</small>
+                    <a class="icon_skills icon_skills_32" style="background-color: rgba(0, 0, 0, 0.3)">
+                        <img src="{{ asset('img/illustrations/technologies/symfony.png') }}" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="d-flex flex-row flex-wrap">
+                <div class="m-4">
+                    <small class="text-muted">.icon_skills</small>
+                    <a class="icon_skills icon_skills_128" style="background-color: rgba(0, 0, 0, 0.3)">
+                        <img src="{{ asset('img/illustrations/technologies/symfony.png') }}" alt="">
+                    </a>
+                </div>
+                <div class="m-4">
+                    <small class="text-muted">.icon_skills</small>
+                    <a class="icon_skills icon_skills_128" style="background-color: rgba(57, 0, 145, 0.3)">
+                        <img src="{{ asset('img/illustrations/technologies/c-sharp.png') }}" alt="">
+                    </a>
+                </div>
+                <div class="m-4">
+                    <small class="text-muted">.icon_skills</small>
+                    <a class="icon_skills icon_skills_128" style="background-color: rgba(79, 190, 159, 0.3)">
+                        <img src="{{ asset('img/illustrations/technologies/android.png') }}" alt="">
+                    </a>
+                </div>
+                <div class="m-4">
+                    <small class="text-muted">.icon_skills</small>
+                    <a class="icon_skills icon_skills_128" style="background-color: rgba(0, 128, 197, 0.3)">
+                        <img src="{{ asset('img/illustrations/technologies/dotnet.png') }}" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="d-flex flex-row flex-wrap">
+                <div class="m-4">
+                    <small class="text-muted">.techno-text-list</small>
+                    <div class="techno-text-list">
+                        <a class="techno-text-list_item" href="#">
+                            <div class="icon_skills icon_skills_40" style="background-color: rgba(0, 0, 0, 0.3)">
+                                <img src="{{ asset('img/illustrations/technologies/symfony.png') }}" alt="">
+                            </div>
+                            <span>Symfony</span>
+                        </a>
+                        <div class="techno-text-list_item">
+                            <div class="icon_skills icon_skills_40" style="background-color: rgba(57, 0, 145, 0.3)">
+                                <img src="{{ asset('img/illustrations/technologies/c-sharp.png') }}" alt="">
+                            </div>
+                            <span>Symfony</span>
+                        </div>
+                        <div class="techno-text-list_item">
+                            <div class="icon_skills icon_skills_40" style="background-color: rgba(79, 190, 159, 0.3)">
+                                <img src="{{ asset('img/illustrations/technologies/android.png') }}" alt="">
+                            </div>
+                            <span>Symfony</span>
+                        </div>
+                        <div class="techno-text-list_item">
+                            <div class="icon_skills icon_skills_40" style="background-color: rgba(0, 128, 197, 0.3)">
+                                <img src="{{ asset('img/illustrations/technologies/dotnet.png') }}" alt="">
+                            </div>
+                            <span>Symfony</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h1 class="h1 mb2">Badge</h1>
+            <div class="d-flex flex-row flex-wrap">
+                {% for color in colors %}
+                    <div class="m-2 app-badge app-badge-{{ color }}"><span>.app-badge app-badge-{{ color }}</span></div>
+                {% endfor %}
+            </div>
+            <h2 class="mt-4">.app-badge-small</h2>
+            <div class="d-flex flex-row flex-wrap">
+                {% for color in colors %}
+                    <div class="m-2 app-badge app-badge-small app-badge-{{ color }}"><span>.app-badge.app-badge.small.app-badge-{{ color }}</span></div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div>
+            <h1 class="h1 mb2">Carte</h1>
+            <div class="d-flex flex-row flex-wrap">
+                <div class="m-4">
+                    <small class="text-muted">.card</small>
+                    <div class="card" style="width: 400px">
+                        <div class="card-body">
+                            <h2>Titre de la carte</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis consectetur cum
+                                debitis facilis fugiat illo impedit maiores sequi soluta sunt tempora vel, veritatis.
+                                Aperiam nesciunt quaerat quam quas quasi.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-4">
+                    <small class="text-muted">.card (& > card-footer )</small>
+                    <div class="card" style="width: 400px">
+                        <div class="card-body">
+                            <h2>Titre de la carte</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis consectetur cum
+                                debitis facilis fugiat illo impedit maiores sequi soluta sunt tempora vel, veritatis.
+                                Aperiam nesciunt quaerat quam quas quasi.</p>
+                        </div>
+                        <div class="card-footer">
+                            Footer
+                        </div>
+                    </div>
+                </div>
+                <div class="m-4">
+                    <small class="text-muted">.card.card-centered (& > .card-footer )</small>
+                    <div class="card card-centered" style="width: 300px">
+                        <div class="card-body">
+                            <h2>Titre de la carte</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis consectetur cum
+                                debitis facilis fugiat illo impedit maiores sequi soluta sunt tempora vel, veritatis.
+                                Aperiam nesciunt quaerat quam quas quasi.</p>
+                        </div>
+                        <div class="card-footer">
+                            Footer
+                        </div>
+                    </div>
+                </div>
+                <div class="m-4">
+                    <small class="text-muted">.card.card-centered.card-media-circle (& > .card-footer )</small>
+                    <div class="card card-centered card-media" style="width: 325px">
+                        <img src="{{ asset('img/illustrations/earth-1149733.jpg') }}" alt=""
+                             class="card-media-circle">
+                        <div class="card-body">
+                            <h2>Titre de la carte</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis consectetur cum
+                                debitis facilis fugiat illo impedit maiores sequi soluta sunt tempora vel, veritatis.
+                                Aperiam nesciunt quaerat quam quas quasi.</p>
+                        </div>
+                        <div class="card-footer">
+                            Footer
+                        </div>
+                    </div>
+                </div>
+                <div class="m-4">
+                    <small class="text-muted">.card.card-media-circle (& > .card-footer )</small>
+                    <div class="card card-media" style="width: 325px">
+                        <img src="{{ asset('img/illustrations/earth-1149733.jpg') }}" alt="">
+                        <div class="card-body">
+                            <h2>Titre de la carte</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis consectetur cum
+                                debitis facilis fugiat illo impedit maiores sequi soluta sunt tempora vel, veritatis.
+                                Aperiam nesciunt quaerat quam quas quasi.</p>
+                        </div>
+                        <div class="card-footer">
+                            Footer
+                        </div>
+                    </div>
+                </div>
+                <div class="m-4">
+                    <small class="text-muted">.card.card-media-circle_horiz ( & > .card-body.card-media-circle_horiz
+                        )</small>
+                    <div class="card card-media-circle_horiz" style="width: 400px">
+                        <div class="card-body">
+                            <div class="card-media-circle_horiz">
+                                <img src="{{ asset('img/silvain.eu/smtp.png') }}" alt="">
+                                <h2>Titre de la carte</h2>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis consectetur cum
+                                debitis facilis fugiat illo impedit maiores sequi soluta sunt tempora vel, veritatis.
+                                Aperiam nesciunt quaerat quam quas quasi.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-4">
+                    <small class="text-muted">.card.card-media-circle.card-centered ( & > .card-body > img::first-child
+                        )</small>
+                    <div class="card card-media-circle card-centered" style="width: 350px">
+                        <div class="card-body">
+                            <img src="{{ asset('img/silvain.eu/gitlab.jpg') }}" alt="">
+                            <h2>Titre de la carte</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad blanditiis consectetur cum
+                                debitis facilis fugiat illo impedit maiores sequi soluta sunt tempora vel, veritatis.
+                                Aperiam nesciunt quaerat quam quas quasi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
