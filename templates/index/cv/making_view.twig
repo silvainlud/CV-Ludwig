@@ -4,9 +4,9 @@
     <link rel="stylesheet" href="{{ asset('library/highlight/themes/atom-dark-theme.css') }}">
 {% endblock %}
 {% block content %}
-    <div class="container-fluid px-15 cv_article mb-10">
+    <div class="container-fluid cv_article mb-10">
         <div class="row justify-content-center mt-5">
-            <div class="col-8 cv_article_content">
+            <div class="col-xxl-8 col-12 cv_article_content">
                 <h1>{{ realisation.name }}</h1>
                 {% if realisation.mainImage !=null %}
                     <img src="{{ path('cv-making-img', {"rea" : realisation.mainImage.id }) }}"
@@ -29,78 +29,86 @@
                 {% endif %}
             </div>
 
-            <div class="col-4 pl-5">
-                {% if realisation.company != null or realisation.company != null or realisation.dateRelease != null or realisation.timeToMake != null or realisation.link != null %}
-                    <h2>Informations</h2>
-                    <div class="art-info-table">
+            <div class="col-xxl-4 col-12 pl-5">
+                <div class="row ">
+                    {% if realisation.company != null or realisation.company != null or realisation.dateRelease != null or realisation.timeToMake != null or realisation.link != null %}
+                        <div class="col-xxl-12 col-xl-5 col-12">
+                            <h2>Informations</h2>
+                            <div class="art-info-table">
 
-                        {% if realisation.company != null %}
-                            <div class="art-info-table_icon">
-                                <i class="fas fa-building"></i>
-                            </div>
-                            <div>
-                                <h4>Entreprise</h4>
-                                <p>{{ realisation.company }}</p>
-                            </div>
-                        {% endif %}
+                                {% if realisation.company != null %}
+                                    <div class="art-info-table_icon">
+                                        <i class="fas fa-building"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Entreprise</h4>
+                                        <p>{{ realisation.company }}</p>
+                                    </div>
+                                {% endif %}
 
-                        {% if realisation.company != null %}
-                            <div class="art-info-table_icon">
-                                <i class="fas fa-briefcase"></i>
-                            </div>
-                            <div>
-                                <h4>Employeur</h4>
-                                <p>{{ realisation.company }}</p>
-                            </div>
-                        {% endif %}
+                                {% if realisation.company != null %}
+                                    <div class="art-info-table_icon">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Employeur</h4>
+                                        <p>{{ realisation.company }}</p>
+                                    </div>
+                                {% endif %}
 
-                        {% if realisation.dateRelease != null %}
-                            <div class="art-info-table_icon">
-                                <i class="fas fa-calendar-alt"></i>
-                            </div>
-                            <div>
-                                <h4>Date de mise en production</h4>
-                                <p>{{ realisation.dateRelease|date('M Y') }}</p>
-                            </div>
-                        {% endif %}
+                                {% if realisation.dateRelease != null %}
+                                    <div class="art-info-table_icon">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Date de mise en production</h4>
+                                        <p>{{ realisation.dateRelease|date('M Y') }}</p>
+                                    </div>
+                                {% endif %}
 
-                        {% if realisation.timeToMake != null %}
-                            <div class="art-info-table_icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div>
-                                <h4>Temps</h4>
-                                <p>{{ realisation.timeToMake }}</p>
-                            </div>
-                        {% endif %}
+                                {% if realisation.timeToMake != null %}
+                                    <div class="art-info-table_icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Temps</h4>
+                                        <p>{{ realisation.timeToMake }}</p>
+                                    </div>
+                                {% endif %}
 
-                        {% if realisation.link != null %}
-                            <div class="art-info-table_icon">
-                                <i class="fas fa-link"></i>
+                                {% if realisation.link != null %}
+                                    <div class="art-info-table_icon">
+                                        <i class="fas fa-link"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Lien</h4>
+                                        <p><a href="{{ realisation.link }}">{{ realisation.link }}</a></p>
+                                    </div>
+                                {% endif %}
+
                             </div>
-                            <div>
-                                <h4>Lien</h4>
-                                <p><a href="{{ realisation.link }}">{{ realisation.link }}</a></p>
-                            </div>
+                            {% if realisation.technologies|length >0 %}
+                                <hr class="d-xxl-block d-xl-none">
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    <div class="col-1 d-xxl-none d-xl-block d-lg-none">
+                        <hr class="hr-horizontal">
+                    </div>
+                    <div class="col-xxl-12 col-xl-6 col-12">
+                        {% if realisation.technologies|length >0 %}
+                            <h3>Technologie Utilisée</h3>
+                            {% include 'index/cv/utils/_list_techno.html.twig' with {"techno" : realisation.technologies} only %}
+
+                            {% if linkTechno|length %}
+                                <h3 class="mt-5">Technologie Indirecte</h3>
+                                {% include 'index/cv/utils/_list_techno.html.twig' with {"techno" : linkTechno} only %}
+                            {% endif %}
+
                         {% endif %}
 
                     </div>
-                    {% if realisation.technologies|length >0 %}
-                        <hr>
-                    {% endif %}
-                {% endif %}
-
-                {% if realisation.technologies|length >0 %}
-                    <h3>Technologie Utilisée</h3>
-                    {% include 'index/cv/utils/_list_techno.html.twig' with {"techno" : realisation.technologies} only %}
-
-                    {% if linkTechno|length %}
-                        <h3 class="mt-5">Technologie Indirecte</h3>
-                        {% include 'index/cv/utils/_list_techno.html.twig' with {"techno" : linkTechno} only %}
-                    {% endif %}
-
-                {% endif %}
-
+                </div>
             </div>
         </div>
     </div>

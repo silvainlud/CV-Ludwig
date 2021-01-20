@@ -13,7 +13,7 @@ header {
     padding: 0 15px 0 12px;
   }
 
-  & > .header_separate {
+  .header_separate {
     height: 100%;
     width: 2px;
     background: $menu_seperate_color;
@@ -29,25 +29,26 @@ header {
     box-sizing: border-box;
     align-items: center;
 
-    & > a {
+    p, a {
       padding: 4px 10px;
       margin: 0 4px;
       text-decoration: unset;
       color: $menu_color;
       font-size: 20px;
       font-family: Roboto, sans-serif;
-
-      &:hover {
-        transition: color 0.3s;
-        color: lighten($menu_color, 20%);
-      }
     }
+
+    a:hover {
+      transition: color 0.3s;
+      color: lighten($menu_color, 20%);
+    }
+
 
     & > .header_space {
       flex: 1 0 auto;
     }
 
-    & > .app-nav-btn {
+    .app-nav-btn {
       border-radius: 5px;
       border: 1px solid $menu_color;
       padding: 7px 15px;
@@ -58,194 +59,310 @@ header {
         background: transparentize(white, 0.9);
       }
     }
+
+    .app-nav-btn-text {
+      padding: 4px 10px;
+      margin: 0 4px;
+      text-decoration: unset;
+      color: $menu_color;
+      font-size: 20px;
+      background: none;
+      border: none;
+      font-family: Roboto, sans-serif;
+
+      &:hover {
+        transition: color 0.3s;
+        color: lighten($menu_color, 20%);
+      }
+    }
   }
 }
 
 main > div.header {
   width: 100%;
-  position: relative;
 
-  & > img, & > svg {
-    &.header_bg {
-      width: 100%;
-      top: 0;
-      right: 0;
-      min-height: 300px;
-      object-fit: cover;
-      filter: drop-shadow( 0px 4px 4px rgba(0, 0, 0, 0.25));
-    }
-
-    &:not(.header_bg) {
-      position: absolute;
-      top: 0;
-      left: 0;
-
-
-      animation-iteration-count: infinite;
-
-      &.header_img_cloud {
-        animation-name: cloud_anim;
-        animation-duration: 7s;
-        animation-direction: alternate;
-        width: 14vw;
-        min-width: 100px;
-      }
-
-      &.header_img_earth {
-        animation-name: earth_anim;
-        animation-duration: 15s;
-        width: 14vw;
-        min-width: 100px;
-      }
-
-      &.header_img_rocket {
-        animation-name: rocket_anim;
-        animation-duration: 15s;
-        width: 12vw;
-        min-width: 100px;
-      }
-    }
+  .header_bg {
+    width: 100%;
+    top: 0;
+    right: 0;
+    object-fit: cover;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    margin-top: -3px;
   }
 
-  .header_content {
-    position: absolute;
-    top: 35%;
-    left: 50%; /* à 50%/50% du parent référent */
-    transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  & > .header-main {
+    width: 100%;
+    position: relative;
+    height: 250px;
+    background: var(--color-header-bg);
+    z-index: 1;
 
-    &.header_index {
+    &.header-index {
+      height: 60vh;
+      min-height: 350px;
+    }
+
+
+    & > img, & > svg, & > *:not(.header_content) > img, & > *:not(.header_content) > svg {
+
+
+      &:not(.header_bg) {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+
+        animation-iteration-count: infinite;
+
+        &.header_img_cloud {
+          animation-name: cloud_anim;
+          animation-duration: 7s;
+          animation-direction: alternate;
+          width: 14vw;
+          min-width: 100px;
+        }
+
+        &.header_img_earth {
+          animation-name: earth_anim;
+          animation-duration: 15s;
+          width: 14vw;
+          min-width: 100px;
+        }
+
+        &.header_img_rocket {
+          animation-name: rocket_anim;
+          animation-duration: 15s;
+          width: 12vw;
+          min-width: 100px;
+        }
+      }
+    }
+
+    & > .anim-earth:not(.header_content) {
+
+      top: 74%;
+      left: 68%;
+      position: absolute;
+
+      & > img:not(.header_bg) {
+        &.header_img_earth {
+          z-index: 1;
+          transform: scale(0.85);
+          animation-duration: unset;
+          animation-direction: unset;
+          animation: earth_anim 5s ease-in infinite, anim_earth 5s linear;
+          transition: none;
+        }
+
+        &.header_img_rocket {
+          position: absolute;
+          top: -13vh;
+          left: 10vw;
+
+          animation-duration: unset;
+          animation-direction: unset;
+          animation: rocket_anim 5s ease-in infinite, anim_rocket 5s ease-in-out;
+          transition: none;
+
+          transform: scale(0.9);
+        }
+      }
+
+
+      @keyframes anim_rocket {
+        0% {
+          transform: scale(0.0);
+          top: 0;
+          left: 0;
+        }
+        100% {
+          transform: scale(1);
+
+        }
+      }
+
+      @keyframes anim_earth {
+        0%, 45% {
+          transform: scale(1);
+        }
+        75%, 100% {
+          transform: scale(0.85);
+        }
+      }
+
+      @keyframes anim_rocket_ {
+        0% {
+          transform: scale(0.0) rotate(-114deg);
+          left: -1.9vw;
+          top: 5vh;
+        }
+        4% {
+          transform: scale(0.12) rotate(-91.2deg);
+          left: -4vw;
+          top: 5vh;
+        }
+        7% {
+          left: -4.5vw;
+        }
+        16% {
+          transform: scale(0.48) rotate(-22.8deg);
+          left: -5vw;
+          top: -10vh;
+        }
+        20%, 100% {
+          transform: scale(0.6) rotate(0deg);
+
+
+          /*top: -10vh;*/
+        }
+        25% {
+          transform: scale(0.75) rotate(25deg);
+          left: 0vw;
+          top: -12vh;
+        }
+        /*27% {*/
+        /*    left: 5vw;*/
+        /*    top: -11vh;*/
+        /*}*/
+        /*35%, 100% {*/
+        /*    transform: scale(0.9) rotate(45deg);*/
+        /*}*/
+      }
+    }
+
+    &.header-index .header_content {
       & > img {
         width: 222px;
         height: 222px;
         @media screen and (max-width: 1300px) {
-          width: 164px;
-          height: 164px;
-          @media screen and (max-width: 1000px) {
-            width: 125px;
-            height: 125px;
-          }
+          width: 200px;
+          height: 200px;
         }
       }
     }
 
-    & > img {
-      box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.25);
-      border-radius: 512px;
-      width: 164px;
-      height: 164px;
-      @media screen and (max-width: 1300px) {
-        width: 125px;
-        height: 125px;
-        @media screen and (max-width: 1000px) {
-          width: 100px;
-          height: 100px;
-        }
-      }
-    }
-
-    & > .header_title {
-      padding: 34px;
+    .header_content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-55%, -50%);
       display: flex;
-      flex-direction: column;
-
-      @media screen and (max-width: 1300px) {
-        padding: 28px;
-        @media screen and (max-width: 1000px) {
-          padding: 20px;
-        }
-        @media screen and (max-width: 700px) {
-          padding: 10px;
-        }
+      flex-direction: row;
+      align-items: center;
+      @media screen and (max-width: 600px) {
+        flex-direction: column;
+        transform: translate(-50%, -50%);
       }
 
-      & > .header_title_title {
 
-        padding: 5px 0;
-        margin: 0;
-        font-family: Roboto, sans-serif;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 36px;
-        line-height: 42px;
-        white-space: nowrap;
-
-        color: $header_color;
-
-        text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+      & > img {
+        box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.25);
+        border-radius: 512px;
+        width: 164px;
+        height: 164px;
         @media screen and (max-width: 1300px) {
-          font-size: 30px;
-          line-height: 35px;
+          width: 125px;
+          height: 125px;
           @media screen and (max-width: 1000px) {
-            font-size: 25px;
-            line-height: 30px;
+            width: 100px;
+            height: 100px;
           }
         }
       }
 
-      & > .header_title_content {
-        padding: 5px 0;
-        margin: 0;
-        font-family: Roboto, sans-serif;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 24px;
-        line-height: 28px;
-        white-space: nowrap;
+      & > .header_title {
+        padding: 34px;
+        display: flex;
+        flex-direction: column;
 
-        color: $header_color;
         @media screen and (max-width: 1300px) {
-          font-size: 20px;
-          line-height: 24px;
+          padding: 28px;
           @media screen and (max-width: 1000px) {
-            font-size: 16px;
-            line-height: 20px;
+            padding: 20px;
+          }
+          @media screen and (max-width: 700px) {
+            padding: 10px;
+          }
+        }
+
+        & > .header_title_title {
+
+          padding: 5px 0;
+          margin: 0;
+          font-family: Roboto, sans-serif;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 36px;
+          line-height: 42px;
+          white-space: nowrap;
+
+          color: $header_color;
+
+          text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+          @media screen and (max-width: 1300px) {
+            font-size: 30px;
+            line-height: 35px;
+          }
+        }
+
+        & > .header_title_content {
+          padding: 5px 0;
+          margin: 0;
+          font-family: Roboto, sans-serif;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 24px;
+          line-height: 28px;
+          white-space: nowrap;
+
+          color: $header_color;
+          @media screen and (max-width: 1300px) {
+            font-size: 20px;
+            line-height: 24px;
           }
         }
       }
     }
-  }
 
 
-  @keyframes cloud_anim {
-    0% {
-      transform: translate(0, 0)
-    }
-    50% {
-      transform: translate(10px, 7px)
-    }
-    100% {
-      transform: translate(0, 0)
-    }
-  }
-
-  @keyframes rocket_anim {
-    0% {
-      transform: translate(0, 0)
+    @keyframes cloud_anim {
+      0% {
+        transform: translate(0, 0)
+      }
+      50% {
+        transform: translate(10px, 7px)
+      }
+      100% {
+        transform: translate(0, 0)
+      }
     }
 
-    33% {
-      transform: translate(-7px, -7px)
-    }
-    66% {
-      transform: translate(7px, 7px)
-    }
-    100% {
-      transform: translate(0, 0)
-    }
-  }
+    @keyframes rocket_anim {
+      0% {
+        transform: translate(0, 0)
+      }
 
-  @keyframes earth_anim {
-    0% {
-      transform: translate(0, 0)
+      33% {
+        transform: translate(-7px, -7px)
+      }
+      66% {
+        transform: translate(7px, 7px)
+      }
+      100% {
+        transform: translate(0, 0)
+      }
     }
-    50% {
-      transform: translate(-14px, -10px)
-    }
-    100% {
-      transform: translate(0, 0)
+
+    @keyframes earth_anim {
+      0% {
+        transform: translate(0, 0) scale(0.85)
+      }
+      50% {
+        transform: translate(-14px, -10px) scale(0.85)
+      }
+      100% {
+        transform: translate(0, 0) scale(0.85)
+      }
     }
   }
 }
