@@ -1,27 +1,49 @@
 <header>
     <img src="{{ asset('favicon_256.png') }}" alt="Logo de silvain.eu">
-    <div class="header_separate"></div>
+    <div class="header_separate  d-sm-block d-none"></div>
     <nav>
-        <a href="{{ path('index') }}">Accueil</a>
-        <a href="{{ path('cv-my_career') }}">Parcours</a>
-        <a href="{{ path('cv-my_skills') }}">Compétences</a>
-        <a href="{{ path('cv-making') }}">Réalisations</a>
+        <div class="d-md-flex d-none">
+            <a href="{{ path('index') }}">Accueil</a>
+            <a href="{{ path('cv-my_career') }}">Parcours</a>
+            <a href="{{ path('cv-my_skills') }}">Compétences</a>
+            <a href="{{ path('cv-making') }}">Réalisations</a>
+        </div>
+        <div>
+            <p class="d-md-none d-sm-block d-none">
+                {{ "site_name"|trans }}
+            </p>
+        </div>
         <div class="header_space"></div>
 
+        <a href="" class="app-nav-btn-text" title="Passer sur le thème sombre">
+            <i class="far fa-moon"></i>
+            {# <i class="far fa-sun"></i> #}
+        </a>
+        <a href="" class="app-nav-btn-text" title="Me Contacter">
+            <i class="far fa-envelope-open"></i>
+        </a>
+
+
         {% if app.user %}
-            <a href="{{ path('db_index') }}" class="app-nav-btn">
+            <a href="{{ path('db_index') }}" class="app-nav-btn-text" title="{{ 'general.menu.administration'|trans }}">
                 <i class="fas fa-shield-alt"></i>
-                {{ 'general.menu.administration'|trans }}
+            </a>
+            <div class="header_separate d-md-flex d-none"></div>
+            <a href="{{ path('app_logout') }}" class="app-nav-btn-text" title="{{ 'general.menu.sign-out'|trans }}">
+                <i class="fas fa-sign-out-alt"></i>
             </a>
         {% else %}
-            <a href="" class="app-nav-btn">
-                <i class="far fa-envelope-open"></i>
-                Me Contacter
-            </a>
-            <a href="{{ path('app_login') }}" class="app-nav-btn">
-                {{ 'general.menu.sign-in'|trans }}
+            <div class="header_separate d-md-flex d-none"></div>
+            <a href="{{ path('app_login') }}" class="app-nav-btn-text" title="{{ 'general.menu.sign-in'|trans }}">
                 <i class="fas fa-sign-in-alt"></i>
             </a>
         {% endif %}
+
+        <div class="d-md-none d-flex align-items-center">
+            <div class="header_separate"></div>
+            <button class="app-nav-btn-text  d-md-none" title="{{ 'general.menu.sign-in'|trans }}">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
     </nav>
 </header>

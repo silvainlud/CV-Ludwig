@@ -1,4 +1,5 @@
 site_name: "Ludwig SILVAIN "
+site_initial: "LS"
 cv:
   skills:
     skill:
@@ -67,6 +68,7 @@ general:
   menu:
     administration: Administration
     sign-in: Se connecter
+    sign-out: Se déconnecter
   title:
     legal-notice: Mentions légales
     list-services: Liste des services

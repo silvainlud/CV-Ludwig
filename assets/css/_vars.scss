@@ -4,6 +4,7 @@ $menu_seperate_color: #8494A4;
 $menu_height: 60px;
 
 $header_color: #ECF0F1;
+$header_backgroud_color: #5FAADD;
 
 
 $footer_h2_color: #ECF0F1;
@@ -50,4 +51,5 @@ $colors: (
   @each $class, $color in $colors {
     --color-#{$class} : #{$color};
   }
+  --color-header-bg : #{$header_backgroud_color}
 }

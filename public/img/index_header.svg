@@ -1,4 +1,3 @@
-<svg preserveAspectRatio="xMinYMin slice" class="header_bg" viewBox="0 0 1440 562" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M1440 0H0V410.5C0 410.5 96.3426 517.008 195 514C293.657 510.992 525.213 426.992 730.5 430C935.787 433.008 1057.99 569.019 1200.5 561.5C1343.01 553.981 1440 497.5 1440 497.5V0Z" fill="#5FAADD"/>
+<svg preserveAspectRatio="xMinYMin slice" class="header_bg" viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 74.0519C0 74.0519 67.3426 102.223 166 98.6941C264.657 95.1654 438.425 30.9712 643.712 34.5C848.999 38.0288 1013.78 107.516 1156.29 98.6941C1298.79 89.8722 1440 18.4736 1440 18.4736V0H0V74.0519Z" fill="#5FAADD"/>
 </svg>
-

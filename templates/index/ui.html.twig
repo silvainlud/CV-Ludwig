@@ -19,7 +19,7 @@
 {% block content %}
     <div class="container stack-separated py5" style="--gap:6">
         <div class="row">
-            <div class="col-6">
+            <div class="col-xl-6 col-12">
                 <div class="h1 mb2">Titre de premier niveau</div>
                 <div class="h2 mb1">Titre de second niveau</div>
                 <div class="h3 mb1">Titre de troisième niveau</div>
@@ -69,7 +69,8 @@
             <div>
                 <h2>.app-btn-fluent</h2>
                 {% for color in colors %}
-                    <a href="#" class="m-2 app-btn app-btn-fluent app-btn-{{ color }}">.app-btn.app-btn-fluent.app-btn-{{ color }}</a>
+                    <a href="#"
+                       class="m-2 app-btn app-btn-fluent app-btn-{{ color }}">.app-btn.app-btn-fluent.app-btn-{{ color }}</a>
                 {% endfor %}
             </div>
             <div>
@@ -204,7 +205,8 @@
             <h2 class="mt-4">.app-badge-small</h2>
             <div class="d-flex flex-row flex-wrap">
                 {% for color in colors %}
-                    <div class="m-2 app-badge app-badge-small app-badge-{{ color }}"><span>.app-badge.app-badge.small.app-badge-{{ color }}</span></div>
+                    <div class="m-2 app-badge app-badge-small app-badge-{{ color }}"><span>.app-badge.app-badge.small.app-badge-{{ color }}</span>
+                    </div>
                 {% endfor %}
             </div>
         </div>
