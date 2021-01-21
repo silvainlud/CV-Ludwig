@@ -7,7 +7,16 @@
     {% block head %}{% endblock %}
     {% block  stylesheet %}{% endblock %}
 </head>
-<body class="theme-dark">
+<body>
+<script async>
+
+    setTimeout(function () {
+        if (window.localStorage.getItem("CvThemeMode") !== null)
+            document.body.classList.add("theme-" + window.localStorage.getItem("CvThemeMode"))
+    }, 100)
+
+
+</script>
 {% include('index/include/menu_top.html.twig') with {} only %}
 <main>
     {% block header %}
@@ -39,6 +48,8 @@
     {% endblock %}
 </main>
 {% include('index/include/footer.html.twig') with {} only %}
+
+{{ encore_entry_script_tags('index-main') }}
 {% block script %}{% endblock %}
 </body>
 </html>

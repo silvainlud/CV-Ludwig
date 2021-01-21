@@ -47,7 +47,7 @@ $colors: (
         'grey' : $grey_color,
 );
 
-:root {
+:root, .theme-light {
   @each $class, $color in $colors {
     --color-#{$class} : #{$color};
   }
@@ -65,8 +65,18 @@ $colors: (
   --color-main-background: #ECF0F1;
 }
 
+@mixin DarkMode() {
+  //@media (prefers-color-scheme: dark) {
+  //  body:not([class~='theme-light']) {
+  //    @content;
+  //  }
+  //}
+  .theme-dark {
+    @content
+  }
+}
 
-.theme-dark {
+@include DarkMode {
   --color-title: #dce2e4;
   $default_text_color: #d1cece;
   --color-text: #{$default_text_color};
@@ -79,5 +89,4 @@ $colors: (
   --color-card-footer-color: rgba(255, 255, 255, 0.5);
   --color-card-footer-border: #33475a;
   --color-main-background: #{$menu_background};
-
 }

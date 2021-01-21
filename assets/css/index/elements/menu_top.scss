@@ -49,9 +49,11 @@ header {
     }
 
     .app-nav-btn {
+      outline: none;
       border-radius: 5px;
       border: 1px solid $menu_color;
       padding: 7px 15px;
+      cursor: pointer;
 
       &:hover {
         transition: color 0.3s, background-color 0.3s, color 0.3s;
@@ -61,6 +63,8 @@ header {
     }
 
     .app-nav-btn-text {
+      outline: none;
+      cursor: pointer;
       padding: 4px 10px;
       margin: 0 4px;
       text-decoration: unset;
