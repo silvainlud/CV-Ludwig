@@ -10,7 +10,7 @@ h1, .h1 {
   font-size: 44px;
   line-height: 1.5;
 
-  color: $menu_background;
+  color: var(--color-title);
   margin: 12px 0;
 
   @media screen and (max-width: 950px) {
@@ -31,7 +31,7 @@ h2, .h2 {
   font-size: 30px;
   line-height: 1.5;
 
-  color: $menu_background;
+  color: var(--color-title);
   margin: 12px 0;
 
   @media screen and (max-width: 950px) {
@@ -52,7 +52,7 @@ h3, .h3 {
   line-height: 1.5;
   margin: 12px 0;
 
-  color: #2C3E50;
+  color: var(--color-title);
   @media screen and (max-width: 950px) {
     font-size: 22px;
     @media screen and (max-width: 700px) {
@@ -70,7 +70,7 @@ h4, .h4 {
   line-height: 1.5;
   margin: 12px 0;
 
-  color: #2C3E50;
+  color: var(--color-title);
   @media screen and (max-width: 950px) {
     font-size: 18px;
     @media screen and (max-width: 700px) {
@@ -90,7 +90,7 @@ p {
   margin: 6px 0;
   padding: 0;
 
-  color: $default_text_color;
+  color: var(--color-text);
 
   @media screen and (max-width: 950px) {
     font-size: 20px;
@@ -161,7 +161,7 @@ hr {
 .text-muted, p.text-muted {
   font-size: 16px;
   line-height: 1.1;
-  color: lighten($default_text_color, 15%);
+  color: var(--color-text_ligthen_15);
 }
 
 .section-title {

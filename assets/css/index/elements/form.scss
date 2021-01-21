@@ -141,11 +141,11 @@ $form_col-size: (
 
   a:not(.app-btn) {
     font-family: Open Sans, sans-serif;
-    color: #666666;
+    color: var(--color-text);
     text-decoration: unset;
 
     &:not(:disabled):hover {
-      color: lighten(#666666, 7%);
+      color: var(--color-text_ligthen_7);
       text-decoration: underline;
     }
 

@@ -10,7 +10,7 @@ body {
   margin: 0;
   overflow-y: scroll;
   overflow-x: hidden;
-  background: #ECF0F1;
+  background: var(--color-main-background);
 
   display: flex;
   flex-direction: column;

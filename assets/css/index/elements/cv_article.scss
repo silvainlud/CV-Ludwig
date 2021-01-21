@@ -7,7 +7,7 @@
 
 
     font-family: Roboto, sans-serif;
-    color: #666666;
+    color: var(--color-text);
 
     display: flex;
     flex-direction: column;
@@ -68,12 +68,12 @@
     }
 
     i {
-      color: #484747;
+      color: var(--color-text-accent);
       font-size: 24px;
     }
 
     h4 {
-      color: #484747;
+      color: var(--color-text-accent);
       font-size: 21px;
       margin: 0;
       padding: 0;
@@ -83,7 +83,6 @@
     p {
       font-weight: 300;
       font-size: 17px;
-      color: #666666;
       line-height: unset;
       text-indent: 0;
     }

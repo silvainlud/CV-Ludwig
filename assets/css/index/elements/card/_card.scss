@@ -27,7 +27,7 @@ $card_border-radius: 5px;
       width: 100%;
       object-fit: cover;
       height: 175px;
-      background: white;
+      background: var(--color-card-background);
     }
   }
 
@@ -72,9 +72,6 @@ $card_border-radius: 5px;
         margin: 0 25px 10px;
       }
 
-      p {
-        color: black;
-      }
     }
   }
 
@@ -98,7 +95,7 @@ $card_border-radius: 5px;
 
   .card-body {
     padding: $card_padding_top $card_padding_x;
-    background: white;
+    background: var(--color-card-background);
     display: flex;
     flex-direction: column;
 
@@ -117,7 +114,6 @@ $card_border-radius: 5px;
 
 
     h2 {
-      color: #2C3E50;
       font-family: Roboto, sans-serif;
       font-weight: bold;
       font-size: 22px;
@@ -125,18 +121,6 @@ $card_border-radius: 5px;
       display: flex;
       align-items: center;
       text-align: center;
-
-      &.big-title {
-        font-family: Roboto, sans-serif;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 38px;
-        /* identical to box height */
-
-        text-align: center;
-
-        color: #2C3E50;
-      }
     }
 
     p {
@@ -144,27 +128,25 @@ $card_border-radius: 5px;
       font-weight: normal;
       font-size: 16px;
       line-height: 23px;
-
-      color: $default_text_color;
     }
   }
 
   .card-footer {
     padding: 12px 15px;
-    background-color: #F7FAFD;
+    background-color: var(--color-card-footer-background);
     display: flex;
     flex-direction: row;
     align-items: center;
-    border: 1px solid #EAE8E8;
+    border: 1px solid var(--color-card-footer-border);
     justify-content: flex-end;
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--color-card-footer-color);
 
     & > .card-footer_spacer {
       flex: 1 0 auto;
     }
 
     & > i, .card-footer_icon > i, i.card-footer_icon {
-      color: rgba(0, 0, 0, 0.5);
+      color: var(--color-card-footer-color);
       font-size: 25px;
       padding: 0 4px;
     }
