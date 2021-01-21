@@ -48,17 +48,17 @@ $icon_size: (128, 64, 48, 32, 40);
   flex-wrap: wrap;
 
   font-family: "Open Sans", sans-serif;
-  color: #666666;
+  color: var(--color-text);
   font-weight: 400;
   font-size: 17px;
 
   a {
     text-decoration: none;
-    color: #666666;
+    color: var(--color-text);
     transition: color 0.3s;
 
     &:link:hover {
-      color: lighten(#666666, 30%);
+      color: var(--color-text_ligthen_30);
     }
   }
 

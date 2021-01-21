@@ -9,9 +9,9 @@
             <div class="col-xl-6 col-md-8 col-12">
                 <div class="card mb-10">
                     <div class="card-body px-6">
-                        <h2 class="big-title justify-content-center">Connexion</h2>
+                        <h1 class="text-center mb-6 justify-content-center">Connexion</h1>
 
-                        <form method="post" class="form-zone mt-6">
+                        <form method="post" class="form-zone">
                             {% if error %}
                                 <div class="form-alert form-alert-red c"><i
                                             class="fas fa-exclamation-circle"></i>&nbsp;{{ error.messageKey|trans(error.messageData, 'security') }}

@@ -51,5 +51,33 @@ $colors: (
   @each $class, $color in $colors {
     --color-#{$class} : #{$color};
   }
-  --color-header-bg : #{$header_backgroud_color}
+  --color-header-bg: #{$header_backgroud_color};
+  --color-title: #{$menu_background};
+  --color-text: #{$default_text_color};
+  --color-text_ligthen_30: #{lighten($default_text_color, 30%)};
+  --color-text_ligthen_7: #{lighten($default_text_color, 7%)};
+  --color-text_ligthen_15: #{lighten($default_text_color, 15%)};
+  --color-text-accent: #484747;
+  --color-card-background: #ffffff;
+  --color-card-footer-background: #F7FAFD;
+  --color-card-footer-color: rgba(0, 0, 0, 0.5);
+  --color-card-footer-border: #EAE8E8;
+  --color-main-background: #ECF0F1;
+}
+
+
+.theme-dark {
+  --color-title: #dce2e4;
+  $default_text_color: #d1cece;
+  --color-text: #{$default_text_color};
+  --color-text_ligthen_30: #{lighten($default_text_color, 30%)};
+  --color-text_ligthen_7: #{lighten($default_text_color, 7%)};
+  --color-text_ligthen_15: #{lighten($default_text_color, 15%)};
+  --color-text-accent: #484747;
+  --color-card-background: #3b4f63;
+  --color-card-footer-background: #33475a;
+  --color-card-footer-color: rgba(255, 255, 255, 0.5);
+  --color-card-footer-border: #33475a;
+  --color-main-background: #{$menu_background};
+
 }

@@ -7,7 +7,7 @@ div.index-page {
 
   font-size: 22px;
   font-family: 'Open Sans', sans-serif;
-  color: $default_text_color;
+  color: var(--color-text);
 
   p {
     text-indent: 20px;
@@ -24,7 +24,6 @@ div.index-page {
     font-weight: 500;
     font-size: 30px;
     line-height: 45px;
-    color: $default_h2_color;
   }
 
 
@@ -71,7 +70,7 @@ div.index-page {
           font-style: normal;
           font-weight: 500;
           font-size: 20px;
-          color: $default_h2_color;
+          color: var(--color-title);
 
           margin: 0;
           padding: 0;
@@ -140,7 +139,7 @@ div.index-page {
     & > .index-card-circle_main {
       display: flex;
       flex-direction: row;
-      background: white;
+      background: var(--color-card-background);
       filter: drop-shadow(0px 10px 100px rgba(0, 0, 0, 0.25));
 
 
@@ -172,7 +171,7 @@ div.index-page {
           font-style: normal;
           font-weight: 500;
           font-size: 35px;
-          color: #343434;
+
           padding: 20px 20px 20px;
         }
 
@@ -184,7 +183,7 @@ div.index-page {
           text-indent: 0;
           padding: 0;
           margin: 0;
-          color: #343434;
+
         }
       }
     }
@@ -222,7 +221,7 @@ div.index-page {
     img.index-contact-me_background {
       width: 100%;
       object-fit: cover;
-      filter: drop-shadow(0px 4px 100px #5FAADD);
+      filter: drop-shadow(0px 0px 15px #5FAADD);
       min-height: 500px;
     }
 
