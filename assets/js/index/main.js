@@ -1,5 +1,3 @@
-import React from 'react'
-import ReactDom from 'react-dom'
-import ThemeSwitcher from "./components/ThemeSwicther";
+import ThemeSwitcher from './components/ThemeSwitcher'
 
-ReactDom.render(<ThemeSwitcher/>, document.getElementById('theme-switcher'))
+customElements.define('theme-switch', ThemeSwitcher)

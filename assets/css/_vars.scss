@@ -63,6 +63,10 @@ $colors: (
   --color-card-footer-color: rgba(0, 0, 0, 0.5);
   --color-card-footer-border: #EAE8E8;
   --color-main-background: #ECF0F1;
+
+  --color-input-background: #F8FAFE;
+  --color-input-border: #DFE4F3;
+  --color-input-border_focus: darken(#DFE4F3, 2%);
 }
 
 @mixin DarkMode() {
@@ -83,10 +87,15 @@ $colors: (
   --color-text_ligthen_30: #{lighten($default_text_color, 30%)};
   --color-text_ligthen_7: #{lighten($default_text_color, 7%)};
   --color-text_ligthen_15: #{lighten($default_text_color, 15%)};
-  --color-text-accent: #484747;
+  --color-text-accent: #ddd9d9;
+  
   --color-card-background: #3b4f63;
   --color-card-footer-background: #33475a;
   --color-card-footer-color: rgba(255, 255, 255, 0.5);
   --color-card-footer-border: #33475a;
   --color-main-background: #{$menu_background};
+
+  --color-input-background: #47586a;
+  --color-input-border: #2d3b47;
+  --color-input-border_focus: darken(#2d3b47, 2%);
 }

@@ -1,3 +1,10 @@
+test-r {
+  background-color: red;
+  button {
+    background-color: pink;
+  }
+}
+
 header {
   background: $menu_background;
   display: flex;
@@ -61,6 +68,7 @@ header {
         background: transparentize(white, 0.9);
       }
     }
+
 
     .app-nav-btn-text {
       outline: none;
