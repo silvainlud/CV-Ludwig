@@ -16,11 +16,11 @@ $form_col-size: (
   }
 
   & > input {
-    background: #F8FAFE;
+    background: var(--color-input-background);
     margin: 3px 0 5px 0;
     padding: 14px 10px;
 
-    border: 0.15rem solid #DFE4F3;
+    border: 0.15rem solid var(--color-input-border);
 
 
     border-radius: 5px;
@@ -39,7 +39,7 @@ $form_col-size: (
     &:focus {
       box-shadow: none;
       outline: none;
-      border-color: darken(#DFE4F3, 2%);
+      border-color: var(--color-input-border_focus);
     }
   }
 

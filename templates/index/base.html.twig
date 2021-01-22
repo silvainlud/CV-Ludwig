@@ -8,15 +8,6 @@
     {% block  stylesheet %}{% endblock %}
 </head>
 <body>
-<script async>
-
-    setTimeout(function () {
-        if (window.localStorage.getItem("CvThemeMode") !== null)
-            document.body.classList.add("theme-" + window.localStorage.getItem("CvThemeMode"))
-    }, 100)
-
-
-</script>
 {% include('index/include/menu_top.html.twig') with {} only %}
 <main>
     {% block header %}

@@ -198,3 +198,14 @@ code {
   background-color: #cccccc;
   border-radius: 4px;
 }
+
+.main-content a:not(.app-btn) {
+  font-family: Robot, sans-serif;
+  color: var(--color-text);
+  transition: color 0.3s;
+
+  &:hover {
+    text-decoration: underline;
+    color: var(--color-text_ligthen_15);
+  }
+}
