@@ -6,6 +6,9 @@
     {% include('index/include/header.html.twig') with {} only %}
     {% block head %}{% endblock %}
     {% block  stylesheet %}{% endblock %}
+    {% for js in encore_entry_js_files('index-main') %}
+        <script src="{{ js }}" defer></script>
+    {% endfor %}
 </head>
 <body>
 {% include('index/include/menu_top.html.twig') with {} only %}
@@ -40,7 +43,7 @@
 </main>
 {% include('index/include/footer.html.twig') with {} only %}
 
-{{ encore_entry_script_tags('index-main') }}
+
 {% block script %}{% endblock %}
 </body>
 </html>

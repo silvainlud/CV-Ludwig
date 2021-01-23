@@ -26,7 +26,10 @@ export default class ThemeSwitcher extends HTMLElement {
         })
 
 
-        const theme = localStorage.getItem(ThemeKey)
+        let theme = localStorage.getItem(ThemeKey)
+        if (theme === null && window.matchMedia('(prefers-color-scheme: dark)').matches)
+            theme = 'dark';
+
         if (theme !== null) {
             document.body.classList.add("theme-" + theme)
             if (theme === ThemeDark)
