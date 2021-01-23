@@ -38,7 +38,7 @@ class CuriculumVitaeController extends AbstractController
     }
 
     /**
-     * @Route("/cv/my-skills", name="cv-my_skills")
+     * @Route("/competences", name="cv-my_skills")
      */
     public function my_skills(): Response
     {
@@ -57,7 +57,7 @@ class CuriculumVitaeController extends AbstractController
     }
 
     /**
-     * @Route("/cv/my-skills/icon/{slug}", name="cv-technology_icon")
+     * @Route("/competences/logo/{slug}", name="cv-technology_icon")
      */
     public function technology_icon(Technologie $tech): Response
     {
@@ -65,7 +65,7 @@ class CuriculumVitaeController extends AbstractController
     }
 
     /**
-     * @Route("/cv/my-career", name="cv-my_career")
+     * @Route("/cv", name="cv-my_career")
      */
     public function my_career(): Response
     {
@@ -73,7 +73,7 @@ class CuriculumVitaeController extends AbstractController
     }
 
     /**
-     * @Route("/cv/realisation", name="cv-making")
+     * @Route("/realisations", name="cv-making")
      */
     public function making(RealisationRepository $realisationRepository): Response
     {

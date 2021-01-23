@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /img/
+Disallow: /css/
+Disallow: /js/
+Disallow: /public/
+Disallow: /library/
+Disallow: /bundles/
+Disallow: /build/
+Disallow: /dashboard/
+Allow: /

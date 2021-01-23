@@ -2,12 +2,12 @@
     <img src="{{ asset('favicon_256.png') }}" alt="Logo de silvain.eu">
     <div class="header_separate  d-sm-block d-none"></div>
     <nav>
-        <div class="d-md-flex d-none">
-            <a href="{{ path('index') }}">Accueil</a>
-            <a href="{{ path('cv-my_career') }}">Parcours</a>
-            <a href="{{ path('cv-my_skills') }}">Compétences</a>
-            <a href="{{ path('cv-making') }}">Réalisations</a>
-        </div>
+        <ul class="d-md-block d-none header_menu-list">
+            <li><a href="{{ path('index') }}">Accueil</a></li>
+            <li><a href="{{ path('cv-my_career') }}">Parcours</a></li>
+            <li><a href="{{ path('cv-my_skills') }}">Compétences</a></li>
+            <li><a href="{{ path('cv-making') }}">Réalisations</a></li>
+        </ul>
         <div>
             <p class="d-md-none d-sm-block d-none">
                 {{ "site_name"|trans }}
