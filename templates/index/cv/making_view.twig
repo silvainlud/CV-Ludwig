@@ -3,6 +3,9 @@
     <link rel="stylesheet" href="{{ asset('library/highlight/styles/default.css') }}">
     <link rel="stylesheet" href="{{ asset('library/highlight/themes/atom-dark-theme.css') }}">
 {% endblock %}
+
+{% block title %}{{ realisation.name }}{% endblock %}
+
 {% block content %}
     <div class="container-fluid cv_article mb-10">
         <div class="row justify-content-center mt-5">

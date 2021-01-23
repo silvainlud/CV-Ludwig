@@ -1,5 +1,6 @@
 test-r {
   background-color: red;
+
   button {
     background-color: pink;
   }
@@ -35,6 +36,16 @@ header {
     flex-direction: row;
     box-sizing: border-box;
     align-items: center;
+
+    & > ul.header_menu-list {
+      list-style: none;
+      padding: 0;
+
+      li {
+        display: inline;
+      }
+
+    }
 
     p, a {
       padding: 4px 10px;
