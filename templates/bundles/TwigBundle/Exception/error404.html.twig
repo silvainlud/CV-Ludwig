@@ -1,0 +1,15 @@
+{% extends 'bundles/TwigBundle/Exception/error.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid cv_article mb-5 text-center">
+        <h1>{{ exception.statusText|trans({}, "exception") }}</h1>
+        <p>{{ (exception.statusText ~ '.content')|trans({}, "exception") }}</p>
+        {% set prev_url  = GetPreviousUrl() %}
+        <div class="py-2"></div>
+        {% if prev_url != null %}
+            <a href="{{ prev_url }}" class="app-btn">Retour</a>
+        {% else %}
+            <a href="{{ path('index') }}" class="app-btn">Accueil</a>
+        {% endif %}
+    </div>
+{% endblock %}
