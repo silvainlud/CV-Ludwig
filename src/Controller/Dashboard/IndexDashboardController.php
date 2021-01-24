@@ -2,8 +2,6 @@
 
 namespace App\Controller\Dashboard;
 
-use App\Entity\Mail\Domain;
-use App\Entity\Mail\Mailbox;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,12 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class IndexDashboardController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController
 {
     private ObjectManager $em;
-    private ObjectManager $emMail;
 
     public function __construct(ManagerRegistry $doctrine)
     {
         $this->em = $doctrine->getManager();
-        $this->emMail = $doctrine->getManager('mail');
     }
 
     /**
@@ -26,14 +22,7 @@ class IndexDashboardController extends \Symfony\Bundle\FrameworkBundle\Controlle
      */
     public function Index(Request $request): Response
     {
-        /** @var Domain[] $domains */
-        $domains = $this->emMail->getRepository(Domain::class)->findBy(['active' => true], ['domain' => 'ASC']);
-        /** @var Mailbox[] $mailboxes */
-        $mailboxes = $this->emMail->getRepository(Mailbox::class)->findBy(['active' => true], ['username' => 'ASC']);
-
         return $this->render('dashboard/Mail/index.html.twig', [
-            'domains' => $domains,
-            'mailboxes' => $mailboxes,
         ]);
     }
 }
