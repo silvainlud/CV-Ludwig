@@ -13,49 +13,52 @@
     </p>
     <div class="container">
         <div class="row">
-            {% for c in skills %}
-                <div class="col-12">
-                    <h2 class="mt-7">{{ c.name }}</h2>
-                </div>
-                {% for s in c.competences %}
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-5 {% if  loop.index > 8 %}d-none{% endif %}"
-                         id="tech-{{- c.id -}}-{{- s.technologie.id -}}">
-                        <div class="card h-100">
-                            <div class="card-body card-centered card-body_maximize">
-                                <a class="icon_skills" style="background-color: {{ s.technologie.color }}"
-                                   {% if s.technologie.link != null %}href="{{ s.technologie.link }}"{% endif %}>
-                                    <img src="{{ path('cv-technology_icon',{'slug': s.technologie.slug }) }}" alt="">
-                                </a>
-                                <h2 class="mt-4">{{ s.technologie.name }}</h2>
-                                <p>
-                                    {{ s.technologie.description }}
-                                </p>
-                            </div>
-                            <div class="card-footer flex-column justify-content-center">
-                                <div class="app-badge app-badge-small app-badge-{{ s.niveau.class }}">
-                                    <span>{{ s.niveau.name }}</span>
-                                </div>
-                                <div class="card-footer_spacer"></div>
-                                <div class="card-footer_icon mt-3">
-                                    {% if s.autoditacte %}
-                                        <i class="fas fa-home"></i>
-                                    {% endif %}
-                                    {% if s.scolaire %}
-                                        <i class="fas fa-graduation-cap"></i>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
+            {% cache skills %}
+                {% for c in skills %}
+                    <div class="col-12">
+                        <h2 class="mt-7">{{ c.name }}</h2>
                     </div>
-                    {% if loop.index == 8 and loop.last == false %}
-                        <div class="col-12 text-center">
-                            <button class="app-btn app-btn-inverse app-btn-grey" id="btn-categ-{{ c.id }}">
-                                Voir plus
-                            </button>
+                    {% for s in c.competences %}
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-5 {% if  loop.index > 8 %}d-none{% endif %}"
+                             id="tech-{{- c.id -}}-{{- s.technologie.id -}}">
+                            <div class="card h-100">
+                                <div class="card-body card-centered card-body_maximize">
+                                    <a class="icon_skills" style="background-color: {{ s.technologie.color }}"
+                                       {% if s.technologie.link != null %}href="{{ s.technologie.link }}"{% endif %}>
+                                        <img src="{{ path('cv-technology_icon',{'slug': s.technologie.slug }) }}"
+                                             alt="">
+                                    </a>
+                                    <h2 class="mt-4">{{ s.technologie.name }}</h2>
+                                    <p>
+                                        {{ s.technologie.description }}
+                                    </p>
+                                </div>
+                                <div class="card-footer flex-column justify-content-center">
+                                    <div class="app-badge app-badge-small app-badge-{{ s.niveau.class }}">
+                                        <span>{{ s.niveau.name }}</span>
+                                    </div>
+                                    <div class="card-footer_spacer"></div>
+                                    <div class="card-footer_icon mt-3">
+                                        {% if s.autoditacte %}
+                                            <i class="fas fa-home"></i>
+                                        {% endif %}
+                                        {% if s.scolaire %}
+                                            <i class="fas fa-graduation-cap"></i>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    {% endif %}
+                        {% if loop.index == 8 and loop.last == false %}
+                            <div class="col-12 text-center">
+                                <button class="app-btn app-btn-inverse app-btn-grey" id="btn-categ-{{ c.id }}">
+                                    Voir plus
+                                </button>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
+            {% endcache %}
         </div>
     </div>
 
