@@ -14,7 +14,7 @@ use Twig\TokenParser\AbstractTokenParser;
  * Class TwigCacheExtension.
  *
  * @author Grafikart
- * @url https://github.com/Grafikart/Grafikart.fr/blob/master/src/Core/Twig/TwigCacheExtension.php
+ * https://github.com/Grafikart/Grafikart.fr/blob/master/src/Core/Twig/TwigCacheExtension.php
  */
 class TwigCacheExtension extends AbstractExtension
 {

@@ -8,7 +8,7 @@ use App\Twig\Cache\CacheableInterface;
  * Class FakeTestClass.
  *
  * @author Grafikart
- * @url https://github.com/Grafikart/Grafikart.fr/blob/master/tests/Core/Twig/FakeClass.php
+ * https://github.com/Grafikart/Grafikart.fr/blob/master/tests/Core/Twig/FakeClass.php
  */
 class FakeTestClass implements CacheableInterface
 {

@@ -12,7 +12,7 @@ use Symfony\Component\Cache\CacheItem;
  * Class TwigCacheExtensionTest.
  *
  * @author Grafikart
- * @url https://github.com/Grafikart/Grafikart.fr/blob/master/tests/Core/Twig/TwigCacheExtensionTest.php
+ * https://github.com/Grafikart/Grafikart.fr/blob/master/tests/Core/Twig/TwigCacheExtensionTest.php
  *
  * @internal
  * @coversNothing
