@@ -3,6 +3,7 @@
 namespace App\Entity\Main\CV;
 
 use App\Repository\Main\CV\TechnologieRepository;
+use App\Twig\Cache\CacheableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,8 +16,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=TechnologieRepository::class)
  * @ORM\Table(name="CV_Technologie")
  * @UniqueEntity(fields={"name"})
+ * @ORM\HasLifecycleCallbacks
  */
-class Technologie
+class Technologie implements CacheableInterface
 {
     /**
      * @ORM\Id
@@ -81,10 +83,21 @@ class Technologie
      */
     private ?string $link;
 
+    /**
+     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false,name="TechnologieCreation")
+     */
+    private \DateTimeInterface $dateCreated;
+    /**
+     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false,name="TechnologieEdition")
+     */
+    private \DateTimeInterface $dateModified;
+
     public function __construct()
     {
         $this->linkedTechonologies = new ArrayCollection();
         $this->link = null;
+        $this->dateModified = new \DateTime();
+        $this->dateCreated = new \DateTime();
     }
 
     public function getDescription(): ?string
@@ -257,5 +270,27 @@ class Technologie
         $this->link = $link;
 
         return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->dateModified;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist(): void
+    {
+        $this->preUpdate();
+        $this->dateCreated = $this->dateModified;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate(): void
+    {
+        $this->dateModified = new \DateTime();
     }
 }

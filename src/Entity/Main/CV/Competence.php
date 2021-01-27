@@ -3,6 +3,7 @@
 namespace App\Entity\Main\CV;
 
 use App\Repository\Main\CV\CompetenceRepository;
+use App\Twig\Cache\CacheableInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -14,8 +15,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     fields={"technologie"},
  *     errorPath="technologie",
  * )
+ * @ORM\HasLifecycleCallbacks
  */
-class Competence
+class Competence implements CacheableInterface
 {
     /**
      * @ORM\Id
@@ -49,11 +51,27 @@ class Competence
     private bool $autoditacte;
 
     /**
+     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false, name="CompetenceCreation")
+     */
+    private \DateTimeInterface $dateCreated;
+
+    /**
+     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false, name="CompetenceEdition")
+     */
+    private \DateTimeInterface $dateModified;
+
+    /**
      * @ORM\ManyToOne(targetEntity=CompetenceNiveau::class)
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotNull
      */
     private CompetenceNiveau $niveau;
+
+    public function __construct()
+    {
+        $this->dateCreated = new \DateTime();
+        $this->dateModified = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -122,5 +140,27 @@ class Competence
         $this->niveau = $niveau;
 
         return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->dateModified;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist(): void
+    {
+        $this->preUpdate();
+        $this->dateCreated = $this->dateModified;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate(): void
+    {
+        $this->dateModified = new \DateTime();
     }
 }

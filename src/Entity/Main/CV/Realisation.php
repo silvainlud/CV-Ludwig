@@ -3,6 +3,7 @@
 namespace App\Entity\Main\CV;
 
 use App\Repository\Main\CV\RealisationRepository;
+use App\Twig\Cache\CacheableInterface;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -19,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     errorPath="name",
  * )
  */
-class Realisation
+class Realisation implements CacheableInterface
 {
     /**
      * @ORM\Id
@@ -92,7 +93,6 @@ class Realisation
      * @ORM\Column(type="string", nullable=true, name="Resume")
      */
     protected ?string $preface;
-
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Main\CV\Technologie")
      * @ORM\JoinTable(joinColumns={@ORM\JoinColumn(referencedColumnName="id")}, inverseJoinColumns={@ORM\JoinColumn(referencedColumnName="NumTechnologie")})
@@ -101,12 +101,23 @@ class Realisation
      */
     protected Collection $technologies;
 
+    /**
+     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false, name="RealisationCreation")
+     */
+    private \DateTimeInterface $dateCreated;
+    /**
+     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false, name="RealisationEdition")
+     */
+    private \DateTimeInterface $dateModified;
+
     public function __construct()
     {
         $this->gallery = new ArrayCollection();
         $this->technologies = new ArrayCollection();
         $this->mainImage = null;
         $this->public = false;
+        $this->dateModified = new \DateTime();
+        $this->dateCreated = new \DateTime();
     }
 
     public function getDescription(): string
@@ -301,5 +312,27 @@ class Realisation
         }
 
         return $this;
+    }
+
+    public function getUpdatedAt(): ?DateTimeInterface
+    {
+        return $this->dateModified;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist(): void
+    {
+        $this->preUpdate();
+        $this->dateCreated = $this->dateModified;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate(): void
+    {
+        $this->dateModified = new \DateTime();
     }
 }
