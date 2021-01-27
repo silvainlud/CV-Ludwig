@@ -124,4 +124,9 @@ abstract class RealisationImage implements CacheableInterface
     {
         $this->dateModified = new \DateTime();
     }
+
+    public function postUpdate(): void
+    {
+        $this->preUpdate();
+    }
 }
