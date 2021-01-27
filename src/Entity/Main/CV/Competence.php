@@ -164,7 +164,7 @@ class Competence implements CacheableInterface
         $this->dateModified = new \DateTime();
     }
 
-    public function postUpdate()
+    public function postUpdate(): void
     {
         if (isset($this->categorie) && null != $this->categorie) {
             $this->categorie->preUpdate();
