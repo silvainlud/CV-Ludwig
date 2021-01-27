@@ -2,6 +2,7 @@
 
 namespace App\Entity\Main\CV;
 
+use App\Twig\Cache\CacheableInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -14,8 +15,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @ORM\InheritanceType(value="SINGLE_TABLE")
  * @DiscriminatorColumn(name="discr", type="string")
  * @ORM\DiscriminatorMap({"miniature": "RealisationImageMiniature", "gallery": "RealisationImageGallerie"})
+ * @ORM\HasLifecycleCallbacks
  */
-abstract class RealisationImage
+abstract class RealisationImage implements CacheableInterface
 {
     /**
      * @ORM\Id
@@ -30,6 +32,15 @@ abstract class RealisationImage
      * @var resource|string $image
      */
     protected $image;
+
+    /**
+     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false,name="RealisationImageCreation")
+     */
+    private \DateTimeInterface $dateCreated;
+    /**
+     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false,name="RealisationImageEdition")
+     */
+    private \DateTimeInterface $dateModified;
 
     /**
      * @return string
@@ -90,5 +101,27 @@ abstract class RealisationImage
         }
 
         return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->dateModified;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist(): void
+    {
+        $this->preUpdate();
+        $this->dateCreated = $this->dateModified;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate(): void
+    {
+        $this->dateModified = new \DateTime();
     }
 }

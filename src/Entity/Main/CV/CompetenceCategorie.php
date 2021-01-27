@@ -3,6 +3,7 @@
 namespace App\Entity\Main\CV;
 
 use App\Repository\Main\CV\CompetenceCategorieRepository;
+use App\Twig\Cache\CacheableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,8 +12,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=CompetenceCategorieRepository::class)
  * @ORM\Table(name="CV_CompetenceCategorie")
+ * @ORM\HasLifecycleCallbacks
  */
-class CompetenceCategorie
+class CompetenceCategorie implements CacheableInterface
 {
     /**
      * @ORM\Id
@@ -36,6 +38,16 @@ class CompetenceCategorie
     private ?int $ordre;
 
     /**
+     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false, name="CompetenceCategorieCreation")
+     */
+    private \DateTimeInterface $dateCreated;
+
+    /**
+     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false, name="CompetenceCategorieEdition")
+     */
+    private \DateTimeInterface $dateModified;
+
+    /**
      * @ORM\OneToMany(targetEntity=Competence::class, mappedBy="categorie")
      *
      * @var Collection<Competence>
@@ -45,6 +57,8 @@ class CompetenceCategorie
     public function __construct()
     {
         $this->competences = new ArrayCollection();
+        $this->dateCreated = new \DateTime();
+        $this->dateModified = new \DateTime();
     }
 
     public function getId(): ?int
@@ -105,5 +119,27 @@ class CompetenceCategorie
         }
 
         return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->dateModified;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist(): void
+    {
+        $this->preUpdate();
+        $this->dateCreated = $this->dateModified;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate(): void
+    {
+        $this->dateModified = new \DateTime();
     }
 }
