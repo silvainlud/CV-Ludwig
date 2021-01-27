@@ -10,7 +10,10 @@ namespace App\Twig\Cache;
  */
 interface CacheableInterface
 {
-    public function getId(): ?int;
+    /**
+     * @return int|string|null
+     */
+    public function getId();
 
     public function getUpdatedAt(): ?\DateTimeInterface;
 }
