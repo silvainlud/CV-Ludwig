@@ -13,7 +13,7 @@ stages:
   - compile
   - lint
   - test
-  - build
+#  - build
   - deploy
 
 variables:
@@ -58,21 +58,21 @@ phpunit:
     - compile:composer
     - compile:nodejs
 
-docker-build-master:
-  before_script: [ ]
-  tags:
-    - docker
-  # Official docker image.
-  image: docker:19.03.12
-  stage: build
-  services:
-    - docker:19.03.12-dind
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build -t $CI_REGISTRY/silvain.eu/cv-ludwig_php:latest .
-    - docker push $CI_REGISTRY/silvain.eu/cv-ludwig_php:latest
-  only:
-    - master
+#docker-build-master:
+#  before_script: [ ]
+#  tags:
+#    - docker
+#  # Official docker image.
+#  image: docker:19.03.12
+#  stage: build
+#  services:
+#    - docker:19.03.12-dind
+#  script:
+#    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#    - docker build -t $CI_REGISTRY/silvain.eu/cv-ludwig_php:latest .
+#    - docker push $CI_REGISTRY/silvain.eu/cv-ludwig_php:latest
+#  only:
+#    - master
 
 deployment:production:ansible:
   tags:
