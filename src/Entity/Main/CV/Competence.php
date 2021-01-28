@@ -51,12 +51,12 @@ class Competence implements CacheableInterface
     private bool $autoditacte;
 
     /**
-     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false, name="CompetenceCreation")
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="CompetenceCreation")
      */
     private \DateTimeInterface $dateCreated;
 
     /**
-     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false, name="CompetenceEdition")
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="CompetenceEdition")
      */
     private \DateTimeInterface $dateModified;
 

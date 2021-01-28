@@ -2,9 +2,7 @@
 
 namespace App\EventSubscriber\Doctrine\CV;
 
-use App\Controller\Dashboard\CV\AdminMakingController;
 use App\Entity\Main\CV\Realisation;
-use App\Entity\Main\CV\RealisationImage;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
@@ -31,18 +29,15 @@ class RealisationSubscriber implements EventSubscriberInterface
         ];
     }
 
+    public function preUpdate(LifecycleEventArgs $args): void
+    {
+        $this->prePersist($args);
+    }
+
     public function prePersist(LifecycleEventArgs $args): void
     {
         if ($args->getEntity() instanceof Realisation) {
             $args->getEntity()->CompleteSlug($this->slugger);
-            AdminMakingController::RemoveMakingCache($args->getEntityManager(), $this->cache);
-        } elseif ($args->getEntity() instanceof RealisationImage) {
-            AdminMakingController::RemoveMakingCache($args->getEntityManager(), $this->cache);
         }
-    }
-
-    public function preUpdate(LifecycleEventArgs $args): void
-    {
-        $this->prePersist($args);
     }
 }

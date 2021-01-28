@@ -38,12 +38,12 @@ class CompetenceCategorie implements CacheableInterface
     private ?int $ordre;
 
     /**
-     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false, name="CompetenceCategorieCreation")
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="CompetenceCategorieCreation")
      */
     private \DateTimeInterface $dateCreated;
 
     /**
-     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false, name="CompetenceCategorieEdition")
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="CompetenceCategorieEdition")
      */
     private \DateTimeInterface $dateModified;
 

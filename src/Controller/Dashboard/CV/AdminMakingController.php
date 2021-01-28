@@ -2,15 +2,11 @@
 
 namespace App\Controller\Dashboard\CV;
 
-use App\Controller\CuriculumVitaeController;
 use App\Entity\Main\CV\Realisation;
-use App\Entity\Main\CV\RealisationImage;
 use App\Entity\Main\CV\RealisationImageGallerie;
 use App\Entity\Main\CV\RealisationImageMiniature;
 use App\Form\CV\Realisation\RealisationImageGallerieType;
 use App\Form\CV\Realisation\RealisationType;
-use App\Utils\Assets\AssetsResponse;
-use App\Utils\StringHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,23 +28,6 @@ class AdminMakingController extends AbstractController
     {
         $this->em = $em;
         $this->cache = $cache;
-    }
-
-    public static function RemoveMakingCache(EntityManagerInterface $em, AdapterInterface $cache): void
-    {
-        $keys = [StringHelper::strRemoveCacheKey(CuriculumVitaeController::CACHE_KEY_REALISATION)];
-        /** @var RealisationImage[] $_ts */
-        $_ts = $em->getRepository(RealisationImage::class)->findAll();
-        foreach ($_ts as $t) {
-            $keys[] = AssetsResponse::CacheKey($t->getImage(), (string) $t->getId(), null, null);
-        }
-        $_ts = $em->getRepository(Realisation::class)->findAll();
-        foreach ($_ts as $t) {
-            $keys[] = StringHelper::strRemoveCacheKey(CuriculumVitaeController::CACHE_KEY_REALISATION_VIEW . $t->getSlug());
-            $keys[] = StringHelper::strRemoveCacheKey(CuriculumVitaeController::CACHE_KEY_REALISATION_VIEW_GALLERY . $t->getSlug());
-        }
-
-        $cache->deleteItems($keys);
     }
 
     /**

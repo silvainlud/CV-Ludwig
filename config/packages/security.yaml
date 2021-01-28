@@ -1,7 +1,7 @@
 security:
 
     role_hierarchy:
-        ROLE_ADMIN_CV: [ROLE_ADMIN_CV_SKILLS, ROLE_ADMIN_CV_PORTFOLIO]
+        ROLE_ADMIN_CV: [ROLE_ADMIN_CV_SKILLS, ROLE_ADMIN_CV_PORTFOLIO, ROLE_PREVIEW_MAKING]
 
     encoders:
         App\Entity\Main\Utilisateur:
