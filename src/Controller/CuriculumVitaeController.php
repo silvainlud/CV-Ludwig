@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Main\CV\CompetenceCategorie;
+use App\Entity\Main\CV\Realisation;
 use App\Entity\Main\CV\RealisationImage;
 use App\Entity\Main\CV\RealisationImageGallerie;
 use App\Entity\Main\CV\RealisationImageMiniature;
 use App\Entity\Main\CV\Technologie;
 use App\Repository\Main\CV\RealisationRepository;
 use App\Utils\Assets\AssetsResponse;
+use App\Utils\StringHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,8 +42,17 @@ class CuriculumVitaeController extends AbstractController
      */
     public function my_skills(): Response
     {
+        $i = $this->cache->getItem(self::CACHE_KEY_TECHNOLOGIE);
+        if (!$i->isHit()) {
+            $i->set($this->getDoctrine()->getRepository(CompetenceCategorie::class)->findAll());
+            $this->cache->save($i);
+        }
+
+        /** @var CompetenceCategorie[] $skills */
+        $skills = $i->get();
+
         return $this->render('index/cv/my_skills.twig', [
-            'skills' => $this->getDoctrine()->getRepository(CompetenceCategorie::class)->findAll(),
+            'skills' => $skills,
         ]);
     }
 
@@ -66,7 +77,16 @@ class CuriculumVitaeController extends AbstractController
      */
     public function making(RealisationRepository $realisationRepository): Response
     {
-        return $this->render('index/cv/making.twig', ['realisations' => $realisationRepository->findBy(['public' => true], ['dateRelease' => 'desc', 'name' => 'asc'])]);
+        $i = $this->cache->getItem(self::CACHE_KEY_REALISATION);
+        if (!$i->isHit()) {
+            $i->set($realisationRepository->findAllWithImage());
+            $this->cache->save($i);
+        }
+
+        /** @var Realisation[] $makings */
+        $makings = $i->get();
+
+        return $this->render('index/cv/making.twig', ['realisations' => $makings]);
     }
 
     /**
@@ -91,30 +111,53 @@ class CuriculumVitaeController extends AbstractController
      */
     public function making_view(string $slug, RealisationRepository $realisationRepository): Response
     {
-        $realisation = $realisationRepository->findBySlug($slug);
-        if (null == $realisation || (!$realisation->isPublic() && !$this->isGranted('ROLE_PREVIEW_MAKING'))) {
+        $i = $this->cache->getItem(StringHelper::strRemoveCacheKey(self::CACHE_KEY_REALISATION_VIEW . $slug));
+        if (!$i->isHit()) {
+            $i->set($realisationRepository->findBySlug($slug));
+            $this->cache->save($i);
+        }
+
+        /** @var Realisation|null $v */
+        $v = $i->get();
+        if (null === $v || (!$v->isPublic() && !$this->isGranted('ROLE_PREVIEW_MAKING'))) {
             throw $this->createNotFoundException();
         }
 
-        $alreadyDisplay = array_reduce($realisation->getTechnologies()->getValues(), function (array $acc, Technologie $t) {
+        $alreadyDisplay = array_reduce($v->getTechnologies()->getValues(), function (array $acc, Technologie $t) {
             $acc[] = $t->getId();
 
             return $acc;
         }, []);
 
-        /** @var Technologie $linkTechno */
-        $linkTechno = array_reduce($realisation->getTechnologies()->getValues(), function (array $acc, Technologie $t) use ($alreadyDisplay) {
-            return array_merge($acc, array_reduce($t->getLinkedTechonologies()->getValues(), function (array $acc2, Technologie $lt) use ($alreadyDisplay, $acc) {
-                if (!\in_array($lt->getId(), $alreadyDisplay) && !\in_array($lt, $acc2) && !\in_array($lt, $acc)) {
-                    $acc2[] = $lt;
-                }
+        $i2 = $this->cache->getItem(StringHelper::strRemoveCacheKey(self::CACHE_KEY_REALISATION_VIEW_LINKE_TECH . $slug));
+        if (!$i2->isHit() || !$i->isHit()) {
+            $i2->set(array_reduce($v->getTechnologies()->getValues(), function (array $acc, Technologie $t) use ($alreadyDisplay) {
+                return array_merge($acc, array_reduce($t->getLinkedTechonologies()->getValues(), function (array $acc2, Technologie $lt) use ($alreadyDisplay, $acc) {
+                    if (!\in_array($lt->getId(), $alreadyDisplay) && !\in_array($lt, $acc2) && !\in_array($lt, $acc)) {
+                        $acc2[] = $lt;
+                    }
 
-                return $acc2;
+                    return $acc2;
+                }, []));
             }, []));
-        }, []);
+            $this->cache->save($i);
+        }
+
+        /** @var Technologie $linkTechno */
+        $linkTechno = $i2->get();
+
+        $i = $this->cache->getItem(StringHelper::strRemoveCacheKey(self::CACHE_KEY_REALISATION_VIEW_GALLERY . $slug));
+        if (!$i->isHit()) {
+            $i->set($this->em->getRepository(RealisationImageGallerie::class)->findBy(['realisations' => $v->getId()]));
+            $this->cache->save($i);
+        }
+
+        /** @var RealisationImageGallerie[] $gallery */
+        $gallery = $i->get();
 
         return $this->render('index/cv/making_view.twig', [
-            'realisation' => $realisation,
+            'realisation' => $v,
+            'gallery' => $gallery,
             'linkTechno' => $linkTechno,
         ]);
     }

@@ -2,7 +2,10 @@
 
 namespace App\EventSubscriber\Doctrine\CV;
 
+use App\Controller\Dashboard\CV\AdminMakingController;
+use App\Controller\Dashboard\CV\AdminSkillsController;
 use App\Entity\Main\CV\Competence;
+use App\Entity\Main\CV\CompetenceCategorie;
 use App\Entity\Main\CV\RealisationImage;
 use App\Entity\Main\CV\Technologie;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
@@ -17,7 +20,9 @@ class CompetenceSubscriber implements EventSubscriberInterface
     private SluggerInterface $slugger;
 
     private AdapterInterface $cache;
-
+    /**
+     * @var EntityManagerInterface
+     */
     private EntityManagerInterface $em;
 
     public function __construct(SluggerInterface $slugger, AdapterInterface $cache, EntityManagerInterface $em)
@@ -45,6 +50,21 @@ class CompetenceSubscriber implements EventSubscriberInterface
     {
         if ($args->getEntity() instanceof Technologie) {
             $args->getEntity()->CompleteSlug($this->slugger);
+            AdminSkillsController::RemoveSkillCache($args->getEntityManager(), $this->cache);
+            AdminMakingController::RemoveMakingCache($args->getEntityManager(), $this->cache);
+
+            /** @var Competence|null $skill */
+            $skill = $this->em->getRepository(Competence::class)->findOneBy(['technologie' => $args->getEntity()->getId()]);
+
+            if ($skill) {
+                $this->em->persist($skill);
+                $skill->preUpdate();
+            }
+//            dd($skill);
+        } elseif ($args->getEntity() instanceof Competence) {
+            AdminSkillsController::RemoveSkillCache($args->getEntityManager(), $this->cache);
+        } elseif ($args->getEntity() instanceof CompetenceCategorie) {
+            AdminSkillsController::RemoveSkillCache($args->getEntityManager(), $this->cache);
         }
     }
 
