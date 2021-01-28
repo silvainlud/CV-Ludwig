@@ -1,63 +1,64 @@
-#---
-#kind: pipeline
-#type: docker
-#name: UnitTest
-#
-#workspace:
-#  path: /drone/src
-#
-#
-#steps:
-#  - name: Composer
-#    image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
-#    commands:
-#      - composer install --prefer-dist --no-ansi --no-interaction --no-progress
-#    volumes:
-#      - name: composer
-#        path: /drone/src/vendor/
-#  - name: Yarn
-#    image: node
-#    commands:
-#      - yarn install --ignore-engines
-#      - yarn encore dev
-#    volumes:
-#      - name: node
-#        path: /drone/src/node_modules/
-#      - name: build
-#        path: /drone/src/public/build/
-#  - name: Lint
-#    image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
-#    commands:
-#      - ./vendor/bin/phpstan analyse  --memory-limit=-1
-#    volumes:
-#      - name: composer
-#        path: /drone/src/vendor/
-#    depends_on:
-#      - Composer
-#  - name: phpunit
-#    image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
-#    commands:
-#      - php bin/phpunit
-#    depends_on:
-#      - Yarn
-#      - Composer
-#      - Lint
-#    volumes:
-#      - name: node
-#        path: /drone/src/node_modules/
-#      - name: build
-#        path: /drone/src/public/build/
-#      - name: composer
-#        path: /drone/src/vendor/
-#
-#volumes:
-#  - name: composer
-#    temp: { }
-#  - name: node
-#    temp: { }
-#  - name: build
-#    temp: { }
+---
+kind: pipeline
+type: docker
+name: UnitTest
 
+workspace:
+  path: /drone/src
+
+
+steps:
+  - name: Composer
+    image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
+    commands:
+      - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+    volumes:
+      - name: composer
+        path: /drone/src/vendor/
+  - name: Yarn
+    image: node
+    commands:
+      - yarn install --ignore-engines
+      - yarn encore dev
+    volumes:
+      - name: node
+        path: /drone/src/node_modules/
+      - name: build
+        path: /drone/src/public/build/
+  - name: Lint
+    image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
+    commands:
+      - ./vendor/bin/phpstan analyse  --memory-limit=-1
+    volumes:
+      - name: composer
+        path: /drone/src/vendor/
+    depends_on:
+      - Composer
+  - name: phpunit
+    image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
+    commands:
+      - php bin/phpunit
+    depends_on:
+      - Yarn
+      - Composer
+      - Lint
+    volumes:
+      - name: node
+        path: /drone/src/node_modules/
+      - name: build
+        path: /drone/src/public/build/
+      - name: composer
+        path: /drone/src/vendor/
+
+volumes:
+  - name: composer
+    temp: { }
+  - name: node
+    temp: { }
+  - name: build
+    temp: { }
+
+---
 kind: pipeline
 type: docker
 name: Mirror
