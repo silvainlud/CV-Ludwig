@@ -58,8 +58,6 @@
 #  - name: build
 #    temp: { }
 
----
-
 kind: pipeline
 type: docker
 name: Mirror
