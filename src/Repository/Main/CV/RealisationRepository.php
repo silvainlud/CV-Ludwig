@@ -26,8 +26,6 @@ class RealisationRepository extends ServiceEntityRepository
             return $this->createQueryBuilder('t')
                 ->andWhere('t.slug = :slug')
                 ->setParameter('slug', $value)
-                ->andWhere('t.public = :true')
-                ->setParameter('true', true)
                 ->orderBy('t.name', 'ASC')
                 ->join('t.mainImage', 'mainImage')->addSelect('mainImage')
                 ->leftJoin('t.technologies', 'technologies')->addSelect('technologies')

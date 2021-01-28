@@ -84,11 +84,11 @@ class Technologie implements CacheableInterface
     private ?string $link;
 
     /**
-     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false,name="TechnologieCreation")
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="TechnologieCreation")
      */
     private \DateTimeInterface $dateCreated;
     /**
-     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false,name="TechnologieEdition")
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="TechnologieEdition")
      */
     private \DateTimeInterface $dateModified;
 
