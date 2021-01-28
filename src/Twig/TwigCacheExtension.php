@@ -4,6 +4,8 @@ namespace App\Twig;
 
 use App\Twig\Cache\CacheableInterface;
 use App\Twig\Cache\CacheTokenParser;
+use Doctrine\Common\Collections\AbstractLazyCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\String\Slugger\AsciiSlugger;
@@ -60,6 +62,10 @@ class TwigCacheExtension extends AbstractExtension
             $prefix = (new AsciiSlugger())->slug(str_replace('.html.twig', '', $templatePath)) . '_';
         } else {
             $prefix = '';
+        }
+
+        if ($item instanceof AbstractLazyCollection || $item instanceof ArrayCollection) {
+            $item = $item->getValues();
         }
         if (\is_bool($item)) {
             return $prefix . ($item ? '1' : '0');
