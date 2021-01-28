@@ -26,7 +26,7 @@ class TwigCacheExtensionTest extends TestCase
 
     private TwigCacheExtension $extension;
 
-    protected function setUp(): void
+    public function setUp(): void
     {
         // @var MockObject|AdapterInterface cache
         $this->cache = $this->getMockBuilder(AdapterInterface::class)->getMock();

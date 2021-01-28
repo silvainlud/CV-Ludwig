@@ -24,9 +24,9 @@ class CompetenceCategorieRepository extends ServiceEntityRepository
     public function findAll()
     {
         return $this->createQueryBuilder('c')
-//            ->leftJoin('c.competences', 'competences')->addSelect('competences')
-//            ->leftJoin('competences.technologie', 'technologie')->addSelect('technologie')
-//            ->leftJoin('competences.niveau', 'niveau')->addSelect('niveau')
+            ->leftJoin('c.competences', 'competences')->addSelect('competences')
+            ->leftJoin('competences.technologie', 'technologie')->addSelect('technologie')
+            ->leftJoin('competences.niveau', 'niveau')->addSelect('niveau')
             ->orderBy('c.ordre', 'ASC')
             ->getQuery()
             ->getResult();

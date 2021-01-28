@@ -2,14 +2,18 @@
 
 namespace App\Controller\Dashboard\CV;
 
+use App\Controller\CuriculumVitaeController;
 use App\Entity\Main\CV\Competence;
 use App\Entity\Main\CV\CompetenceCategorie;
 use App\Entity\Main\CV\Technologie;
 use App\Form\CV\CompetenceCategorieType;
 use App\Form\CV\CompetenceType;
 use App\Form\CV\TechnologieType;
+use App\Utils\Assets\AssetsResponse;
+use App\Utils\StringHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +31,16 @@ class AdminSkillsController extends AbstractController
     {
         $this->em = $em;
         $this->translator = $translator;
+    }
+
+    public static function RemoveSkillCache(EntityManagerInterface $em, AdapterInterface $cache): void
+    {
+        $keys = [StringHelper::strRemoveCacheKey(CuriculumVitaeController::CACHE_KEY_TECHNOLOGIE)];
+        $_ts = $em->getRepository(Technologie::class)->findAll();
+        foreach ($_ts as $t) {
+            $keys[] = AssetsResponse::CacheKey($t->getImage(), $t->getSlug(), $t->getImageExtension(), CuriculumVitaeController::TECHNOLOGIES_SIZE_WIDTH);
+        }
+        $cache->deleteItems($keys);
     }
 
     /**

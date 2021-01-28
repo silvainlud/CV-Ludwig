@@ -6,36 +6,31 @@
     <h1 class="text-center">Mes réalisations</h1>
     <div class="container">
         <div class="row justify-content-center mt-5">
-            {% cache realisations %}
-                {% for s in realisations %}
-                    <div class="col-lg-4 col-md-6 col-12 mb-5 mt-2 px-xl-5 px-md-4 p-0">
-                        <div class="card card-media">
-                            {% cache s.mainImage %}
-                                {% if s.mainImage  != null %}
-                                    <img src="{{ path('cv-making-img', {"rea" : s.mainImage.id}) }}" alt=""
-                                         class="card-media-circle">
-                                {% endif %}
-                            {% endcache %}
-                            <div class="card-body card-centered card-body_maximize">
-                                <h2>{{ s.name }}</h2>
-                                <p class="text-justify">
-                                    {{ s.preface }}
-                                </p>
-                            </div>
-                            <div class="card-footer justify-content-end">
-                                <a href="{{ path('cv-making-view', {'slug': s.slug}) }}"
-                                   class="app-btn app-btn-light-blue app-btn-small">
-                                    Voir plus
-                                </a>
-                            </div>
+            {% for s in realisations %}
+                <div class="col-lg-4 col-md-6 col-12 mb-5 mt-2 px-xl-5 px-md-4 p-0">
+                    <div class="card card-media">
+                        {% if s.mainImage  != null %}
+                            <img src="{{ path('cv-making-img', {"rea" : s.mainImage.id}) }}" alt=""
+                                 class="card-media-circle">
+                        {% endif %}
+                        <div class="card-body card-centered card-body_maximize">
+                            <h2>{{ s.name }}</h2>
+                            <p class="text-justify">
+                                {{ s.preface }}
+                            </p>
+                        </div>
+                        <div class="card-footer justify-content-end">
+                            <a href="{{ path('cv-making-view', {'slug': s.slug}) }}" class="app-btn app-btn-light-blue app-btn-small">
+                                Voir plus
+                            </a>
                         </div>
                     </div>
-                {% else %}
-                    <div class="col-12 mt-5 mb-14">
-                        <p class="text-center" style="text-indent: 0">Aucune réalisation ;(</p>
-                    </div>
-                {% endfor %}
-            {% endcache %}
+                </div>
+            {% else %}
+                <div class="col-12 mt-5 mb-14">
+                    <p class="text-center" style="text-indent: 0">Aucune réalisation ;(</p>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

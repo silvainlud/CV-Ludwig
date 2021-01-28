@@ -70,11 +70,11 @@ class Service implements CacheableInterface
     private string $slug;
 
     /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="ServiceCreation")
+     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false,name="ServiceCreation")
      */
     private \DateTimeInterface $dateCreated;
     /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="ServiceEdition")
+     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false,name="ServiceEdition")
      */
     private \DateTimeInterface $dateModified;
 

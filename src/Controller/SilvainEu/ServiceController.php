@@ -26,8 +26,17 @@ class ServiceController extends AbstractController
      */
     public function Hub(): Response
     {
+        $i = $this->cache->getItem(self::CACHE_KEY_SERVICES);
+        if (!$i->isHit()) {
+            $i->set($this->getDoctrine()->getRepository(Service::class)->findAll());
+            $this->cache->save($i);
+        }
+
+        /** @var Service[] $services */
+        $services = $i->get();
+
         return $this->render('index/silvain.eu/index.html.twig', [
-            'services' => $this->getDoctrine()->getRepository(Service::class)->findAll(),
+            'services' => $services,
         ]);
     }
 
