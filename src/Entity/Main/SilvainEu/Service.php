@@ -3,6 +3,7 @@
 namespace App\Entity\Main\SilvainEu;
 
 use App\Repository\Main\SilvainEu\ServiceRepository;
+use App\Twig\Cache\CacheableInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -13,8 +14,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=ServiceRepository::class)
  * @ORM\Table(name="SilvainEu_Service")
  * @UniqueEntity(fields={"name"})
+ * @ORM\HasLifecycleCallbacks
  */
-class Service
+class Service implements CacheableInterface
 {
     /**
      * @ORM\Id
@@ -66,6 +68,21 @@ class Service
      * @Assert\Length(max="128")
      */
     private string $slug;
+
+    /**
+     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false,name="ServiceCreation")
+     */
+    private \DateTimeInterface $dateCreated;
+    /**
+     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false,name="ServiceEdition")
+     */
+    private \DateTimeInterface $dateModified;
+
+    public function __construct()
+    {
+        $this->dateCreated = new \DateTime();
+        $this->dateModified = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -189,5 +206,27 @@ class Service
         }
 
         return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->dateModified;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist(): void
+    {
+        $this->preUpdate();
+        $this->dateCreated = $this->dateModified;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate(): void
+    {
+        $this->dateModified = new \DateTime();
     }
 }
