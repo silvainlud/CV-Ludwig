@@ -102,11 +102,11 @@ class Realisation implements CacheableInterface
     protected Collection $technologies;
 
     /**
-     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false, name="RealisationCreation")
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="RealisationCreation")
      */
     private \DateTimeInterface $dateCreated;
     /**
-     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false, name="RealisationEdition")
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="RealisationEdition")
      */
     private \DateTimeInterface $dateModified;
 

@@ -34,11 +34,11 @@ abstract class RealisationImage implements CacheableInterface
     protected $image;
 
     /**
-     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false,name="RealisationImageCreation")
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="RealisationImageCreation")
      */
     private \DateTimeInterface $dateCreated;
     /**
-     * @ORM\Column(type="datetime", options={"default" : "CURRENT_TIMESTAMP"}, nullable=false,name="RealisationImageEdition")
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="RealisationImageEdition")
      */
     private \DateTimeInterface $dateModified;
 

@@ -20,9 +20,7 @@ class CompetenceSubscriber implements EventSubscriberInterface
     private SluggerInterface $slugger;
 
     private AdapterInterface $cache;
-    /**
-     * @var EntityManagerInterface
-     */
+
     private EntityManagerInterface $em;
 
     public function __construct(SluggerInterface $slugger, AdapterInterface $cache, EntityManagerInterface $em)
