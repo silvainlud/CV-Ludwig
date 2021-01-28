@@ -40,10 +40,12 @@
                                     <div class="card-footer_spacer"></div>
                                     <div class="card-footer_icon mt-3">
                                         {% if s.autoditacte %}
-                                            <i class="fas fa-home"></i>
+                                            <i class="fas fa-home"
+                                               title="{{ "cv.skills.skill.attr.autoditacte"|trans }}"></i>
                                         {% endif %}
                                         {% if s.scolaire %}
-                                            <i class="fas fa-graduation-cap"></i>
+                                            <i class="fas fa-graduation-cap"
+                                               title="{{ "cv.skills.skill.attr.scolaire"|trans }}"></i>
                                         {% endif %}
                                     </div>
                                 </div>
