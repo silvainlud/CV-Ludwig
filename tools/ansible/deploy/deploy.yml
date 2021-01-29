@@ -9,3 +9,4 @@
         file: "{{ playbook_dir }}/vars/prod.yml"
     - include_role:
         name: "ansistrano.deploy"
+      become: yes

@@ -1,20 +1,27 @@
 ---
 kind: pipeline
 type: docker
-name: UnitTest
+name: Test
 
 workspace:
   path: /drone/src
 
 
 steps:
-  - name: Composer
+  - name: Symfony Check Security
     image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
     commands:
-      - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+      - symfony
     volumes:
       - name: composer
         path: /drone/src/vendor/
+  - name: Composer
+      image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
+      commands:
+        - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+      volumes:
+        - name: composer
+          path: /drone/src/vendor/
   - name: Yarn
     image: node
     commands:
@@ -125,3 +132,6 @@ trigger:
     - promote
   target:
     - production
+
+depends_on:
+  - Test
