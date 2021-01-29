@@ -99,15 +99,12 @@ steps:
   - name: Ansible
     image: williamyeh/ansible:centos7
     commands:
-      - which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )
       - eval $(ssh-agent -s)
       - mkdir -p ~/.ssh
       - chmod 700 ~/.ssh
       - echo "$remoteurl" | tr -d '\r' | ssh-add -
-      - ssh-keyscan github.com >> ~/.ssh/known_hosts
-      - chmod 644 ~/.ssh/known_hosts
       - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config'
-      - echo -e "${ansible_vault}" > secret.txt
+      - echo "$ansible_vault" > /drone/src/secret.txt
       - ansible-playbook -i /drone/src/tools/ansible/deploy/inventory --extra-vars "ansible_user=$ansible_user ansible_become_pass=$ansible_sudo_pass ansible_become_user=$ansible_become_user" --vault-password-file secret.txt /drone/src/tools/ansible/deploy/deploy.yml
       - rm secret.txt
     environment:
