@@ -9,9 +9,9 @@ workspace:
 
 steps:
   - name: SymfonyCheckSecurity
-    image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
-    commands:
-      - symfony security:check
+      image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
+      commands:
+        - symfony security:check
   - name: Composer
       image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
       commands:
