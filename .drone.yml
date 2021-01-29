@@ -1,20 +1,17 @@
 ---
 kind: pipeline
 type: docker
-name: Test
+name: UnitTest
 
 workspace:
   path: /drone/src
 
 
 steps:
-  - name: Symfony Check Security
+  - name: SymfonyCheckSecurity
     image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
     commands:
-      - symfony
-    volumes:
-      - name: composer
-        path: /drone/src/vendor/
+      - symfony security:check
   - name: Composer
       image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
       commands:
@@ -89,8 +86,9 @@ steps:
     environment:
       remoteurl:
         from_secret: Git
+
 depends_on:
-  - Test
+  - UnitTest
 
 trigger:
   branch:
@@ -127,9 +125,6 @@ steps:
       ansible_vault:
         from_secret: AnsibleVault
 
-depends_on:
-  - Test
-
 trigger:
   branch:
     - master
@@ -137,4 +132,3 @@ trigger:
     - promote
   target:
     - production
-
