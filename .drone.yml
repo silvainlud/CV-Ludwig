@@ -89,6 +89,8 @@ steps:
     environment:
       remoteurl:
         from_secret: Git
+depends_on:
+  - Test
 
 trigger:
   branch:
@@ -125,6 +127,9 @@ steps:
       ansible_vault:
         from_secret: AnsibleVault
 
+depends_on:
+  - Test
+
 trigger:
   branch:
     - master
@@ -133,5 +138,3 @@ trigger:
   target:
     - production
 
-depends_on:
-  - Test
