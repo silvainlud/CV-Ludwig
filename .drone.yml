@@ -97,6 +97,7 @@ workspace:
 
 steps:
   - name: Ansible
+    image: williamyeh/ansible:centos7
     commands:
       - which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )
       - eval $(ssh-agent -s)
@@ -121,6 +122,8 @@ steps:
         from_secret: AnsibleVault
 
 trigger:
+  branch:
+    - master
   event:
     - promote
   target:
