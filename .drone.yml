@@ -9,16 +9,16 @@ workspace:
 
 steps:
   - name: SymfonyCheckSecurity
-      image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
-      commands:
-        - symfony security:check
+    image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
+    commands:
+      - symfony security:check
   - name: Composer
-      image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
-      commands:
-        - composer install --prefer-dist --no-ansi --no-interaction --no-progress
-      volumes:
-        - name: composer
-          path: /drone/src/vendor/
+    image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
+    commands:
+      - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+    volumes:
+      - name: composer
+        path: /drone/src/vendor/
   - name: Yarn
     image: node
     commands:
