@@ -92,9 +92,6 @@ steps:
       remoteurl:
         from_secret: Git
 
-depends_on:
-  - Test
-
 trigger:
   branch:
     - master
