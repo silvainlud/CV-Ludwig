@@ -11,7 +11,8 @@ use Twig\Node\Node;
  * Class CacheNode.
  *
  * @author Grafikart
- * https://github.com/Grafikart/Grafikart.fr/blob/master/src/Core/Twig/CacheExtension/CacheNode.php
+ *
+ * @see https://github.com/Grafikart/Grafikart.fr/blob/master/src/Core/Twig/CacheExtension/CacheNode.php
  */
 class CacheNode extends Node
 {

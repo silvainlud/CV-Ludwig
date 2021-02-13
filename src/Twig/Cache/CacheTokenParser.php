@@ -9,7 +9,8 @@ use Twig\TokenParser\AbstractTokenParser;
  * Class CacheTokenParser.
  *
  * @author Grafikart
- * https://github.com/Grafikart/Grafikart.fr/blob/master/src/Core/Twig/CacheExtension/CacheTokenParser.php
+ *
+ * @see https://github.com/Grafikart/Grafikart.fr/blob/master/src/Core/Twig/CacheExtension/CacheTokenParser.php
  */
 class CacheTokenParser extends AbstractTokenParser
 {
