@@ -27,7 +27,7 @@
                                        >
                                         <img src="{{ path('cv-technology_icon',{'slug': s.technologie.slug }) }}"
                                              alt="">
-                                    </{% if s.technologie.link != null %}a{{ s.technologie.link }}"{% else %}div{% endif %}>
+                                    </{% if s.technologie.link != null %}a{% else %}div{% endif %}>
                                     <h2 class="mt-4">{{ s.technologie.name }}</h2>
                                     <p>
                                         {{ s.technologie.description }}

@@ -42,17 +42,8 @@ class CuriculumVitaeController extends AbstractController
      */
     public function my_skills(): Response
     {
-        $i = $this->cache->getItem(self::CACHE_KEY_TECHNOLOGIE);
-        if (!$i->isHit()) {
-            $i->set($this->getDoctrine()->getRepository(CompetenceCategorie::class)->findAll());
-            $this->cache->save($i);
-        }
-
-        /** @var CompetenceCategorie[] $skills */
-        $skills = $i->get();
-
         return $this->render('index/cv/my_skills.twig', [
-            'skills' => $skills,
+            'skills' => $this->getDoctrine()->getRepository(CompetenceCategorie::class)->findAll(),
         ]);
     }
 
