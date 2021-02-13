@@ -89,4 +89,5 @@ contact:
     email: Addresse email
     message: Message
   error:
-    need-to-wait: "Vous ne pouvez pas envoyer plusieurs mails le même jours, veuilliez revenir plus tard."
+    need-to-wait: "Vous ne pouvez pas envoyer plusieurs mails le même jour, veuilliez revenir plus tard."
+  send: "Votre message a bien été envoyé."

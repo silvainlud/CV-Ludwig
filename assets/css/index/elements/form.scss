@@ -12,10 +12,17 @@ $form_col-size: (
 
   & > label {
     margin: 5px 0 1px 5px;
-    color: #525858;
+    color: var(--color-text);
+    font-size: 18px;
   }
 
-  & > input {
+  & > textarea {
+    min-height: 250px;
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  & > input, & > textarea {
     background: var(--color-input-background);
     margin: 3px 0 5px 0;
     padding: 14px 10px;
@@ -29,11 +36,11 @@ $form_col-size: (
     font-family: Roboto, sans-serif;
     font-style: normal;
     font-weight: 400;
-    color: darken(#999999, 5%);
+    color: var(--color-input-color);
     font-size: 16px;
 
     &::placeholder {
-      color: #999999;
+      color: var(--color-input-border);
     }
 
     &:focus {
@@ -68,24 +75,45 @@ $form_col-size: (
   }
 }
 
+
 .form-zone {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  @each $unit, $size in $form_col-size {
-    .flex-col-#{$unit} {
-      width: $size;
-      @extend %form-row;
-    }
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px 15px;
+
+  @media screen and (max-width: 800px) {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .form-row {
-    width: 100%;
+  ul {
+    grid-column: 1 / -1;
+  }
+
+  .form-col {
+    grid-column: span 2;
     @extend %form-row;
   }
 
+  .form-row {
+    grid-column: 1 / -1;
+    @extend %form-row;
+  }
+
+
+  ul {
+    margin: 5px 0;
+    padding-left: 15px;
+    list-style: none;
+
+    li {
+      font-size: 0.9em;
+      color: darken($red_color, 14%);
+    }
+  }
+
   .form-alert {
-    width: 100%;
+
+    grid-column: 1 / -1;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -106,7 +134,6 @@ $form_col-size: (
     }
   }
 
-
   .form-checkbox {
     grid-column: 1 / -1;
     display: flex;
@@ -123,12 +150,13 @@ $form_col-size: (
   }
 
   .form-submit {
-    width: 100%;
+    grid-column: 1 / -1;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-end;
     flex-wrap: wrap;
     align-self: center;
+    align-items: center;
 
     & > * {
       margin: 5px;
@@ -150,5 +178,4 @@ $form_col-size: (
     }
 
   }
-
 }

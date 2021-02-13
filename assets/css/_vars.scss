@@ -47,6 +47,12 @@ $colors: (
         'grey' : $grey_color,
 );
 
+@each $class, $color in $colors {
+  .color-#{$class} {
+    color: var(--color-#{$class});
+  }
+}
+
 :root, .theme-light {
   @each $class, $color in $colors {
     --color-#{$class} : #{$color};
@@ -64,9 +70,10 @@ $colors: (
   --color-card-footer-border: #EAE8E8;
   --color-main-background: #ECF0F1;
 
+  --color-input-color: #{$default_text_color};
   --color-input-background: #F8FAFE;
-  --color-input-border: #DFE4F3;
-  --color-input-border_focus: darken(#DFE4F3, 2%);
+  --color-input-border: #ccd2e5;
+  --color-input-border_focus: #a2aac3;
 }
 
 @mixin DarkMode() {
@@ -95,7 +102,8 @@ $colors: (
   --color-card-footer-border: #33475a;
   --color-main-background: #{$menu_background};
 
+  --color-input-color: #ecf0f1;
   --color-input-background: #47586a;
-  --color-input-border: #2d3b47;
-  --color-input-border_focus: darken(#2d3b47, 2%);
+  --color-input-border: #607484;
+  --color-input-border_focus: #748ea3;
 }

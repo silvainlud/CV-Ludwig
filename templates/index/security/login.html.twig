@@ -18,12 +18,14 @@
                                 </div>
                             {% endif %}
                             <div class="form-row">
-                                <input placeholder="Nom d'utilisateur" type="email" value="{{ last_username }}"
+                                <label for="inputEmail">Nom d'utilisateur</label>
+                                <input type="email" value="{{ last_username }}"
                                        name="email"
                                        id="inputEmail" class="form-control" required autofocus>
                             </div>
                             <div class="form-row">
-                                <input placeholder="Mot de passe" type="password" name="password" id="inputPassword"
+                                <label for="inputPassword">Mot de passe</label>
+                                <input type="password" name="password" id="inputPassword"
                                        class="form-control" required>
                             </div>
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -39,7 +41,7 @@
                             </div>
                             #}
 
-                            <div class="d-flex w-100 mt-4 mb-7 align-items-center flex-sm-row flex-column-reverse">
+                            <div class="form-submit">
                                 <a href="">Mot de passe oublié ?</a>
                                 <div class="flex-grow-1"></div>
                                 <button class="app-btn app-btn-small app-btn-green"
