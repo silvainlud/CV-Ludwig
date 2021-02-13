@@ -2,7 +2,7 @@
     <img src="{{ asset('favicon_256.png') }}" alt="Logo de silvain.eu">
     <div class="header_separate  d-sm-block d-none"></div>
     <nav>
-        <ul class="d-md-block d-none header_menu-list">
+        <ul class=" header_menu-list">
             <li><a href="{{ path('index') }}">Accueil</a></li>
             <li><a href="{{ path('cv-my_career') }}">Parcours</a></li>
             <li><a href="{{ path('cv-my_skills') }}">Compétences</a></li>
@@ -39,8 +39,8 @@
 
         <div class="d-md-none d-flex align-items-center">
             <div class="header_separate"></div>
-            <button class="app-nav-btn-text  d-md-none" title="{{ 'general.menu.sign-in'|trans }}">
-                <i class="fas fa-bars"></i>
+            <button class="app-nav-btn-text hambuger_icon  d-md-none" title="{{ 'general.menu.sign-in'|trans }}">
+                <span></span>
             </button>
         </div>
     </nav>

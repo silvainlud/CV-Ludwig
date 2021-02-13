@@ -1,12 +1,7 @@
-test-r {
-  background-color: red;
-
-  button {
-    background-color: pink;
-  }
-}
+@import "menu_top_nav";
 
 header {
+  z-index: 2;
   background: $menu_background;
   display: flex;
   flex-direction: row;
@@ -30,6 +25,7 @@ header {
 
   }
 
+
   & > nav {
     flex: 1 0 auto;
     display: flex;
@@ -37,15 +33,8 @@ header {
     box-sizing: border-box;
     align-items: center;
 
-    & > ul.header_menu-list {
-      list-style: none;
-      padding: 0;
-
-      li {
-        display: inline;
-      }
-
-    }
+    @extend %menu_top_nav;
+    @extend %menu_top_nav_2;
 
     p, a {
       padding: 4px 10px;
@@ -72,12 +61,14 @@ header {
       border: 1px solid $menu_color;
       padding: 7px 15px;
       cursor: pointer;
+      transition: color 0.3s, background-color 0.3s, color 0.3s;
+
 
       &:hover {
-        transition: color 0.3s, background-color 0.3s, color 0.3s;
         border-color: lighten($menu_color, 20%);
         background: transparentize(white, 0.9);
       }
+
     }
 
 
@@ -92,9 +83,13 @@ header {
       background: none;
       border: none;
       font-family: Roboto, sans-serif;
+      transition: color 0.3s;
+
+      &.hambuger_icon {
+        @extend %hamburger_icon;
+      }
 
       &:hover {
-        transition: color 0.3s;
         color: lighten($menu_color, 20%);
       }
     }
