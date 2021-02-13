@@ -5,6 +5,7 @@ namespace App\Services\Contact;
 use App\Entity\Main\ContactLog;
 use App\Utils\Helpers\Contact\ContactMe;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Mailer\MailerInterface;
 
@@ -13,17 +14,10 @@ class ContactMeFactory implements ContactMeFactoryInterface
     public const timeBetweenTry = '1  days';
     public const emailTo = 'contact@silvain.eu';
 
-    /**
-     * @var RequestStack
-     */
     private RequestStack $requestStack;
-    /**
-     * @var EntityManagerInterface
-     */
+
     private EntityManagerInterface $em;
-    /**
-     * @var MailerInterface
-     */
+
     private MailerInterface $mailer;
 
     public function __construct(RequestStack $requestStack, EntityManagerInterface $em, MailerInterface $mailer)
@@ -35,15 +29,23 @@ class ContactMeFactory implements ContactMeFactoryInterface
 
     public function canSendMessage(): bool
     {
+        $currentRequest = $this->requestStack->getCurrentRequest();
+        if (null === $currentRequest) {
+            return false;
+        }
         /** @var ?ContactLog $log */
-        $log = $this->em->getRepository(ContactLog::class)->findLastByIp((string) $this->requestStack->getCurrentRequest()->getClientIp());
+        $log = $this->em->getRepository(ContactLog::class)->findLastByIp((string) $currentRequest->getClientIp());
 
-        return null === $log || $log->getDateCreated() < (new \DateTime())->sub(date_interval_create_from_date_string(self::timeBetweenTry));
+        $intervale = date_interval_create_from_date_string(self::timeBetweenTry);
+
+        return null === $log || (false !== $intervale && $log->getDateCreated() < (new \DateTime())->sub($intervale));
     }
 
     public function sendMessage(ContactMe $contactMe): void
     {
-        $log = new ContactLog((string) $this->requestStack->getCurrentRequest()->getClientIp());
+        /** @var Request $currentRequest */
+        $currentRequest = $this->requestStack->getCurrentRequest();
+        $log = new ContactLog((string) $currentRequest->getClientIp());
         $this->em->persist($log);
         $this->em->flush();
         $this->mailer->send($contactMe->makeEmail(self::emailTo));
