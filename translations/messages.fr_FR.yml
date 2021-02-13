@@ -69,6 +69,7 @@ general:
     administration: Administration
     sign-in: Se connecter
     sign-out: Se déconnecter
+    contact-me: "Me contacter"
   title:
     legal-notice: Mentions légales
     list-services: Liste des services
@@ -82,4 +83,10 @@ silvaineu:
     title:
       add: Ajouter un service
       edit: Éditer un service
-
+contact:
+  attr:
+    name: Nom
+    email: Addresse email
+    message: Message
+  error:
+    need-to-wait: "Vous ne pouvez pas envoyer plusieurs mails le même jours, veuilliez revenir plus tard."

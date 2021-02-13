@@ -1,0 +1,22 @@
+{% extends 'index/base.html.twig' %}
+
+{% block title %}
+    {{ "general.menu.contact-me"|trans|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center">{{ "general.menu.contact-me"|trans|title }}</h1>
+                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut commodi debitis
+                    dignissimos eaque eos ipsum minima neque nihil, numquam obcaecati omnis quidem quos sunt tempora vel
+                    voluptatem voluptates? Fuga, sed?</p>
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
