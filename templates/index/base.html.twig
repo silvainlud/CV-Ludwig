@@ -7,26 +7,10 @@
         {% set _title = _title ~ ' | ' %}
     {% endif %}
     {% set _title = _title ~  'site_name'|trans %}
-    <meta charset="UTF-8">
-    <meta name="title" content="{{ _title -}}">
-    <meta name="description" content="Curiculum Vitae de Ludwig SILVAIN (Développeur informatique)">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://dev.silvain.eu/">
-    <meta property="og:title" content="{{ _title -}}">
-    <meta property="og:description" content="Ludwig SILVAIN (Développeur informatique)">
-    <meta property="og:image" content="{{ absolute_url(asset('img/site-screen.png')) }}">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://dev.silvain.eu/">
-    <meta property="twitter:title" content="{{ _title -}}">
-    <meta property="twitter:description" content="Ludwig SILVAIN (Développeur informatique)">
-    <meta property="twitter:image" content="{{ absolute_url(asset('img/site-screen.png')) }}">
 
     <title>{% block title %}{% endblock %} {% if block('title') is not empty %}| {% endif -%}{{ "site_name"|trans }}</title>
-    {% include('index/include/header.html.twig') with {} only %}
+    {% include('index/include/header.html.twig') with {"_title" : _title} only %}
+
     {% block head %}{% endblock %}
     {% block  stylesheet %}{% endblock %}
     {% for js in encore_entry_js_files('index-main') %}

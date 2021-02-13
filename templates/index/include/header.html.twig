@@ -1,5 +1,26 @@
+
+<meta charset="UTF-8">
+<meta name="title" content="{{ _title -}}">
+<meta name="description" content="Curiculum Vitae de Ludwig SILVAIN (Développeur informatique)">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dev.silvain.eu/">
+<meta property="og:title" content="{{ _title -}}">
+<meta property="og:description" content="Ludwig SILVAIN (Développeur informatique)">
+<meta property="og:image" content="{{ absolute_url(asset('img/site-screen.png')) }}">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://dev.silvain.eu/">
+<meta property="twitter:title" content="{{ _title -}}">
+<meta property="twitter:description" content="Ludwig SILVAIN (Développeur informatique)">
+<meta property="twitter:image" -content="{{ absolute_url(asset('img/site-screen.png')) }}">
+
+<title>{% block title %}{% endblock %} {% if block('title') is not empty %}| {% endif -%}{{ "site_name"|trans }}</title>
+
 {{ encore_entry_link_tags('css/index/main') }}
-<meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+<meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
       name="viewport"/>
 <link rel="stylesheet" href="{{ asset('css/fontawesome/css/all.css') }}">
 <link rel="shortcut icon" type="image/png" href="{{ asset('favicon.png') }}"/>
