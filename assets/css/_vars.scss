@@ -74,6 +74,10 @@ $colors: (
   --color-input-background: #F8FAFE;
   --color-input-border: #ccd2e5;
   --color-input-border_focus: #a2aac3;
+
+  &.theme-light .is-theme-dark {
+    display: none !important;
+  }
 }
 
 @mixin DarkMode() {
@@ -106,4 +110,7 @@ $colors: (
   --color-input-background: #47586a;
   --color-input-border: #607484;
   --color-input-border_focus: #748ea3;
+  .is-theme-light {
+    display: none !important;
+  }
 }
