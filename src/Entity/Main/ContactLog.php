@@ -21,7 +21,7 @@ class ContactLog
      */
     protected int $id;
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=32)
      */
     protected string $ipAddress;
     /**
