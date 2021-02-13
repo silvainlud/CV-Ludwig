@@ -8,8 +8,9 @@
     {% endif %}
     {% set _title = _title ~  'site_name'|trans %}
 
-    <title>{% block title %}{% endblock %} {% if block('title') is not empty %}| {% endif -%}{{ "site_name"|trans }}</title>
     {% include('index/include/header.html.twig') with {"_title" : _title} only %}
+    <title>{% block title %}{% endblock %} {% if block('title') is not empty %}| {% endif -%}{{ "site_name"|trans }}</title>
+
 
     {% block head %}{% endblock %}
     {% block  stylesheet %}{% endblock %}
