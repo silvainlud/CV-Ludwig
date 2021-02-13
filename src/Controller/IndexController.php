@@ -24,8 +24,6 @@ class IndexController extends AbstractController
 
     /**
      * @Route("/contact", name="contact")
-     *
-     * @return Response
      */
     public function ContactMe(Request $request, ContactMeFactory $contactMeFactory, TranslatorInterface $translator): Response
     {

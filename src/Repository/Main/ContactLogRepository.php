@@ -14,9 +14,6 @@ class ContactLogRepository extends ServiceEntityRepository
         parent::__construct($registry, ContactLog::class);
     }
 
-    /**
-     * @return ContactLog|null
-     */
     public function findLastByIp(string $ipAddress): ?ContactLog
     {
         return $this->createQueryBuilder('contact')

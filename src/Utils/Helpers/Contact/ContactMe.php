@@ -9,31 +9,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 class ContactMe
 {
     /**
-     * @Assert\NotBlank()
+     * @Assert\NotBlank
      * @Assert\Length(max=32)
-     *
-     * @var string
      */
     protected string $name;
     /**
-     * @Assert\NotBlank()
-     * @Assert\Email()
+     * @Assert\NotBlank
+     * @Assert\Email
      * @Assert\Length(max=32)
-     *
-     * @var string
      */
     protected string $email;
     /**
      * @Assert\Length(max=1000, min=15)
-     * @Assert\NotBlank()
-     *
-     * @var string
+     * @Assert\NotBlank
      */
     protected string $message;
 
-    /**
-     * @return string
-     */
     public function getMessage(): string
     {
         return $this->message;
@@ -46,9 +37,6 @@ class ContactMe
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
@@ -61,9 +49,6 @@ class ContactMe
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
