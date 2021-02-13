@@ -33,8 +33,8 @@ header {
     box-sizing: border-box;
     align-items: center;
 
+    @extend %menu_top_nav_responsive;
     @extend %menu_top_nav;
-    @extend %menu_top_nav_2;
 
     p, a {
       padding: 4px 10px;

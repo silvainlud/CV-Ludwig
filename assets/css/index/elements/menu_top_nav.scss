@@ -1,4 +1,4 @@
-%menu_top_nav {
+%menu_top_nav_responsive {
 
   & > ul.header_menu-list {
     &.is-opened {
@@ -36,7 +36,7 @@
 
 }
 
-%menu_top_nav_2 {
+%menu_top_nav {
   @include media-breakpoint-up(md) {
     & > ul.header_menu-list {
       display: list-item;
@@ -55,6 +55,10 @@
         display: inline;
         text-align: unset;
         padding: initial;
+
+        a {
+          color: #8494A4;
+        }
       }
     }
   }

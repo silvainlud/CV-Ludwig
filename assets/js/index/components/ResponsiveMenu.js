@@ -1,11 +1,4 @@
 export function loadBtnMenu(x) {
-    document.querySelectorAll(".header_menu-list").forEach(y => {
-        y.querySelectorAll("a").forEach(a => {
-            a.addEventListener("click", function () {
-                x.click();
-            });
-        })
-    });
 
     x.addEventListener("click", function (e) {
         e.preventDefault();
