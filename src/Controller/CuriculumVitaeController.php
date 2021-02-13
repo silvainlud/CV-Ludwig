@@ -90,7 +90,7 @@ class CuriculumVitaeController extends AbstractController
     }
 
     /**
-     * @Route("/cv/realisation/img/{rea}", name="cv-making-img")
+     * @Route("/realisation/img/{rea}", name="cv-making-img")
      * @ParamConverter("_r", options={"mapping": {"rea": "id"}})
      */
     public function making_image(RealisationImage $_r): Response
@@ -107,7 +107,7 @@ class CuriculumVitaeController extends AbstractController
     }
 
     /**
-     * @Route("/cv/realisation/{slug}", name="cv-making-view")
+     * @Route("/realisation/{slug}", name="cv-making-view")
      */
     public function making_view(string $slug, RealisationRepository $realisationRepository): Response
     {
