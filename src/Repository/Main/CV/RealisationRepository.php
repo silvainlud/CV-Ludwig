@@ -44,7 +44,7 @@ class RealisationRepository extends ServiceEntityRepository
     {
         $qd = $this->createQueryBuilder('t')
             ->orderBy('t.dateRelease', 'DESC')
-            ->orderBy('t.name', 'ASC')
+            ->addOrderBy('t.name', 'ASC')
             ->leftJoin('t.mainImage', 'mainImage')->addSelect('mainImage');
 
         if ($needPublic) {
