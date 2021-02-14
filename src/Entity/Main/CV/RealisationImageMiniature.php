@@ -31,9 +31,8 @@ class RealisationImageMiniature extends RealisationImage
         return $this;
     }
 
-    public function preUpdate(): void
+    public function postUpdate(): void
     {
-        parent::preUpdate();
         $this->realisation->preUpdate();
     }
 }

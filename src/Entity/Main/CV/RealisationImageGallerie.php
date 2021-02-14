@@ -30,9 +30,8 @@ class RealisationImageGallerie extends RealisationImage
         return $this;
     }
 
-    public function preUpdate(): void
+    public function postUpdate(): void
     {
-        parent::preUpdate();
         $this->realisations->preUpdate();
     }
 }

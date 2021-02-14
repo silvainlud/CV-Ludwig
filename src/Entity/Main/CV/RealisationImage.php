@@ -111,7 +111,7 @@ abstract class RealisationImage implements CacheableInterface
     /**
      * @ORM\PrePersist
      */
-    public function prePersist(): void
+    public function prePersist()
     {
         $this->preUpdate();
         $this->dateCreated = $this->dateModified;
@@ -125,8 +125,5 @@ abstract class RealisationImage implements CacheableInterface
         $this->dateModified = new \DateTime();
     }
 
-    public function postUpdate(): void
-    {
-        $this->preUpdate();
-    }
+    abstract public function postUpdate(): void;
 }
