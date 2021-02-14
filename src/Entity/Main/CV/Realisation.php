@@ -4,6 +4,7 @@ namespace App\Entity\Main\CV;
 
 use App\Repository\Main\CV\RealisationRepository;
 use App\Twig\Cache\CacheableInterface;
+use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -104,20 +105,24 @@ class Realisation implements CacheableInterface
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="RealisationCreation")
      */
-    private \DateTimeInterface $dateCreated;
+    private DateTimeInterface $dateCreated;
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="RealisationEdition")
      */
-    private \DateTimeInterface $dateModified;
+    private DateTimeInterface $dateModified;
 
     public function __construct()
     {
         $this->gallery = new ArrayCollection();
         $this->technologies = new ArrayCollection();
         $this->mainImage = null;
+        $this->timeToMake = null;
+        $this->company = null;
+        $this->dateRelease = null;
+        $this->link = null;
         $this->public = false;
-        $this->dateModified = new \DateTime();
-        $this->dateCreated = new \DateTime();
+        $this->dateModified = new DateTime();
+        $this->dateCreated = new DateTime();
     }
 
     public function getDescription(): string
@@ -333,6 +338,13 @@ class Realisation implements CacheableInterface
      */
     public function preUpdate(): void
     {
-        $this->dateModified = new \DateTime();
+        $this->dateModified = new DateTime();
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }

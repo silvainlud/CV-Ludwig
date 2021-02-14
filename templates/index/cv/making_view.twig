@@ -10,7 +10,15 @@
     <div class="container-fluid cv_article mb-10">
         <div class="row justify-content-center mt-5">
             <div class="col-xxl-8 col-12 cv_article_content">
-                <h1>{{ realisation.name }}</h1>
+                <h1>
+                    {{ realisation.name }}
+                    {% if realisation.public == false %}
+                        <div class=" m-2 app-badge app-badge-small app-badge-danger" style="display: inline-grid">
+                            <span>Non publié</span>
+                        </div>
+                    {% endif %}
+
+                </h1>
                 {% if realisation.mainImage !=null %}
                     <img src="{{ path('cv-making-img', {"rea" : realisation.mainImage.id }) }}"
                          alt="{{ realisation.name }} {{ "cv.making.attr.mainImage"|trans }}" class="art_miniature">
@@ -109,7 +117,6 @@
                             {% endif %}
 
                         {% endif %}
-
                     </div>
                 </div>
             </div>

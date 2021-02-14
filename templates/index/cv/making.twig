@@ -20,7 +20,14 @@
                             </p>
                         </div>
                         <div class="card-footer justify-content-end">
-                            <a href="{{ path('cv-making-view', {'slug': s.slug}) }}" class="app-btn app-btn-light-blue app-btn-small">
+                            {% if s.public == false %}
+                                <div class="m-2 app-badge app-badge-small app-badge-danger">
+                                    <span>Non publié</span>
+                                </div>
+                            {% endif %}
+                            <div class="flex-grow-1"></div>
+                            <a href="{{ path('cv-making-view', {'slug': s.slug}) }}"
+                               class="app-btn app-btn-light-blue app-btn-small">
                                 Voir plus
                             </a>
                         </div>

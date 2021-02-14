@@ -40,15 +40,19 @@ class RealisationRepository extends ServiceEntityRepository
     /**
      * @return array<Realisation>
      */
-    public function findAllWithImage(): ?array
+    public function findAllWithImage(bool $needPublic = true): ?array
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.public = :true')
-            ->setParameter('true', true)
+        $qd = $this->createQueryBuilder('t')
             ->orderBy('t.dateRelease', 'DESC')
             ->orderBy('t.name', 'ASC')
-            ->leftJoin('t.mainImage', 'mainImage')->addSelect('mainImage')
-            ->getQuery()
+            ->leftJoin('t.mainImage', 'mainImage')->addSelect('mainImage');
+
+        if ($needPublic) {
+            $qd->andWhere('t.public = :true')
+                ->setParameter('true', true);
+        }
+
+        return $qd->getQuery()
             ->getResult();
     }
 

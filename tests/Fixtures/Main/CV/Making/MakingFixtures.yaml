@@ -1,0 +1,14 @@
+App\Entity\Main\CV\Realisation:
+  making{1..10}:
+    name (unique): '<current()>'
+    description: '<paragraph(10)>'
+    preface: '<paragraph(2)>'
+    company: '<company()>'
+    dateRelease: '<dateTimeBetween("-200 days", "now")>'
+    public: '<boolean()>'
+    slug (unique): '<slug()>'
+
+App\Entity\Main\CV\RealisationImageMiniature:
+  public_{@making*}:
+    image: '<image()>'
+    realisation: '<current()>'

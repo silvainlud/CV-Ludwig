@@ -68,10 +68,18 @@ class CuriculumVitaeController extends AbstractController
      */
     public function making(RealisationRepository $realisationRepository): Response
     {
-        $i = $this->cache->getItem(self::CACHE_KEY_REALISATION);
-        if (!$i->isHit()) {
-            $i->set($realisationRepository->findAllWithImage());
-            $this->cache->save($i);
+        if ($this->isGranted('ROLE_PREVIEW_MAKING')) {
+            $i = $this->cache->getItem(self::CACHE_KEY_REALISATION . '_all');
+            if (!$i->isHit()) {
+                $i->set($realisationRepository->findAllWithImage(false));
+                $this->cache->save($i);
+            }
+        } else {
+            $i = $this->cache->getItem(self::CACHE_KEY_REALISATION);
+            if (!$i->isHit()) {
+                $i->set($realisationRepository->findAllWithImage());
+                $this->cache->save($i);
+            }
         }
 
         /** @var Realisation[] $makings */
@@ -86,7 +94,7 @@ class CuriculumVitaeController extends AbstractController
      */
     public function making_image(RealisationImage $_r): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN_CV')) {
+        if (!$this->isGranted('ROLE_PREVIEW_MAKING')) {
             if ($_r instanceof RealisationImageMiniature || $_r instanceof RealisationImageGallerie) {
                 if (!$_r->getRealisation()->isPublic()) {
                     throw $this->createNotFoundException();
