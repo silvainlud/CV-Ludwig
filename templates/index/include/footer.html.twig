@@ -39,26 +39,43 @@
                     <div class="container-fluid">
                         <div class="row">
                             {% set service = GetServicesFooter() %}
-                            {% for arrayService in service %}
+                            {%- for arrayService in service -%}
                                 <div class="col-6">
-                                    {% for s in arrayService %}
+                                    {%- for s in arrayService -%}
                                         <a href="{{ s[1] }}">{{ s[0] }}</a>
-                                    {% endfor %}
+                                    {%- endfor -%}
                                 </div>
-                            {% endfor %}
+                            {%- endfor -%}
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-4 col-12 px-xl-6 px-0 mt-xl-0 mt-6">
                     <h2>Ludwig SILVAIN</h2>
-                    <p>
-                        Alii nullo quaerente vultus severitate adsimulata patrimonia sua in inmensum extollunt, cultorum
-                        ut puta feracium multiplicantes annuos fructus.
+                    <p class="mb-2">
+                        Je suis développeur en informatique pincipalement orienté vers le web.
+                        Mais j'adore découvrir de nouvelles technologie.
                     </p>
+                    <ul class="me-media">
+                        <li class="media-github" title="Github">
+                            <a href="https://github.com/silvainlud/" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </li>
+                        <li class="media-linkedin" title="Linkedin">
+                            <a href="https://www.linkedin.com/in/ludwig-silvain" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </li>
+                        <li class="media-email" title="Email">
+                            <a href="mailto:contact@silvain.eu" target="_blank">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="col-12">
                     <p class="footer_copyright">Site réalisé par : Ludwig SILVAIN | Copyright © Ludwig
-                        SILVAIN {{ "now"|date('Y') }}</p>
+                        SILVAIN {{- "now"|date('Y') -}}</p>
                 </div>
             </div>
         </div>
