@@ -36,7 +36,7 @@ class AdminMakingController extends AbstractController
 
     public static function RemoveMakingCache(EntityManagerInterface $em, AdapterInterface $cache): void
     {
-        $keys = [StringHelper::strRemoveCacheKey(CuriculumVitaeController::CACHE_KEY_REALISATION)];
+        $keys = [StringHelper::strRemoveCacheKey(CuriculumVitaeController::CACHE_KEY_REALISATION), StringHelper::strRemoveCacheKey(CuriculumVitaeController::CACHE_KEY_REALISATION . '_all')];
         /** @var RealisationImage[] $_ts */
         $_ts = $em->getRepository(RealisationImage::class)->findAll();
         foreach ($_ts as $t) {

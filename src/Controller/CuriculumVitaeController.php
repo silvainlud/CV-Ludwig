@@ -69,7 +69,7 @@ class CuriculumVitaeController extends AbstractController
     public function making(RealisationRepository $realisationRepository): Response
     {
         if ($this->isGranted('ROLE_PREVIEW_MAKING')) {
-            $i = $this->cache->getItem(self::CACHE_KEY_REALISATION . '_all');
+            $i = $this->cache->getItem(StringHelper::strRemoveCacheKey(self::CACHE_KEY_REALISATION . '_all'));
             if (!$i->isHit()) {
                 $i->set($realisationRepository->findAllWithImage(false));
                 $this->cache->save($i);
