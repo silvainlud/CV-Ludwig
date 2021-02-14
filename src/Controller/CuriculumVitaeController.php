@@ -102,7 +102,7 @@ class CuriculumVitaeController extends AbstractController
             }
         }
 
-        return AssetsResponse::ReturnImgAdapterCache($this->cache, $_r->getImage(), (string) $_r->getId(), null, null);
+        return AssetsResponse::ReturnImgAdapterCache($this->cache, $_r->getImage(), (string) $_r->getId(), null, 850);
     }
 
     /**
