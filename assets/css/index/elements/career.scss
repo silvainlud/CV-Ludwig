@@ -1,0 +1,159 @@
+.career-zone {
+
+  display: grid;
+  grid-template-columns: 100px 100px 1fr;
+
+  @each $class, $color in $colors {
+
+    .career_icon {
+      &.career_icon-#{$class} {
+        img {
+          border-color: lighten($color, 15%);
+        }
+      }
+
+      .career_link_corner.career_link_corner-#{$class}, .career_link_sub.career_link_sub-#{$class} {
+        border-color: lighten($color, 10%);
+      }
+    }
+
+  }
+
+  .career_content {
+    margin-left: 20px;
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    padding: 25px 0;
+
+    &.career_content-sub {
+      grid-column: span 1;
+    }
+
+    grid-column: span 2;
+  }
+
+  .career_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    position: relative;
+    overflow: hidden;
+
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      border-radius: 100%;
+      border: 10px solid #5FAADD;
+      z-index: 1;
+    }
+
+    &:not(.career_icon_not_link):after {
+      content: " ";
+      flex-grow: 1;
+      background: #8CCCF6;
+      width: 5px;
+      min-height: 40px;
+      height: 100%;
+    }
+
+    &.career_icon_link-top:before {
+      content: " ";
+      background: #8CCCF6;
+      width: 5px;
+      height: 25px;
+    }
+
+    .career_link_sub {
+      position: absolute;
+      z-index: 0;
+      height: calc(50% + 35px);
+      max-height: 100%;
+
+      border-right: 5px dashed #8CCCF6;
+      bottom: 5px;
+      left: calc(50% + 14px);
+
+    }
+
+    .career_link_corner {
+      position: absolute;
+      z-index: 0;
+      height: 50%;
+      width: 50%;
+
+      border-left: 5px dashed #8CCCF6;
+      border-bottom: 5px dashed #8CCCF6;
+      top: 0;
+      left: calc(50% + 14px);
+
+    }
+
+    .career_link_tree_up, .career_link_tree_down {
+      position: absolute;
+      z-index: 0;
+      height: 50%;
+      width: 25%;
+
+      &.career_link_tree_up {
+        border-bottom: 5px dashed #8CCCF6;
+        top: 0;
+      }
+
+      &.career_link_tree_down {
+        border-top: 5px dashed #8CCCF6;
+        bottom: 0;
+      }
+
+      border-left: 5px dashed #8CCCF6;
+      right: 0;
+    }
+
+
+  }
+
+  .career_linker-elem {
+    display: flex;
+    position: relative;
+
+    .career_link_point {
+      height: 10px;
+      width: 10px;
+      margin: 0 auto;
+      background: #5BBAF9;
+      position: relative;
+      z-index: 1;
+
+    }
+
+    .career_link_point_middle {
+      height: 10px;
+      width: 10px;
+      margin: 0 auto;
+      background: #5BBAF9;
+      position: absolute;
+      top: calc(50% - 4.5px);
+      left: calc(50% + 25% - 2.5px);
+      z-index: 1;
+    }
+
+    &:after {
+      content: " ";
+      position: absolute;
+      top: calc(50% - 2.5px);
+      left: calc(50% + 2.5px);
+      width: 25%;
+      z-index: 0;
+      height: 5px;
+      border-top: 5px dashed #8CCCF6;
+    }
+
+  }
+
+}
