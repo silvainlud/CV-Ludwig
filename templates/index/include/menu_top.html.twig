@@ -7,9 +7,10 @@
             <li><a href="{{ path('cv-my_career') }}">Parcours</a></li>
             <li><a href="{{ path('cv-my_skills') }}">Compétences</a></li>
             <li><a href="{{ path('cv-making') }}">Réalisations</a></li>
+            <li><a href="{{ path('cv-my_passions') }}">Passions</a></li>
         </ul>
         <div>
-            <p class="d-md-none d-sm-block d-none">
+            <p class="d-lg-none d-sm-block d-none">
                 {{ "site_name"|trans }}
             </p>
         </div>
@@ -26,20 +27,20 @@
             <a href="{{ path('db_index') }}" class="app-nav-btn-text" title="{{ 'general.menu.administration'|trans }}">
                 <i class="fas fa-shield-alt"></i>
             </a>
-            <div class="header_separate d-md-flex d-none"></div>
+            <div class="header_separate d-lg-flex d-none"></div>
             <a href="{{ path('app_logout') }}" class="app-nav-btn-text" title="{{ 'general.menu.sign-out'|trans }}">
                 <i class="fas fa-sign-out-alt"></i>
             </a>
         {% else %}
-            <div class="header_separate d-md-flex d-none"></div>
+            <div class="header_separate d-lg-flex d-none"></div>
             <a href="{{ path('app_login') }}" class="app-nav-btn-text" title="{{ 'general.menu.sign-in'|trans }}">
                 <i class="fas fa-sign-in-alt"></i>
             </a>
         {% endif %}
 
-        <div class="d-md-none d-flex align-items-center">
+        <div class="d-lg-none d-flex align-items-center">
             <div class="header_separate"></div>
-            <button class="app-nav-btn-text hambuger_icon  d-md-none" title="{{ 'general.menu.sign-in'|trans }}">
+            <button class="app-nav-btn-text hambuger_icon  d-lg-none" title="{{ 'general.menu.sign-in'|trans }}">
                 <span></span>
             </button>
         </div>

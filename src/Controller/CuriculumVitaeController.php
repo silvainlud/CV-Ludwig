@@ -64,6 +64,14 @@ class CuriculumVitaeController extends AbstractController
     }
 
     /**
+     * @Route("/passion", name="cv-my_passions")
+     */
+    public function my_passion(): Response
+    {
+        return $this->render('index/cv/passion.html.twig', []);
+    }
+
+    /**
      * @Route("/realisations", name="cv-making")
      */
     public function making(RealisationRepository $realisationRepository): Response

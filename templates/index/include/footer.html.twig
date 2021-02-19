@@ -25,11 +25,11 @@
                             <div class="col-6">
                                 <a href="{{ path('cv-my_skills') }}">Mes compétences</a>
                                 <a href="{{ path('cv-my_career') }}">Mon parcours</a>
-                                <a href="">Mes passions</a>
+                                <a href="{{ path('cv-my_passions') }}">Mes passions</a>
                             </div>
                             <div class="col-6">
                                 <a href="{{ path('cv-making') }}">Mes réalisations</a>
-                                <a href="">Me contacter</a>
+                                <a href="{{ path('contact') }}">Me contacter</a>
                             </div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="col-12">
                     <p class="footer_copyright">Site réalisé par : Ludwig SILVAIN | Copyright © Ludwig
-                        SILVAIN {{- "now"|date('Y') -}}</p>
+                        SILVAIN {{ "now"|date('Y') -}}</p>
                 </div>
             </div>
         </div>
