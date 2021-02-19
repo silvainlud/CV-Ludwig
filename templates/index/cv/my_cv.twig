@@ -6,124 +6,14 @@
     <h1 class="text-center">Mon parcours</h1>
     <div class="container mt-5">
         <div class="row">
-             <div class="col-12 is-theme-light">
-             <img src="{{ asset('img/Timeline.svg') }}" alt="Mon parcours en mode clair" class="w-100">
-             </div>
-             <div class="col-12 is-theme-dark">
-             <img src="{{ asset('img/Timeline_Dark.svg') }}" alt="Mon parcours en mode sombre" class="w-100">
-             </div>
-{#            <div class="col-12">#}
-{#                <div class="career-zone">#}
+{#             <div class="col-12 is-theme-light">#}
+{#             <img src="{{ asset('img/Timeline.svg') }}" alt="Mon parcours en mode clair" class="w-100">#}
+{#             </div>#}
+{#             <div class="col-12 is-theme-dark">#}
+{#             <img src="{{ asset('img/Timeline_Dark.svg') }}" alt="Mon parcours en mode sombre" class="w-100">#}
+{#             </div>#}
+            {% include 'index/include/_career.html.twig' %}
 
-{#                    <div class="career_icon career-blue">#}
-{#                        <img src="{{ asset('img/career/start.jpg') }}" alt="">#}
-{#                    </div>#}
-
-{#                    <div class="career_content">#}
-{#                        <h2>Naissance le 17 avril 2000</h2>#}
-{#                        <p>#}
-{#                            Je suis nais le 17 avril 2000 à Boulogne sur Mer dans le Nord pas de Calais#}
-{#                        </p>#}
-{#                    </div>#}
-
-
-{#                    <div class="career_icon career_icon-red">#}
-{#                        <img src="{{ asset('img/career/graduation.jpg') }}" alt="">#}
-{#                        <div class="career_link_sub career_link_sub-red"></div>#}
-{#                    </div>#}
-
-{#                    <div class="career_content">#}
-{#                        <h2>Obtention du Bac</h2>#}
-{#                        <p>#}
-{#                            J’ai obtenu le bas en juin 2018 le bac scienctifique option science de l’ingénieur, avec la#}
-{#                            mention Très Bien.#}
-{#                        </p>#}
-{#                    </div>#}
-
-{#                    <div class="career_icon">#}
-{#                        <div class="career_link_corner career_link_corner-red "></div>#}
-{#                    </div>#}
-
-{#                    <div class="career_icon career_icon_not_link align-items-start career_icon-yellow">#}
-{#                        <img src="{{ asset('img/career/start.jpg') }}" alt="" class="">#}
-{#                    </div>#}
-
-{#                    <div class="career_content career_content-sub">#}
-{#                        <h2>Gotobac</h2>#}
-{#                        <p>#}
-{#                            En parallé le de mon année de terminal, j’ai développé un site web pour aider à réviser. Il#}
-{#                            a été à ma destination mais également à ceux de mes camarades.#}
-{#                        </p>#}
-{#                    </div>#}
-
-{#                    <div class="career_icon">#}
-{#                        <div class="career_link_tree_down"></div>#}
-{#                    </div>#}
-
-{#                    <div class="career_icon career_icon_not_link align-items-start career_icon-yellow">#}
-{#                        <img src="{{ asset('img/career/start.jpg') }}" alt="" class="">#}
-{#                    </div>#}
-
-{#                    <div class="career_content career_content-sub">#}
-{#                        <h2>Lait Pairies du Boulonnais</h2>#}
-{#                        <p>#}
-{#                            Durant trois mois (juilliet, aout et septembre 2018) j’ai réalisé un site de vente pour des#}
-{#                            yaourts, produit par une coopérative de d’agriculteur : LaitPrairiesDuBoulonnais#}
-{#                        </p>#}
-{#                    </div>#}
-
-{#                    <div class="career_linker-elem">#}
-{#                        <div class="career_link_point"></div>#}
-{#                        <div class="career_link_point_middle"></div>#}
-{#                    </div>#}
-
-{#                    <div></div>#}
-{#                    <div></div>#}
-
-{#                    <div class="career_icon">#}
-{#                        <div class="career_link_tree_up"></div>#}
-{#                    </div>#}
-
-{#                    <div class="career_icon career_icon_not_link align-items-start career_icon-yellow">#}
-{#                        <img src="{{ asset('img/career/start.jpg') }}" alt="" class="">#}
-{#                    </div>#}
-
-{#                    <div class="career_content career_content-sub">#}
-{#                        <h2>CDD - Intersysteme</h2>#}
-{#                        <p>#}
-{#                            C’est également durant juin 2018 que j’ai été employé en tant que développeur informatique#}
-{#                            par la socité Intersystème basé sur Pernes-lez-Boulogne.#}
-{#                        </p>#}
-{#                    </div>#}
-
-{#                    <div class="career_icon career_icon-red">#}
-{#                        <img src="{{ asset('img/career/start.jpg') }}" alt="" class="">#}
-{#                    </div>#}
-
-{#                    <div class="career_content">#}
-{#                        <h2>Licence Informatique</h2>#}
-{#                        <p>#}
-{#                            J’ai commencé en Septembre une licence en Informatique à l’universisté du Littoral Cote#}
-{#                            d’Opale (sur le site de Calais). J’ai pour l’instant obtenu la première et seconde années de#}
-{#                            licence.#}
-{#                        </p>#}
-{#                    </div>#}
-
-{#                    <div class="career_icon career_icon_not_link career_icon_link-top career_icon-yellow justify-content-start">#}
-{#                        <img src="{{ asset('img/career/start.jpg') }}" alt="" class="">#}
-{#                    </div>#}
-
-{#                    <div class="career_content ">#}
-{#                        <h2>CDD Etudiant - Intersystème</h2>#}
-{#                        <p>#}
-{#                            Je travaille actuellemnt dans la Socitété Intersystème en tant que développeur informatique,#}
-{#                            dans le domaine du site Web.#}
-{#                        </p>#}
-{#                    </div>#}
-
-
-{#                </div>#}
-{#            </div>#}
         </div>
     </div>
 {% endblock %}

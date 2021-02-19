@@ -20,10 +20,10 @@
     <div class="container stack-separated py5" style="--gap:6">
         <div class="row">
             <div class="col-xl-6 col-12">
-                <div class="h1 mb2">Titre de premier niveau</div>
-                <div class="h2 mb1">Titre de second niveau</div>
-                <div class="h3 mb1">Titre de troisième niveau</div>
-                <div class="h4 mb1">Titre de quatrième niveau</div>
+                <div class="h1 mb-2">Titre de premier niveau</div>
+                <div class="h2 mb-1">Titre de second niveau</div>
+                <div class="h3 mb-1">Titre de troisième niveau</div>
+                <div class="h4 mb-1">Titre de quatrième niveau</div>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam consequatur dolor est ex,
                     excepturi
@@ -32,7 +32,7 @@
                     veniam voluptates?
                 </p>
             </div>
-            <div class="col-6">
+            <div class="col-xl-6 col-12">
                 <div class="hero-title">Titre .hero-title</div>
                 <p class="hero-text">.hero-text ipsum dolor sit amet, consectetur adipisicing elit. Adipisci atque
                     dolorem eligendi esse et porro repellendus? Autem consectetur deserunt dolor laborum, tenetur unde!
@@ -48,7 +48,7 @@
         </div>
 
         <div>
-            <div class="h1 mb2">Couleurs</div>
+            <div class="h1 mb-2">Couleurs</div>
             <div class="d-flex flex-row flex-wrap">
                 {% for color in colors %}
                     <div class="m-2">
@@ -60,7 +60,7 @@
         </div>
 
         <div>
-            <h1 class="h1 mb2">Boutons</h1>
+            <h2 class="h1 mb-2">Boutons</h2>
             <div>
                 {% for color in colors %}
                     <a href="#" class="m-2 app-btn app-btn-{{ color }}">.app-btn app-btn-{{ color }}</a>
@@ -97,7 +97,7 @@
         </div>
 
         <div>
-            <h1 class="h1 mb2">Icones des compétences</h1>
+            <h2 class="h1 mb-2">Icones des compétences</h2>
             <div class="d-flex flex-row flex-wrap">
                 <div class="m-4">
                     <small class="text-muted">.icon_skills</small>
@@ -196,7 +196,7 @@
         </div>
 
         <div>
-            <h1 class="h1 mb2">Badge</h1>
+            <h2 class="h1 mb-2">Badge</h2>
             <div class="d-flex flex-row flex-wrap">
                 {% for color in colors %}
                     <div class="m-2 app-badge app-badge-{{ color }}"><span>.app-badge app-badge-{{ color }}</span></div>
@@ -212,7 +212,7 @@
         </div>
 
         <div>
-            <h1 class="h1 mb2">Carte</h1>
+            <h2 class="h1 mb-2">Carte</h2>
             <div class="d-flex flex-row flex-wrap">
                 <div class="m-4">
                     <small class="text-muted">.card</small>
@@ -313,6 +313,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div>
+            <h2 class="h1">Carière</h2>
+            {% include 'index/include/_career.html.twig' %}
         </div>
     </div>
 {% endblock %}
