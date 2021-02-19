@@ -37,7 +37,7 @@
 }
 
 %menu_top_nav {
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     & > ul.header_menu-list {
       display: list-item;
       position: relative;

@@ -16,7 +16,7 @@
                 <div class="col-lg-4 col-md-6 col-12 mb-5 mt-4 px-xl-5 px-md-4 p-0">
                     <div class="card card-media-circle">
                         <div class="card-body card-centered card-body_maximize">
-                            <img src="{{ path('silvaineu_service_icon', {"slug" : s.slug}) }}" alt="" class="card-media-circle">
+                            <img src="{{ path('silvaineu_service_icon', {"slug" : s.slug}) }}" alt="{{ s.slug }}" class="card-media-circle">
                             <h2>{{ s.name }}</h2>
                             <p>
                                 {{ s.description }}

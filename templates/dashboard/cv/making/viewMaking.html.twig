@@ -20,7 +20,7 @@
                     <tr>
                         <td class="td_icon">
                             {% if c.mainImage  != null %}
-                                <img src="{{ path('cv-making-img', {"rea" : c.mainImage.id }) }}" alt="">
+                                <img src="{{ path('cv-making-img', {"rea" : c.mainImage.id }) }}" alt="{{ c.mainImage.id }}">
                             {% endif %}
                         </td>
                         <td class="td_key">

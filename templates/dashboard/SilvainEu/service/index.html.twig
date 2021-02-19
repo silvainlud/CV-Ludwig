@@ -20,7 +20,7 @@
                 {% for s in services %}
                     <tr>
                         <td class="td_icon">
-                            <img src="{{ path('silvaineu_service_icon', {"slug" : s.slug}) }}" alt="">
+                            <img src="{{ path('silvaineu_service_icon', {"slug" : s.slug}) }}" alt="{{ s.slug }}">
                         </td>
                         <td class="td_key">
                             <h3>N° :</h3>

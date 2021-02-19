@@ -41,7 +41,7 @@
                                     <tr>
                                         <td>
                                             <img style="max-width: 200px; max-height: 100px; object-fit: contain"
-                                                 src="{{ path('cv-making-img',{"rea" : g.id}) }}" alt="">
+                                                 src="{{ path('cv-making-img',{"rea" : g.id}) }}" alt="{{ g.id }}">
                                         </td>
                                         <td class="text-right">
                                             {{ form(formGalleryRemove[g.id]) }}
