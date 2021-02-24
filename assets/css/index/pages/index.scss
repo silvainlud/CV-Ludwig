@@ -245,7 +245,7 @@ div.index-page {
     height: 440px;
 
     & > .row {
-      @extend .h-100;
+      height: 100%;
 
       .index-hub-dir_item {
         text-decoration: unset;
@@ -288,8 +288,8 @@ div.index-page {
   flex-direction: row;
   box-sizing: border-box;;
   align-items: center;
-  @extend .px-0;
-  @extend .py-4;
+  padding-bottom: 10px;
+  padding-top: 0;
 
   .quality_img {
     border-radius: 50px;
