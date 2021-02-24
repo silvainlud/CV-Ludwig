@@ -1,6 +1,10 @@
 @import "../vars";
 @import "../fonts";
 
+*, :after, :before {
+  box-sizing: inherit;
+}
+
 html {
   height: 100%;
   margin: 0;
