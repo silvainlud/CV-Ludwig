@@ -16,69 +16,64 @@
         </g>
     </svg>
     <div class="footer_content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-4 col-lg-6 col-12 footer_border px-xl-6 pr-lg-5 p-0 ">
-                    <h2>Curiculum Vitae</h2>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-6">
-                                <a href="{{ path('cv-my_skills') }}">Mes compétences</a>
-                                <a href="{{ path('cv-my_career') }}">Mon parcours</a>
-                                <a href="{{ path('cv-my_passions') }}">Mes passions</a>
-                            </div>
-                            <div class="col-6">
-                                <a href="{{ path('cv-making') }}">Mes réalisations</a>
-                                <a href="{{ path('contact') }}">Me contacter</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-6 col-12 footer_border px-xl-6 pl-lg-5 p-0 mt-lg-0 mt-6">
-                    <h2>Silvain.eu</h2>
-                    <div class="container-fluid">
-                        <div class="row">
-                            {% set service = GetServicesFooter() %}
-                            {%- for arrayService in service -%}
-                                <div class="col-6">
-                                    {%- for s in arrayService -%}
-                                        <a href="{{ s[1] }}">{{ s[0] }}</a>
-                                    {%- endfor -%}
-                                </div>
-                            {%- endfor -%}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-12 px-xl-6 px-0 mt-xl-0 mt-6">
-                    <h2>Ludwig SILVAIN</h2>
-                    <p class="mb-2">
-                        Je suis développeur en informatique pincipalement orienté vers le web.
-                        Mais j'adore découvrir de nouvelles technologie.
-                    </p>
-                    <ul class="me-media">
-                        <li class="media-github" title="Github">
-                            <a href="https://github.com/silvainlud/" target="_blank">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </li>
-                        <li class="media-linkedin" title="Linkedin">
-                            <a href="https://www.linkedin.com/in/ludwig-silvain" target="_blank">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                        </li>
-                        <li class="media-email" title="Email">
-                            <a href="mailto:contact@silvain.eu" target="_blank">
-                                <i class="fas fa-envelope"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-12">
-                    <p class="footer_copyright">Site réalisé par : Ludwig SILVAIN | Copyright © Ludwig
-                        SILVAIN {{ "now"|date('Y') -}}</p>
+        <div class="footer_container">
+            <div>
+                <h2>Curiculum Vitae</h2>
+                <div class="grid2">
+
+                    <a href="{{ path('cv-my_skills') }}">Mes compétences</a>
+                    <a href="{{ path('cv-my_career') }}">Mon parcours</a>
+                    <a href="{{ path('cv-my_passions') }}">Mes passions</a>
+                    <a href="{{ path('cv-making') }}">Mes réalisations</a>
+                    <a href="{{ path('contact') }}">Me contacter</a>
+
                 </div>
             </div>
+            <div class="footer_border"></div>
+            <div>
+                <h2>Silvain.eu</h2>
+                <div class="container-fluid">
+                    <ul class="grid2">
+                        {% set service = GetServicesFooter() %}
+                        {%- for arrayService in service -%}
+                            {%- for s in arrayService -%}
+                                <li><a href="{{ s[1] }}">{{ s[0] }}</a></li>
+                            {%- endfor -%}
+                        {%- endfor -%}
+                    </ul>
+                </div>
+            </div>
+            <div class="footer_border"></div>
+            <div class="footer_info_me">
+                <h2>Ludwig SILVAIN</h2>
+                <p class="mb-2">
+                    Je suis développeur en informatique pincipalement orienté vers le web.
+                    Mais j'adore découvrir de nouvelles technologie.
+                </p>
+                <ul class="me-media">
+                    <li class="media-github" title="Github">
+                        <a href="https://github.com/silvainlud/" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </li>
+                    <li class="media-linkedin" title="Linkedin">
+                        <a href="https://www.linkedin.com/in/ludwig-silvain" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </li>
+                    <li class="media-email" title="Email">
+                        <a href="mailto:contact@silvain.eu" target="_blank">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer_col-full">
+                <p class="footer_copyright">Site réalisé par : Ludwig SILVAIN | Copyright © Ludwig
+                    SILVAIN {{ "now"|date('Y') -}}</p>
+            </div>
         </div>
+    </div>
     </div>
 
 </footer>
