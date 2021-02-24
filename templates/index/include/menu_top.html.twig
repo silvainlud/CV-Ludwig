@@ -1,6 +1,6 @@
 <header>
     <img src="{{ asset('favicon_256.png') }}" alt="Logo de silvain.eu">
-    <div class="header_separate  d-sm-block d-none"></div>
+    <div class="header_separate" id="header_separate_logo"></div>
     <nav>
         <ul class=" header_menu-list">
             <li><a href="{{ path('index') }}">Accueil</a></li>
@@ -9,11 +9,9 @@
             <li><a href="{{ path('cv-making') }}">Réalisations</a></li>
             <li><a href="{{ path('cv-my_passions') }}">Passions</a></li>
         </ul>
-        <div>
-            <p class="d-lg-none d-sm-block d-none">
-                {{ "site_name"|trans }}
-            </p>
-        </div>
+        <p class="header_menu_site-name">
+            {{ "site_name"|trans }}
+        </p>
         <div class="header_space"></div>
 
         <theme-switch></theme-switch>
@@ -27,18 +25,18 @@
             <a href="{{ path('db_index') }}" class="app-nav-btn-text" title="{{ 'general.menu.administration'|trans }}">
                 <i class="fas fa-shield-alt"></i>
             </a>
-            <div class="header_separate d-lg-flex d-none"></div>
+            <div class="header_separate" id="header_separate_action"></div>
             <a href="{{ path('app_logout') }}" class="app-nav-btn-text" title="{{ 'general.menu.sign-out'|trans }}">
                 <i class="fas fa-sign-out-alt"></i>
             </a>
         {% else %}
-            <div class="header_separate d-lg-flex d-none"></div>
+            <div class="header_separate" id="header_separate_action"></div>
             <a href="{{ path('app_login') }}" class="app-nav-btn-text" title="{{ 'general.menu.sign-in'|trans }}">
                 <i class="fas fa-sign-in-alt"></i>
             </a>
         {% endif %}
 
-        <div class="d-lg-none d-flex align-items-center">
+        <div class="header_menu_responsive-zone" >
             <div class="header_separate"></div>
             <button class="app-nav-btn-text hambuger_icon  d-lg-none" title="{{ 'general.menu.sign-in'|trans }}">
                 <span></span>
