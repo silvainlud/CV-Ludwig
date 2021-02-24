@@ -8,26 +8,26 @@
 
 {% block header %}
     <div class="header">
-      <div class="header-main header-index">
-          <img src="{{ asset('img/header/icon_cloud.svg') }}" class="header_img_cloud" alt="nuage"
-               style="left: 19%;top: 1%;">
-          <img src="{{ asset('img/header/icon_cloud.svg') }}" class="header_img_cloud" alt="nuage"
-               style="left: 72%;top: 8%">
-          <img src="{{ asset('img/header/icon_cloud.svg') }}" class="header_img_cloud" alt="nuage"
-               style="left: 5%;top: 46%;">
-          <div class="anim-earth">
-              <img src="{{ asset('img/header/icon_earth.svg') }}" class="header_img_earth" alt="terre">
-              <img src="{{ asset('img/header/icon_Rocket.svg') }}" class="header_img_rocket" alt="fusée">
-          </div>
+        <div class="header-main header-index">
+            <img src="{{ asset('img/header/icon_cloud.svg') }}" class="header_img_cloud" alt="nuage"
+                 style="left: 19%;top: 1%;">
+            <img src="{{ asset('img/header/icon_cloud.svg') }}" class="header_img_cloud" alt="nuage"
+                 style="left: 72%;top: 8%">
+            <img src="{{ asset('img/header/icon_cloud.svg') }}" class="header_img_cloud" alt="nuage"
+                 style="left: 5%;top: 46%;">
+            <div class="anim-earth">
+                <img src="{{ asset('img/header/icon_earth.svg') }}" class="header_img_earth" alt="terre">
+                <img src="{{ asset('img/header/icon_Rocket.svg') }}" class="header_img_rocket" alt="fusée">
+            </div>
 
-          <div class="header_content">
-              <img src="{{ asset('img/profil.jpg') }}" alt="Image de profil Ludwig SILVAIN">
-              <div class="header_title">
-                  <h1 class="header_title_title">Ludwig SILVAIN</h1>
-                  <h2 class="header_title_content">Developpeur Informatique</h2>
-              </div>
-          </div>
-      </div>
+            <div class="header_content">
+                <img src="{{ asset('img/profil.jpg') }}" alt="Image de profil Ludwig SILVAIN">
+                <div class="header_title">
+                    <h1 class="header_title_title">Ludwig SILVAIN</h1>
+                    <h2 class="header_title_content">Developpeur Informatique</h2>
+                </div>
+            </div>
+        </div>
         {{ source('@public_path'~asset('img/index_header.svg')) }}
     </div>
 {% endblock %}
@@ -35,28 +35,30 @@
 {% block body %}
     <div class="index-page">
         <div class="container who-am-i">
-            <div class="row align-items-center">
-                <div class="col-xl-8 col-lg-6 col-12">
-                    <h2>Qui suis-je ?</h2>
-                    <p class="hero-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim
-                        imperdiet, et finibus tortor tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris dignissim viverra mauris non laoreet.
-                    </p>
-                    <p class="hero-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim
-                        imperdiet, et finibus tortor tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris dignissim viverra mauris non laoreet dignissim viverra mauris non laoreet.
-                    </p>
-                </div>
-                <div class="col-xl-4 col-lg-6 d-lg-block d-none">
-                    <img src="{{ asset('img/illustrations/undraw_feeling_proud_qne1.png') }}" alt="Homme sur un bureau"
-                         class="who-am-i_img">
-                </div>
-                <div class="col-12 mt-4">
-                    <div class="hr-horiz"></div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12 who-am-i_quality who-am-i_quality-purple">
+            <div class="who-am-i_content">
+                <h2>Qui suis-je ?</h2>
+                <p class="hero-text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim
+                    imperdiet, et finibus tortor tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Mauris dignissim viverra mauris non laoreet.
+                </p>
+                <p class="hero-text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim
+                    imperdiet, et finibus tortor tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Mauris dignissim viverra mauris non laoreet dignissim viverra mauris non laoreet.
+                </p>
+            </div>
+            <div class="who-am-i_img">
+                <img src="{{ asset('img/illustrations/undraw_feeling_proud_qne1.png') }}" alt="Homme sur un bureau"
+                     class="who-am-i_img">
+            </div>
+
+            <div class="hr-horiz"></div>
+
+            <div class="who-am-i_quality_zone">
+
+
+                <div class="who-am-i_quality who-am-i_quality-purple">
                     <div class="quality_img">
                         <i class="fas fa-music"></i>
                     </div>
@@ -67,7 +69,7 @@
                             violoncelle.</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-12 who-am-i_quality who-am-i_quality-light-blue">
+                <div class="who-am-i_quality who-am-i_quality-light-blue">
                     <div class="quality_img">
                         <i class="fas fa-space-shuttle" style="transform: rotate(-45deg)"></i>
                     </div>
@@ -79,7 +81,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-12 who-am-i_quality who-am-i_quality-red">
+                <div class="who-am-i_quality who-am-i_quality-red">
                     <div class="quality_img">
                         <i class="fas fa-hand-spock" title="Salutation Vulcaine (série Start Trek)"></i>
                     </div>
@@ -92,7 +94,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-12 who-am-i_quality who-am-i_quality-green">
+                <div class="who-am-i_quality who-am-i_quality-green">
                     <div class="quality_img">
                         <i class="fas fa-desktop"></i>
                     </div>
@@ -104,7 +106,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-12 who-am-i_quality who-am-i_quality-yellow">
+                <div class="who-am-i_quality who-am-i_quality-yellow">
                     <div class="quality_img">
 
                         <i class="fas fa-atom"></i>
@@ -135,7 +137,8 @@
                             Mes réalisations
                         </a>
 
-                        <a href="{{ path('cv-my_passions') }}" class="app-btn app-btn-fluent app-btn-small app-btn-yellow ml-4">
+                        <a href="{{ path('cv-my_passions') }}"
+                           class="app-btn app-btn-fluent app-btn-small app-btn-yellow ml-4">
                             Mes passions
                         </a>
                     </div>
@@ -148,7 +151,8 @@
             </div>
         </div>
         <div class="index-contact-me">
-            <img src="{{ asset('img/contact_me_background.png') }}" alt="Fond écran de contact" class="index-contact-me_background">
+            <img src="{{ asset('img/contact_me_background.png') }}" alt="Fond écran de contact"
+                 class="index-contact-me_background">
             <div class="index-contact-me_content">
                 <h2>Me Contacter</h2>
                 <p>
@@ -159,7 +163,8 @@
                     le formulaire de contact du site accessible
                     grâce au bouton en dessous <i class="fas fa-smile-beam"></i> .
                 </p>
-                <a href="{{ path('contact') }}" class="app-btn app-btn-light-black app-color-plain mt-5">Me contacter</a>
+                <a href="{{ path('contact') }}" class="app-btn app-btn-light-black app-color-plain mt-5">Me
+                    contacter</a>
             </div>
         </div>
         <div class="index-card-circle reverse">
