@@ -1,61 +1,56 @@
 {% extends 'index/base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-3 col-md-2"></div>
-            <div class="col-xl-6 col-md-8 col-12">
-                <div class="card mb-10">
-                    <div class="card-body px-6">
-                        <h1 class="text-center mb-6 justify-content-center">Connexion</h1>
+    <div class="container" id="silvain-eu_login">
+        <div class="card mb-10 mt-5">
+            <div class="card-body px-6">
+                <h1 class="text-center mb-6 justify-content-center">Connexion</h1>
 
-                        <form method="post" class="form-zone">
-                            {% if error %}
-                                <div class="form-alert form-alert-red c"><i
-                                            class="fas fa-exclamation-circle"></i>&nbsp;{{ error.messageKey|trans(error.messageData, 'security') }}
-                                </div>
-                            {% endif %}
-                            <div class="form-row">
-                                <label for="inputEmail">Nom d'utilisateur</label>
-                                <input type="email" value="{{ last_username }}"
-                                       name="email"
-                                       id="inputEmail" class="form-control" required autofocus>
-                            </div>
-                            <div class="form-row">
-                                <label for="inputPassword">Mot de passe</label>
-                                <input type="password" name="password" id="inputPassword"
-                                       class="form-control" required>
-                            </div>
-                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-                            {#
-                            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-                            See https://symfony.com/doc/current/security/remember_me.html
-
-                            <div class="checkbox mb-3">
-                                <label>
-                                    <input type="checkbox" name="_remember_me"> Remember me
-                                </label>
-                            </div>
-                            #}
-
-                            <div class="form-submit">
-                                <div class="flex-grow-1"></div>
-                                <button class="app-btn app-btn-small app-btn-green"
-                                        type="submit">
-                                    Se connecter
-                                    <i class="fas fa-sign-in-alt"></i>
-                                </button>
-                            </div>
-                        </form>
+                <form method="post" class="form-zone">
+                    {% if error %}
+                        <div class="form-alert form-alert-red c"><i
+                                    class="fas fa-exclamation-circle"></i>&nbsp;{{ error.messageKey|trans(error.messageData, 'security') }}
+                        </div>
+                    {% endif %}
+                    <div class="form-row">
+                        <label for="inputEmail">Nom d'utilisateur</label>
+                        <input type="email" value="{{ last_username }}"
+                               name="email"
+                               id="inputEmail" class="form-control" required autofocus>
                     </div>
-                </div>
+                    <div class="form-row">
+                        <label for="inputPassword">Mot de passe</label>
+                        <input type="password" name="password" id="inputPassword"
+                               class="form-control" required>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
+                    {#
+                    Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                    See https://symfony.com/doc/current/security/remember_me.html
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Remember me
+                        </label>
+                    </div>
+                    #}
+
+                    <div class="form-submit mt-5">
+                        <div class="flex-grow-1"></div>
+                        <button class="app-btn app-btn-small app-btn-green"
+                                type="submit">
+                            Se connecter
+                            <i class="fas fa-sign-in-alt"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="col-x-3 col-md-2 col-0"></div>
         </div>
+
+
     </div>
 
 {% endblock %}
