@@ -1,0 +1,107 @@
+#my_hobbies {
+  & > * {
+    display: grid;
+
+    max-width: 100%;
+
+    grid-template:
+            'd a e' auto
+            'b b b' auto
+            'c c c' auto / 1fr minmax(200px, 350px) 1fr;
+
+    @media screen and (min-width: 800px) {
+      grid-template:
+            'a d' auto
+            'a b' auto
+            'a e' auto
+            'c c' auto /minmax(230px, 1fr) minmax(400px, 800px);
+    }
+
+    @media screen and (min-width: 1150px) {
+      grid-template:
+            'a d' auto
+            'a b' auto
+            'a c' auto
+            'a e' auto /minmax(230px, 1fr) minmax(400px, 800px);
+    }
+
+
+    align-items: center;
+
+    &.my_hobbies-reverse {
+      @media screen and (min-width: 800px) {
+        grid-template:
+            'd a'
+            'b a'
+            'e a'
+            'c c'   /minmax(500px, 700px) minmax(190px, 1fr);
+      }
+
+      @media screen and (min-width: 1150px) {
+        grid-template:
+            'd a'
+            'b a'
+            'c a'
+            'e a';
+      }
+    }
+
+    grid-column-gap: 20px;
+    margin-bottom: 100px;
+
+    & > .my_hobbies-img {
+      grid-area: a;
+
+    }
+
+    & > .my_hobbies-content {
+
+
+      text-align: center;
+
+      @media screen and (min-width: 800px) {
+        text-align: left;
+      }
+
+      @media screen and (min-width: 1150px) {
+        grid-area: b/c;
+        grid-row: b/c;
+      }
+
+      grid-area: b;
+      grid-row: b;
+
+      &:not(:last-child) {
+        @media screen and (min-width: 1150px) {
+
+          grid-area: b;
+          grid-row: b;
+        }
+      }
+
+    }
+
+    & > .my_hobbies-quality {
+      border-top: 2px solid $hr_background;
+      padding-top: 20px;
+      margin-top: 25px;
+      grid-area: c;
+
+      display: grid;
+      grid-gap: 15px;
+
+      grid-template-columns: repeat(1, 1fr);
+      @media screen and (min-width: 800px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @media screen and (min-width: 1000px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      @media screen and (min-width: 1150px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+    }
+  }
+
+}

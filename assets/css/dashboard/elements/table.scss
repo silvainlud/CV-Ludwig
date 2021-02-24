@@ -34,7 +34,7 @@ table.db_data-table_last {
       td {
 
         &:first-child {
-          @extend .text-center;
+          text-align: center;
         }
 
         color: #C2C8D8;
@@ -54,7 +54,7 @@ table.db_data-table_last {
       & > td {
 
         &:first-child {
-          @extend .text-center;
+          text-align: center;
         }
 
         background: white;

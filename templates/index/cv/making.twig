@@ -4,40 +4,38 @@
 
 {% block content %}
     <h1 class="text-center">Mes réalisations</h1>
-    <div class="container">
-        <div class="row justify-content-center mt-5">
-            {% for s in realisations %}
-                <div class="col-lg-4 col-md-6 col-12 mb-5 mt-2 px-xl-5 px-md-4 p-0">
-                    <div class="card card-media">
-                        {% if s.mainImage  != null %}
-                            <img src="{{ path('cv-making-img', {"rea" : s.mainImage.id}) }}" alt="{{ s.mainImage.id }}"
-                                 class="card-media-circle">
-                        {% endif %}
-                        <div class="card-body card-centered card-body_maximize">
-                            <h2>{{ s.name }}</h2>
-                            <p class="text-justify">
-                                {{ s.preface }}
-                            </p>
-                        </div>
-                        <div class="card-footer justify-content-end">
-                            {% if s.public == false %}
-                                <div class="m-2 app-badge app-badge-small app-badge-danger">
-                                    <span>Non publié</span>
-                                </div>
-                            {% endif %}
-                            <div class="flex-grow-1"></div>
-                            <a href="{{ path('cv-making-view', {'slug': s.slug}) }}"
-                               class="app-btn app-btn-light-blue app-btn-small">
-                                Voir plus
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            {% else %}
-                <div class="col-12 mt-5 mb-14">
-                    <p class="text-center" style="text-indent: 0">Aucune réalisation ;(</p>
-                </div>
-            {% endfor %}
-        </div>
+    <div class="container hstack stack-center" id="making_list">
+
+        {% for s in realisations %}
+           <div>
+               <div class="card card-media p-2">
+                   {% if s.mainImage  != null %}
+                       <img src="{{ path('cv-making-img', {"rea" : s.mainImage.id}) }}" alt="{{ s.mainImage.id }}"
+                            class="card-media-circle">
+                   {% endif %}
+                   <div class="card-body card-centered card-body_maximize">
+                       <h2>{{ s.name }}</h2>
+                       <p class="text-justify">
+                           {{ s.preface }}
+                       </p>
+                   </div>
+                   <div class="card-footer justify-content-end">
+                       {% if s.public == false %}
+                           <div class="m-2 app-badge app-badge-small app-badge-danger">
+                               <span>Non publié</span>
+                           </div>
+                       {% endif %}
+                       <div class="flex-grow-1"></div>
+                       <a href="{{ path('cv-making-view', {'slug': s.slug}) }}"
+                          class="app-btn app-btn-light-blue app-btn-small">
+                           Voir plus
+                       </a>
+                   </div>
+               </div>
+           </div>
+        {% else %}
+            <p class="text-center" style="text-indent: 0">Aucune réalisation ;(</p>
+        {% endfor %}
+
     </div>
 {% endblock %}

@@ -1,4 +1,17 @@
 %menu_top_nav_responsive {
+  .header_menu_responsive-zone {
+    display: flex;
+    align-items: center;
+  }
+
+
+
+  .header_menu_site-name {
+    display: none;
+    @media screen and (min-width: 600px) {
+      display: block;
+    }
+  }
 
   & > ul.header_menu-list {
     &.is-opened {
@@ -37,7 +50,14 @@
 }
 
 %menu_top_nav {
-  @include media-breakpoint-up(lg) {
+  @media screen and (min-width: 900px) {
+    .header_menu_responsive-zone {
+      display: none;
+    }
+    .header_menu_site-name {
+      display: none;
+    }
+
     & > ul.header_menu-list {
       display: list-item;
       position: relative;

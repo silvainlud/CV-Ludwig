@@ -32,10 +32,45 @@ div.index-page {
 
 
   .who-am-i {
+
+    align-self: center;
+    display: grid;
+
+
+    @media screen and (min-width: 1150px){
+      grid-template-columns: 2fr 1fr;
+    }
+    @media screen and (min-width: 1000px){
+      grid-template-columns: repeat(2, 1fr);
+    }
+    grid-template-columns: repeat(1, 1fr);
+
+
     .who-am-i_img {
-      width: 100%;
+      display: none;
+      @media screen and (min-width: 1000px){
+        display: block;
+      }
+      margin: 0 15px;
       object-fit: contain;
       filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    }
+
+    .who-am-i_quality_zone, .hr-horiz {
+      grid-column: 1/-1;
+    }
+
+    .who-am-i_quality_zone {
+      display: grid;
+      @media screen and (min-width: 1050px){
+        grid-template-columns: repeat(3, 1fr);
+      }
+      @media screen and (min-width: 800px){
+        grid-template-columns: repeat(2, 1fr);
+      }
+      grid-template-columns: repeat(1, 1fr);
+
+      grid-gap: 10px;
     }
 
 
@@ -245,7 +280,7 @@ div.index-page {
     height: 440px;
 
     & > .row {
-      @extend .h-100;
+      height: 100%;
 
       .index-hub-dir_item {
         text-decoration: unset;
@@ -288,8 +323,8 @@ div.index-page {
   flex-direction: row;
   box-sizing: border-box;;
   align-items: center;
-  @extend .px-0;
-  @extend .py-4;
+  padding-bottom: 10px;
+  padding-top: 0;
 
   .quality_img {
     border-radius: 50px;

@@ -11,15 +11,15 @@
         nec opibus nec victu nec indumentorum vilitate gregariis militibus discrepantes opposita cuncta superasse
         virtute.
     </p>
-    <div class="container">
-        <div class="row">
-            {% cache skills %}
+    <div class="container" id="my_skills">
+        <div class="grid4">
+{#            {% cache skills %}#}
                 {% for c in skills %}
-                    <div class="col-12">
+                    <div class="grid-rfull">
                         <h2 class="mt-7">{{ c.name }}</h2>
                     </div>
                     {% for s in c.competences %}
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-5 {% if  loop.index > 8 %}d-none{% endif %}"
+                        <div class="mb-5" {% if  loop.index > 8 %}style="display: none" {% endif %}
                              id="tech-{{- c.id -}}-{{- s.technologie.id -}}">
                             <div class="card h-100">
                                 <div class="card-body card-centered card-body_maximize">
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         {% if loop.index == 8 and loop.last == false %}
-                            <div class="col-12 text-center">
+                            <div class="grid-rfull text-center">
                                 <button class="app-btn app-btn-inverse app-btn-grey" id="btn-categ-{{ c.id }}">
                                     Voir plus
                                 </button>
@@ -60,7 +60,7 @@
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
-            {% endcache %}
+{#            {% endcache %}#}
         </div>
     </div>
 
@@ -73,8 +73,8 @@
             let btn = document.getElementById('btn-categ-' + x);
             if (btn != null)
                 btn.addEventListener('click', function (e) {
-                    document.querySelectorAll('*[id^="tech-' + x + '-"].d-none').forEach(function (i) {
-                        i.classList.remove("d-none");
+                    document.querySelectorAll('*[id^="tech-' + x + '-"]').forEach(function (i) {
+                        i.style.display ='';
                     });
                     btn.parentElement.remove();
                 });

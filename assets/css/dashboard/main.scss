@@ -68,4 +68,9 @@ body {
 /** Import Index **/
 @import "../index/elements/media/icon_skills";
 
-@import "../Utils/Bootstrap/bootstrap";
+
+@import "../index/elements/stack";
+@import "../index/elements/grid";
+@import "../index/elements/spacing";
+@import "../index/ui";
+//@import "../Utils/Bootstrap/bootstrap";

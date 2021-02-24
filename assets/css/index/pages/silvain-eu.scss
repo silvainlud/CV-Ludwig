@@ -1,0 +1,39 @@
+#silvain-eu_services {
+  .hstack {
+    & > * {
+
+      max-width: 100%;
+      width: 350px;
+      margin: 15px;
+
+      @media screen and (min-width: 800px) {
+        width: calc(100% / 2 - 3 * 10px);
+        margin: 10px;
+      }
+
+      @media screen and (min-width: 1000px) {
+        width: calc(100% / 3 - 4 * 10px);
+      }
+
+    }
+  }
+}
+
+#silvain-eu_config_email {
+  .hstack {
+    & > * {
+
+      width: 100%;
+
+      @media screen and (min-width: 1000px) {
+        width: calc(100% / 2 - 3 * 10px);
+      }
+    }
+  }
+}
+
+#silvain-eu_contact {
+  min-width: 50%;
+  width: 900px;
+  max-width: 100%;
+}

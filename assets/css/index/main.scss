@@ -1,6 +1,10 @@
 @import "../vars";
 @import "../fonts";
 
+*, :after, :before {
+  box-sizing: inherit;
+}
+
 html {
   height: 100%;
   margin: 0;
@@ -39,20 +43,25 @@ body {
   }
 }
 
-@import "../Utils/Bootstrap/bootstrap";
+//@import "../Utils/Bootstrap/bootstrap";
+@import "elements/grid";
+@import "elements/spacing";
+@import "elements/stack";
 @import "elements/menu_top";
 @import "elements/footer";
 @import "elements/separator";
 @import "elements/button";
 @import "elements/badge";
 @import "elements/form";
-@import "elements/cv_article";
 @import "elements/career";
 
 @import "elements/media/icon_skills";
 @import "elements/card/card";
 
 @import "pages/index";
+@import "pages/making";
+@import "pages/silvain-eu";
+@import "pages/hobbies";
 
 
 @import "ui";

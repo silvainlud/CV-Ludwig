@@ -17,12 +17,24 @@ header {
   }
 
   .header_separate {
-    height: 100%;
     width: 2px;
     background: $menu_seperate_color;
     margin: 0 4px;
     padding: 12px 0;
 
+    &#header_separate_logo {
+      display: none;
+      @media screen and (min-width: 600px) {
+        display: block;
+      }
+    }
+
+    &#header_separate_action {
+      display: none;
+      @media screen and (min-width: 900px) {
+        display: block;
+      }
+    }
   }
 
 
@@ -33,8 +45,8 @@ header {
     box-sizing: border-box;
     align-items: center;
 
-    @extend %menu_top_nav_responsive;
     @extend %menu_top_nav;
+    @extend %menu_top_nav_responsive;
 
     p, a {
       padding: 4px 10px;

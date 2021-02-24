@@ -5,34 +5,33 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-1 col-0"></div>
-            <div class="col-xl-10 col-12">
-                <h1 class="text-center">{{ "general.menu.contact-me"|trans|title }}</h1>
-                <p class="text-center">
-                    Si vous avez des questions à me poser (propositions, informations sur les projets que j'ai pu faire,
-                    ...), vous pouvez me contacter par mail à l'adresse <a href="mailto:contact@silvain.eu">contact@silvain.eu</a>,
-                    ou en utilisant
-                    le formulaire de contact du site ci-dessous <i class="fas fa-smile-beam"></i> .
+    <div class="container vstack" id="silvain-eu_contact">
 
-                </p>
-            </div>
-            <div class="col-xl-1 col-0"></div>
-            <div class="col-xl-2 col-lg-1 col-0"></div>
-            <div class="col-xl-8 col-lg-10 col-12">
-                {% block form %}
-                    {{ form_start(form, {"attr" : {"class"  : "form-zone"}}) }}
-                    {{ form_row(form.name, {"row_attr" : {"class" : "form-col"}}) }}
-                    {{ form_row(form.email, {"row_attr" : {"class" : "form-col"}}) }}
-                    {{ form_row(form.message, {"row_attr" : {"class" : "form-row"}}) }}
-                    {{ form_errors(form) }}
-                    {{ form_row(form.submit, {"row_attr" : {"class" : "form-submit"},"attr" : {"class" : "app-btn"}}) }}
-                    {{ form_end(form) }}
-                {% endblock %}
-            </div>
-            <div class="col-xl-2 col-lg-1 col-0"></div>
+
+        <div>
+            <h1 class="text-center">{{ "general.menu.contact-me"|trans|title }}</h1>
+            <p class="text-center">
+                Si vous avez des questions à me poser (propositions, informations sur les projets que j'ai pu faire,
+                ...), vous pouvez me contacter par mail à l'adresse <a href="mailto:contact@silvain.eu">contact@silvain.eu</a>,
+                ou en utilisant
+                le formulaire de contact du site ci-dessous <i class="fas fa-smile-beam"></i> .
+
+            </p>
         </div>
+
+        <div>
+            {% block form %}
+                {{ form_start(form, {"attr" : {"class"  : "form-zone"}}) }}
+                {{ form_row(form.name, {"row_attr" : {"class" : "form-col"}}) }}
+                {{ form_row(form.email, {"row_attr" : {"class" : "form-col"}}) }}
+                {{ form_row(form.message, {"row_attr" : {"class" : "form-row"}}) }}
+                {{ form_errors(form) }}
+                {{ form_row(form.submit, {"row_attr" : {"class" : "form-submit"},"attr" : {"class" : "app-btn"}}) }}
+                {{ form_end(form) }}
+            {% endblock %}
+        </div>
+
+
     </div>
 {% endblock %}
 
