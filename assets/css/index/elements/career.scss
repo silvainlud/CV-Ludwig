@@ -37,6 +37,12 @@
   }
 
   .career_icon {
+
+
+    &.career_icon-end {
+      justify-content: flex-start;
+    }
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -139,7 +145,7 @@
       background: #5BBAF9;
       position: absolute;
       top: calc(50% - 4.5px);
-      left: calc(50% + 25% - 2.5px);
+      left: calc(50% + 25% - 7.5px);
       z-index: 1;
     }
 
