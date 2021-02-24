@@ -33,6 +33,9 @@ footer {
 
       grid-template-columns: 1fr;
 
+      .grid2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
 
 
       @media screen and (min-width: 500px) {
@@ -100,7 +103,7 @@ footer {
 
       color: $footer_color;
       text-decoration: unset;
-      margin: 7px 5px 7px 0;
+      margin: 0 5px 0 0;
       display: flex;
 
       @media screen and (max-width: 720px) {
@@ -108,6 +111,14 @@ footer {
         text-align: center;
       }
 
+    }
+    a{
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    p{
+      margin-top: 10px;
+      margin-bottom: 10px;
     }
 
     a:hover {
