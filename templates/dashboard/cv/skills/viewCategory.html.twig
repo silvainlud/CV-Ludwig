@@ -5,9 +5,9 @@
 {% block content %}
     <div class="row">
         <div class="col-12">
-            <div class="d-flex align-items-center mb-5">
+            <div class="hstack stack-vcenter mb-5">
                 <h2>{{ 'cv.skills.skill-categories.title._'|trans({"%name%" : selectCategory.name}) }}</h2>
-                <div class="flex-grow-1"></div>
+                <div class="stack-spacer"></div>
                 <div class="justify-content-end">
                     <a href="{{ path('db_cv_skills_add_categ', {"category" : selectCategory.id}) }}" class="app-btn app-btn-green">
                         {{ 'cv.skills.skill.title.add'|trans }}
@@ -32,8 +32,7 @@
                             <p>{{ s.technologie.name }}</p>
                         </td>
                         <td>
-                            <h3></h3>
-                            <div class="justify-content-end">
+                            <div class="hstack stack-end">
                                 <a href="{{ path('db_cv_skills_edit', {'skill': s.id}) }}"
                                    class="app-btn app-btn-light-blue app-btn-text">
                                     <i class="fas fa-pen-alt"></i>

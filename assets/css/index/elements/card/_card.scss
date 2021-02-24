@@ -104,7 +104,8 @@ $card_border-radius: 5px;
     }
 
     &.card-centered {
-      text-align: center²;
+      text-align: center;
+      align-items: center;
 
       p {
         text-align: center;

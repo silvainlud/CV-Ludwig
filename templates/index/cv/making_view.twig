@@ -7,121 +7,114 @@
 {% block title %}{{ realisation.name }}{% endblock %}
 
 {% block content %}
-    <div class="container-fluid cv_article mb-10">
-        <div class="row justify-content-center mt-5">
-            <div class="col-xxl-8 col-12 cv_article_content">
-                <h1>
-                    {{ realisation.name }}
-                    {% if realisation.public == false %}
-                        <div class=" m-2 app-badge app-badge-small app-badge-danger" style="display: inline-grid">
-                            <span>Non publié</span>
-                        </div>
-                    {% endif %}
-
-                </h1>
-                {% if realisation.mainImage !=null %}
-                    <img src="{{ path('cv-making-img', {"rea" : realisation.mainImage.id }) }}"
-                         alt="{{ realisation.name }} {{ "cv.making.attr.mainImage"|trans }}" class="art_miniature">
-                {% endif %}
-                {{ realisation.description|markdown_to_html }}
-                {% if gallery|length > 0 or realisation.mainImage != null %}
-                    <hr>
-                    <div class="row cv_article-gallery">
-                        {% for img in [realisation.mainImage]|merge(gallery) %}
-                            <div class="col-lg-4 col-md-6 col-12 mb-5">
-                                <a class="cv_article-gallery-item" target="_blank"
-                                   href="{{ path('cv-making-img', {"rea" : img.id }) }}">
-                                    <img src="{{ path('cv-making-img', {"rea" : img.id }) }}"
-                                         alt="{{ realisation.name }} {{ "cv.making.attr.mainImage"|trans }}">
-                                </a>
-                            </div>
-                        {% endfor %}
+    <div id="making_view" class="cv_article mb-10">
+        <div class="cv_article_content">
+            <h1>
+                {{ realisation.name }}
+                {% if realisation.public == false %}
+                    <div class=" m-2 app-badge app-badge-small app-badge-danger" style="display: inline-grid">
+                        <span>Non publié</span>
                     </div>
                 {% endif %}
-            </div>
 
-            <div class="col-xxl-4 col-12 pl-5">
-                <div class="row ">
-                    {% if realisation.company != null or realisation.company != null or realisation.dateRelease != null or realisation.timeToMake != null or realisation.link != null %}
-                        <div class="col-xxl-12 col-xl-5 col-12">
-                            <h2>Informations</h2>
-                            <div class="art-info-table">
-
-                                {% if realisation.company != null %}
-                                    <div class="art-info-table_icon">
-                                        <i class="fas fa-building"></i>
-                                    </div>
-                                    <div>
-                                        <h4>Entreprise</h4>
-                                        <p>{{ realisation.company }}</p>
-                                    </div>
-                                {% endif %}
-
-                                {% if realisation.company != null %}
-                                    <div class="art-info-table_icon">
-                                        <i class="fas fa-briefcase"></i>
-                                    </div>
-                                    <div>
-                                        <h4>Employeur</h4>
-                                        <p>{{ realisation.company }}</p>
-                                    </div>
-                                {% endif %}
-
-                                {% if realisation.dateRelease != null %}
-                                    <div class="art-info-table_icon">
-                                        <i class="fas fa-calendar-alt"></i>
-                                    </div>
-                                    <div>
-                                        <h4>Date de mise en production</h4>
-                                        <p>{{ realisation.dateRelease|date('M Y') }}</p>
-                                    </div>
-                                {% endif %}
-
-                                {% if realisation.timeToMake != null %}
-                                    <div class="art-info-table_icon">
-                                        <i class="fas fa-clock"></i>
-                                    </div>
-                                    <div>
-                                        <h4>Temps</h4>
-                                        <p>{{ realisation.timeToMake }}</p>
-                                    </div>
-                                {% endif %}
-
-                                {% if realisation.link != null %}
-                                    <div class="art-info-table_icon">
-                                        <i class="fas fa-link"></i>
-                                    </div>
-                                    <div>
-                                        <h4>Lien</h4>
-                                        <p><a href="{{ realisation.link }}">{{ realisation.link }}</a></p>
-                                    </div>
-                                {% endif %}
-
-                            </div>
-                            {% if realisation.technologies|length >0 %}
-                                <hr class="d-xxl-block d-xl-none">
-                            {% endif %}
+            </h1>
+            {% if realisation.mainImage !=null %}
+                <img src="{{ path('cv-making-img', {"rea" : realisation.mainImage.id }) }}"
+                     alt="{{ realisation.name }} {{ "cv.making.attr.mainImage"|trans }}" class="art_miniature">
+            {% endif %}
+            {{ realisation.description|markdown_to_html }}
+            {% if gallery|length > 0 or realisation.mainImage != null %}
+                <hr>
+                <div class="row cv_article-gallery grid3">
+                    {% for img in [realisation.mainImage]|merge(gallery) %}
+                        <div class="col-lg-4 col-md-6 col-12 mb-5">
+                            <a class="cv_article-gallery-item" target="_blank"
+                               href="{{ path('cv-making-img', {"rea" : img.id }) }}">
+                                <img src="{{ path('cv-making-img', {"rea" : img.id }) }}"
+                                     alt="{{ realisation.name }} {{ "cv.making.attr.mainImage"|trans }}">
+                            </a>
                         </div>
-                    {% endif %}
-                    <div class="col-1 d-xxl-none d-xl-block d-lg-none">
-                        <hr class="hr-horizontal">
-                    </div>
-                    <div class="col-xxl-12 col-xl-6 col-12">
-                        {% if realisation.technologies|length >0 %}
-                            <h3>Technologie Utilisée</h3>
-                            {% include 'index/cv/utils/_list_techno.html.twig' with {"techno" : realisation.technologies} only %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
 
-                            {% if linkTechno|length %}
-                                <h3 class="mt-5">Technologie Indirecte</h3>
-                                {% include 'index/cv/utils/_list_techno.html.twig' with {"techno" : linkTechno} only %}
+        <div>
+            <div class="art_info">
+                {% if realisation.company != null or realisation.company != null or realisation.dateRelease != null or realisation.timeToMake != null or realisation.link != null %}
+                    <div class="art_info-data">
+                        <h2>Informations</h2>
+                        <div class="art-info-table">
+
+                            {% if realisation.company != null %}
+                                <div class="art-info-table_icon">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <div>
+                                    <h4>Entreprise</h4>
+                                    <p>{{ realisation.company }}</p>
+                                </div>
                             {% endif %}
 
+                            {% if realisation.company != null %}
+                                <div class="art-info-table_icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div>
+                                    <h4>Employeur</h4>
+                                    <p>{{ realisation.company }}</p>
+                                </div>
+                            {% endif %}
+
+                            {% if realisation.dateRelease != null %}
+                                <div class="art-info-table_icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <div>
+                                    <h4>Date de mise en production</h4>
+                                    <p>{{ realisation.dateRelease|date('M Y') }}</p>
+                                </div>
+                            {% endif %}
+
+                            {% if realisation.timeToMake != null %}
+                                <div class="art-info-table_icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h4>Temps</h4>
+                                    <p>{{ realisation.timeToMake }}</p>
+                                </div>
+                            {% endif %}
+
+                            {% if realisation.link != null %}
+                                <div class="art-info-table_icon">
+                                    <i class="fas fa-link"></i>
+                                </div>
+                                <div>
+                                    <h4>Lien</h4>
+                                    <p><a href="{{ realisation.link }}">{{ realisation.link }}</a></p>
+                                </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="art_info-tech">
+                    {% if realisation.technologies|length >0 %}
+                        <h3>Technologie Utilisée</h3>
+                        {% include 'index/cv/utils/_list_techno.html.twig' with {"techno" : realisation.technologies} only %}
+
+                        {% if linkTechno|length %}
+                            <h3 class="mt-5">Technologie Indirecte</h3>
+                            {% include 'index/cv/utils/_list_techno.html.twig' with {"techno" : linkTechno} only %}
                         {% endif %}
-                    </div>
+
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
+
 {% endblock %}
 
 {% block script %}

@@ -4,12 +4,12 @@
 
 {% block content %}
     <h1 class="text-center">Mes passions</h1>
-    <div class="container mt-5">
-        <div class="row align-items-center">
-            <div class="col-md-4 col-12 my-6 order-0">
+    <div class="container mt-5 vstack" id="my_hobbies">
+        <div>
+            <div class="my_hobbies-img">
                 <img src="{{ asset('img/illustrations/passions/cello.png') }}" alt="Image de violon" class="w-100">
             </div>
-            <div class="col-md-8 col-12 my-6 order-1">
+            <div class="my_hobbies-content">
                 <h2>Violoncelle</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim imperdiet,
                     et finibus tortor tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
@@ -17,34 +17,39 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim imperdiet,
                     et finibus tortor tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
                     dignissim viverra mauris non laoreet dignissim viverra mauris non laoreet.</p>
-                <div class="hr-horiz"></div>
-                <div class="row">
-                    <div class="col-md-6 col-12 who-am-i_quality who-am-i_quality-purple">
-                        <div class="quality_img">
-                            <i class="fas fa-calendar-alt"></i>
-                        </div>
-                        <div class="quality_content">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim
-                                imperdiet.
-                            </p>
-                        </div>
+            </div>
+            {# <div class="hr-horiz"></div> #}
+            <div class="my_hobbies-quality ">
+                <div class="col-md-6 col-12 who-am-i_quality who-am-i_quality-purple">
+                    <div class="quality_img">
+                        <i class="fas fa-calendar-alt"></i>
                     </div>
-                    <div class="col-md-6 col-12 who-am-i_quality who-am-i_quality-light-blue">
-                        <div class="quality_img">
-                            <i class="fas fa-school"></i>
-                        </div>
-                        <div class="quality_content">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim
-                                imperdiet.
-                            </p>
-                        </div>
+                    <div class="quality_content">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim
+                            imperdiet.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 who-am-i_quality who-am-i_quality-light-blue">
+                    <div class="quality_img">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <div class="quality_content">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim
+                            imperdiet.
+                        </p>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="col-md-8 col-12 my-6 order-3 order-md-2">
+        <div class="my_hobbies-reverse">
+            <div class="my_hobbies-img">
+                <img src="{{ asset('img/illustrations/passions/code.png') }}" alt="Code informatique" class="w-100">
+            </div>
+            <div class="my_hobbies-content">
                 <h2>Informatique</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim imperdiet,
                     et finibus tortor tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
@@ -52,41 +57,41 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim imperdiet,
                     et finibus tortor tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
                     dignissim viverra mauris non laoreet dignissim viverra mauris non laoreet.</p>
-                <div class="hr-horiz"></div>
-                <div class="row">
-                    <div class="col-md-6 col-12 who-am-i_quality who-am-i_quality-red">
-                        <div class="quality_img">
-                            <i class="fas fa-baby"></i>
-                        </div>
-                        <div class="quality_content">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim
-                                imperdiet.
-                            </p>
-                        </div>
+            </div>
+            <div class=" my_hobbies-quality">
+                <div class="col-md-6 col-12 who-am-i_quality who-am-i_quality-red">
+                    <div class="quality_img">
+                        <i class="fas fa-baby"></i>
                     </div>
-                    <div class="col-md-6 col-12 who-am-i_quality who-am-i_quality-light-blue">
-                        <div class="quality_img">
-                            <i class="fas fa-school"></i>
-                        </div>
-                        <div class="quality_content">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim
-                                imperdiet.
-                            </p>
-                        </div>
+                    <div class="quality_content">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim
+                            imperdiet.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 who-am-i_quality who-am-i_quality-light-blue">
+                    <div class="quality_img">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <div class="quality_content">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim
+                            imperdiet.
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-12 my-6 order-2 order-md-3">
-                <img src="{{ asset('img/illustrations/passions/code.png') }}" alt="Code informatique" class="w-100">
-            </div>
+        </div>
+
+        <div>
 
 
-            <div class="col-md-4 col-12 my-6 order-4">
-                <img src="{{ asset('img/illustrations/passions/space.png') }}" alt="Astronaute dans l'espace" class="w-100">
+            <div class="my_hobbies-img">
+                <img src="{{ asset('img/illustrations/passions/space.png') }}" alt="Astronaute dans l'espace"
+                     class="w-100">
             </div>
-            <div class="col-md-8 col-12 my-6 order-5">
+            <div class="my_hobbies-content">
                 <h2>Espace & Science</h2>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar libero eget enim imperdiet,

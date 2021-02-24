@@ -1,3 +1,52 @@
+$default_grid_break: (1150, 950);
+$grid-template: (
+        2: (1:800),
+        3: (2:900, 1:600),
+        4: (3:1100, 2:900, 1:600),
+        5: (4:1400, 3:1100, 2:900, 1:600),
+);
+
+@mixin DefaultGridColSpan($max,$pre : '') {
+
+  & > .grid-rfull#{$pre} {
+    grid-column: 1/-1;
+  }
+
+  @for $i from 0 through $max {
+    & > .grid-cspan#{$pre}-#{$i} {
+      grid-column: span #{$i};
+    }
+  }
+}
+
+@mixin DefaultGrid($init, $breakpoints) {
+  display: grid;
+  grid-template-columns: repeat(#{$init}, 1fr);
+  grid-gap: 15px;
+  @content;
+
+  @include DefaultGridColSpan($init);
+
+  @each $col, $size in $breakpoints {
+    @media screen and (max-width: #{$size}px) {
+      grid-template-columns: repeat($col, 1fr);
+    }
+  }
+
+}
+
+@each $name, $breakpoint in $grid-template {
+  .grid#{$name} {
+    @include DefaultGrid($name, $breakpoint) {
+      & > a, & > li > a {
+        margin-top: 7px;
+        margin-bottom: 7px;
+      }
+    }
+
+  }
+}
+
 .grid2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -37,4 +86,12 @@ ul.grid2 {
     max-width: 1140px;
   }
 
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
 }
