@@ -68,8 +68,9 @@
 
 {% block script %}
     <script>
-        const categId = {{ skills|map(x=>x.id)|json_encode }};
-        categId.forEach(function (x) {
+        {
+
+        {{ skills|map(x=>x.id)|json_encode }}.forEach(function (x) {
             let btn = document.getElementById('btn-categ-' + x);
             if (btn != null)
                 btn.addEventListener('click', function (e) {
@@ -79,5 +80,6 @@
                     btn.parentElement.remove();
                 });
         });
+        }
     </script>
 {% endblock %}

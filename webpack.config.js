@@ -71,7 +71,9 @@ Encore
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     .enableReactPreset()
+    .addEntry('app', './assets/js/app.js')
     .addEntry('index-main', './assets/js/index/main.js')
+    .addEntry('dashboard-main', './assets/js/dashboard/main.js')
 
     .enablePostCssLoader()
 ;

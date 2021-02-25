@@ -14,6 +14,9 @@
 
     {% block head %}{% endblock %}
     {% block  stylesheet %}{% endblock %}
+    {% for js in encore_entry_js_files('app') %}
+        <script src="{{ js }}" defer></script>
+    {% endfor %}
     {% for js in encore_entry_js_files('index-main') %}
         <script src="{{ js }}" defer></script>
     {% endfor %}
