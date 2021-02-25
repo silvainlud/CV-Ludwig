@@ -34,7 +34,8 @@ export function toggleMenu(x) {
 export function loadBtnMenu(x) {
     document.querySelectorAll(".header_menu-list a").forEach(y => {
         y.addEventListener('click', function (e) {
-            toggleMenu(x, e);
+            if (x.classList.contains("is-opened"))
+                toggleMenu(x, e);
         });
     })
     x.addEventListener("click", function (e) {
