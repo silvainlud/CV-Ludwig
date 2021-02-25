@@ -6,6 +6,12 @@
     {% include('dashboard/include/header.html.twig') with {} only %}
     {% block head %}{% endblock %}
     {% block  stylesheet %}{% endblock %}
+    {% for js in encore_entry_js_files('app') %}
+        <script src="{{ js }}" defer></script>
+    {% endfor %}
+    {% for js in encore_entry_js_files('dashboard-main') %}
+        <script src="{{ js }}" defer data-turbolinks-track="reload"></script>
+    {% endfor %}
 </head>
 <body>
 
@@ -22,7 +28,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.select2').select2();
     });
 </script>
