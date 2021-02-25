@@ -20,6 +20,7 @@
     {% for js in encore_entry_js_files('index-main') %}
         <script src="{{ js }}" defer></script>
     {% endfor %}
+
 </head>
 <body>
 {% include('index/include/menu_top.html.twig') with {} only %}
@@ -54,7 +55,7 @@
 </main>
 {% include('index/include/footer.html.twig') with {} only %}
 
-
+<script src="{{ asset('library/highlight/highlight.js') }}"></script>
 {% block script %}{% endblock %}
 </body>
 </html>
