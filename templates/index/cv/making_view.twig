@@ -1,6 +1,7 @@
 {% extends 'index/base.html.twig' %}
 {% block head %}
 
+
     <link rel="stylesheet" href="{{ asset('library/highlight/themes/atom-dark-theme.css') }}">
 {% endblock %}
 
@@ -118,9 +119,9 @@
 {% endblock %}
 
 {% block script %}
-    <script src="{{ asset('library/highlight/highlight.js') }}"></script>
+
     <script>
-        hljs.initHighlightingOnLoad();
+        document.addEventListener("turbolinks:load",hljs.initHighlighting)
     </script>
 {% endblock %}
 
