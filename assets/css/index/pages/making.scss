@@ -10,7 +10,7 @@
 
 #making_view {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(100%, 1fr);
   grid-gap: 50px;
 
   max-width: 1550px;
