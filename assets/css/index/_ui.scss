@@ -80,6 +80,14 @@ h4, .h4 {
   }
 }
 
+.select2 *, .select2-results * {
+  color: black;
+}
+
+*:not(input):not(textarea):not(select):not(i) {
+  color: var(--color-text);
+}
+
 p {
   font-family: Roboto, sans-serif;
   font-style: normal;
@@ -209,6 +217,14 @@ code {
   }
 }
 
-.text-left   { text-align: left !important; }
-.text-right  { text-align: right !important; }
-.text-center { text-align: center !important; }
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
