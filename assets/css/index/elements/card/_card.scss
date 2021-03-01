@@ -78,8 +78,9 @@ $card_border-radius: 5px;
   &.card-centered {
     .card-body {
       text-align: center;
+      align-items: center;
 
-      p {
+      p, h2 {
         text-align: center;
         text-indent: 0;
       }
