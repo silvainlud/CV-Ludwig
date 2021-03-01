@@ -31,7 +31,7 @@ header {
 
     &#header_separate_action {
       display: none;
-      @media screen and (min-width: 900px) {
+      @media screen and (min-width: $split_menu) {
         display: block;
       }
     }

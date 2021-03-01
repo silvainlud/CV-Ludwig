@@ -1,9 +1,10 @@
+$split_menu: 950px;
+
 %menu_top_nav_responsive {
   .header_menu_responsive-zone {
     display: flex;
     align-items: center;
   }
-
 
 
   .header_menu_site-name {
@@ -50,7 +51,7 @@
 }
 
 %menu_top_nav {
-  @media screen and (min-width: 900px) {
+  @media screen and (min-width: $split_menu) {
     .header_menu_responsive-zone {
       display: none;
     }
@@ -58,7 +59,7 @@
       display: none;
     }
 
-    & > ul.header_menu-list {
+    & > ul.header_menu-list, & > ul.header_menu-list.is-opened {
       display: list-item;
       position: relative;
       top: unset;
@@ -78,6 +79,14 @@
 
         a {
           color: #8494A4;
+          border-radius: 10px;
+          padding: 6px 15px;
+          transition: color 0.3s, background-color 0.3s;
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.04);
+            color: lighten(#8494A4, 10%);
+          }
         }
       }
     }
