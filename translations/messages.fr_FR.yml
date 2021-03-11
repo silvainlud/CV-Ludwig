@@ -43,8 +43,8 @@ cv:
       edit: Éditer une réalisation
       list: Liste des rélisation
       gallery:
-        add: "Ajouter une image à la gallerie"
-        list: "Element de la gallerie"
+        add: "Ajouter une image à la galerie"
+        list: "Element de la galerie"
     attr:
       name: Titre
       preface: Resumé
@@ -89,5 +89,5 @@ contact:
     email: Addresse email
     message: Message
   error:
-    need-to-wait: "Vous ne pouvez pas envoyer plusieurs mails le même jour, veuilliez revenir plus tard."
+    need-to-wait: "Vous ne pouvez pas envoyer plusieurs mails le même jour, réessayez ulterieurement."
   send: "Votre message a bien été envoyé."

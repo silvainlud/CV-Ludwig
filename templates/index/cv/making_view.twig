@@ -100,11 +100,11 @@
                 {% endif %}
                 <div class="art_info-tech">
                     {% if realisation.technologies|length >0 %}
-                        <h3>Technologie Utilisée</h3>
+                        <h3>Technologies Utilisées</h3>
                         {% include 'index/cv/utils/_list_techno.html.twig' with {"techno" : realisation.technologies} only %}
 
                         {% if linkTechno|length %}
-                            <h3 class="mt-5">Technologie Indirecte</h3>
+                            <h3 class="mt-5">Technologies Indirectes</h3>
                             {% include 'index/cv/utils/_list_techno.html.twig' with {"techno" : linkTechno} only %}
                         {% endif %}
 
