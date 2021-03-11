@@ -51,6 +51,7 @@ class TechnologieType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'cv.skills.technology.attr.description',
                 'row_attr' => ['class' => 'form-col-12'],
+                'required' => false,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'general.action.btn.submit',

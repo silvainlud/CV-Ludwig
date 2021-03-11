@@ -31,8 +31,9 @@ class TechnologieTest extends EntityKernelTestCase
 
     public function testValidatorDescription()
     {
-        $this->assertsHasErrors($this->GetEntity()->setName('Description'), 0);
-        $this->assertsHasErrors($this->GetEntity()->setName(''), 1);
+        $this->assertsHasErrors($this->GetEntity()->setDescription('Description'), 0);
+        $this->assertsHasErrors($this->GetEntity()->setDescription(''), 0);
+        $this->assertsHasErrors($this->GetEntity()->setDescription(null), 0);
     }
 
     public function testValidatorImageExtension()

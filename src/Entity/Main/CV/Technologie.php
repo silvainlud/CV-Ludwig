@@ -35,10 +35,9 @@ class Technologie implements CacheableInterface
     private string $name;
 
     /**
-     * @ORM\Column(type="text", name="DescriptionTechnologie")
-     * @Assert\NotBlank
+     * @ORM\Column(type="text", name="DescriptionTechnologie", nullable=true)
      */
-    private string $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="blob", name="ImageTechnologie")
@@ -98,6 +97,7 @@ class Technologie implements CacheableInterface
         $this->link = null;
         $this->dateModified = new \DateTime();
         $this->dateCreated = new \DateTime();
+        $this->description = null;
     }
 
     public function getDescription(): ?string
@@ -105,7 +105,7 @@ class Technologie implements CacheableInterface
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
