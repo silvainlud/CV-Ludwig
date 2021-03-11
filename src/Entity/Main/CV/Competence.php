@@ -62,13 +62,13 @@ class Competence implements CacheableInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=CompetenceNiveau::class)
-     * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotNull
+     * @ORM\JoinColumn(nullable=true)
      */
-    private CompetenceNiveau $niveau;
+    private ?CompetenceNiveau $niveau;
 
     public function __construct()
     {
+        $this->niveau = null;
         $this->dateCreated = new \DateTime();
         $this->dateModified = new \DateTime();
     }
@@ -135,7 +135,7 @@ class Competence implements CacheableInterface
         return $this->niveau;
     }
 
-    public function setNiveau(CompetenceNiveau $niveau): self
+    public function setNiveau(?CompetenceNiveau $niveau): self
     {
         $this->niveau = $niveau;
 
