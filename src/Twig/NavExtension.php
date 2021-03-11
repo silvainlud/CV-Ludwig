@@ -97,20 +97,13 @@ class NavExtension extends AbstractExtension
         $col2 = [];
         $services = $i->get();
         $i = 1;
-        $services[] = (new Service())->setName($this->translator->trans('general.title.legal-notice'))->setLink('#');
+        $services[] = (new Service())->setName($this->translator->trans('general.title.legal-notice'))->setLink($this->router->generate('legal_notice'));
         $services[] = (new Service())->setName($this->translator->trans('general.title.list-services'))->setLink($this->router->generate('silvaineu_service_index'));
-        /** @var Service $s */
-        foreach ($services as $s) {
-            $k = [0 => $s->getName(), 1 => $s->getLink()];
-            if (0 !== $i % 2) {
-                $col1[] = $k;
-            } else {
-                $col2[] = $k;
-            }
 
-            ++$i;
-        }
+        return array_reduce($services, function (array $acc, Service $s) {
+            $acc[] = [0 => $s->getName(), 1 => $s->getLink()];
 
-        return [0 => $col1, 1 => $col2];
+            return $acc;
+        }, []);
     }
 }

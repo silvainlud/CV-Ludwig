@@ -23,6 +23,14 @@ class IndexController extends AbstractController
     }
 
     /**
+     * @Route("/legal-notice", name="legal_notice")
+     */
+    public function LegalNotice(): Response
+    {
+        return $this->render('index/legal_notice.html.twig');
+    }
+
+    /**
      * @Route("/contact", name="contact")
      */
     public function ContactMe(Request $request, ContactMeFactory $contactMeFactory, TranslatorInterface $translator): Response

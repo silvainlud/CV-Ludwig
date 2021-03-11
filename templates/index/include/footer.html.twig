@@ -34,11 +34,11 @@
                 <h2>Silvain.eu</h2>
                 <div class="container-fluid">
                     <ul class="grid2">
-                        {% set service = GetServicesFooter() %}
-                        {%- for arrayService in service -%}
-                            {%- for s in arrayService -%}
+                        {% set services = GetServicesFooter() %}
+                        {%- for s in services -%}
+
                                 <li><a href="{{ s[1] }}">{{ s[0] }}</a></li>
-                            {%- endfor -%}
+
                         {%- endfor -%}
                     </ul>
                 </div>
