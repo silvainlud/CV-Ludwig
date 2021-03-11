@@ -22,6 +22,7 @@ class CompetenceType extends AbstractType
                 'class' => CompetenceNiveau::class,
                 'label' => 'cv.skills.skill.attr.level',
                 'choice_label' => 'name',
+                'required' => false,
             ])
             ->add('technologie', EntityType::class, [
                 'class' => Technologie::class,

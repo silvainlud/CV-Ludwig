@@ -68,6 +68,28 @@ class SkillControllerTest extends WebTestCase
         self::assertFalse($_skill->getAutoditacte());
     }
 
+    public function testAddSkillsWhitoutlevel()
+    {
+        $this->login('admin');
+        $crawler = $this->client->request(Request::METHOD_GET, '/dashboard/cv/skills/add/' . $this->_categ->getId());
+        $form = $crawler->filter('#competence_submit')->form([
+            'competence[technologie]' => $this->_tech->getId(),
+            'competence[scolaire]' => true,
+            'competence[autoditacte]' => false,
+        ]);
+        $this->client->submit($form);
+        self::assertResponseRedirects();
+
+        /** @var Competence $_skill */
+        $_skill = $this->em->getRepository(Competence::class)->findOneBy([]);
+        self::assertNotNull($_skill);
+        self::assertNull($_skill->getNiveau());
+        self::assertEquals($this->_tech->getId(), $_skill->getTechnologie()->getId());
+        self::assertEquals($this->_categ->getId(), $_skill->getCategorie()->getId());
+        self::assertTrue($_skill->getScolaire());
+        self::assertFalse($_skill->getAutoditacte());
+    }
+
     public function testEditSkill()
     {
         $c = (new Competence())->setCategorie($this->_categ)->setAutoditacte(false)->setScolaire(true)->setNiveau($this->_level)->setTechnologie($this->_tech);
