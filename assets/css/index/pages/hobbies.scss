@@ -34,7 +34,7 @@
             'd a'
             'b a'
             'e a'
-            'c c'   /minmax(500px, 700px) minmax(190px, 1fr);
+            'c c' auto /minmax(500px, 700px) minmax(190px, 1fr);
       }
 
       @media screen and (min-width: 1150px) {
@@ -42,7 +42,7 @@
             'd a'
             'b a'
             'c a'
-            'e a';
+            'e a' auto /minmax(400px, 800px) minmax(230px, 1fr);
       }
     }
 
