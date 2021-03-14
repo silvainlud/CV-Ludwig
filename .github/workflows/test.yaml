@@ -4,7 +4,7 @@ jobs:
   CheckSecurity:
     name: Symfony Check Security
     runs-on: ubuntu-latest
-    container: docker.pkg.github.com/silvainlud/cv-ludwig/php:base
+    container: ghcr.io/silvainlud/cv-ludwig_php:base
     steps:
       - uses: actions/checkout@master
       - name: security:check
@@ -12,19 +12,39 @@ jobs:
   lint:
     name: lint
     runs-on: ubuntu-latest
-    container: docker.pkg.github.com/silvainlud/cv-ludwig/php:base
+    container: ghcr.io/silvainlud/cv-ludwig_php:base
     steps:
       - uses: actions/checkout@master
       - name: Composer
         run: composer install --prefer-dist --no-ansi --no-interaction --no-progress
       - name: Lint
         run: ./vendor/bin/phpstan analyse  --memory-limit=-1
+  yarn:
+    name: yarn
+    runs-on: ubuntu-latest
+    container: node
+    steps:
+      - uses: actions/checkout@master
+      - name: Install
+        run: yarn install --ignore-engines
+      - name: Build
+        run: yarn encore dev
+      - uses: actions/upload-artifact@v2
+        with:
+          name: yarn-build
+          path: public/build
+          retention-days: 1
   test:
     name: Test
     runs-on: ubuntu-latest
-    container: docker.pkg.github.com/silvainlud/cv-ludwig/php:base
+    container: ghcr.io/silvainlud/cv-ludwig_php:base
+    needs: yarn
     steps:
       - uses: actions/checkout@master
+      - uses: actions/download-artifact@v2
+        with:
+          name: yarn-build
+          path: public/build
       - name: Composer
         run: composer install --prefer-dist --no-ansi --no-interaction --no-progress
       - name: test
