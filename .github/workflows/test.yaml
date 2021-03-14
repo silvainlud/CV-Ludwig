@@ -1,0 +1,31 @@
+name: Tests
+on: [push]
+jobs:
+  CheckSecurity:
+    name: Symfony Check Security
+    runs-on: ubuntu-latest
+    container: docker.pkg.github.com/silvainlud/cv-ludwig/php:base
+    steps:
+      - uses: actions/checkout@master
+      - name: security:check
+        run: symfony security:check
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    container: docker.pkg.github.com/silvainlud/cv-ludwig/php:base
+    steps:
+      - uses: actions/checkout@master
+      - name: Composer
+        run: composer install --prefer-dist --no-ansi --no-interaction --no-progress
+      - name: Lint
+        run: ./vendor/bin/phpstan analyse  --memory-limit=-1
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    container: docker.pkg.github.com/silvainlud/cv-ludwig/php:base
+    steps:
+      - uses: actions/checkout@master
+      - name: Composer
+        run: composer install --prefer-dist --no-ansi --no-interaction --no-progress
+      - name: test
+        run: php bin/phpunit
