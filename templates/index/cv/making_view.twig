@@ -71,7 +71,7 @@
                                 </div>
                                 <div>
                                     <h4>Date de mise en production</h4>
-                                    <p>{{ realisation.dateRelease|date('M Y') }}</p>
+                                    <p>{{ realisation.dateRelease|format_datetime(pattern='MMMM Y', locale='fr')|title }}</p>
                                 </div>
                             {% endif %}
 
