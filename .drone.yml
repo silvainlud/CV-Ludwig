@@ -88,6 +88,7 @@ steps:
       - git fetch --all
       - git checkout master
       - git push mirror master
+      - git push mirror --tags
     environment:
       remoteurl:
         from_secret: Git
