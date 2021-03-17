@@ -32,15 +32,12 @@
             <div class="footer_border"></div>
             <div>
                 <h2>Silvain.eu</h2>
-                <div class="container-fluid">
-                    <ul class="grid2">
-                        {% set services = GetServicesFooter() %}
-                        {%- for s in services -%}
+                <div class="grid2">
+                    {% set services = GetServicesFooter() %}
+                    {%- for s in services -%}
+                        <a href="{{ s[1] }}">{{ s[0] }}</a>
+                    {%- endfor -%}
 
-                                <li><a href="{{ s[1] }}">{{ s[0] }}</a></li>
-
-                        {%- endfor -%}
-                    </ul>
                 </div>
             </div>
             <div class="footer_border"></div>
