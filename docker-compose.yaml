@@ -27,7 +27,7 @@ services:
       - mailcatcher
       - database
   yarn:
-    image: node:10.23.0-alpine3.10
+    image: node
     working_dir: /var/www
     volumes:
       - node_modules:/var/www/node_modules
