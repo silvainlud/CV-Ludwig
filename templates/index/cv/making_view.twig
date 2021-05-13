@@ -6,7 +6,7 @@
 {% block title %}{{ realisation.name }}{% endblock %}
 
 {% block content %}
-    <div id="making_view" class="cv_article mb-10">
+    <div id="making_view" class="cv_article">
         <div class="cv_article_content">
             <h1>
                 {{ realisation.name }}
@@ -26,13 +26,11 @@
                 <hr>
                 <div class="row cv_article-gallery grid3">
                     {% for img in [realisation.mainImage]|merge(gallery) %}
-                        <div class="col-lg-4 col-md-6 col-12 mb-5">
-                            <a class="cv_article-gallery-item" target="_blank"
-                               href="{{ path('cv-making-img', {"rea" : img.id }) }}">
-                                <img src="{{ path('cv-making-img', {"rea" : img.id }) }}"
-                                     alt="{{ realisation.name }} {{ "cv.making.attr.mainImage"|trans }}">
-                            </a>
-                        </div>
+                        <a class="cv_article-gallery-item" target="_blank"
+                           href="{{ path('cv-making-img', {"rea" : img.id }) }}">
+                            <img src="{{ path('cv-making-img', {"rea" : img.id }) }}"
+                                 alt="{{ realisation.name }} {{ "cv.making.attr.mainImage"|trans }}">
+                        </a>
                     {% endfor %}
                 </div>
             {% endif %}
@@ -119,7 +117,7 @@
 {% block script %}
 
     <script>
-        document.addEventListener("turbolinks:load",hljs.initHighlighting)
+        document.addEventListener("turbolinks:load", hljs.initHighlighting)
     </script>
 {% endblock %}
 

@@ -12,7 +12,7 @@
                         <h2 class="mt-7">{{ c.name }}</h2>
                     </div>
                     {% for s in c.competences %}
-                        <div class="mb-5" {% if  loop.index > 8 %}style="display: none" {% endif %}
+                        <div {% if  loop.index > 8 %}style="display: none" {% endif %}
                              id="tech-{{- c.id -}}-{{- s.technologie.id -}}">
                             <div class="card h-100">
                                 <div class="card-body card-centered card-body_maximize">
