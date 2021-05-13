@@ -1,7 +1,7 @@
 {% extends 'bundles/TwigBundle/Exception/error.html.twig' %}
 
 {% block content %}
-    <div class="container-fluid cv_article mb-5 text-center">
+    <div class="text-center">
         <h1>{{ exception.statusText|trans({}, "exception") }}</h1>
         <p>{{ (exception.statusText ~ '.content')|trans({}, "exception") }}</p>
         {% set prev_url  = GetPreviousUrl() %}

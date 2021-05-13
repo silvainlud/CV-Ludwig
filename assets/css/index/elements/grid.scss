@@ -22,7 +22,7 @@ $grid-template: (
 @mixin DefaultGrid($init, $breakpoints) {
   display: grid;
   grid-template-columns: repeat(#{$init}, 1fr);
-  grid-gap: 15px;
+  grid-gap: 20px;
   @content;
 
   @include DefaultGridColSpan($init);
