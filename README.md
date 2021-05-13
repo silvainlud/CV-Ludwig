@@ -2,7 +2,9 @@
 
 [![Build Status](https://drone.silvain.eu/api/badges/Silvain.eu/cv-ludwig/status.svg?ref=refs/heads/master)](https://drone.silvain.eu/Silvain.eu/cv-ludwig)
 
-Voir [https://silvain.eu](https://silvain.eu)
+Voir [silvain.eu](https://silvain.eu)
+
+Déplot complet sur [gitea.silvain.eu](https://git.silvain.eu/Silvain.eu/cv-ludwig)
 
 # Utilisation
 
