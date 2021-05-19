@@ -17,7 +17,10 @@ services:
     image: ghcr.io/silvainlud/cv-ludwig_php:base
     working_dir: /var/www/
     volumes:
-      - .:/var/www
+      - ./var/www/node_modules
+      - .:/var/www:cached
+      - vendor:/var/www/vendor
+      - var:/var/www/var/cache
     tty: true
     links:
       - redis
@@ -27,11 +30,14 @@ services:
     image: node
     working_dir: /var/www
     volumes:
-      - .:/var/www
+      - node_modules:/var/www/node_modules
+      - .:/var/www:delegated
+      - vendor:/var/www/vendor
+      - /var/www/var/cache
     command: /bin/sh -c "yarn install && yarn watch"
-  #    ports:
-  #      - 9003:8080
-  #    command: /bin/sh -c "npm install && ./node_modules/.bin/encore dev-server --hot --port 8080 --host 0.0.0.0 --public localhost:9003"
+#    ports:
+#      - 9003:8080
+#    command: /bin/sh -c "npm install && ./node_modules/.bin/encore dev-server --hot --port 8080 --host 0.0.0.0 --public localhost:9003"
 
   database:
     image: "mariadb" # use latest official postgres version
