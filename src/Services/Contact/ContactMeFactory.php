@@ -11,7 +11,7 @@ use Symfony\Component\Mailer\MailerInterface;
 
 class ContactMeFactory implements ContactMeFactoryInterface
 {
-    public const timeBetweenTry = '1  days';
+    public const timeBetweenTry = '1  weeks';
     public const emailTo = 'contact@silvain.eu';
 
     private RequestStack $requestStack;
