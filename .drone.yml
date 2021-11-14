@@ -20,7 +20,7 @@ steps:
       - name: composer
         path: /drone/src/vendor/
   - name: Yarn
-    image: node
+    image: node:16
     commands:
       - yarn install --ignore-engines
       - yarn encore dev

@@ -22,7 +22,7 @@ jobs:
   yarn:
     name: yarn
     runs-on: ubuntu-latest
-    container: node
+    container: node:16
     steps:
       - uses: actions/checkout@master
       - name: Install
