@@ -1,5 +1,6 @@
 - name: Symfony | Composer
   composer:
+    arguments: --no-interaction
     command: install
     working_dir: "{{ ansistrano_release_path.stdout }}"
     optimize_autoloader: true
