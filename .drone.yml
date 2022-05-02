@@ -41,7 +41,7 @@ steps:
   - name: phpunit
     image: ghcr.io/silvainlud/cv-ludwig_php:base
     commands:
-      - php bin/phpunit
+      - make test
     depends_on:
       - Yarn
       - Composer
