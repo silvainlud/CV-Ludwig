@@ -3,15 +3,14 @@
 namespace App\Utils\Assets;
 
 use App\Utils\StringHelper;
+use DateTime;
 use Gumlet\ImageResize;
-use Gumlet\ImageResizeException;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use InvalidArgumentException;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\EventListener\AbstractSessionListener;
 use Symfony\Component\Mime\MimeTypes;
-use Symfony\Contracts\Cache\ItemInterface;
 
 class AssetsResponse
 {
@@ -19,46 +18,6 @@ class AssetsResponse
 
     /**
      * @param resource|string $file
-     * @param ?int            $width_resize
-     */
-    public static function ReturnImg($file, string $filename, string $ext = 'png', ?int $width_resize = self::image_width, int $expireCache = 3600): Response
-    {
-        $filename = StringHelper::strRemoveAccent($filename);
-        $filename = str_replace(' ', '', $filename);
-        $filename = str_replace('/', '_', $filename);
-        $filename = str_replace('\\', '_', $filename);
-        $filename = iconv('UTF-8', 'ASCII//IGNORE', $filename);
-        if (false === $filename) {
-            $filename = StringHelper::strRemoveAccent(StringHelper::GenreateRandomString(16));
-            $expireCache = 0;
-        }
-
-        $ext = str_replace(' ', '', $ext);
-        $ext = str_replace('_', '', $ext);
-        if ($expireCache < 0) {
-            return self::MakeReponseImg($file, $filename, $ext, $width_resize);
-        }
-        if (\is_string($file)) {
-            $cacheKey = $file . '_' . $width_resize;
-        } else {
-            $cacheKey = $filename . '_' . $ext . '_' . $width_resize;
-        }
-
-        $cacheKey = StringHelper::strRemoveCacheKey($cacheKey);
-        $cache = new FilesystemAdapter('app.cache');
-
-        return $cache->get($cacheKey, function (ItemInterface $item) use ($file, $filename, $ext, $width_resize, $expireCache) {
-            $item->expiresAfter($expireCache);
-
-            return self::MakeReponseImg($file, $filename, $ext, $width_resize);
-        });
-    }
-
-    /**
-     * @param resource|string $file
-     * @param ?int            $width_resize
-     *
-     * @throws ImageResizeException
      */
     public static function MakeReponseImg($file, string $filename, string $ext = 'png', ?int $width_resize = self::image_width): Response
     {
@@ -67,7 +26,7 @@ class AssetsResponse
         } else {
             $stream = stream_get_contents($file);
             if (false === $stream) {
-                throw new \InvalidArgumentException('The var $file is not a valid resource.');
+                throw new InvalidArgumentException('The var $file is not a valid resource.');
             }
 
             $image = ImageResize::createFromString($stream);
@@ -75,7 +34,7 @@ class AssetsResponse
         if (null !== $width_resize) {
             $image->resizeToWidth($width_resize);
         }
-        $response = new Response((string) $image);
+        $response = new Response((string)$image);
 
         $filename .= '.' . $ext;
 
@@ -95,13 +54,13 @@ class AssetsResponse
                 $filename
             );
         }
-        $date = new \DateTime();
+        $date = new DateTime();
         $date->modify('+ 900 seconds');
         $response->setExpires($date);
         $response->headers->set('Content-Disposition', $disposition);
         $response->headers->set(AbstractSessionListener::NO_AUTO_CACHE_CONTROL_HEADER, 'true');
-        $response->headers->addCacheControlDirective('max-age', 900);
-        $response->headers->addCacheControlDirective('s-maxage', 900);
+        $response->headers->addCacheControlDirective('max-age', "900");
+        $response->headers->addCacheControlDirective('s-maxage', "900");
         $response->headers->addCacheControlDirective('must-revalidate', true);
         $response->headers->addCacheControlDirective('public', true);
         $response->headers->removeCacheControlDirective('private');
@@ -111,10 +70,8 @@ class AssetsResponse
 
     /**
      * @param resource|string $file
-     * @param ?string         $ext
-     * @param ?int            $width_resize
      */
-    public static function ReturnImgAdapterCache(AdapterInterface $cache, $file, string $filename, ?string $ext = 'png', ?int $width_resize = self::image_width, int $expireCache = 3600): Response
+    public static function ReturnImgAdapterCache(CacheItemPoolInterface $cache, $file, string $filename, ?string $ext = 'png', ?int $width_resize = self::image_width, int $expireCache = 3600): Response
     {
         $filename = StringHelper::strRemoveAccent($filename);
         $filename = str_replace(' ', '', $filename);
@@ -135,7 +92,7 @@ class AssetsResponse
         }
 
         if (null === $ext || false === $ext) {
-            throw new \InvalidArgumentException('Bad extension');
+            throw new InvalidArgumentException('Bad extension');
         }
 
         $ext = str_replace(' ', '', $ext);
@@ -157,8 +114,6 @@ class AssetsResponse
 
     /**
      * @param resource|string $file
-     * @param ?int            $width_resize
-     * @param ?string         $ext
      */
     public static function CacheKey($file, string $filename, ?string $ext, ?int $width_resize): string
     {
@@ -178,7 +133,7 @@ class AssetsResponse
             }
         }
         if (null === $ext || false === $ext) {
-            throw new \InvalidArgumentException('Bad extension');
+            throw new InvalidArgumentException('Bad extension');
         }
 
         $cacheKey = $filename . '_' . $ext . '_' . $width_resize;

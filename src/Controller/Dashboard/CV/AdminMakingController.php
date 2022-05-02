@@ -12,9 +12,9 @@ use App\Form\CV\Realisation\RealisationType;
 use App\Utils\Assets\AssetsResponse;
 use App\Utils\StringHelper;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -26,21 +26,18 @@ class AdminMakingController extends AbstractController
 {
     private EntityManagerInterface $em;
 
-    private AdapterInterface $cache;
-
-    public function __construct(EntityManagerInterface $em, AdapterInterface $cache)
+    public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
-        $this->cache = $cache;
     }
 
-    public static function RemoveMakingCache(EntityManagerInterface $em, AdapterInterface $cache): void
+    public static function RemoveMakingCache(EntityManagerInterface $em, CacheItemPoolInterface $cache): void
     {
         $keys = [StringHelper::strRemoveCacheKey(CuriculumVitaeController::CACHE_KEY_REALISATION), StringHelper::strRemoveCacheKey(CuriculumVitaeController::CACHE_KEY_REALISATION . '_all')];
         /** @var RealisationImage[] $_ts */
         $_ts = $em->getRepository(RealisationImage::class)->findAll();
         foreach ($_ts as $t) {
-            $keys[] = AssetsResponse::CacheKey($t->getImage(), (string) $t->getId(), null, null);
+            $keys[] = AssetsResponse::CacheKey($t->getImage(), (string)$t->getId(), null, null);
         }
         $_ts = $em->getRepository(Realisation::class)->findAll();
         foreach ($_ts as $t) {
@@ -51,23 +48,20 @@ class AdminMakingController extends AbstractController
         $cache->deleteItems($keys);
     }
 
-    /**
-     * @Route("/dashboard/cv/making", name="db_cv_making")
-     */
+    #[Route(path: '/dashboard/cv/making', name: 'db_cv_making')]
     public function ViewMaking(): Response
     {
         $_rs = $this->em->getRepository(Realisation::class)->findAll();
-
         return $this->render('dashboard/cv/making/viewMaking.html.twig', [
             'makings' => $_rs,
         ]);
     }
 
     /**
-     * @Route("/dashboard/cv/making/add", name="db_cv_making_add")
-     * @Route("/dashboard/cv/making/edit/{slug}", name="db_cv_making_edit")
      * @ParamConverter("_rea", options={"mapping": {"slug": "slug"}})
      */
+    #[Route(path: '/dashboard/cv/making/add', name: 'db_cv_making_add')]
+    #[Route(path: '/dashboard/cv/making/edit/{slug}', name: 'db_cv_making_edit')]
     public function AddMaking(Request $request, Realisation $_rea = null): Response
     {
         $isAdd = true;
@@ -79,11 +73,8 @@ class AdminMakingController extends AbstractController
         } else {
             $isAdd = false;
         }
-
         $form = $this->createForm(RealisationType::class, $_rea);
-
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             if (null !== $_rea->getMainImage()) {
                 if (null === $_rea->getMainImage()->getImageOrNull()) {
@@ -108,7 +99,6 @@ class AdminMakingController extends AbstractController
 
             return $this->redirectToRoute('db_cv_making');
         }
-
         if (false === $isAdd) {
             $_reaGallery = new RealisationImageGallerie();
             $_reaGallery->setRealisation($_rea);
@@ -143,7 +133,6 @@ class AdminMakingController extends AbstractController
                 $formGalleryRemove[$ga->getId()] = $_tf->createView();
             }
         }
-
         return $this->render('dashboard/cv/making/form_makink.html.twig', [
             'form' => $form->createView(),
             'formGallery' => null !== $formGallery ? $formGallery->createView() : null,

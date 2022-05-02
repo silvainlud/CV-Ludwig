@@ -9,11 +9,11 @@ workspace:
 
 steps:
   - name: SymfonyCheckSecurity
-    image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
+    image: ghcr.io/silvainlud/cv-ludwig_php:base
     commands:
       - symfony security:check
   - name: Composer
-    image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
+    image: ghcr.io/silvainlud/cv-ludwig_php:base
     commands:
       - composer install --prefer-dist --no-ansi --no-interaction --no-progress
     volumes:
@@ -30,7 +30,7 @@ steps:
       - name: build
         path: /drone/src/public/build/
   - name: Lint
-    image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
+    image: ghcr.io/silvainlud/cv-ludwig_php:base
     commands:
       - ./vendor/bin/phpstan analyse  --memory-limit=-1
     volumes:
@@ -39,9 +39,9 @@ steps:
     depends_on:
       - Composer
   - name: phpunit
-    image: registry.silvain.eu:5000/silvain.eu/cv_php:latest
+    image: ghcr.io/silvainlud/cv-ludwig_php:base
     commands:
-      - php bin/phpunit
+      - make test
     depends_on:
       - Yarn
       - Composer

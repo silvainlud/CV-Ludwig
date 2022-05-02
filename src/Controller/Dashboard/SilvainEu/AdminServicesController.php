@@ -8,10 +8,10 @@ use App\Form\SilvainEu\ServiceType;
 use App\Utils\Assets\AssetsResponse;
 use App\Utils\StringHelper;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,35 +30,28 @@ class AdminServicesController extends AbstractController
         $this->em = $em;
     }
 
-    /**
-     * @Route("/dashboard/silvaineu/services", name="db_silvaineu_services")
-     */
+    #[Route(path: '/dashboard/silvaineu/services', name: 'db_silvaineu_services')]
     public function ListServices(): Response
     {
         /** @var Service[] $service */
         $service = $this->em->getRepository(Service::class)->findAll();
-
         return $this->render('dashboard/SilvainEu/service/index.html.twig', [
             'services' => $service,
         ]);
     }
 
-    /**
-     * @Route("/dashboard/silvaineu/services/add", name="db_silvaineu_services-add")
-     */
+    #[Route(path: '/dashboard/silvaineu/services/add', name: 'db_silvaineu_services-add')]
     public function AddService(Request $request): Response
     {
         $s = new Service();
         $form = $this->createForm(ServiceType::class, $s, ['cancel_btn' => true]);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($s);
             $this->em->flush();
 
             return $this->redirectToRoute('db_silvaineu_services');
         }
-
         return $this->render('dashboard/SilvainEu/service/form.html.twig', [
             'form' => $form->createView(),
             'isEdit' => false,
@@ -66,27 +59,25 @@ class AdminServicesController extends AbstractController
     }
 
     /**
-     * @Route("/dashboard/silvaineu/services/edit/{service}", name="db_silvaineu_services-edit")
      * @ParamConverter("s", options={"mapping": {"service": "slug"}})
      */
+    #[Route(path: '/dashboard/silvaineu/services/edit/{service}', name: 'db_silvaineu_services-edit')]
     public function EditService(Request $request, Service $s): Response
     {
         $form = $this->createForm(ServiceType::class, $s, ['cancel_btn' => true]);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->flush();
 
             return $this->redirectToRoute('db_silvaineu_services');
         }
-
         return $this->render('dashboard/SilvainEu/service/form.html.twig', [
             'form' => $form->createView(),
             'isEdit' => true,
         ]);
     }
 
-    public static function RemoveServiceCache(EntityManagerInterface $em, AdapterInterface $cache): void
+    public static function RemoveServiceCache(EntityManagerInterface $em, CacheItemPoolInterface $cache): void
     {
         $keys = [StringHelper::strRemoveCacheKey(ServiceController::CACHE_KEY_SERVICES)];
         $_ts = $em->getRepository(Service::class)->findAll();

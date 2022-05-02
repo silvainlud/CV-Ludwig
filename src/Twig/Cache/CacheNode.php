@@ -16,8 +16,6 @@ use Twig\Node\Node;
  */
 class CacheNode extends Node
 {
-    private static int $cacheCount = 1;
-
     /**
      * @param AbstractExpression<AbstractExpression> $key
      */
@@ -29,9 +27,9 @@ class CacheNode extends Node
     /**
      * {@inheritdoc}
      */
-    public function compile(Compiler $compiler)
+    public function compile(Compiler $compiler) : void
     {
-        $i = self::$cacheCount++;
+        $i = 0;
         $extension = TwigCacheExtension::class;
         $templateParam = "\"{$this->getTemplateName()}\", ";
         $compiler

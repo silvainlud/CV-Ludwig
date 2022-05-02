@@ -4,9 +4,12 @@ namespace App\Twig;
 
 use App\Twig\Cache\CacheableInterface;
 use App\Twig\Cache\CacheTokenParser;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\AbstractLazyCollection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Error;
+use Exception;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Twig\Extension\AbstractExtension;
@@ -21,10 +24,10 @@ use Twig\TokenParser\AbstractTokenParser;
  */
 class TwigCacheExtension extends AbstractExtension
 {
-    private AdapterInterface $cache;
+    private CacheItemPoolInterface $cache;
     private bool $active;
 
-    public function __construct(AdapterInterface $cache, bool $active = true)
+    public function __construct(CacheItemPoolInterface $cache, bool $active = true)
     {
         $this->cache = $cache;
         $this->active = $active;
@@ -72,28 +75,28 @@ class TwigCacheExtension extends AbstractExtension
             return $prefix . ($item ? '1' : '0');
         }
         if (empty($item)) {
-            throw new \Exception('Clef de cache invalide');
+            throw new Exception('Clef de cache invalide');
         }
         if (\is_string($item)) {
             return $prefix . $item;
         }
         if (\is_array($item)) {
-            return $prefix . implode('_', array_map(fn ($v) => $this->getCacheKey($templatePath, $v, false), $item));
+            return $prefix . implode('_', array_map(fn($v) => $this->getCacheKey($templatePath, $v, false), $item));
         }
 
         if (!\is_object($item) || !($item instanceof CacheableInterface)) {
-            throw new \Exception("TwigCache : Impossible de serialiser une variable qui n'est pas un objet ou une chaine");
+            throw new Exception("TwigCache : Impossible de serialiser une variable qui n'est pas un objet ou une chaine");
         }
 
         try {
-            $updatedAt = $item->getUpdatedAt() ?: new \DateTimeImmutable('@0');
+            $updatedAt = $item->getUpdatedAt() ?: new DateTimeImmutable('@0');
             $id = $item->getId() ?: '0';
             $className = \get_class($item);
             $className = substr($className, strrpos($className, '\\') + 1);
 
             return $prefix . $id . $className . $updatedAt->getTimestamp();
-        } catch (\Error $e) {
-            throw new \Exception("TwigCache : Impossible de serialiser l'objet pour le cache : \n" . $e->getMessage());
+        } catch (Error $e) {
+            throw new Exception("TwigCache : Impossible de serialiser l'objet pour le cache : \n" . $e->getMessage());
         }
     }
 

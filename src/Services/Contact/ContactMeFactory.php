@@ -2,6 +2,7 @@
 
 namespace App\Services\Contact;
 
+use DateTime;
 use App\Entity\Main\ContactLog;
 use App\Utils\Helpers\Contact\ContactMe;
 use Doctrine\ORM\EntityManagerInterface;
@@ -38,7 +39,7 @@ class ContactMeFactory implements ContactMeFactoryInterface
 
         $intervale = date_interval_create_from_date_string(self::timeBetweenTry);
 
-        return null === $log || (false !== $intervale && $log->getDateCreated() < (new \DateTime())->sub($intervale));
+        return null === $log || (false !== $intervale && $log->getDateCreated() < (new DateTime())->sub($intervale));
     }
 
     public function sendMessage(ContactMe $contactMe): void

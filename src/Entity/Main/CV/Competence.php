@@ -4,73 +4,54 @@ namespace App\Entity\Main\CV;
 
 use App\Repository\Main\CV\CompetenceRepository;
 use App\Twig\Cache\CacheableInterface;
-use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+use DateTimeInterface;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToOne;
+use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\ORM\Mapping\PreUpdate;
+use Doctrine\ORM\Mapping\Table;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\NotNull;
 
-/**
- * @ORM\Entity(repositoryClass=CompetenceRepository::class)
- * @ORM\Table(name="CV_Competence")
- * @UniqueEntity(
- *     fields={"technologie"},
- *     errorPath="technologie",
- * )
- * @ORM\HasLifecycleCallbacks
- */
+#[UniqueEntity(fields: "technologie", errorPath: "technologie")]
+#[Entity(repositoryClass: CompetenceRepository::class)]
+#[Table(name: 'CV_Competence')]
+#[HasLifecycleCallbacks]
 class Competence implements CacheableInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer", name="CodeCompetence")
-     */
+    #[Id]
+    #[GeneratedValue]
+    #[Column(name: 'CodeCompetence', type: 'integer')]
     private int $id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=CompetenceCategorie::class, inversedBy="competences")
-     * @ORM\JoinColumn(name="NumCompetenceCategorie", nullable=false, referencedColumnName="NumCompetenceCategorie")
-     * @Assert\NotNull
-     */
+    #[ManyToOne(targetEntity: CompetenceCategorie::class, inversedBy: 'competences')]
+    #[JoinColumn(name: 'NumCompetenceCategorie', referencedColumnName: 'NumCompetenceCategorie', nullable: false)]
+    #[NotNull]
     private CompetenceCategorie $categorie;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Technologie::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false, name="NumTechnologie", referencedColumnName="NumTechnologie")
-     * @Assert\NotNull
-     */
+    #[OneToOne(targetEntity: Technologie::class, cascade: ['persist', 'remove'])]
+    #[JoinColumn(name: 'NumTechnologie', referencedColumnName: 'NumTechnologie', nullable: false)]
+    #[NotNull]
     private Technologie $technologie;
-
-    /**
-     * @ORM\Column(type="boolean", name="EstScolaire")
-     */
+    #[Column(name: 'EstScolaire', type: 'boolean')]
     private bool $scolaire;
-
-    /**
-     * @ORM\Column(type="boolean", name="EstAutoDitacte")
-     */
+    #[Column(name: 'EstAutoDitacte', type: 'boolean')]
     private bool $autoditacte;
-
-    /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="CompetenceCreation")
-     */
-    private \DateTimeInterface $dateCreated;
-
-    /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="CompetenceEdition")
-     */
-    private \DateTimeInterface $dateModified;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=CompetenceNiveau::class)
-     * @ORM\JoinColumn(nullable=true)
-     */
+    #[Column(name: 'CompetenceEdition', type: 'datetime', nullable: false, options: ['default' => 'CURRENT_TIMESTAMP'])]
+    private DateTimeInterface $dateModified;
+    #[ManyToOne(targetEntity: CompetenceNiveau::class)]
+    #[JoinColumn(nullable: true)]
     private ?CompetenceNiveau $niveau;
 
     public function __construct()
     {
         $this->niveau = null;
-        $this->dateCreated = new \DateTime();
-        $this->dateModified = new \DateTime();
+        $this->dateModified = new DateTime();
     }
 
     public function getId(): ?int
@@ -142,26 +123,21 @@ class Competence implements CacheableInterface
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->dateModified;
     }
 
-    /**
-     * @ORM\PrePersist
-     */
+    #[PrePersist]
     public function prePersist(): void
     {
         $this->preUpdate();
-        $this->dateCreated = $this->dateModified;
     }
 
-    /**
-     * @ORM\PreUpdate
-     */
+    #[PreUpdate]
     public function preUpdate(): void
     {
-        $this->dateModified = new \DateTime();
+        $this->dateModified = new DateTime();
     }
 
     public function postUpdate(): void

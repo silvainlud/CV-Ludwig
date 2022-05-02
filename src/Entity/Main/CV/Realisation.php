@@ -9,106 +9,77 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\OneToOne;
+use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\ORM\Mapping\PreUpdate;
+use Doctrine\ORM\Mapping\Table;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Url;
 
-/**
- * @ORM\Entity(repositoryClass=RealisationRepository::class)
- * @ORM\Table(name="CV_Realisation")
- * @UniqueEntity(
- *     fields={"name"},
- *     errorPath="name",
- * )
- */
+
+#[UniqueEntity(fields: "name", errorPath: "name")]
+#[Entity(repositoryClass: RealisationRepository::class)]
+#[Table(name: 'CV_Realisation')]
 class Realisation implements CacheableInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
+    #[Id]
+    #[GeneratedValue(strategy: 'AUTO')]
+    #[Column(type: 'integer')]
     protected int $id;
-
-    /**
-     * @ORM\Column(type="string", length=255, unique=true, name="NomRealisation")
-     * @Assert\NotBlank
-     * @Assert\Length(max=255)
-     */
+    #[Column(name: 'NomRealisation', type: 'string', length: 255, unique: true)]
+    #[NotBlank]
+    #[Length(max: 255)]
     protected string $name;
-
-    /**
-     * @ORM\Column(type="text", name="DescriptionRealisation")
-     * @Assert\NotBlank
-     */
+    #[Column(name: 'DescriptionRealisation', type: 'text')]
+    #[NotBlank]
     protected string $description;
-
-    /**
-     * @ORM\Column(type="string", nullable=true, name="EntrepriseRealisation", length=32)
-     * @Assert\Length(max=32)
-     */
+    #[Column(name: 'EntrepriseRealisation', type: 'string', length: 32, nullable: true)]
+    #[Length(max: 32)]
     protected ?string $company;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true, name="DateMiseEnLigneRealisation")
-     */
+    #[Column(name: 'DateMiseEnLigneRealisation', type: 'datetime', nullable: true)]
     protected ?DateTimeInterface $dateRelease;
-
-    /**
-     * @ORM\Column(type="string", nullable=true, name="TempsRealisation", length=32)
-     * @Assert\Length(max=32)
-     */
+    #[Column(name: 'TempsRealisation', type: 'string', length: 32, nullable: true)]
+    #[Length(max: 32)]
     protected ?string $timeToMake;
-
-    /**
-     * @ORM\Column(type="string", nullable=true, name="LienRealisation", length=255)
-     * @Assert\Length(max=255)
-     * @Assert\Url
-     */
+    #[Column(name: 'LienRealisation', type: 'string', length: 255, nullable: true)]
+    #[Length(max: 255)]
+    #[Url]
     protected ?string $link;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Main\CV\RealisationImageMiniature", orphanRemoval=true, mappedBy="realisation", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
-     */
+    #[OneToOne(mappedBy: 'realisation', targetEntity: 'App\Entity\Main\CV\RealisationImageMiniature', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[JoinColumn(nullable: true)]
     protected ?RealisationImageMiniature $mainImage;
-
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Main\CV\RealisationImageGallerie", orphanRemoval=true, mappedBy="realisations")
-     *
      * @var Collection<RealisationImageGallerie>
      */
+    #[OneToMany(mappedBy: 'realisations', targetEntity: 'App\Entity\Main\CV\RealisationImageGallerie', orphanRemoval: true)]
     protected Collection $gallery;
-
-    /**
-     * @ORM\Column(type="boolean", options={"default": false}, name="EnLigne")
-     */
+    #[Column(name: 'EnLigne', type: 'boolean', options: ['default' => false])]
     protected bool $public;
-
-    /**
-     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
-     */
+    #[Column(type: 'string', length: 255, unique: true, nullable: false)]
     protected string $slug;
-
-    /**
-     * @ORM\Column(type="string", nullable=true, name="Resume")
-     */
+    #[Column(name: 'Resume', type: 'string', nullable: true)]
     protected ?string $preface;
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Main\CV\Technologie")
-     * @ORM\JoinTable(joinColumns={@ORM\JoinColumn(referencedColumnName="id")}, inverseJoinColumns={@ORM\JoinColumn(referencedColumnName="NumTechnologie")})
      *
      * @var Collection<Technologie>
      */
+    #[ManyToMany(targetEntity: 'App\Entity\Main\CV\Technologie')]
+    #[JoinTable]
+    #[JoinColumn(referencedColumnName: 'id')]
+    #[ORM\InverseJoinColumn(referencedColumnName: 'NumTechnologie')]
     protected Collection $technologies;
-
-    /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="RealisationCreation")
-     */
-    private DateTimeInterface $dateCreated;
-    /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="RealisationEdition")
-     */
+    #[Column(name: 'RealisationEdition', type: 'datetime', nullable: false, options: ['default' => 'CURRENT_TIMESTAMP'])]
     private DateTimeInterface $dateModified;
 
     public function __construct()
@@ -122,7 +93,6 @@ class Realisation implements CacheableInterface
         $this->link = null;
         $this->public = false;
         $this->dateModified = new DateTime();
-        $this->dateCreated = new DateTime();
     }
 
     public function getDescription(): string
@@ -247,7 +217,7 @@ class Realisation implements CacheableInterface
     public function CompleteSlug(SluggerInterface $slugger): void
     {
         if (null === $this->getSlugOrNUll() || '-' == $this->getSlugOrNUll()) {
-            $this->slug = (string) $slugger->slug($this->getId() . ' ' . $this->getName())->lower();
+            $this->slug = (string)$slugger->slug($this->getId() . ' ' . $this->getName())->lower();
         }
     }
 
@@ -324,18 +294,13 @@ class Realisation implements CacheableInterface
         return $this->dateModified;
     }
 
-    /**
-     * @ORM\PrePersist
-     */
+    #[PrePersist]
     public function prePersist(): void
     {
         $this->preUpdate();
-        $this->dateCreated = $this->dateModified;
     }
 
-    /**
-     * @ORM\PreUpdate
-     */
+    #[PreUpdate]
     public function preUpdate(): void
     {
         $this->dateModified = new DateTime();

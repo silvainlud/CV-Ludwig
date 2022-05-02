@@ -5,7 +5,8 @@ namespace App\Twig;
 use App\Controller\SilvainEu\ServiceController;
 use App\Entity\Main\SilvainEu\Service;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Exception;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -21,13 +22,13 @@ class NavExtension extends AbstractExtension
 
     private EntityManagerInterface $em;
 
-    private AdapterInterface $cache;
+    private CacheItemPoolInterface $cache;
 
     private TranslatorInterface $translator;
 
     private UrlMatcherInterface $matcher;
 
-    public function __construct(RouterInterface $router, UrlMatcherInterface $matcher, RequestStack $request, EntityManagerInterface $em, AdapterInterface $cache, TranslatorInterface $translator)
+    public function __construct(RouterInterface $router, UrlMatcherInterface $matcher, RequestStack $request, EntityManagerInterface $em, CacheItemPoolInterface $cache, TranslatorInterface $translator)
     {
         $this->router = $router;
         $this->request = $request;
@@ -59,25 +60,25 @@ class NavExtension extends AbstractExtension
     {
         try {
             $url = $this->router->generate('index');
-            if (null === $this->request->getMasterRequest()) {
+            if (null === $this->request->getMainRequest()) {
                 return null;
             }
-            $referer = $this->request->getMasterRequest()->headers->get('referer');
+            $referer = $this->request->getMainRequest()->headers->get('referer');
 
             if (null == $referer) {
                 return null;
             }
 
-            $lastPath = str_replace($this->request->getMasterRequest()->getSchemeAndHttpHost(), '', $referer);
+            $lastPath = str_replace($this->request->getMainRequest()->getSchemeAndHttpHost(), '', $referer);
 
             $parametersLastRoute = $this->matcher->match($lastPath);
 
-            if ($parametersLastRoute['_route'] !== $this->request->getMasterRequest()->attributes->get('_route')) {
+            if ($parametersLastRoute['_route'] !== $this->request->getMainRequest()->attributes->get('_route')) {
                 $url = $referer;
             }
 
             return $url;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return null;
         }
     }
@@ -92,9 +93,6 @@ class NavExtension extends AbstractExtension
             $i->set($this->em->getRepository(Service::class)->findAll());
             $this->cache->save($i);
         }
-
-        $col1 = [];
-        $col2 = [];
         $services = $i->get();
         $i = 1;
         $services[] = (new Service())->setName($this->translator->trans('general.title.legal-notice'))->setLink($this->router->generate('legal_notice'));
