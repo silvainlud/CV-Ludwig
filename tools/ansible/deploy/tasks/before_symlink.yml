@@ -1,5 +1,7 @@
 - name: Symfony | Composer
   command: composer install --optimize-autoloader --no-dev --prefer-dist --no-interaction --no-scripts -vvv
+  args:
+    chdir: "{{ ansistrano_release_path.stdout }}"
 - name: Symfony | Yarn | Install
   command: yarn install
   args:
