@@ -4,99 +4,87 @@ namespace App\Entity\Main\CV;
 
 use App\Repository\Main\CV\TechnologieRepository;
 use App\Twig\Cache\CacheableInterface;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\InverseJoinColumns;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\ORM\Mapping\PreUpdate;
+use Doctrine\ORM\Mapping\Table;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Expression;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Url;
 
-/**
- * @ORM\Entity(repositoryClass=TechnologieRepository::class)
- * @ORM\Table(name="CV_Technologie")
- * @UniqueEntity(fields={"name"})
- * @ORM\HasLifecycleCallbacks
- */
+#[UniqueEntity(fields: "name")]
+#[Entity(repositoryClass: TechnologieRepository::class)]
+#[Table(name: 'CV_Technologie')]
+#[HasLifecycleCallbacks]
 class Technologie implements CacheableInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer", name="NumTechnologie")
-     */
+    #[Id]
+    #[GeneratedValue]
+    #[Column(name: 'NumTechnologie', type: 'integer')]
     private int $id;
-
-    /**
-     * @ORM\Column(type="string", length=64, unique=true, name="NomTechnologie")
-     * @Assert\NotBlank
-     * @Assert\Length(max="64")
-     */
+    #[Column(name: 'NomTechnologie', type: 'string', length: 64, unique: true)]
+    #[NotBlank]
+    #[Length(max: 64)]
     private string $name;
-
-    /**
-     * @ORM\Column(type="text", name="DescriptionTechnologie", nullable=true)
-     */
+    #[Column(name: 'DescriptionTechnologie', type: 'text', nullable: true)]
     private ?string $description;
-
     /**
-     * @ORM\Column(type="blob", name="ImageTechnologie")
-     * @Assert\NotNull
      *
      * @var resource|string
      */
+    #[Column(name: 'ImageTechnologie', type: 'blob')]
+    #[NotNull]
     private $image;
-
-    /**
-     * @ORM\Column(type="string", length=10, name="ImageExtensionTechnologie")
-     * @Assert\NotBlank
-     * @Assert\Length(max="10")
-     */
+    #[Column(name: 'ImageExtensionTechnologie', type: 'string', length: 10)]
+    #[NotBlank]
+    #[Length(max: 10)]
     private string $imageExtension;
-
-    /**
-     * @ORM\Column(type="string", length=25, name="ColorTechnologie", nullable=true)
-     * @Assert\NotBlank
-     * @Assert\Length(max="25")
-     */
+    #[Column(name: 'ColorTechnologie', type: 'string', length: 25, nullable: true)]
+    #[NotBlank]
+    #[Length(max: 25)]
     private string $color;
-
-    /**
-     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
-     */
+    #[Column(type: 'string', length: 255, unique: true, nullable: false)]
     private string $slug;
-
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Main\CV\Technologie")
-     * @ORM\JoinTable(joinColumns={@ORM\JoinColumn(referencedColumnName="NumTechnologie", name="source_technologie_num")}, inverseJoinColumns={@ORM\JoinColumn(referencedColumnName="NumTechnologie", name="target_technologie_num")})
-     * @Assert\Expression("this.getLinkedTechonologies().contains(this) == false", message="cv.skills.technology.attr.link.not-contain-slef")
      *
      * @var Collection<self> $linkedTechonologies
      */
+    #[ManyToMany(targetEntity: 'App\Entity\Main\CV\Technologie')]
+    #[JoinTable]
+    #[JoinColumn(name: 'source_technologie_num', referencedColumnName: 'NumTechnologie')]
+    #[ORM\InverseJoinColumn(name: 'target_technologie_num', referencedColumnName: 'NumTechnologie')]
+    #[Expression(expression: 'this.getLinkedTechonologies().contains(this) == false', message: 'cv.skills.technology.attr.link.not-contain-slef')]
     private Collection $linkedTechonologies;
-
-    /**
-     * @ORM\Column(type="string", nullable=true, length=255)
-     * @Assert\Url
-     * @Assert\Length(max=255)
-     */
+    #[Column(type: 'string', length: 255, nullable: true)]
+    #[Url]
+    #[Length(max: 255)]
     private ?string $link;
-
-    /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="TechnologieCreation")
-     */
-    private \DateTimeInterface $dateCreated;
-    /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="TechnologieEdition")
-     */
-    private \DateTimeInterface $dateModified;
+    #[Column(name: 'TechnologieEdition', type: 'datetime', nullable: false, options: ['default' => 'CURRENT_TIMESTAMP'])]
+    private DateTimeInterface $dateModified;
 
     public function __construct()
     {
         $this->linkedTechonologies = new ArrayCollection();
         $this->link = null;
-        $this->dateModified = new \DateTime();
-        $this->dateCreated = new \DateTime();
+        $this->dateModified = new DateTime();
         $this->description = null;
     }
 
@@ -122,8 +110,6 @@ class Technologie implements CacheableInterface
 
     /**
      * @param resource|string $image
-     *
-     * @return $this
      */
     public function setImage($image): self
     {
@@ -146,7 +132,7 @@ class Technologie implements CacheableInterface
 
     public function displayImage(): ?string
     {
-        if (isset($this->image, $this->imageExtension)) {
+        try {
             if (!\is_string($this->image)) {
                 $_f = stream_get_contents($this->image);
                 if (false === $_f) {
@@ -157,9 +143,11 @@ class Technologie implements CacheableInterface
             }
 
             return 'data:image/' . $this->imageExtension . ';base64,' . base64_encode($_f);
+        } catch (\Exception) {
+            return null;
         }
 
-        return null;
+
     }
 
     public function getColor(): ?string
@@ -203,7 +191,7 @@ class Technologie implements CacheableInterface
     public function CompleteSlug(SluggerInterface $slugger): void
     {
         if (null === $this->getSlugOrNUll() || '-' == $this->getSlugOrNUll()) {
-            $this->slug = (string) $slugger->slug($this->getId() . ' ' . $this->getName())->lower();
+            $this->slug = (string)$slugger->slug($this->getId() . ' ' . $this->getName())->lower();
         }
     }
 
@@ -272,25 +260,20 @@ class Technologie implements CacheableInterface
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->dateModified;
     }
 
-    /**
-     * @ORM\PrePersist
-     */
+    #[PrePersist]
     public function prePersist(): void
     {
         $this->preUpdate();
-        $this->dateCreated = $this->dateModified;
     }
 
-    /**
-     * @ORM\PreUpdate
-     */
+    #[PreUpdate]
     public function preUpdate(): void
     {
-        $this->dateModified = new \DateTime();
+        $this->dateModified = new DateTime();
     }
 }

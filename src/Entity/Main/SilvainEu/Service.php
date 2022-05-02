@@ -4,84 +4,70 @@ namespace App\Entity\Main\SilvainEu;
 
 use App\Repository\Main\SilvainEu\ServiceRepository;
 use App\Twig\Cache\CacheableInterface;
-use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+use DateTimeInterface;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\ORM\Mapping\PreUpdate;
+use Doctrine\ORM\Mapping\Table;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 
-/**
- * @ORM\Entity(repositoryClass=ServiceRepository::class)
- * @ORM\Table(name="SilvainEu_Service")
- * @UniqueEntity(fields={"name"})
- * @ORM\HasLifecycleCallbacks
- */
+#[UniqueEntity(fields: "name")]
+#[Entity(repositoryClass: ServiceRepository::class)]
+#[Table(name: 'SilvainEu_Service')]
+#[HasLifecycleCallbacks]
 class Service implements CacheableInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[Id]
+    #[GeneratedValue]
+    #[Column(type: 'integer')]
     private int $id;
-
-    /**
-     * @ORM\Column(type="string", length=32, unique=true, name="NomService")
-     * @Assert\Length(max="32")
-     * @Assert\NotBlank
-     */
+    #[Column(name: 'NomService', type: 'string', length: 32, unique: true)]
+    #[Length(max: 32)]
+    #[NotBlank]
     private string $name;
-
-    /**
-     * @ORM\Column(type="text", name="DescriptionService")
-     * @Assert\NotBlank
-     */
+    #[Column(name: 'DescriptionService', type: 'text')]
+    #[NotBlank]
     private string $description;
-
     /**
-     * @ORM\Column(type="string", length=128, name="LinkService")
-     * @Assert\NotBlank
      * @Assert\AtLeastOneOf(constraints={
      *     @Assert\Url(relativeProtocol=true),
      *     @Assert\Regex(pattern="/^\/.*$/")
      * })
      */
+    #[Column(name: 'LinkService', type: 'string', length: 128)]
+    #[NotBlank]
     private string $link;
-
     /**
-     * @ORM\Column(type="blob", name="ImageService")
-     * @Assert\NotNull
      *
      * @var resource|string
      */
+    #[Column(name: 'ImageService', type: 'blob')]
+    #[NotNull]
     private $image;
-
-    /**
-     * @ORM\Column(type="string", length=10, name="ImageExtensionService")
-     * @Assert\Length(max="10")
-     * @Assert\NotBlank
-     */
+    #[Column(name: 'ImageExtensionService', type: 'string', length: 10)]
+    #[Length(max: 10)]
+    #[NotBlank]
     private string $imageExtension;
-
-    /**
-     * @ORM\Column(type="string", length=128, name="SlugService")
-     * @Assert\Length(max="128")
-     */
+    #[Column(name: 'SlugService', type: 'string', length: 128)]
+    #[Length(max: 128)]
     private string $slug;
-
-    /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="ServiceCreation")
-     */
-    private \DateTimeInterface $dateCreated;
-    /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="ServiceEdition")
-     */
-    private \DateTimeInterface $dateModified;
+    #[Column(name: 'ServiceEdition', type: 'datetime', nullable: false, options: ['default' => 'CURRENT_TIMESTAMP'])]
+    private DateTimeInterface $dateModified;
 
     public function __construct()
     {
-        $this->dateCreated = new \DateTime();
-        $this->dateModified = new \DateTime();
+        $this->dateModified = new DateTime();
     }
 
     public function getId(): ?int
@@ -139,8 +125,6 @@ class Service implements CacheableInterface
 
     /**
      * @param resource|string $image
-     *
-     * @return $this
      */
     public function setImage($image): self
     {
@@ -184,7 +168,7 @@ class Service implements CacheableInterface
 
     public function MakeSlug(SluggerInterface $slugger): void
     {
-        $this->slug = (string) $slugger->slug($this->name)->lower();
+        $this->slug = (string)$slugger->slug($this->name)->lower();
     }
 
     public function getUpload(): ?UploadedFile
@@ -208,25 +192,20 @@ class Service implements CacheableInterface
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->dateModified;
     }
 
-    /**
-     * @ORM\PrePersist
-     */
+    #[PrePersist]
     public function prePersist(): void
     {
         $this->preUpdate();
-        $this->dateCreated = $this->dateModified;
     }
 
-    /**
-     * @ORM\PreUpdate
-     */
+    #[PreUpdate]
     public function preUpdate(): void
     {
-        $this->dateModified = new \DateTime();
+        $this->dateModified = new DateTime();
     }
 }

@@ -2,6 +2,21 @@
 
 namespace App\Entity\Main\CV;
 
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Table;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Column;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
+use Symfony\Component\Validator\Constraints\NotNull;
+use DateTimeInterface;
+use Doctrine\ORM\Mapping\OneToMany;
+use DateTime;
+use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\ORM\Mapping\PreUpdate;
 use App\Repository\Main\CV\CompetenceCategorieRepository;
 use App\Twig\Cache\CacheableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,58 +24,35 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=CompetenceCategorieRepository::class)
- * @ORM\Table(name="CV_CompetenceCategorie")
- * @ORM\HasLifecycleCallbacks
- */
+#[Entity(repositoryClass: CompetenceCategorieRepository::class)]
+#[Table(name: 'CV_CompetenceCategorie')]
+#[HasLifecycleCallbacks]
 class CompetenceCategorie implements CacheableInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer", name="NumCompetenceCategorie")
-     */
+    #[Id]
+    #[GeneratedValue]
+    #[Column(name: 'NumCompetenceCategorie', type: 'integer')]
     private int $id;
-
-    /**
-     * @ORM\Column(type="string", length=64, name="NomCompetenceCategorie", unique=true)
-     * @Assert\Length(max="64")
-     * @Assert\NotBlank
-     */
+    #[Column(name: 'NomCompetenceCategorie', type: 'string', length: 64, unique: true)]
+    #[Length(max: 64)]
+    #[NotBlank]
     private string $name;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true, name="OrdreCompetenceCategorie")
-     * @Assert\GreaterThanOrEqual(0)
-     * @Assert\NotNull
-     */
+    #[Column(name: 'OrdreCompetenceCategorie', type: 'integer', nullable: true)]
+    #[GreaterThanOrEqual(value: 0)]
+    #[NotNull]
     private ?int $ordre;
-
+    #[Column(name: 'CompetenceCategorieEdition', type: 'datetime', nullable: false, options: ['default' => 'CURRENT_TIMESTAMP'])]
+    private DateTimeInterface $dateModified;
     /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="CompetenceCategorieCreation")
-     */
-    private \DateTimeInterface $dateCreated;
-
-    /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="CompetenceCategorieEdition")
-     */
-    private \DateTimeInterface $dateModified;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Competence::class, mappedBy="categorie")
-     *
      * @var Collection<Competence>
      */
+    #[OneToMany(mappedBy: 'categorie', targetEntity: Competence::class)]
     private Collection $competences;
-
     public function __construct()
     {
         $this->competences = new ArrayCollection();
-        $this->dateCreated = new \DateTime();
-        $this->dateModified = new \DateTime();
+        $this->dateModified = new DateTime();
     }
-
     public function getId(): ?int
     {
         if (!isset($this->id)) {
@@ -69,31 +61,26 @@ class CompetenceCategorie implements CacheableInterface
 
         return $this->id;
     }
-
     public function getName(): ?string
     {
         return $this->name;
     }
-
     public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
-
     public function getOrdre(): ?int
     {
         return $this->ordre;
     }
-
     public function setOrdre(?int $ordre): self
     {
         $this->ordre = $ordre;
 
         return $this;
     }
-
     /**
      * @return Collection|Competence[]
      */
@@ -101,7 +88,6 @@ class CompetenceCategorie implements CacheableInterface
     {
         return $this->competences;
     }
-
     public function addCompetence(Competence $competence): self
     {
         if (!$this->competences->contains($competence)) {
@@ -111,7 +97,6 @@ class CompetenceCategorie implements CacheableInterface
 
         return $this;
     }
-
     public function removeCompetence(Competence $competence): self
     {
         if ($this->competences->contains($competence)) {
@@ -120,26 +105,18 @@ class CompetenceCategorie implements CacheableInterface
 
         return $this;
     }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->dateModified;
     }
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function prePersist(): void
+    #[PrePersist]
+    public function prePersist() : void
     {
         $this->preUpdate();
-        $this->dateCreated = $this->dateModified;
     }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function preUpdate(): void
+    #[PreUpdate]
+    public function preUpdate() : void
     {
-        $this->dateModified = new \DateTime();
+        $this->dateModified = new DateTime();
     }
 }

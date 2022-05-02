@@ -12,18 +12,18 @@ use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class CompetenceSubscriber implements EventSubscriberInterface
 {
     private SluggerInterface $slugger;
 
-    private AdapterInterface $cache;
+    private CacheItemPoolInterface $cache;
 
     private EntityManagerInterface $em;
 
-    public function __construct(SluggerInterface $slugger, AdapterInterface $cache, EntityManagerInterface $em)
+    public function __construct(SluggerInterface $slugger, CacheItemPoolInterface $cache, EntityManagerInterface $em)
     {
         $this->slugger = $slugger;
         $this->cache = $cache;

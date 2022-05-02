@@ -2,45 +2,50 @@
 
 namespace App\Entity\Main\CV;
 
+use Doctrine\ORM\Mapping\Table;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\InheritanceType;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Column;
+use DateTimeInterface;
+use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\ORM\Mapping\PreUpdate;
+use DateTime;
 use App\Twig\Cache\CacheableInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * Class RealisationImage.
- *
- * @ORM\Table(name="CV_RealisationImage")
- * @ORM\Entity
- * @ORM\InheritanceType(value="SINGLE_TABLE")
- * @DiscriminatorColumn(name="discr", type="string")
- * @ORM\DiscriminatorMap({"miniature": "RealisationImageMiniature", "gallery": "RealisationImageGallerie"})
- * @ORM\HasLifecycleCallbacks
  */
+#[Table(name: 'CV_RealisationImage')]
+#[Entity]
+#[InheritanceType(value: 'SINGLE_TABLE')]
+#[DiscriminatorColumn(name: 'discr', type: 'string')]
+#[DiscriminatorMap(['miniature' => RealisationImageMiniature::class, 'gallery' => RealisationImageGallerie::class])]
+#[HasLifecycleCallbacks]
 abstract class RealisationImage implements CacheableInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="UUID")
-     * @ORM\Column(type="string")
-     */
+    #[Id]
+    #[Column(type: 'string')]
     protected string $id;
-
     /**
-     * @ORM\Column(type="blob", nullable=false)
-     *
      * @var resource|string $image
      */
+    #[Column(type: 'blob', nullable: false)]
     protected $image;
+    #[Column(name: 'RealisationImageEdition', type: 'datetime', nullable: false, options: ['default' => 'CURRENT_TIMESTAMP'])]
+    private DateTimeInterface $dateModified;
 
-    /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="RealisationImageCreation")
-     */
-    private \DateTimeInterface $dateCreated;
-    /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=false, name="RealisationImageEdition")
-     */
-    private \DateTimeInterface $dateModified;
+    public function __construct()
+    {
+        $this->id = Uuid::v6()->toRfc4122();
+    }
 
     /**
      * @return string
@@ -64,8 +69,6 @@ abstract class RealisationImage implements CacheableInterface
 
     /**
      * @param resource|string $image
-     *
-     * @return $this
      */
     public function setImage($image): self
     {
@@ -79,10 +82,6 @@ abstract class RealisationImage implements CacheableInterface
      */
     public function getImageOrNull()
     {
-        if (!isset($this->image)) {
-            return null;
-        }
-
         return $this->image;
     }
 
@@ -103,26 +102,21 @@ abstract class RealisationImage implements CacheableInterface
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->dateModified;
     }
 
-    /**
-     * @ORM\PrePersist
-     */
+    #[PrePersist]
     public function prePersist(): void
     {
         $this->preUpdate();
-        $this->dateCreated = $this->dateModified;
     }
 
-    /**
-     * @ORM\PreUpdate
-     */
+    #[PreUpdate]
     public function preUpdate(): void
     {
-        $this->dateModified = new \DateTime();
+        $this->dateModified = new DateTime();
     }
 
     abstract public function postUpdate(): void;

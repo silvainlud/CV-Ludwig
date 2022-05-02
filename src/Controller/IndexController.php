@@ -14,32 +14,24 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class IndexController extends AbstractController
 {
-    /**
-     * @Route("/", name="index")
-     */
+    #[Route(path: '/', name: 'index')]
     public function Index(): Response
     {
         return $this->render('index/index.html.twig');
     }
 
-    /**
-     * @Route("/legal-notice", name="legal_notice")
-     */
+    #[Route(path: '/legal-notice', name: 'legal_notice')]
     public function LegalNotice(): Response
     {
         return $this->render('index/legal_notice.html.twig');
     }
 
-    /**
-     * @Route("/contact", name="contact")
-     */
+    #[Route(path: '/contact', name: 'contact')]
     public function ContactMe(Request $request, ContactMeFactory $contactMeFactory, TranslatorInterface $translator): Response
     {
         $contactMe = new ContactMe();
         $form = $this->createForm(ContactMeType::class, $contactMe);
-
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             if ($contactMeFactory->canSendMessage()) {
                 $contactMeFactory->sendMessage($contactMe);
@@ -48,7 +40,6 @@ class IndexController extends AbstractController
             }
             $form->addError(new FormError($translator->trans('contact.error.need-to-wait')));
         }
-
         return $this->render('index/contact.html.twig', [
             'form' => $form->createView(),
         ]);

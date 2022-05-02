@@ -60,7 +60,10 @@ format: ## Formate le code
 
 .PHONY: test
 test: ## Lancer les tests unitaire
-	$(dockerRun) ./bin/phpunit
+	$(dockerRun) php bin/console doctrine:database:drop --force --env=test
+	$(dockerRun) php bin/console doctrine:database:create --env=test
+	$(dockerRun) php bin/console doctrine:schema:update --force --env=test
+	$(dockerRun) ./vendor/bin/phpunit
 
 
 # -----------------------------------

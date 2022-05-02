@@ -1,9 +1,11 @@
 security:
 
+    enable_authenticator_manager: true
+
     role_hierarchy:
         ROLE_ADMIN_CV: [ROLE_ADMIN_CV_SKILLS, ROLE_ADMIN_CV_PORTFOLIO,ROLE_PREVIEW_MAKING]
 
-    encoders:
+    password_hashers:
         App\Entity\Main\Utilisateur:
             algorithm: auto
 
@@ -19,14 +21,14 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
             lazy: true
             provider: app_user_provider
-            guard:
-                authenticators:
-                    - App\Security\AppAuthenticator
+#            guard:
+#                authenticators:
+#                    - App\Security\AppAuthenticator
             logout:
                 path: app_logout
+            custom_authenticator: App\Security\AppAuthenticator
                 # where to redirect after logout
                 # target: app_any_route
 

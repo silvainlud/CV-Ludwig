@@ -2,27 +2,23 @@
 
 namespace App\Utils\Helpers\Contact;
 
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class ContactMe
 {
-    /**
-     * @Assert\NotBlank
-     * @Assert\Length(max=32)
-     */
+    #[NotBlank]
+    #[Length(max: 32)]
     protected string $name;
-    /**
-     * @Assert\NotBlank
-     * @Assert\Email
-     * @Assert\Length(max=32)
-     */
+    #[NotBlank]
+    #[\Symfony\Component\Validator\Constraints\Email]
+    #[Length(max: 32)]
     protected string $email;
-    /**
-     * @Assert\Length(max=1000, min=15)
-     * @Assert\NotBlank
-     */
+    #[Length(max: 1000, min: 15)]
+    #[NotBlank]
     protected string $message;
 
     public function getMessage(): string

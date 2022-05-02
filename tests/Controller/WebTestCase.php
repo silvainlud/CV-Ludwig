@@ -5,7 +5,7 @@ namespace App\Tests\Controller;
 use App\Entity\Main\Utilisateur;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
-use Liip\TestFixturesBundle\Test\FixturesTrait;
+use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
 /**
@@ -14,7 +14,6 @@ use Symfony\Bundle\FrameworkBundle\KernelBrowser;
  */
 class WebTestCase extends \Symfony\Bundle\FrameworkBundle\Test\WebTestCase
 {
-    use FixturesTrait;
     protected KernelBrowser $client;
     protected EntityManagerInterface $em;
     protected array $data = [];
@@ -23,11 +22,16 @@ class WebTestCase extends \Symfony\Bundle\FrameworkBundle\Test\WebTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
+
         $this->client = self::createClient();
+
+        $this->databaseTool = static::getContainer()->get(DatabaseToolCollection::class)->get();
         /** @var EntityManagerInterface $em */
         $em = self::$container->get(EntityManagerInterface::class);
 
-        $temp = $this->loadFixtureFiles($this->fixtures);
+        $temp = $this->databaseTool->loadAliceFixture($this->fixtures);
         foreach ($temp as $k => $t) {
             $pk = '';
             $chars = array_reverse(str_split($k));

@@ -8,22 +8,22 @@ use App\Entity\Main\CV\RealisationImage;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class RealisationSubscriber implements EventSubscriberInterface
 {
     private SluggerInterface $slugger;
 
-    private AdapterInterface $cache;
+    private CacheItemPoolInterface $cache;
 
-    public function __construct(SluggerInterface $slugger, AdapterInterface $cache)
+    public function __construct(SluggerInterface $slugger, CacheItemPoolInterface $cache)
     {
         $this->slugger = $slugger;
         $this->cache = $cache;
     }
 
-    public function getSubscribedEvents()
+    public function getSubscribedEvents() : array
     {
         return [
             Events::prePersist => 'prePersist',

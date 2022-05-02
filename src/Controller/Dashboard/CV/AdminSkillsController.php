@@ -12,8 +12,8 @@ use App\Form\CV\TechnologieType;
 use App\Utils\Assets\AssetsResponse;
 use App\Utils\StringHelper;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,7 +33,7 @@ class AdminSkillsController extends AbstractController
         $this->translator = $translator;
     }
 
-    public static function RemoveSkillCache(EntityManagerInterface $em, AdapterInterface $cache): void
+    public static function RemoveSkillCache(EntityManagerInterface $em, CacheItemPoolInterface $cache): void
     {
         $keys = [StringHelper::strRemoveCacheKey(CuriculumVitaeController::CACHE_KEY_TECHNOLOGIE)];
         $_ts = $em->getRepository(Technologie::class)->findAll();
@@ -43,42 +43,33 @@ class AdminSkillsController extends AbstractController
         $cache->deleteItems($keys);
     }
 
-    /**
-     * @Route("/dashboard/cv/skills", name="db_cv_skills")
-     */
+    #[Route(path: '/dashboard/cv/skills', name: 'db_cv_skills')]
     public function Categories(Request $request): Response
     {
         $categories = $this->em->getRepository(CompetenceCategorie::class)->findBy([], ['ordre' => 'asc']);
-
         return $this->render('dashboard/cv/skills/index.html.twig', [
             'categories' => $categories,
         ]);
     }
 
-    /**
-     * @Route("/dashboard/cv/skills/categories/{cat}", name="db_cv_skills_categories_view")
-     */
+    #[Route(path: '/dashboard/cv/skills/categories/{cat}', name: 'db_cv_skills_categories_view')]
     public function ViewCategory(Request $request, CompetenceCategorie $cat): Response
     {
         $skills = $this->em->getRepository(Competence::class)->findBy(['categorie' => $cat->getId()]);
-
         return $this->render('dashboard/cv/skills/viewCategory.html.twig', [
             'skills' => $skills,
             'selectCategory' => $cat,
         ]);
     }
 
-    /**
-     * @Route("/dashboard/cv/skills/category/{cat}/edit", name="db_cv_skills_categories_edit")
-     * @Route("/dashboard/cv/skills/category/add", name="db_cv_skills_categories_add")
-     */
+    #[Route(path: '/dashboard/cv/skills/category/{cat}/edit', name: 'db_cv_skills_categories_edit')]
+    #[Route(path: '/dashboard/cv/skills/category/add', name: 'db_cv_skills_categories_add')]
     public function EditCategories(Request $request, CompetenceCategorie $cat = null): Response
     {
         if (null == $cat) {
             $cat = new CompetenceCategorie();
         }
         $form = $this->createForm(CompetenceCategorieType::class, $cat, ['cancel_btn' => true]);
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if (null == $cat->getId()) {
@@ -88,18 +79,15 @@ class AdminSkillsController extends AbstractController
 
             return $this->redirectToRoute('db_cv_skills');
         }
-
         return $this->render('dashboard/cv/skills/edit_categories.html.twig', [
             'form' => $form->createView(),
             'add' => null == $cat->getId(),
         ]);
     }
 
-    /**
-     * @Route("/dashboard/cv/skills/edit/{skill}", name="db_cv_skills_edit")
-     * @Route("/dashboard/cv/skills/add/{category}", name="db_cv_skills_add_categ")
-     * @Route("/dashboard/cv/skills/add", name="db_cv_skills_add")
-     */
+    #[Route(path: '/dashboard/cv/skills/edit/{skill}', name: 'db_cv_skills_edit')]
+    #[Route(path: '/dashboard/cv/skills/add/{category}', name: 'db_cv_skills_add_categ')]
+    #[Route(path: '/dashboard/cv/skills/add', name: 'db_cv_skills_add')]
     public function ModifyCompetences(Request $request, Competence $skill = null, CompetenceCategorie $category = null): Response
     {
         if (null == $skill) {
@@ -108,9 +96,7 @@ class AdminSkillsController extends AbstractController
                 $skill->setCategorie($category);
             }
         }
-
         $form = $this->createForm(CompetenceType::class, $skill, ['cancel_btn' => true, 'choose_categories' => null == $category]);
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if (null == $skill->getId()) {
@@ -120,7 +106,6 @@ class AdminSkillsController extends AbstractController
 
             return $this->redirectToRoute('db_cv_skills_categories_view', ['cat' => $skill->getCategorie()->getId()]);
         }
-
         return $this->render('dashboard/cv/skills/form_skill.html.twig', [
             'form' => $form->createView(),
             'add' => null == $skill->getId(),
@@ -128,30 +113,25 @@ class AdminSkillsController extends AbstractController
     }
 
     /**
-     * @Route("/dashboard/cv/skills/technlogies", name="db_cv_skills_technologies")
-     *
      * @return Response
      */
+    #[Route(path: '/dashboard/cv/skills/technlogies', name: 'db_cv_skills_technologies')]
     public function ViewTechnologies()
     {
         $_ts = $this->em->getRepository(Technologie::class)->findAll();
-
         return $this->render('dashboard/cv/skills/viewTechnologies.html.twig', [
             'technologies' => $_ts,
         ]);
     }
 
-    /**
-     * @Route("/dashboard/cv/skills/technlogy/{tech}/edit", name="db_cv_skills_technologies_edit")
-     * @Route("/dashboard/cv/skills/technlogy/add", name="db_cv_skills_technologies_add")
-     */
+    #[Route(path: '/dashboard/cv/skills/technlogy/{tech}/edit', name: 'db_cv_skills_technologies_edit')]
+    #[Route(path: '/dashboard/cv/skills/technlogy/add', name: 'db_cv_skills_technologies_add')]
     public function EditTechnology(Request $request, Technologie $tech = null): Response
     {
         if (null == $tech) {
             $tech = new Technologie();
         }
         $form = $this->createForm(TechnologieType::class, $tech, ['cancel_btn' => true]);
-
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
@@ -172,7 +152,6 @@ class AdminSkillsController extends AbstractController
                 $form->get('upload')->addError(new FormError($this->translator->trans((new NotNull())->message, [], 'validators')));
             }
         }
-
         return $this->render('dashboard/cv/skills/form_technlology.html.twig', [
             'form' => $form->createView(),
             'add' => null == $tech->getId(),
