@@ -44,4 +44,56 @@ class IndexController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route(path: '/mail/config-v1.1.xml', name: '_autodiscover')]
+    public function Autodiscover(Request $request): Response
+    {
+        if (!$request->query->has("emailaddress"))
+            throw $this->createNotFoundException();
+
+        $email = $request->query->get("emailaddress");
+        $domain = explode("@", $email)[1];
+        $mailServeur = "mail.silvain.eu";
+
+        $xml = <<<xml
+<clientConfig version="1.1">
+    <emailProvider id="$domain">
+      <domain>$domain</domain>
+      <displayName>$domain</displayName>
+      <displayShortName>$domain</displayShortName>
+      <incomingServer type="imap">
+         <hostname>$mailServeur</hostname>
+         <port>993</port>
+         <socketType>STARTTLS</socketType>
+         <username>%EMAILADDRESS%</username>
+         <authentication>password-cleartext</authentication>
+      </incomingServer>
+      <incomingServer type="pop3">
+         <hostname>$mailServeur</hostname>
+         <port>995</port>
+         <socketType>STARTTLS</socketType>
+         <username>%EMAILADDRESS%</username>
+         <authentication>password-cleartext</authentication>
+      </incomingServer>
+      <outgoingServer type="smtp">
+         <hostname>$mailServeur</hostname>
+         <port>587</port>
+         <socketType>STARTTLS</socketType>
+         <username>%EMAILADDRESS%</username>
+         <authentication>password-cleartext</authentication>
+      </outgoingServer>
+      <documentation url="https://webmail.silvain.eu">
+          <descr lang="fr">Connexion Webmail</descr>
+          <descr lang="en">Webmail connexion</descr>
+      </documentation>
+    </emailProvider>
+</clientConfig>
+xml;
+
+
+        return new Response($xml, 200, [
+            "Content-Type" => "application/xml"
+        ]);
+
+    }
 }
