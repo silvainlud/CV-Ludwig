@@ -48,4 +48,4 @@ jobs:
       - name: Composer
         run: composer install --prefer-dist --no-ansi --no-interaction --no-progress
       - name: test
-        run: php bin/phpunit
+        run: make test
