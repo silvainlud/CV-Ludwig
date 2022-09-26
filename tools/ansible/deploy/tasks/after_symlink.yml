@@ -1,5 +1,5 @@
-- name: Apache2 | Stop
+- name: Nginx | Stop
   service:
-    name: apache2
+    name: nginx
     state: stopped
   become: yes
