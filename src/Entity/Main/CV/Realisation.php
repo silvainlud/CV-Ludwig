@@ -27,7 +27,6 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Url;
 
-
 #[UniqueEntity(fields: "name", errorPath: "name")]
 #[Entity(repositoryClass: RealisationRepository::class)]
 #[Table(name: 'CV_Realisation')]

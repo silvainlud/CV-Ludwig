@@ -3,6 +3,7 @@
 namespace App\Utils;
 
 use InvalidArgumentException;
+
 class StringHelper
 {
     private const unwanted_array_accent = ['Š' => 'S', 'š' => 's', 'Ž' => 'Z', 'ž' => 'z', 'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'A', 'Ç' => 'C', 'È' => 'E', 'É' => 'E',

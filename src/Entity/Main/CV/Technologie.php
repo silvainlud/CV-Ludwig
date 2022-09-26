@@ -146,8 +146,6 @@ class Technologie implements CacheableInterface
         } catch (\Exception) {
             return null;
         }
-
-
     }
 
     public function getColor(): ?string

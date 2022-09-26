@@ -48,8 +48,9 @@ class IndexController extends AbstractController
     #[Route(path: '/mail/config-v1.1.xml', name: '_autodiscover')]
     public function Autodiscover(Request $request): Response
     {
-        if (!$request->query->has("emailaddress"))
+        if (!$request->query->has("emailaddress")) {
             throw $this->createNotFoundException();
+        }
 
         $email = $request->query->get("emailaddress");
         $domain = explode("@", $email)[1];
@@ -94,6 +95,5 @@ xml;
         return new Response($xml, 200, [
             "Content-Type" => "application/xml"
         ]);
-
     }
 }
