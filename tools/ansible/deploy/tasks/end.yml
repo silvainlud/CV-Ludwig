@@ -37,9 +37,9 @@
     - "{{ ansistrano_release_path.stdout }}/var/spool"
     - "{{ ansistrano_release_path.stdout }}/vendor/"
   become: yes
-- name: Apache2 | Start
+- name: Nginx | Start
   service:
-    name: apache2
+    name: nginx
     state: started
   become: yes
 - name: Php 7.4 FPM | Restart
