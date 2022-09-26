@@ -21,8 +21,12 @@ class ContactMeFactory implements ContactMeFactoryInterface
 
     private MailerInterface $mailer;
 
-    public function __construct(RequestStack $requestStack, EntityManagerInterface $em, MailerInterface $mailer)
-    {
+    public function __construct(
+        RequestStack $requestStack,
+        EntityManagerInterface $em,
+        MailerInterface $mailer,
+        private string $addressFrom
+    ) {
         $this->requestStack = $requestStack;
         $this->em = $em;
         $this->mailer = $mailer;
@@ -49,6 +53,6 @@ class ContactMeFactory implements ContactMeFactoryInterface
         $log = new ContactLog((string) $currentRequest->getClientIp());
         $this->em->persist($log);
         $this->em->flush();
-        $this->mailer->send($contactMe->makeEmail(self::emailTo));
+        $this->mailer->send($contactMe->makeEmail(self::emailTo, $this->addressFrom));
     }
 }

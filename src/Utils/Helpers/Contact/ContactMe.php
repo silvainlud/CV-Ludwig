@@ -57,12 +57,12 @@ class ContactMe
         return $this;
     }
 
-    public function makeEmail(string $to): Email
+    public function makeEmail(string $to, string $from): Email
     {
         return (new Email())
-            ->from(new Address($this->email, $this->name))
+            ->from($from)
             ->to($to)
-            ->subject('Un email de contact (silvain.eu) de ' . $this->name)
+            ->subject('Un email de contact (silvain.eu) de ' . $this->name . "(" . $this->email . ')')
             ->text($this->message);
     }
 }

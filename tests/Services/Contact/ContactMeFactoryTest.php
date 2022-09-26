@@ -71,7 +71,7 @@ class ContactMeFactoryTest extends TestCase
         $this->em = $this->getMockBuilder(EntityManagerInterface::class)->getMock();
         $this->mailer = $this->getMockBuilder(MailerInterface::class)->getMock();
 
-        $this->service = new ContactMeFactory($requestStack, $this->em, $this->mailer);
+        $this->service = new ContactMeFactory($requestStack, $this->em, $this->mailer, ContactMeFactory::emailTo);
 
         return $this->service;
     }
@@ -81,7 +81,7 @@ class ContactMeFactoryTest extends TestCase
         $s = $this->createEvent($ipAddress);
         $this->em->expects($this->once())->method('persist');
         $this->em->expects($this->once())->method('flush');
-        $this->mailer->expects($this->once())->method('send')->with($contactMe->makeEmail(ContactMeFactory::emailTo));
+        $this->mailer->expects($this->once())->method('send')->with($contactMe->makeEmail(ContactMeFactory::emailTo,ContactMeFactory::emailTo));
 
         return $s;
     }

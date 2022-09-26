@@ -59,13 +59,12 @@ class ContactMeTest extends EntityKernelTestCase
     public function testMakeEmail()
     {
         $d = self::GetEntity();
-        $m = $d->makeEmail('send@silvain.eu');
+        $m = $d->makeEmail('send@silvain.eu','contact@silvain.eu');
         self::assertCount(1, $m->getFrom());
         self::assertCount(1, $m->getTo());
         self::assertEquals('contact@silvain.eu', $m->getFrom()[0]->getAddress());
-        self::assertEquals('Nom Prénom', $m->getFrom()[0]->getName());
         self::assertEquals('send@silvain.eu', $m->getTo()[0]->getAddress());
-        self::assertEquals('Un email de contact (silvain.eu) de Nom Prénom', $m->getSubject());
+        self::assertEquals('Un email de contact (silvain.eu) de Nom Prénom(contact@silvain.eu)', $m->getSubject());
         self::assertEquals('Ceci est un message', $m->getTextBody());
     }
 }
